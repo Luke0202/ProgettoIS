@@ -1,11 +1,12 @@
 package is;
 
-import is.Funzioni.Amministratore;
-import is.Funzioni.Dipendente;
+import is.Funzioni.Dependent;
 
 import java.util.LinkedList;
 
 public interface AziendaIF {
-    LinkedList<Dipendente> getDipendenti();
-    int numeroDipendenti();
+    void addDependent(Dependent d);
+    void removeDependent(int ID);
+    void assignRole(Dependent d,Role r);
+    int getNDependents();
 }

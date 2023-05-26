@@ -1,45 +1,73 @@
 package is;
 
-import is.Funzioni.Amministratore;
-import is.Funzioni.Dipendente;
+import is.Funzioni.Administrator;
+import is.Funzioni.Dependent;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
-public class Azienda {
-    private int codice;
-    private String nome;
-    private LinkedList<Dipendente> listaDipendenti = new LinkedList<>();
-    private Amministratore admin;
-    private int maxDipendenti = 100;
-    public Azienda(int codice,String nome){
-        this.codice = codice;
-        this.nome = nome;
+public class Azienda implements AziendaIF{
+    private int cod;
+    private int maxDependents = 100;
+    private String name;
+    private Administrator admin;
+    private LinkedList<Dependent> dependents = new LinkedList<>();
+    private HashSet<AreaOrganization> areas = new HashSet<>();
+
+    public Azienda(int cod,String name){
+        this.cod = cod;
+        this.name = name;
     }
-    public int getCodice() {
-        return codice;
+
+
+    public int getCod() {
+        return cod;
     }
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
-    public LinkedList<Dipendente> getDipendenti() {
-        return listaDipendenti;
+    public LinkedList<Dependent> getDependents() {
+        return dependents;
     }
-    public int getMaxDipendenti(){
-        return maxDipendenti;
+    public int getMaxDependents(){
+        return maxDependents;
     }
-    public void setMaxDipendenti(int N){
-        maxDipendenti=N;
+    public HashSet<AreaOrganization> getAreas(){
+        return areas;
     }
-    public int numeroDipendenti(){
-        return listaDipendenti.size();
+    public void setMaxDependents(int maxDependents) {
+        this.maxDependents = maxDependents;
     }
-    public void aggiungiDipendente(Dipendente d){
-        boolean b = admin.aggiugniDipendente(this,d);
+
+    @Override
+    public LinkedList<Dependent> getDipendenti() {
+        return null;
+    }
+
+
+    @Override
+    public void addDependent(Dependent d){
+        boolean b = admin.addDependent(this,d);
         if (!b) throw new IllegalArgumentException("Impossibile aggiungere un dipendente");
     }
-    public void rimuoviDipendente(int ID){
-        boolean b = admin.rimuoviDipendente(this,ID);
+
+    @Override
+    public void removeDependent(int ID){
+        boolean b = admin.removeDependent(this,ID);
         if (!b) throw new IllegalArgumentException("Rimozione Impossibile");
     }
 
+    @Override
+    public void assignRole(Dependent d, Role role){
+        AreaOrganization area = role.getArea();
+        if (!areas.contains(area))
+            throw new IllegalArgumentException("Ruolo inserito non valido");
+        admin.assignArea(d,area);
+        admin.assignRole(d,role);
+    }
+
+    @Override
+    public int getNDependents() {
+        return 0;
+    }
 }
