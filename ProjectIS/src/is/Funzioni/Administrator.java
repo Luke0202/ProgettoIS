@@ -1,9 +1,7 @@
 package is.Funzioni;
 
-import is.AreaOrganization;
-import is.AreaOrganizationIF;
-import is.Azienda;
-import is.Role;
+import is.organigramma.AreaOrganizationIF;
+import is.organigramma.Azienda;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,27 +37,22 @@ public class Administrator implements AdministratorIF {
     }
 
     @Override
-    public int getNumberDependents() {
-        return azienda.numeroDipendenti();
-    }
-
-    @Override
-    public boolean addDependent(Azienda a, Dependent d) {
-        int N = a.numeroDipendenti();
-        if (N<a.getMaxDependents()) {
-            a.getDipendenti().add(d);
+    public boolean addEmployee(Azienda azienda, Employee d) {
+        int N = azienda.getNEmployees();
+        if (N<azienda.getMaxEmployees()) {
+            azienda.getEmployees().add(d);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean removeDependent(Azienda a,int ID) {
-        LinkedList<Dependent> ll = a.getDipendenti();
-        Iterator<Dependent> it = ll.iterator();
+    public boolean removeEmployee(Azienda azienda,int ID) {
+        LinkedList<Employee> ll = azienda.getEmployees();
+        Iterator<Employee> it = ll.iterator();
         while(it.hasNext()){
-            Dependent dip = it.next();
-            if (dip.getID()==ID){
+            Employee emp = it.next();
+            if (emp.getID()==ID){
                 it.remove();
                 return true;
             }
@@ -68,16 +61,16 @@ public class Administrator implements AdministratorIF {
     }
 
     @Override
-    public void assignRole(Dependent d, Role role){
+    public void assignRole(Employee d, Role role){
         //Ogni unità organizzativa presenta un set di ruoli
         d.takeRole(role);
     }
 
     @Override
     public int giveID(){
-        LinkedList<Dependent> dep = azienda.getDipendenti();
-        int N = azienda.getDipendenti().size();
-        if (N<azienda.getMaxDependents()){
+        LinkedList<Employee> dep = azienda.getEmployees();
+        int N = azienda.getEmployees().size();
+        if (N<azienda.getMaxEmployees()){
             for (int i = 0;i<N;i++){
                 if (i!=dep.get(i).getID()){
                     return i;
@@ -86,7 +79,8 @@ public class Administrator implements AdministratorIF {
         }return -1;
     }
 
-    public void assignArea(Dependent d, AreaOrganizationIF area){
-        area.addDependent(d);
+    @Override
+    public void assignArea(Employee d, AreaOrganizationIF area){
+        area.addEmployee(d);
     }
 }

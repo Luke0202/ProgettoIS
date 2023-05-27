@@ -1,21 +1,35 @@
-package is;
+package is.Funzioni;
+
+import is.organigramma.Organigramma;
 
 import java.util.Objects;
 
 public class Role {
-    private String name;
-    private AreaOrganization area;
+    private String name,description;
+    private Organigramma area;
 
-    public Role(String name, AreaOrganization area){
+    public Role(String name, String description, Organigramma area){
         this.name = name;
         this.area = area;
     }
     public String getName() {
         return name;
     }
-
-    public AreaOrganization getArea() {
+    public String getDescription(){ return description;}
+    public Organigramma getArea() {
         return area;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setArea(Organigramma area) {
+        this.area = area;
     }
 
     @Override

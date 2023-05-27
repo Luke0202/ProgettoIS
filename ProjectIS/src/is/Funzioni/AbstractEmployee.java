@@ -1,26 +1,21 @@
 package is.Funzioni;
 
-import is.AreaOrganization;
-import is.Role;
-
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class Dependent implements DependentIF {
-    private int ID;
+public abstract class AbstractEmployee implements EmployeeIF {
+    private final int ID;
     private String name, surname, email;
     private final AdministratorIF admin;
-    private LinkedList<Role> roles = new LinkedList<>();
-    private LinkedList<AreaOrganization> areas = new LinkedList<>();
-
-    public Dependent(String name, String surname, String email, AdministratorIF admin){
+    protected LinkedList<Role> roles = new LinkedList<>();
+    public AbstractEmployee(String name, String surname, String email, AdministratorIF admin){
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.admin = admin;
         this.ID = admin.giveID();
     }
-    //GETTERS
+
     public LinkedList<Role> getRoles() {
         return roles;
     }
@@ -34,6 +29,7 @@ public class Dependent implements DependentIF {
         return email;
     }
     public int getID(){ return ID;  }
+    public AdministratorIF getAdmin(){return admin;}
     //SETTERS
     public void setName(String name) {
         this.name = name;
@@ -44,26 +40,14 @@ public class Dependent implements DependentIF {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-    public void setRoles(LinkedList<Role> roles) { this.roles = roles;
-    }
-
-    @Override
-    public void takeRole(Role role) {
-        if (!roles.contains(role)){
-            roles.add(role);
-            role.getArea().addDependent(this);
-        }
-    }
+    public void setRoles(LinkedList<Role> roles) { this.roles = roles;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dependent that = (Dependent) o;
-        return ID == that.ID && admin==that.admin;
+        Employee that = (Employee) o;
+        return ID == that.getID() && admin==that.getAdmin();
     }//equals
 
     @Override
