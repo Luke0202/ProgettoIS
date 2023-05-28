@@ -1,34 +1,30 @@
-package is.Funzioni;
-
-import is.organigramma.Organigramma;
+package is.dipendenti;
 
 import java.util.Objects;
 
 public class Role {
-    private String name,description;
-    private Organigramma area;
+    private String name,description,area;
 
-    public Role(String name, String description, Organigramma area){
+    public Role(String name, String description, String area){
         this.name = name;
         this.area = area;
     }
+    //GETTERS
     public String getName() {
         return name;
     }
     public String getDescription(){ return description;}
-    public Organigramma getArea() {
+    public String getArea() {
         return area;
     }
-
+    //SETTERS
     public void setName(String name) {
         this.name = name;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public void setArea(Organigramma area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
@@ -43,5 +39,10 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(name, area);
+    }
+
+    @Override
+    public String toString(){
+        return "Name: "+name+", Description: "+description+", Area: "+area+".";
     }
 }

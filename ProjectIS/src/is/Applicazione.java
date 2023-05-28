@@ -1,18 +1,19 @@
 package is;
 
 import is.mediator.Mediator;
-import is.organigramma.Azienda;
 import is.panels.CreateAreaPanel;
-import is.panels.HomePanel;
-import is.shapes.ImageZoom;
+import is.panels.ModAreaPanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Applicazione {
     public static void main(String[] args){
         JFrame frame = new JFrame("Applicazione");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
+
 
         JMenuBar menubar = new JMenuBar();
         JMenu area = new JMenu("Area"); menubar.add(area);
@@ -59,7 +60,8 @@ public class Applicazione {
 
         //Panel1
         //HomePanel home = new HomePanel(mediator); frame.add(home);
-        CreateAreaPanel createArea = new CreateAreaPanel(mediator,null); frame.add(createArea);
+        //CreateAreaPanel createArea = new CreateAreaPanel(mediator,null); frame.add(createArea);
+        ModAreaPanel modArea = new ModAreaPanel(mediator,null); frame.add(modArea);
         //Frame settings
         frame.setLocation(350,150);
         frame.setSize(1000,650);

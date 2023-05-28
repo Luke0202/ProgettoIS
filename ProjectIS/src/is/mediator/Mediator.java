@@ -1,7 +1,6 @@
 package is.mediator;
 
-import is.Funzioni.Administrator;
-import is.organigramma.Azienda;
+import is.organigramma.AziendaLL;
 
 import javax.swing.*;
 
@@ -11,9 +10,9 @@ public class Mediator implements MediatorIF{
     private JButton confButton, saveB, saveV;
     private JScrollPane descrScroll;
     private JComboBox dadComboBox;
-    private Azienda azienda;
+    private AziendaLL azienda;
 
-    public Mediator(Azienda azienda){
+    public Mediator(AziendaLL azienda){
         this.azienda = azienda;
     }
 
@@ -67,11 +66,11 @@ public class Mediator implements MediatorIF{
         if(widget==confButton){
             String id = idField.getText().trim();
             String psw = pswField.getText().trim();
-            Administrator admin = new Administrator("Luca","Barbieri","myemail@gmail.com",null);
+
 
             if (id.equals("1") && psw.equals("ciao")){
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(JFrame.class, widget)
-                        , "Accesso effettuato da " + admin.getName() + " " + admin.getSurname());
+                        , "Accesso effettuato da " /*admin.getName() + " " + admin.getSurname()*/);
             }else{
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(JFrame.class, widget)
                         , "Accesso negato !");

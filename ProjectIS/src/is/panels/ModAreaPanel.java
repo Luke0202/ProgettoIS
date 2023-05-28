@@ -6,10 +6,10 @@ import is.shapes.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 
-public class CreateAreaPanel extends JPanel {
+public class ModAreaPanel extends JPanel{
     private Mediator mediator;
     private AziendaIF azienda;
-    public CreateAreaPanel(Mediator mediator, AziendaIF azienda) {
+    public ModAreaPanel(Mediator mediator, AziendaIF azienda) {
         this.mediator = mediator;
         this.azienda = azienda;
 
@@ -23,7 +23,7 @@ public class CreateAreaPanel extends JPanel {
         headPanel.setBounds(0,0,1000,60); add(headPanel);
 
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
-        JLabel head = new JLabel("Crea Area organizzativa");
+        JLabel head = new JLabel("Modifica Area organizzativa");
         head.setFont(f); head.setForeground(Color.black); head.setBounds(10,0,280,50);
         headPanel.add(head);
         //Adding Fields

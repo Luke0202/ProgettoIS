@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 public abstract class AbstractOrganigramma implements OrganigrammaIF {
     private ArrayList<AreaOrganizationIF> areas = new ArrayList<>();
+
     protected String name,description;
 
     public AbstractOrganigramma(String name,String description){
@@ -30,7 +31,7 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         if (i<0 || i>=areas.size()) return null;
         return areas.get(i);
     }
-    public boolean contains(AreaOrganizationIF area){
+    public boolean containsArea(AreaOrganizationIF area){
         Iterator<AreaOrganizationIF> it = iterator();
         while(it.hasNext()){
             if (it.next().equals(area)) return true;

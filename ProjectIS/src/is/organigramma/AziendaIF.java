@@ -1,14 +1,14 @@
 package is.organigramma;
 
-import is.Funzioni.Employee;
-import is.Funzioni.Role;
+import is.dipendenti.Employee;
+import is.dipendenti.Role;
 
 import java.util.LinkedList;
 
 public interface AziendaIF {
-    void addEmployee(Employee d);
-    void removeEmployee(int ID);
-    void assignRole(Employee d, Role r);
     int getNEmployees();
+    void addEmployee(Role role, Employee d);
+    void removeEmployee(int ID);
     LinkedList<String> getAreas();
+    LinkedList<Integer> getIDEmployees();
 }
