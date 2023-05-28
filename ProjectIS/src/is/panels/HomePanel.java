@@ -1,0 +1,50 @@
+package is.panels;
+
+import is.Applicazione;
+import is.mediator.Mediator;
+import is.shapes.ImageZoom;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class HomePanel extends JPanel{
+    private Mediator mediator;
+    public HomePanel(Mediator mediator){
+        this.mediator = mediator;
+
+        setLayout(null);
+        Color blue = new Color(200,220,246);
+        Color blue2 = new Color(0,51,200);
+        setBackground(blue);
+        setBounds(0,0,1000,1000);
+        //Image
+        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.3);
+        ImageIcon image = icon.getImageIcon();
+        //Label
+        JLabel lab = new JLabel(image);
+        lab.setBounds(390,35,250,250);
+        add(lab);
+        //Header
+        Font f = new Font("TimesNewRoman",Font.ITALIC,35);
+        JLabel head = new JLabel("MyOrg",SwingConstants.CENTER);
+        head.setFont(f); head.setForeground(Color.red); head.setBounds(410,280,200,100);
+        add(head);
+        //Access
+        JTextField idField = new JTextField(20);  idField.setBounds(485,400,120,30);
+        JTextField pswField = new JTextField(20);   pswField.setBounds(485,470,120,30);
+        JButton confButton = new JButton("Conferma");  confButton.setForeground(Color.white); confButton.setBackground(blue2);
+        confButton.setBounds(453,520,110,30);   confButton.setEnabled(false);
+        //Using mediator
+        mediator.setIdField(idField);
+        mediator.setPswField(pswField);
+        mediator.setConfButton(confButton);
+        idField.addActionListener(e -> mediator.textChanged(idField));
+        pswField.addActionListener(e -> mediator.textChanged(pswField));
+        confButton.addActionListener(e -> mediator.buttonChanged(confButton));
+
+        JLabel reqId = new JLabel("ID: "); reqId.setBounds(410,400,100,30); add(reqId);
+        JLabel reqPsw = new JLabel("Password: "); reqPsw.setBounds(410,470,100,30); add(reqId);
+
+        add(idField); add(pswField); add(reqId); add(reqPsw); add(confButton);
+    }
+}

@@ -4,6 +4,7 @@ import is.Funzioni.Administrator;
 import is.Funzioni.Employee;
 import is.Funzioni.Role;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Azienda implements AziendaIF {
@@ -34,6 +35,7 @@ public class Azienda implements AziendaIF {
     public OrganigrammaIF getOrganigramma(){
         return organigramma;
     }
+    public Administrator getAdmin(){return admin;}
     public LinkedList<Employee> getEmployees() {
         return employees;
     }
@@ -67,5 +69,15 @@ public class Azienda implements AziendaIF {
     @Override
     public int getNEmployees() {
         return employees.size();
+    }
+
+    @Override
+    public LinkedList<String> getAreas(){
+        Iterator<AreaOrganizationIF> it = organigramma.iterator();
+        LinkedList<String> ret = new LinkedList<>();
+        while(it.hasNext()){
+            ret.add(((Organigramma)it.next()).getName());
+        }
+        return ret;
     }
 }
