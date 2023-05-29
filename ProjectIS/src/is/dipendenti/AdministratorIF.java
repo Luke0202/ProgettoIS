@@ -1,7 +1,14 @@
 package is.dipendenti;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public interface AdministratorIF {
-    boolean addEmployee(Role role,Employee emp);
-    boolean removeEmployee(int ID);
+    void addEmployee(Role role,Employee emp);
+    void removeEmployee(Employee e);
+    void removeEmployee(Role role,Employee emp);
     int giveID();
+    HashSet<Role> getRoles(Employee emp);
+    void addRole(Role r);
+    void removeRole(Role r);
 }

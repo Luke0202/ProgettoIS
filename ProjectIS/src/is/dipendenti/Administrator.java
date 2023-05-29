@@ -3,6 +3,7 @@ package is.dipendenti;
 import is.organigramma.AreaOrganizationIF;
 import is.organigramma.Organigramma;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
@@ -15,15 +16,17 @@ public class Administrator implements AdministratorIF {
     private final int maxIdPossible = 10000;
     private int maxEmployees;
     private String name, surname, email;
-    private Organigramma organigramma;
+    private final Organigramma organigramma;
     private LinkedList<Employee> employees = new LinkedList<>();
+    private HashSet<Role> roles = new HashSet<>();
 
-    public Administrator(String name, String surname, String email, int maxEmp){
+    public Administrator(String name, String surname, String email, int maxEmp,Organigramma organigramma){
         this.name = name;
         this.surname = surname;
         this.email = email;
         Random ran = new Random();
         this.maxEmployees = maxEmp;
+        this.organigramma=organigramma;
         this.ID = ran.nextInt(maxEmp-1);
     }
     //GETTERS
@@ -42,6 +45,7 @@ public class Administrator implements AdministratorIF {
     public LinkedList<Employee> getEmployees() {
         return employees;
     }
+    public HashSet<Role> getRoles() {return roles;}
 
     //SETTERS
     public void setMaxEmployees(int maxEmployees) {
@@ -60,28 +64,29 @@ public class Administrator implements AdministratorIF {
     }
 
     @Override
-    public boolean addEmployee(Role role,Employee emp) {
+    public void addEmployee(Role role,Employee emp) {
         Organigramma org = findArea(role);
-        if (org == null) return false;
-        org.addEmployee(role,emp);
-        employees.add(emp);
-        return true;
+        if (org == null) return;
+        org.addEmployee(role,emp.getID());
+        if (!employees.contains(emp)) employees.add(emp);
     }
 
     @Override
-    public boolean removeEmployee(int ID) {
-        Iterator<Employee> it = employees.iterator();
-        while(it.hasNext()){
-            Employee emp = it.next();
-            if (emp.getID()==ID){
-                it.remove();
-                employees.remove(emp);
-                return true;
-            }
-        }
-        return false;
-    }
+    public void removeEmployee(Employee e) {
+        employees.remove(e);
+        organigramma.removeEmployee(e.getID());
 
+        Iterator<AreaOrganizationIF> it = organigramma.iterator();
+        while(it.hasNext()){
+            Organigramma cur = (Organigramma) it.next();
+            cur.removeEmployee(e.getID());
+        }
+    }
+    @Override
+    public void removeEmployee(Role role,Employee emp) {
+        Organigramma org = findArea(role);
+        org.removeEmployee(emp.getID());
+    }
     @Override
     public int giveID(){
         int N = employees.size();
@@ -111,5 +116,26 @@ public class Administrator implements AdministratorIF {
             if (cur.getName().equals(r.getArea())) return cur;
         }
         return null;
+    }
+    @Override
+    public HashSet<Role> getRoles(Employee emp){
+        HashSet<Role> ret = new HashSet<>();
+
+        ret.addAll(organigramma.getRolesOfEmployee(emp));
+
+        Iterator<AreaOrganizationIF> it = organigramma.iterator();
+        while(it.hasNext()){
+            Organigramma org = (Organigramma) it.next();
+            ret.addAll(org.getRolesOfEmployee(emp));
+        }
+        return ret;
+    }
+    @Override
+    public void addRole(Role r){
+        roles.add(r);
+    }
+    @Override
+    public void removeRole(Role r){
+        roles.remove(r);
     }
 }

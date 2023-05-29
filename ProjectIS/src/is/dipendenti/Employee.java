@@ -5,17 +5,15 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 
-public class Employee implements EmployeeIF {
+public class Employee {
     private final int ID;
     private String name, surname, email;
-    private final AdministratorIF admin;
-    protected LinkedList<Role> roles = new LinkedList<>();
-    public Employee(String name, String surname, String email, AdministratorIF admin){
+
+    public Employee(String name, String surname, String email,int ID){
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.admin = admin;
-        this.ID = admin.giveID();
+        this.ID = ID;
     }
 
     public int getID(){ return ID;  }
@@ -27,10 +25,6 @@ public class Employee implements EmployeeIF {
     }
     public String getEmail() {
         return email;
-    }
-    public AdministratorIF getAdmin(){return admin;}
-    public LinkedList<Role> getRoles() {
-        return roles;
     }
 
     //SETTERS
@@ -44,22 +38,12 @@ public class Employee implements EmployeeIF {
         this.email = email;
     }
 
-
-    @Override
-    public HashSet<String> getMyAreas(){
-        HashSet<String> ret = new HashSet<>();
-        for (Role r:roles){
-            String area = r.getArea();
-            if (!ret.contains(area)) ret.add(area);
-        }
-        return ret;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee that = (Employee) o;
-        return ID == that.getID() && admin==that.getAdmin();
+        return ID == that.getID();
     }//equals
 
     @Override
@@ -71,10 +55,6 @@ public class Employee implements EmployeeIF {
     public String toString() {
         StringBuilder sb = new StringBuilder(400);
         sb.append("Dipendente: " + surname + " " + name + ". Id: " + ID + "\nRuoli: ");
-        int N = roles.size();
-        for (int i = 0; i < N; i++) {
-            sb.append(roles.get(i).getName() + ", ");
-        }
         sb.setLength(sb.length() - 2);
         sb.append(".");
         return sb.toString();

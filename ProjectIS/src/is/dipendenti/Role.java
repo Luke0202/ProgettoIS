@@ -5,27 +5,28 @@ import java.util.Objects;
 public class Role {
     private String name,description,area;
 
-    public Role(String name, String description, String area){
+    public Role(String name, String area, String description){
         this.name = name;
         this.area = area;
+        this.description=description;
     }
     //GETTERS
     public String getName() {
         return name;
     }
-    public String getDescription(){ return description;}
     public String getArea() {
         return area;
     }
+    public String getDescription(){ return description;}
     //SETTERS
     public void setName(String name) {
         this.name = name;
     }
-    public void setDescription(String description) {
-        this.description = description;
-    }
     public void setArea(String area) {
         this.area = area;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

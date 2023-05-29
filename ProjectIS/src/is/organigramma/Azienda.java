@@ -4,14 +4,16 @@ import is.dipendenti.Administrator;
 import is.dipendenti.Employee;
 import is.dipendenti.Role;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Azienda implements AziendaIF{
     private final int cod;
     private String name;
     private final Administrator admin;
-    public Azienda(int cod,int massimo, String name,Administrator admin){
+    public Azienda(int cod,String name,Administrator admin){
         this.cod = cod;
         this.name = name;
         this.admin = admin;
@@ -26,40 +28,89 @@ public class Azienda implements AziendaIF{
     //SETTERS
     public void setName(String name){this.name = name;}
 
-    @Override
-    public LinkedList<String> getAreas(){
-        LinkedList<String> ret = new LinkedList<>();
 
-        Iterator<AreaOrganizationIF> it = admin.getOrganigramma().iterator();
-        while(it.hasNext()){
-            ret.add(((Organigramma)it.next()).getName());
+    @Override
+    public int getNEmployees(){return admin.getEmployees().size();}
+    @Override
+    public HashSet<Role> getRoles(){return admin.getRoles();}
+    @Override
+    public HashSet<String> getAreas(){
+        HashSet<String> ret = new HashSet<>();
+        HashSet<Role> roles = admin.getRoles();
+        for (Role r:roles){
+            ret.add(r.getArea());
         }
         return ret;
     }
     @Override
-    public LinkedList<Integer> getIDEmployees(){
-        LinkedList<Integer> ret = new LinkedList<>();
+    public HashSet<String> getNameRole(){
+        HashSet<String> ret = new HashSet<>();
+        HashSet<Role> roles = admin.getRoles();
+        for (Role r:roles){
+            ret.add(r.getName());
+        }
+        return ret;
+    }
+
+    @Override
+    public HashSet<Role> getRoles(Employee emp) {return admin.getRoles(emp);}
+
+    @Override
+    public HashSet<String> getAreas(Employee emp) {
+        HashSet<String> ret = new HashSet<>();
+        HashSet<Role> roles = admin.getRoles(emp);
+        for (Role r:roles){
+            ret.add(r.getArea());
+        }
+        return ret;
+    }
+
+    @Override
+    public HashSet<String> getNameRoles(Employee emp) {
+        HashSet<String> ret = new HashSet<>();
+        HashSet<Role> roles = admin.getRoles(emp);
+        for (Role r:roles){
+            ret.add(r.getName());
+        }
+        return ret;
+    }
+
+    @Override
+    public HashSet<Integer> getIDEmployees(){
+        HashSet<Integer> ret = new HashSet<>();
 
         for (Employee emp:admin.getEmployees()){
             ret.add(emp.getID());
         }
         return ret;
     }
-    @Override
-    public int getNEmployees(){
-        return admin.getEmployees().size();
-    }
+
     @Override
     public void addEmployee(Role role, Employee emp){
-        if (getNEmployees()<admin.getMaxEmployees()) {
-            boolean b = admin.addEmployee(role,emp);
-            if (!b) throw new IllegalArgumentException("Impossibile aggiungere il dipendente "+emp.getSurname()+" "+emp.getName()+".");
-        }
+        if (getNEmployees()<admin.getMaxEmployees()) admin.addEmployee(role,emp);
     }
 
     @Override
-    public void removeEmployee(int ID){
-        boolean b = admin.removeEmployee(ID);
-        if (!b) throw new IllegalArgumentException("Impossibile effettuare la rimozione");
+    public void removeEmployee(Employee emp){ admin.removeEmployee(emp);}
+
+    @Override
+    public void removeEmployee(Role role,Employee emp){ admin.removeEmployee(role,emp);}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Azienda azienda = (Azienda) o;
+        return cod == azienda.cod;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cod);
+    }
+
+    @Override
+    public String toString() {
+        return "Azienda: " + "cod=" + cod + ", name='" + name + '.';
     }
 }

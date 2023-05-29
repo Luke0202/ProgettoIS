@@ -1,18 +1,18 @@
 package is.mediator;
 
-import is.organigramma.AziendaLL;
+import is.organigramma.Azienda;
 
 import javax.swing.*;
 
 public class Mediator implements MediatorIF{
     private JMenuItem searchA,createA,editA,remA,searchR,createR,editR,remR,searchU,createU,editU,remU,openA,showA;
     private JTextField idField,pswField, nameField;
-    private JButton confButton, saveB, saveV;
+    private JButton confButton, saveB, saveV, newAziendaButton;
     private JScrollPane descrScroll;
     private JComboBox dadComboBox;
-    private AziendaLL azienda;
+    private Azienda azienda;
 
-    public Mediator(AziendaLL azienda){
+    public Mediator(Azienda azienda){
         this.azienda = azienda;
     }
 
@@ -27,6 +27,7 @@ public class Mediator implements MediatorIF{
     public void setConfButton(JButton button){
         confButton = button;
     }
+    public void setNewAziendaButton(JButton button){ newAziendaButton = button;}
     public void setIdField(JTextField idField){
         this.idField = idField;
     }

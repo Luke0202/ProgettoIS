@@ -6,19 +6,6 @@ import is.dipendenti.Role;
 import java.util.*;
 
 public class Organigramma extends AbstractOrganigramma {
-    private class Couple{
-        String nameRole;
-        int ID;
-
-        public Couple(Role role,Employee employee){
-            nameRole = role.getName();
-            ID = employee.getID();
-        }
-        public Couple(String nameRole,int ID){
-            this.nameRole=nameRole;
-            this.ID = ID;
-        }
-    }
     private HashSet<Couple> couples = new HashSet<>();//Coppie nomeRuolo e IDDipendenti
     public Organigramma(String name,String description){
         super(name,description);
@@ -37,35 +24,37 @@ public class Organigramma extends AbstractOrganigramma {
 
 
     @Override
-    public void addEmployee(Role role,Employee emp){
-        if (role == null || emp == null) return;
-        String nameRole = role.getName();
-        int ID = emp.getID();
-        Couple c = new Couple(nameRole,ID);
-        couples.add(c);
+    public void addEmployee(Role role,int id){
+        if (role == null) return;
+        couples.add(new Couple(role,id));
     }
 
     @Override
-    public void removeEmployee(Employee d){
+    public void removeEmployee(int id){
         //Rimuovere i ruoli del dipendente d associati all'area
-        if (d==null) return;
-
-        int id = d.getID();
 
         Iterator<Couple> it = couples.iterator();
         while(it.hasNext()){
             Couple cur = it.next();
-            if (cur.ID==id){
+            if (cur.getID()==id){
                 it.remove();
             }
         }
     }
 
     @Override
-    public HashSet<String> getRoles(){
-        HashSet<String> roles = new HashSet<>();
+    public HashSet<Role> getRoles(){
+        HashSet<Role> roles = new HashSet<>();
         for(Couple c:couples){
-            roles.add(c.nameRole);
+            roles.add(c.getRole());
+        }
+        return roles;
+    }
+    @Override
+    public HashSet<Role> getRolesOfEmployee(Employee emp){
+        HashSet<Role> roles = new HashSet<>();
+        for(Couple c:couples){
+            if (c.getID() == emp.getID()) roles.add(c.getRole());
         }
         return roles;
     }
@@ -73,7 +62,7 @@ public class Organigramma extends AbstractOrganigramma {
     public HashSet<Integer> getEmployees(){
         HashSet<Integer> employees = new HashSet<>();
         for(Couple c:couples){
-            employees.add(c.ID);
+            employees.add(c.getID());
         }
         return employees;
     }
@@ -96,7 +85,7 @@ public class Organigramma extends AbstractOrganigramma {
     @Override
     public boolean containsID(int empID){
         for(Couple c:couples){
-            if (c.ID == empID) return true;
+            if (c.getID() == empID) return true;
         }
         return false;
     }

@@ -10,8 +10,8 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
-    public void openAzienda(String ID) {
-        pw.println("<Azienda ID="+ID+">");
+    public void openAzienda() {
+        pw.println("<Azienda>");
     }
 
     @Override
@@ -30,8 +30,8 @@ public class TextBuilder implements TextBuilderIF {
     public void closeMaxEmployees() {}
 
     @Override
-    public void openAdmin(String ID) {
-        pw.println("<Admin ID="+ID+">");
+    public void openAdmin() {
+        pw.println("<Admin>");
     }
     @Override
     public void closeAdmin() {
@@ -63,8 +63,8 @@ public class TextBuilder implements TextBuilderIF {
     public void closeEmail() {}
 
     @Override
-    public void openEmployee(String ID) {
-        pw.println("<Employee ID="+ID+">");
+    public void openEmployee() {
+        pw.println("<Employee>");
     }
 
     @Override
@@ -83,29 +83,55 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
-    public void openOrganigramma() {
-        pw.println("<Organigramma>");
-    }
+    public void openRoles() {pw.println("<Roles>");}
 
     @Override
-    public void closeOrganigramma() {
-        pw.println("</Organigramma>");
-    }
+    public void closeRoles() {pw.println("</Roles>");}
 
     @Override
-    public void openArea(String name) {
-        pw.println("<Area>");
-    }
+    public void openRole() {pw.println("<Role>");}
 
     @Override
-    public void closeArea() {
-        pw.println("</Area>");
-    }
+    public void closeRole() {pw.println("</Role>");}
 
     @Override
-    public void openDescription(String content) {
-        pw.println("<Description>"+content+"</Description>");
-    }
+    public void openArea() {pw.println("<Area>");}
+
+    @Override
+    public void closeArea() {pw.println("</Area>");}
+
+    @Override
+    public void openOrganigramma() {pw.println("<Organigramma>");}
+
+    @Override
+    public void closeOrganigramma() {pw.println("</Organigramma>");}
+
+    @Override
+    public void openCouples() {pw.println("<Couples>");}
+
+    @Override
+    public void closeCouples() {pw.println("</Couples>");}
+
+    @Override
+    public void openCouple() {pw.println("<Couple>");}
+
+    @Override
+    public void closeCouple() {pw.println("</Couple>");}
+
+    @Override
+    public void openID(int ID) {pw.println("<ID>"+ID+"</ID>");}
+
+    @Override
+    public void closeID() {}
+
+    @Override
+    public void openNameArea(String nome) {pw.println("<NameArea>"+nome+"</NameArea>");}
+
+    @Override
+    public void closeNameArea() {}
+
+    @Override
+    public void openDescription(String content) {pw.println("<Description>"+content+"</Description>");}
 
     @Override
     public void closeDescription() {}

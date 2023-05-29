@@ -30,21 +30,26 @@ public class HomePanel extends JPanel{
         head.setFont(f); head.setForeground(Color.red); head.setBounds(410,280,200,100);
         add(head);
         //Access
-        JTextField idField = new JTextField(20);  idField.setBounds(485,400,120,30);
-        JTextField pswField = new JTextField(20);   pswField.setBounds(485,470,120,30);
+        JTextField idField = new JTextField(20);  idField.setBounds(485,370,120,30);
+        JTextField pswField = new JTextField(20);   pswField.setBounds(485,410,120,30);
         JButton confButton = new JButton("Conferma");  confButton.setForeground(Color.white); confButton.setBackground(blue2);
-        confButton.setBounds(453,520,110,30);   confButton.setEnabled(false);
+        confButton.setBounds(450,455,110,30);   confButton.setEnabled(false);
+        JButton newAziendaButton = new JButton("Crea Nuova Azienda");  newAziendaButton.setForeground(Color.white);
+        newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(415,520,180,30);
+        newAziendaButton.setEnabled(true);
         //Using mediator
         mediator.setIdField(idField);
         mediator.setPswField(pswField);
         mediator.setConfButton(confButton);
+        mediator.setNewAziendaButton(newAziendaButton);
         idField.addActionListener(e -> mediator.textChanged(idField));
         pswField.addActionListener(e -> mediator.textChanged(pswField));
         confButton.addActionListener(e -> mediator.buttonChanged(confButton));
+        newAziendaButton.addActionListener(e->mediator.buttonChanged(newAziendaButton));
 
-        JLabel reqId = new JLabel("ID: "); reqId.setBounds(410,400,100,30); add(reqId);
-        JLabel reqPsw = new JLabel("Password: "); reqPsw.setBounds(410,470,100,30); add(reqId);
+        JLabel reqId = new JLabel("ID: "); reqId.setBounds(410,370,100,30); add(reqId);
+        JLabel reqPsw = new JLabel("Password: "); reqPsw.setBounds(410,410,100,30); add(reqId);
 
-        add(idField); add(pswField); add(reqId); add(reqPsw); add(confButton);
+        add(idField); add(pswField); add(reqId); add(reqPsw); add(confButton); add(newAziendaButton);
     }
 }

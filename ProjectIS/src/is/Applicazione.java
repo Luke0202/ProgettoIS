@@ -2,6 +2,7 @@ package is;
 
 import is.mediator.Mediator;
 import is.panels.CreateAreaPanel;
+import is.panels.HomePanel;
 import is.panels.ModAreaPanel;
 
 import javax.swing.*;
@@ -59,9 +60,9 @@ public class Applicazione {
 
 
         //Panel1
-        //HomePanel home = new HomePanel(mediator); frame.add(home);
+        HomePanel home = new HomePanel(mediator); frame.add(home);
         //CreateAreaPanel createArea = new CreateAreaPanel(mediator,null); frame.add(createArea);
-        ModAreaPanel modArea = new ModAreaPanel(mediator,null); frame.add(modArea);
+        //ModAreaPanel modArea = new ModAreaPanel(mediator,null); frame.add(modArea);
         //Frame settings
         frame.setLocation(350,150);
         frame.setSize(1000,650);
