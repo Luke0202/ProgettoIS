@@ -3,6 +3,7 @@ package is.panels;
 import is.dipendenti.Administrator;
 import is.dipendenti.Employee;
 import is.dipendenti.Role;
+import is.mediator.Mediator;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
 import is.shapes.DataTable;
@@ -15,11 +16,14 @@ import java.util.Iterator;
 
 public class ListEmployeePanel extends JPanel {
     private Administrator admin;
-    public ListEmployeePanel(Administrator admin){
-        if (admin == null) throw new IllegalArgumentException("Dato non valido");
-        this.admin=admin;
+    private Mediator mediator;
+    public ListEmployeePanel(Administrator admin, Mediator mediator){
+        if (admin == null || mediator==null) throw new IllegalArgumentException("Dato non valido");
+        this.admin=admin; this.mediator=mediator;
 
         setLayout(null);
+        Color blue = new Color(3, 2, 179);
+        Color blue2 = new Color(0,51,200);
         Color gray = new Color(230,230,230);
         setBounds(0,0,1000,1000);
         //Header
@@ -68,7 +72,15 @@ public class ListEmployeePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(15,50,955,200);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //Search
+        JLabel searchLab = new JLabel("Cerca dipendente: ");
+        searchLab.setFont(f); searchLab.setForeground(blue); searchLab.setBounds(20,290,280,30);
 
+        JTextField idField = new JTextField(20); idField.setText("Digita ID dipendente");
+        idField.setBounds(20,330,280,30);
+
+        JButton search = new JButton("Cerca");  search.setForeground(Color.white); search.setBackground(blue2);
+        search.setBounds(340,330,140,30);
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -77,6 +89,13 @@ public class ListEmployeePanel extends JPanel {
         lab.setBounds(730,320,200,200);
         //ADDING
         fieldPanel.add(scrollPane); fieldPanel.add(lab);
+        fieldPanel.add(searchLab); fieldPanel.add(idField); fieldPanel.add(search);
         add(fieldPanel); add(headPanel);
+        //Mediator
+        mediator.setIdListEmployee(idField);
+        mediator.setSearchListEmployee(search);
+        idField.addActionListener(e->mediator.textChanged(idField));
+        search.addActionListener(e->mediator.buttonChanged(search));
+
     }
 }

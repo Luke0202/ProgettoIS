@@ -9,18 +9,19 @@ import java.util.Objects;
 
 public class Azienda implements AziendaIF{
     private final int cod;
-    private String name, headquarter, presidentName, presidentSurname;
+    private String name, headquarter, type;
     private final Administrator admin;
-    public Azienda(int cod,String name,String headquarter,String presidentName,String presidentSurname,Administrator admin){
+    public Azienda(int cod,String name,String headquarter,String type,Administrator admin){
         this.cod = cod;
         this.name = name;
+        this.type = type;
+        this.headquarter=headquarter;
         this.admin = admin;
     }
     //GETTERS
 
     public String getHeadquarter() { return headquarter;}
-    public String getPresidentName() { return presidentName;}
-    public String getPresidentSurname() { return presidentSurname;}
+    public String getType(){return type;}
     public int getCod() {return cod;}
     public String getName() {
         return name;
@@ -30,8 +31,7 @@ public class Azienda implements AziendaIF{
     //SETTERS
 
     public void setHeadquarter(String headquarter) {this.headquarter = headquarter;}
-    public void setPresidentName(String presidentName) {this.presidentName = presidentName;}
-    public void setPresidentSurname(String presidentSurname) {this.presidentSurname = presidentSurname;}
+    public void setType(String type){this.type=type;}
     public void setName(String name){this.name = name;}
 
 
@@ -121,8 +121,7 @@ public class Azienda implements AziendaIF{
                 "cod=" + cod +
                 ", name='" + name + '\'' +
                 ", headquarter='" + headquarter + '\'' +
-                ", presidentName='" + presidentName + '\'' +
-                ", presidentSurname='" + presidentSurname + '\'' +
+                ", sector='" + type + '\'' +
                 '}';
     }
 }

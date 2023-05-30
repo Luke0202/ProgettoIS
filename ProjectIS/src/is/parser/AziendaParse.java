@@ -32,6 +32,12 @@ public class AziendaParse {
         builder.closeID();
         builder.openName(azienda.getName());
         builder.closeName();
+        builder.openHeadquarter(azienda.getHeadquarter());
+        builder.closeHeadquarter();
+        builder.openType(azienda.getType());
+        builder.closeType();
+        builder.openMaxEmployees(String.valueOf(admin.getMaxEmployees()));
+        builder.closeMaxEmployees();
         //Employees
         builder.openEmployees();
         for (Employee emp:employees){
@@ -45,20 +51,29 @@ public class AziendaParse {
             builder.openEmail(emp.getEmail());
             builder.closeEmail();
             builder.openPassword(emp.getPsw());
+            builder.closePassword();
             builder.closeEmployee();
         }
         builder.closeEmployees();
+
+        //Roles
+        builder.openRoles();
+        for (Role role:roles){
+            builder.openRole();
+            builder.openName(role.getName());
+            builder.closeName();
+            builder.openNameArea(role.getArea());
+            builder.closeNameArea();
+            builder.openDescription(role.getDescription());
+            builder.closeDescription();
+            builder.closeRole();
+        }
+        builder.closeRoles();
+
         //Organigramma
         builder.openOrganigramma();
         addAreas(org);
         builder.closeOrganigramma();
-        //Admin
-        builder.openAdmin();
-
-
-        builder.openMaxEmployees(String.valueOf(admin.getMaxEmployees()));
-        builder.closeMaxEmployees();
-        builder.closeAdmin();
 
         builder.closeAzienda();
     }

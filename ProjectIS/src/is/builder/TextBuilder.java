@@ -39,6 +39,18 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
+    public void openHeadquarter(String h) {pw.println("<Headquarter>"+h+"</Headquarter");}
+
+    @Override
+    public void closeHeadquarter() {}
+
+    @Override
+    public void openType(String type) {pw.println("Type"+type+"/Type");}
+
+    @Override
+    public void closeType() {}
+
+    @Override
     public void openName(String name) {
         pw.println("<Name>"+name+"</Name>");
     }
@@ -87,6 +99,12 @@ public class TextBuilder implements TextBuilderIF {
     public void closeEmployees() {
         pw.println("</Employees>");
     }
+
+    @Override
+    public void openRoles() {pw.println("<Roles>");}
+
+    @Override
+    public void closeRoles() {pw.println("</Roles>");}
 
     @Override
     public void openRole() {pw.println("<Role>");}

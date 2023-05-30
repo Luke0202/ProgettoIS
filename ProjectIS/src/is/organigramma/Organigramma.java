@@ -134,32 +134,5 @@ public class Organigramma extends AbstractOrganigramma {
     public void accept() {
 
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Organigramma that = (Organigramma) o;
-        return name == that.name;
-    }
 
-    @Override
-    public int hashCode() {
-        int M = 23;
-        int ret = 0;
-        for (int i:getEmployees()){
-            ret+=i*M;
-        }
-        return ret;
-    }
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder(500);
-        sb.append("<"+name+">\n");
-        int N = getNChildren();
-        for (int i = 0;i<N;i++){
-            sb.append(getChild(i).toString());
-        }
-        sb.append("</"+name+">");
-        return sb.toString();
-    }
 }

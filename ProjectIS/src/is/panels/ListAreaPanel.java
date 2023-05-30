@@ -1,6 +1,7 @@
 package is.panels;
 
 import is.dipendenti.Administrator;
+import is.mediator.Mediator;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
 import is.shapes.DataTable;
@@ -12,12 +13,15 @@ import java.util.Iterator;
 
 public class ListAreaPanel extends JPanel {
     private Administrator admin;
-    public ListAreaPanel(Administrator admin){
-        if (admin == null) throw new IllegalArgumentException("Dato non valido");
-        this.admin=admin;
+    private Mediator mediator;
+    public ListAreaPanel(Administrator admin,Mediator mediator){
+        if (admin == null || mediator==null) throw new IllegalArgumentException("Dato non valido");
+        this.admin=admin; this.mediator=mediator;
 
         setLayout(null);
         Color gray = new Color(230,230,230);
+        Color blue = new Color(3, 2, 179);
+        Color blue2 = new Color(0,51,200);
         setBounds(0,0,1000,1000);
         //Header
         JPanel headPanel = new JPanel(null); headPanel.setBackground(Color.white);
@@ -71,6 +75,15 @@ public class ListAreaPanel extends JPanel {
         scrollPane.setBounds(15,50,955,200);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
+        //Search
+        JLabel searchLab = new JLabel("Cerca area: ");
+        searchLab.setFont(f); searchLab.setForeground(blue); searchLab.setBounds(20,290,200,30);
+
+        JTextField nameField = new JTextField(20); nameField.setText("Digita nome area");
+        nameField.setBounds(20,330,280,30);
+
+        JButton search = new JButton("Cerca");  search.setForeground(Color.white); search.setBackground(blue2);
+        search.setBounds(340,330,140,30);
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -79,6 +92,12 @@ public class ListAreaPanel extends JPanel {
         lab.setBounds(730,320,200,200);
         //ADDING
         fieldPanel.add(lab); fieldPanel.add(scrollPane);
+        fieldPanel.add(searchLab); fieldPanel.add(nameField); fieldPanel.add(search);
         add(headPanel); add(fieldPanel);
+        //Mediator
+        mediator.setNameListArea(nameField);
+        mediator.setSearchListArea(search);
+        nameField.addActionListener(e->mediator.textChanged(nameField));
+        search.addActionListener(e->mediator.buttonChanged(search));
     }
 }

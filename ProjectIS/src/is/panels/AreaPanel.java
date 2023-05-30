@@ -39,12 +39,12 @@ public class AreaPanel extends JPanel {
         fieldPanel.setBounds(0,50,1000,950);
         f = new Font("TimesNewRoman",Font.ITALIC,20);
         //Name Field
-        JLabel nameLab = new JLabel("Nome Area: ");
+        JLabel nameLab = new JLabel("Nome area: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
         JTextField nameField = new JTextField(20); nameField.setText(org.getName()); nameField.setEditable(false);
         nameField.setBounds(20,50,280,30);
         //DadLabel
-        JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
+        JLabel dadLab = new JLabel("Nome area di riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,200,30);
 
         JTextField dadField = new JTextField(20); dadField.setText(findDadArea()); dadField.setEditable(false);
@@ -55,7 +55,7 @@ public class AreaPanel extends JPanel {
         JLabel stateLab2 = new JLabel((org.getStateArea()==false) ? "BOZZA":"VALIDATA");
         stateLab2.setBounds(680,50,280,30);
         //Button
-        JButton removeButton = new JButton("Elimina Area");  removeButton.setForeground(Color.white);
+        JButton removeButton = new JButton("Elimina area");  removeButton.setForeground(Color.white);
         removeButton.setBackground(blue2); removeButton.setBounds(810,50,150,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
@@ -66,7 +66,7 @@ public class AreaPanel extends JPanel {
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         descrScroll.setBounds(20,135,940,150);
         //EmployeesArea
-        JLabel empLab = new JLabel("Dipendendi: ");
+        JLabel empLab = new JLabel("Dipendenti: ");
         empLab.setFont(f); empLab.setForeground(blue); empLab.setBounds(20,315,200,30);
         //Table
         String[] columnNames = {"Cognome","Nome","Email","ID"};

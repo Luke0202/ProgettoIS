@@ -7,9 +7,11 @@ import javax.swing.*;
 public class Mediator implements MediatorIF{
     private JMenuItem searchA,createA,editA,remA,searchR,createR,editR,remR,searchU,createU,editU,remU,openA,showA;
     private JTextField idField,pswField, nameField, nameRoleField, nameRoleModRolePanel,nameCreateEmployee,surnameCreateEmployee,
-            emailCreateEmployee,pswCreateEmployee;
+            emailCreateEmployee,pswCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
+            nameListArea, idListEmployee, nameListRole, areaListRole;
     private JButton confButton,newAziendaButton, saveBPanel, saveVPanel, saveBRole, saveVRole, saveBModRolePanel,saveVModRolePanel,
-           saveCreateEmployee, removeButtonArea, removeButtonEmployee, removeButtonRole;
+           saveCreateEmployee, removeButtonArea, removeButtonEmployee, removeButtonRole, saveCreateAzienda,searchListArea, searchListEmployee,
+    searchListRole;
     private JComboBox dadComboBox, areaComboBox,roleCreateEmployee;
     private Azienda azienda;
     private JFrame frame;
@@ -64,7 +66,18 @@ public class Mediator implements MediatorIF{
     public void setRemoveButtonArea(JButton removeButtonArea){this.removeButtonArea=removeButtonArea;}
     public void setRemoveButtonEmployee(JButton removeButtonEmployee){this.removeButtonEmployee=removeButtonEmployee;}
     public void setRemoveButtonRole(JButton removeButtonRole){this.removeButtonRole=removeButtonRole;}
-
+    public void setNameCreateAzienda(JTextField nameCreateAzienda){this.nameCreateAzienda=nameCreateAzienda;}
+    public void setCodCreateAzienda(JTextField codCreateAzienda){this.codCreateAzienda=codCreateAzienda;}
+    public void setHeadquarterCreateAzienda(JTextField headquarterCreateAzienda){this.headquarterCreateAzienda=headquarterCreateAzienda;}
+    public void setTypeCreateAzienda(JTextField typeCreateAzienda){this.typeCreateAzienda=typeCreateAzienda;}
+    public void setSaveCreateAzienda(JButton saveCreateAzienda){this.saveCreateAzienda=saveCreateAzienda;}
+    public void setNameListArea(JTextField nameListArea){this.nameListArea=nameListArea;}
+    public void setIdListEmployee(JTextField idListEmployee){this.idListEmployee=idListEmployee;}
+    public void setNameListRole(JTextField nameListRole){this.nameListRole=nameListRole;}
+    public void setAreaListRole(JTextField areaListRole){this.areaListRole=areaListRole;}
+    public void setSearchListArea(JButton searchListArea){this.searchListArea=searchListArea;}
+    public void setSearchListEmployee(JButton searchListEmployee){this.searchListEmployee = searchListEmployee;}
+    public void setSearchListRole(JButton searchListRole){this.searchListRole=searchListRole;}
     @Override
     public void menuChanged(JMenuItem widget) {
 

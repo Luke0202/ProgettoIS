@@ -8,6 +8,10 @@ public interface TextBuilderIF {
     void closeMaxEmployees();
     void openAdmin();
     void closeAdmin();
+    void openHeadquarter(String h);
+    void closeHeadquarter();
+    void openType(String type);
+    void closeType();
     void openName(String name);
     void closeName();
     void openSurname(String surname);
@@ -20,6 +24,8 @@ public interface TextBuilderIF {
     void closeEmployee();
     void openEmployees();
     void closeEmployees();
+    void openRoles();
+    void closeRoles();
     void openRole();
     void closeRole();
     void openArea();
