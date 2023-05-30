@@ -10,6 +10,7 @@ import java.awt.*;
 public class HomePanel extends JPanel{
     private Mediator mediator;
     public HomePanel(Mediator mediator){
+        if (mediator == null) throw new IllegalArgumentException("Dato non valido");
         this.mediator = mediator;
 
         setLayout(null);
@@ -33,9 +34,9 @@ public class HomePanel extends JPanel{
         JTextField idField = new JTextField(20);  idField.setBounds(485,370,120,30);
         JTextField pswField = new JTextField(20);   pswField.setBounds(485,410,120,30);
         JButton confButton = new JButton("Conferma");  confButton.setForeground(Color.white); confButton.setBackground(blue2);
-        confButton.setBounds(450,455,110,30);   confButton.setEnabled(false);
+        confButton.setBounds(450,455,110,30);   confButton.setEnabled(false); confButton.setOpaque(true);
         JButton newAziendaButton = new JButton("Crea Nuova Azienda");  newAziendaButton.setForeground(Color.white);
-        newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(415,520,180,30);
+        newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(415,520,180,30); newAziendaButton.setOpaque(true);
         newAziendaButton.setEnabled(true);
         //Using mediator
         mediator.setIdField(idField);

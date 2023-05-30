@@ -13,5 +13,10 @@ public interface AreaOrganizationIF{
     HashSet<Integer> getEmployees();
     HashSet<String> getAreasOfEmployee(Employee emp);
     boolean containsID(int empID);
-    HashSet<Role> getRolesOfEmployee(Employee emp);
+    boolean contains(Role role);
+    HashSet<Role> getRoles(Employee emp);
+    HashSet<String> getSubAreas();
+    int getNEmployees();
+    HashSet<Integer> getEmployees(Role r);
+    void removeRole(Role r);
 }

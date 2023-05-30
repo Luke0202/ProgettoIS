@@ -5,20 +5,22 @@ import is.dipendenti.Employee;
 import is.dipendenti.Role;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public class Azienda implements AziendaIF{
     private final int cod;
-    private String name;
+    private String name, headquarter, presidentName, presidentSurname;
     private final Administrator admin;
-    public Azienda(int cod,String name,Administrator admin){
+    public Azienda(int cod,String name,String headquarter,String presidentName,String presidentSurname,Administrator admin){
         this.cod = cod;
         this.name = name;
         this.admin = admin;
     }
     //GETTERS
+
+    public String getHeadquarter() { return headquarter;}
+    public String getPresidentName() { return presidentName;}
+    public String getPresidentSurname() { return presidentSurname;}
     public int getCod() {return cod;}
     public String getName() {
         return name;
@@ -26,6 +28,10 @@ public class Azienda implements AziendaIF{
     public Administrator getAdmin() { return admin;}
 
     //SETTERS
+
+    public void setHeadquarter(String headquarter) {this.headquarter = headquarter;}
+    public void setPresidentName(String presidentName) {this.presidentName = presidentName;}
+    public void setPresidentSurname(String presidentSurname) {this.presidentSurname = presidentSurname;}
     public void setName(String name){this.name = name;}
 
 
@@ -111,6 +117,12 @@ public class Azienda implements AziendaIF{
 
     @Override
     public String toString() {
-        return "Azienda: " + "cod=" + cod + ", name='" + name + '.';
+        return "Azienda{" +
+                "cod=" + cod +
+                ", name='" + name + '\'' +
+                ", headquarter='" + headquarter + '\'' +
+                ", presidentName='" + presidentName + '\'' +
+                ", presidentSurname='" + presidentSurname + '\'' +
+                '}';
     }
 }

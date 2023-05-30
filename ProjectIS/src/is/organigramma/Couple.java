@@ -22,4 +22,12 @@ public class Couple {
     public int getID() {
         return ID;
     }
+
+    @Override
+    public String toString() {
+        return "Couple{" +
+                "role=" + role +
+                ", ID=" + ID +
+                '}';
+    }
 }

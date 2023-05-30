@@ -6,12 +6,13 @@ import javax.swing.*;
 
 public class Mediator implements MediatorIF{
     private JMenuItem searchA,createA,editA,remA,searchR,createR,editR,remR,searchU,createU,editU,remU,openA,showA;
-    private JTextField idField,pswField, nameField;
-    private JButton confButton, saveB, saveV, newAziendaButton;
-    private JScrollPane descrScroll;
-    private JComboBox dadComboBox;
+    private JTextField idField,pswField, nameField, nameRoleField, nameRoleModRolePanel,nameCreateEmployee,surnameCreateEmployee,
+            emailCreateEmployee,pswCreateEmployee;
+    private JButton confButton,newAziendaButton, saveBPanel, saveVPanel, saveBRole, saveVRole, saveBModRolePanel,saveVModRolePanel,
+           saveCreateEmployee, removeButtonArea, removeButtonEmployee, removeButtonRole;
+    private JComboBox dadComboBox, areaComboBox,roleCreateEmployee;
     private Azienda azienda;
-
+    private JFrame frame;
     public Mediator(Azienda azienda){
         this.azienda = azienda;
     }
@@ -37,22 +38,38 @@ public class Mediator implements MediatorIF{
     public void setNameField(JTextField nameField){
         this.nameField=nameField;
     }
-    public void setDescrScroll(JScrollPane descrScroll){
-        this.descrScroll=descrScroll;
+    public void setSaveBPanel(JButton saveB){
+        this.saveBPanel=saveB;
     }
-    public void setSaveB(JButton saveB){
-        this.saveB=saveB;
+    public void setSaveVPanel(JButton saveV){
+        this.saveVPanel=saveV;
     }
-    public void setSaveV(JButton saveV){
-        this.saveV=saveV;
-    }
+    public void setFrame(JFrame frame){ this.frame=frame;}
     public void setDadComboBox(JComboBox<String> dadComboBox){
         this.dadComboBox=dadComboBox;
     }
+    public void setNameRoleField(JTextField nameRoleField){this.nameRoleField=nameRoleField;}
+    public void setAreaComboBox(JComboBox<String> areaComboBox){this.areaComboBox=areaComboBox;}
+    public void setSaveBRole(JButton saveB){this.saveBRole = saveB;}
+    public void setSaveVRole(JButton saveV){this.saveVRole = saveV;}
+    public void setNameRoleModRole(JTextField nameRoleModRolePanel){this.nameRoleModRolePanel = nameRoleModRolePanel ;}
+    public void setSaveBModRole(JButton saveBModRolePanel){this.saveBModRolePanel = saveBModRolePanel;}
+    public void setSaveVModRole(JButton saveVModRolePanel){this.saveVModRolePanel = saveVModRolePanel;}
+    public void setNameCreateEmployee(JTextField nameCreateEmployee){this.nameCreateEmployee=nameCreateEmployee;}
+    public void setSurnameCreateEmployee(JTextField surnameCreateEmployee){this.surnameCreateEmployee=surnameCreateEmployee;}
+    public void setEmailCreateEmployee(JTextField emailCreateEmployee){this.emailCreateEmployee=emailCreateEmployee;}
+    public void setPswCreateEmployee(JTextField pswCreateEmployee){this.pswCreateEmployee=pswCreateEmployee;}
+    public void setRoleCreateEmployee(JComboBox<String> roleCreateEmployee){this.roleCreateEmployee=roleCreateEmployee;}
+    public void setSaveCreateEmployee(JButton saveCreateEmployee){this.saveCreateEmployee=saveCreateEmployee;}
+    public void setRemoveButtonArea(JButton removeButtonArea){this.removeButtonArea=removeButtonArea;}
+    public void setRemoveButtonEmployee(JButton removeButtonEmployee){this.removeButtonEmployee=removeButtonEmployee;}
+    public void setRemoveButtonRole(JButton removeButtonRole){this.removeButtonRole=removeButtonRole;}
+
     @Override
     public void menuChanged(JMenuItem widget) {
 
     }
+
 
     @Override
     public void textChanged(JTextField widget) {
@@ -90,5 +107,4 @@ public class Mediator implements MediatorIF{
         String psw = pswField.getText().trim();
         return !id.isEmpty() && !psw.isEmpty();
     }
-
 }

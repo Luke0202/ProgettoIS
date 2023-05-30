@@ -26,25 +26,13 @@ public class AziendaParse {
         Organigramma org = (Organigramma) admin.getOrganigramma();
         HashSet<Role> roles = admin.getRoles();
 
+        //Azienda
         builder.openAzienda();
         builder.openID(azienda.getCod());
         builder.closeID();
         builder.openName(azienda.getName());
         builder.closeName();
-
-        builder.openAdmin();
-        builder.openID(admin.getID());
-        builder.closeID();
-        builder.openName(admin.getName());
-        builder.closeName();
-        builder.openSurname(admin.getSurname());
-        builder.closeSurname();
-        builder.openEmail(admin.getEmail());
-        builder.closeEmail();
-        builder.openMaxEmployees(String.valueOf(admin.getMaxEmployees()));
-        builder.closeMaxEmployees();
-        builder.closeAdmin();
-
+        //Employees
         builder.openEmployees();
         for (Employee emp:employees){
             builder.openEmployee();
@@ -56,25 +44,21 @@ public class AziendaParse {
             builder.closeSurname();
             builder.openEmail(emp.getEmail());
             builder.closeEmail();
+            builder.openPassword(emp.getPsw());
             builder.closeEmployee();
         }
         builder.closeEmployees();
-
-        builder.openRoles();
-        for(Role r:roles){
-            builder.openRole();
-            builder.openName(r.getName());
-            builder.closeName();
-            builder.openNameArea(r.getArea());
-            builder.closeNameArea();
-            builder.openDescription(r.getDescription());
-            builder.closeDescription();
-            builder.closeRole();
-        }
-
+        //Organigramma
         builder.openOrganigramma();
         addAreas(org);
         builder.closeOrganigramma();
+        //Admin
+        builder.openAdmin();
+
+
+        builder.openMaxEmployees(String.valueOf(admin.getMaxEmployees()));
+        builder.closeMaxEmployees();
+        builder.closeAdmin();
 
         builder.closeAzienda();
     }
@@ -84,6 +68,7 @@ public class AziendaParse {
         builder.closeName();
         builder.openDescription(org.getDescription());
         builder.closeDescription();
+        //Couples Id employee-role
         builder.openCouples();
         for(Couple c:org.getCouples()){
             builder.openCouple();
@@ -101,8 +86,12 @@ public class AziendaParse {
             builder.closeCouple();
         }
         builder.closeCouples();
+
+        builder.openListAreas();
         for (int i = 0;i<org.getNChildren();i++){
             addAreas((Organigramma) org.getChild(i));
         }
+        builder.closeListAreas();
+        builder.closeArea();
     }
 }

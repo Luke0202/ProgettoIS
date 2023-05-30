@@ -43,6 +43,15 @@ public class Organigramma extends AbstractOrganigramma {
     }
 
     @Override
+    public void removeRole(Role r){
+        Iterator<Couple> it = couples.iterator();
+        while(it.hasNext()){
+            Couple cur = it.next();
+            if (cur.getRole().equals(r)) it.remove();
+        }
+    }
+
+    @Override
     public HashSet<Role> getRoles(){
         HashSet<Role> roles = new HashSet<>();
         for(Couple c:couples){
@@ -51,21 +60,14 @@ public class Organigramma extends AbstractOrganigramma {
         return roles;
     }
     @Override
-    public HashSet<Role> getRolesOfEmployee(Employee emp){
+    public HashSet<Role> getRoles(Employee emp){
         HashSet<Role> roles = new HashSet<>();
         for(Couple c:couples){
             if (c.getID() == emp.getID()) roles.add(c.getRole());
         }
         return roles;
     }
-    @Override
-    public HashSet<Integer> getEmployees(){
-        HashSet<Integer> employees = new HashSet<>();
-        for(Couple c:couples){
-            employees.add(c.getID());
-        }
-        return employees;
-    }
+
     @Override
     public HashSet<String> getAreasOfEmployee(Employee emp){
         HashSet<String> listAreas = new HashSet<>();
@@ -74,7 +76,7 @@ public class Organigramma extends AbstractOrganigramma {
         if (containsID(ID))
             listAreas.add(getName());
 
-        Iterator<AreaOrganizationIF> it = iterator();
+        Iterator<OrganigrammaIF> it = iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma)it.next();
             if (cur.containsID(ID))
@@ -89,6 +91,45 @@ public class Organigramma extends AbstractOrganigramma {
         }
         return false;
     }
+
+    @Override
+    public boolean contains(Role role) {
+        for(Couple c:couples){
+            if (c.getRole().equals(role)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public HashSet<String> getSubAreas(){
+        HashSet<String> ret = new HashSet<>();
+        Iterator<OrganigrammaIF> it = iterator();
+        while(it.hasNext()){
+            ret.add(((Organigramma)it.next()).getName());
+        }
+        return ret;
+    }
+    @Override
+    public HashSet<Integer> getEmployees(){
+        HashSet<Integer> employees = new HashSet<>();
+
+        for(Couple c:couples){
+            employees.add(c.getID());
+        }
+        return employees;
+    }
+    @Override
+    public int getNEmployees(){ return getEmployees().size();}
+
+    @Override
+    public HashSet<Integer> getEmployees(Role r) {
+        HashSet<Integer> employees = new HashSet<>();
+        for(Couple c:couples){
+            if (c.getRole().equals(r)) employees.add(c.getID());
+        }
+        return employees;
+    }
+
     @Override
     public void accept() {
 

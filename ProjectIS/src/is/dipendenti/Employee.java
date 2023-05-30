@@ -6,14 +6,15 @@ import java.util.Objects;
 
 
 public class Employee {
-    private final int ID;
+    private final int ID,psw;
     private String name, surname, email;
 
-    public Employee(String name, String surname, String email,int ID){
+    public Employee(String name, String surname, String email,int ID, int psw){
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.ID = ID;
+        this.psw = psw;
     }
 
     public int getID(){ return ID;  }
@@ -26,6 +27,7 @@ public class Employee {
     public String getEmail() {
         return email;
     }
+    public int getPsw() { return psw;}
 
     //SETTERS
     public void setName(String name) {

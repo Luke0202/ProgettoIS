@@ -31,14 +31,16 @@ public class TextParser {
         this.builder=builder;
         this.urlString=urlString;
     }
-    public void build() {
+    public Azienda build() {
+        Azienda az=null;
         try {
-            doParse();
+            az=doParse();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return az;
     }
-    private void doParse() throws IOException{
+    private Azienda doParse() {
         URL url;
         try {
             url = new URI(urlString).toURL();
@@ -48,7 +50,7 @@ public class TextParser {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        Azienda az = readAzienda();
+        return readAzienda();
     }
     private String nextToken() {
         while (st == null || !st.hasMoreTokens()) {
@@ -98,7 +100,7 @@ public class TextParser {
         LinkedList<Employee> employees = readEmployees();
         Organigramma org = readOrganigramma();
         Administrator ad = readAdmin(org);
-        Azienda az = new Azienda(IDAzienda,nameAzienda,ad);
+        Azienda az = new Azienda(IDAzienda,nameAzienda,null,null,null,ad);
 
         //Aggiunta coppie ID emp-Role
         for (Employee emp:employees){
@@ -156,6 +158,15 @@ public class TextParser {
 
         String emailAdmin = readText();
 
+        token = nextToken();//<Password>
+
+        if (token == null)
+            throw new IllegalArgumentException("Atteso token");
+        if (!token.equals("Password"))
+            throw new IllegalArgumentException(" Atteso: Password trovato:" + token);
+
+        int pswAdmin = Integer.parseInt(readText());
+
         token = nextToken();//<MaxEmployees>
 
         if (token == null)
@@ -165,9 +176,9 @@ public class TextParser {
 
         int maxEmployeesAdmin = Integer.parseInt(readText());
 
-        return new Administrator(nameAdmin,surnameAdmin,emailAdmin,maxEmployeesAdmin,org);
+        return new Administrator(maxEmployeesAdmin,org);
     }
-    
+
     private Organigramma readOrganigramma(){
         token = nextToken();//<Organigramma>
 
@@ -220,7 +231,7 @@ public class TextParser {
             switch(token){
                 case "ID": coupleID = Integer.parseInt(readText()); break;
                 case "Name": nameCouple = readText(); break;
-                case "Area": areaCouple = readText(); break;
+                case "NameArea": areaCouple = readText(); break;
                 case "Description": descrCouple = readText(); break;
                 case "/Role": r = new Role(nameCouple,areaCouple,descrCouple); break;
                 case "/Couple": cou = new Couple(r,coupleID); couples.add(cou); break;
@@ -264,6 +275,7 @@ public class TextParser {
             throw new IllegalArgumentException(" Atteso: Employees trovato:" + token);
 
         int ID=0;
+        int psw=0;
         String name=null;
         String surname=null;
         String email=null;
@@ -276,8 +288,9 @@ public class TextParser {
                 case "Name": name = nextToken(); break;
                 case "Surname": surname = nextToken(); break;
                 case "Email": email = nextToken(); break;
+                case "Password": psw = Integer.parseInt(nextToken()); break;
                 case "/Employee":
-                    Employee emp = new Employee(name,surname,email,ID); listEmp.add(emp); break;
+                    Employee emp = new Employee(name,surname,email,ID,psw); listEmp.add(emp); break;
                 case "/Employees": go = false;
             }
         }

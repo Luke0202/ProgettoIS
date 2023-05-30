@@ -63,6 +63,12 @@ public class TextBuilder implements TextBuilderIF {
     public void closeEmail() {}
 
     @Override
+    public void openPassword(int psw) {pw.println("<Password>"+psw+"</Password>");}
+
+    @Override
+    public void closePassword() {}
+
+    @Override
     public void openEmployee() {
         pw.println("<Employee>");
     }
@@ -83,12 +89,6 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
-    public void openRoles() {pw.println("<Roles>");}
-
-    @Override
-    public void closeRoles() {pw.println("</Roles>");}
-
-    @Override
     public void openRole() {pw.println("<Role>");}
 
     @Override
@@ -99,6 +99,12 @@ public class TextBuilder implements TextBuilderIF {
 
     @Override
     public void closeArea() {pw.println("</Area>");}
+
+    @Override
+    public void openListAreas() {pw.println("<ListAreas>");}
+
+    @Override
+    public void closeListAreas() {pw.println("</ListAreas>");}
 
     @Override
     public void openOrganigramma() {pw.println("<Organigramma>");}
