@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Mediator implements MediatorIF{
-    private JMenuItem searchA,createA,editA,remA,searchR,createR,editR,remR,searchU,createU,editU,remU,openA,showA;
+    private JMenuItem createA,listA,createR,listR,createE,listE,detA;
     private JTextField idLog,pswLog, nameField, nameRoleField, nameRoleModRolePanel,nameCreateEmployee,surnameCreateEmployee,
             emailCreateEmployee,pswCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
             nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda;
@@ -23,15 +23,12 @@ public class Mediator implements MediatorIF{
     private JComboBox dadComboBox, areaComboBox,roleCreateEmployee;
     private JFrame frame;
     private PaginationIF pag;
-    private Azienda azienda;
+    private Azienda azienda=null;
 
-    public void setItem(JMenuItem searchA,JMenuItem searchR, JMenuItem searchU, JMenuItem createA, JMenuItem createR,JMenuItem createU, JMenuItem editA, JMenuItem editR,
-                        JMenuItem editU, JMenuItem remA,JMenuItem remR, JMenuItem remU, JMenuItem openA,JMenuItem showA){
-        this.searchA = searchA; this.searchR=searchR; this.searchU=searchU;
-        this.createA = createA; this.createR=createR; this.createU=createU;
-        this.editA = editA; this.editR=editR; this.editU=editU;
-        this.remA=remA; this.remR=remR; this.remU=remU;
-        this.openA = openA; this.showA = showA;
+    public void setItem(JMenuItem createA,JMenuItem listA,JMenuItem createR,JMenuItem listR,
+                        JMenuItem createE,JMenuItem listE,JMenuItem detA){
+        this.createA=createA; this.listA=listA; this.createR=createR; this.listR=listR;
+        this.createE=createE; this.listE=listE; this.detA=detA;
     }
     public void setConfLog(JButton confLog){
         this.confLog = confLog;
@@ -86,19 +83,32 @@ public class Mediator implements MediatorIF{
     public void setPswCreateAzienda(JTextField pswCreateAzienda){this.pswCreateAzienda = pswCreateAzienda;}
     public void setAzienda(Azienda azienda){this.azienda=azienda;}
     public void setPag(PaginationIF pag){this.pag=pag;}
+
+    public Azienda getAzienda(){return this.azienda;}
+
     @Override
     public void menuChanged(JMenuItem widget) {
+        //Redirecting
+        if(widget==detA) pag.goAhead(3);
 
+        if (widget==createA)pag.goAhead(4);
+
+        if (widget==listA) pag.goAhead(5);
+
+        if (widget==createE) pag.goAhead(6);
+
+        if (widget==listE) pag.goAhead(7);
+
+        if (widget==createR) pag.goAhead(8);
+
+        if (widget==listR) pag.goAhead(9);
     }
-
 
     @Override
     public void textChanged(JTextField widget) {
-
         if (widget == idLog || widget==pswLog){
             if (!idLog.getText().isEmpty() && !pswLog.getText().isEmpty()) confLog.setEnabled(true);
         }
-
     }
     private boolean checkCredential(String id, String psw){
         if (!id.trim().matches("\\d+")) return false;
@@ -113,7 +123,7 @@ public class Mediator implements MediatorIF{
             if (checkCredential(id,psw)){
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
                         , "Accesso effettuato!");
-                pag.start();
+                pag.goAhead(2);
             }else{
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
                         , "Accesso negato.");
@@ -145,14 +155,15 @@ public class Mediator implements MediatorIF{
                 try{
                     PrintWriter pw = new PrintWriter(new FileWriter(path));
                     AziendaParse az = new AziendaParse(azienda,pw); az.doParse();
+                    setAzienda(azienda);
                 }catch(IOException e){
                     e.printStackTrace();
                 }
-                pag.start();
+                pag.goAhead(2);
             }
         }
         if (widget==newAziendaLog){
-            pag.create();
+            pag.goAhead(1);
         }
     }
 

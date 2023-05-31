@@ -1,16 +1,18 @@
 package is.panels;
 
+import is.mediator.Mediator;
 import is.organigramma.Azienda;
 import is.shapes.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 
 public class AziendaPanel extends JPanel {
-    private Azienda azienda;
+    private Mediator mediator;
 
-    public AziendaPanel(Azienda azienda) {
-        if (azienda == null) throw new IllegalArgumentException("Dato non valido");
-        this.azienda = azienda;
+    public AziendaPanel(Mediator mediator) {
+        if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
+        this.mediator=mediator;
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3, 2, 179);

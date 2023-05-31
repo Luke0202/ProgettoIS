@@ -12,11 +12,12 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class ListAreaPanel extends JPanel {
-    private Administrator admin;
     private Mediator mediator;
-    public ListAreaPanel(Administrator admin,Mediator mediator){
-        if (admin == null || mediator==null) throw new IllegalArgumentException("Dato non valido");
-        this.admin=admin; this.mediator=mediator;
+    public ListAreaPanel(Mediator mediator){
+        if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
+        this.mediator=mediator;
+
+        Administrator admin = mediator.getAzienda().getAdmin();
 
         setLayout(null);
         Color gray = new Color(230,230,230);

@@ -12,12 +12,11 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ListEmployeePanel extends JPanel {
-    private Administrator admin;
     private Mediator mediator;
-    public ListEmployeePanel(Administrator admin, Mediator mediator){
-        if (admin == null || mediator==null) throw new IllegalArgumentException("Dato non valido");
-        this.admin=admin; this.mediator=mediator;
-
+    public ListEmployeePanel(Mediator mediator){
+        if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
+        this.mediator=mediator;
+        Administrator admin = mediator.getAzienda().getAdmin();
         setLayout(null);
         Color blue = new Color(3, 2, 179);
         Color blue2 = new Color(0,51,200);

@@ -11,11 +11,9 @@ import java.util.HashSet;
 
 public class CreateEmployeePanel extends JPanel {
     private Mediator mediator;
-    private Administrator admin;
-    public CreateEmployeePanel(Mediator mediator, Administrator admin) {
-        if (mediator == null || admin == null) throw new IllegalArgumentException("Dati non validi");
+    public CreateEmployeePanel(Mediator mediator) {
+        if (mediator == null) throw new IllegalArgumentException("Mediator non valido");
         this.mediator = mediator;
-        this.admin = admin;
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -53,7 +51,7 @@ public class CreateEmployeePanel extends JPanel {
         //Role Field
         JLabel roleLab = new JLabel("Ruolo: ");
         roleLab.setFont(f); roleLab.setForeground(blue); roleLab.setBounds(20,150,200,30);
-        String[] array = findRoles();
+        String[] array = findRoles(mediator.getAzienda().getAdmin());
         JComboBox<String> roleComboBox = new JComboBox<>(array);
         roleComboBox.setBounds(20,185,350,30);
         //SaveButtons
@@ -86,7 +84,7 @@ public class CreateEmployeePanel extends JPanel {
         roleComboBox.addActionListener(e -> mediator.boxComboChanged(roleComboBox));
         save.addActionListener(e -> mediator.buttonChanged(save));
     }
-    private String[] findRoles(){
+    private String[] findRoles(Administrator admin){
         HashSet<Role> roles = admin.getRoles();
 
         HashSet<String> rol = new HashSet<>();

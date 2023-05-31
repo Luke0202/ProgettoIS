@@ -12,11 +12,9 @@ import java.util.Iterator;
 
 public class CreateRolePanel extends JPanel {
     private Mediator mediator;
-    private Administrator admin;
-    public CreateRolePanel(Mediator mediator, Administrator admin) {
-        if (mediator==null || admin==null) throw new IllegalArgumentException("Dati non validi");
+    public CreateRolePanel(Mediator mediator) {
+        if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
         this.mediator = mediator;
-        this.admin = admin;
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -45,7 +43,7 @@ public class CreateRolePanel extends JPanel {
         JLabel areaLab = new JLabel("Scegli Area: ");
         areaLab.setFont(f); areaLab.setForeground(blue); areaLab.setBounds(350,15,200,30);
 
-        String[] array = findAreas();
+        String[] array = findAreas(mediator.getAzienda().getAdmin());
         JComboBox<String> areaComboBox = new JComboBox<>(array);
         areaComboBox.setBounds(350,50,280,30);
         //StateLabel
@@ -92,7 +90,7 @@ public class CreateRolePanel extends JPanel {
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
-    private String[] findAreas(){
+    private String[] findAreas(Administrator admin){
         Organigramma org = admin.getOrganigramma();
 
         HashSet<String> areas = new HashSet<>();

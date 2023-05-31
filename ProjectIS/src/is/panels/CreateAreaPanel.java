@@ -10,11 +10,11 @@ import java.util.HashSet;
 
 public class CreateAreaPanel extends JPanel {
     private Mediator mediator;
-    private Administrator admin;
-    public CreateAreaPanel(Mediator mediator, Administrator admin) {
-        if (mediator == null || admin == null) throw new IllegalArgumentException("Dati non validi");
+
+    public CreateAreaPanel(Mediator mediator) {
+        if (mediator == null) throw new IllegalArgumentException("Mediator non valido");
         this.mediator = mediator;
-        this.admin = admin;
+
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -43,7 +43,7 @@ public class CreateAreaPanel extends JPanel {
         JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,280,30);
 
-        String[] array = findAreas();
+        String[] array = findAreas(mediator.getAzienda().getAdmin());
         JComboBox<String> dadComboBox = new JComboBox<>(array);
         dadComboBox.setBounds(350,50,280,30);
         //StateLabel
@@ -89,7 +89,7 @@ public class CreateAreaPanel extends JPanel {
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
-    private String[] findAreas(){
+    private String[] findAreas(Administrator admin){
         HashSet<String> tot = admin.getAllAreas();
         Organigramma org = admin.getOrganigramma();
         tot.removeAll(org.getSubAreas());

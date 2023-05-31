@@ -87,18 +87,18 @@ public class PanelTest {
         int i = 14;
         switch(i){
             case 1:LogPanel log = new LogPanel(mediator); frame.add(log); break;
-            case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator,admin); frame.add(createArea); break;
+            case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
             case 3:ModAreaPanel modArea = new ModAreaPanel(mediator,admin,o); frame.add(modArea); break;
-            case 4:ListAreaPanel listArea = new ListAreaPanel(admin,mediator); frame.add(listArea); break;
+            case 4:ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
             case 5:AreaPanel areaP = new AreaPanel(o,admin,mediator); frame.add(areaP); break;
-            case 6:CreateRolePanel createRole = new CreateRolePanel(mediator,admin); frame.add(createRole); break;
+            case 6:CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
             case 7:ModRolePanel modRole = new ModRolePanel(mediator,admin,r1); frame.add(modRole); break;
-            case 8:ListRolePanel listRole = new ListRolePanel(admin,mediator); frame.add(listRole); break;
+            case 8:ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;
             case 9:RolePanel roleP = new RolePanel(r7,admin,mediator); frame.add(roleP); break;
-            case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator,admin); frame.add(assoPanel); break;
-            case 11: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(admin,mediator); frame.add(listEmployeePanel); break;
+            case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;
+            case 11: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(mediator); frame.add(listEmployeePanel); break;
             case 12: EmployeePanel employeeP = new EmployeePanel(emp7,admin,mediator); frame.add(employeeP); break;
-            case 13: AziendaPanel aziendaP = new AziendaPanel(azienda); frame.add(aziendaP); break;
+            case 13: AziendaPanel aziendaP = new AziendaPanel(mediator); frame.add(aziendaP); break;
             case 14: CreateAziendaPanel createAzienda = new CreateAziendaPanel(mediator); frame.add(createAzienda); break;
             case 15: HomePanel home = new HomePanel(mediator); frame.add(home);
             default:  break;
