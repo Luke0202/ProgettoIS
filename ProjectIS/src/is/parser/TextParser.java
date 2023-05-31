@@ -7,10 +7,9 @@ import is.dipendenti.Role;
 import is.organigramma.Azienda;
 import is.organigramma.Couple;
 import is.organigramma.Organigramma;
-
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -22,13 +21,11 @@ public class TextParser {
     //Analizza un file.txt e lo converte in un Azienda
     //Lettura di un file.txt e conversione in un Aziendaa
     private final String urlString;
-    private final TextBuilderIF builder;
     private BufferedReader br;
-    private String line,token;
+    private String token;
     private StringTokenizer st;
     private HashSet<Couple> couples = new HashSet<>();
-    public TextParser(TextBuilderIF builder, String urlString){
-        this.builder=builder;
+    public TextParser(String urlString){
         this.urlString=urlString;
     }
     public Azienda build() {
@@ -41,14 +38,10 @@ public class TextParser {
         return az;
     }
     private Azienda doParse() {
-        URL url;
         try {
-            url = new URI(urlString).toURL();
-            br = new BufferedReader(new InputStreamReader(url.openStream()));
+            br = new BufferedReader(new FileReader(urlString));
         } catch (IOException e) {
             throw new IllegalArgumentException("Errore di lettura");
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
         }
         return readAzienda();
     }
@@ -115,21 +108,27 @@ public class TextParser {
 
         String typeAzienda = readText();
 
-        token = nextToken();//<MaxEmployees>
+        token = nextToken();//<Password>
 
         if (token == null)
             throw new IllegalArgumentException("Atteso token");
-        if (!token.equals("MaxEmployees"))
-            throw new IllegalArgumentException(" Atteso: MaxEmployees trovato:" + token);
+        if (!token.equals("Password"))
+            throw new IllegalArgumentException(" Atteso: Password trovato:" + token);
 
-        int maxEmployeesAdmin = Integer.parseInt(readText());
+        String psw = readText();
+
 
         LinkedList<Employee> employees = readEmployees();
         HashSet<Role> roles = readRoles();
         Organigramma org = readOrganigramma();
-        Administrator ad = new Administrator(maxEmployeesAdmin,org);
-        Azienda az = new Azienda(IDAzienda,nameAzienda,hqAzienda,typeAzienda,ad);
+        Administrator ad = new Administrator(org);
+        Azienda az = new Azienda(IDAzienda,nameAzienda,hqAzienda,typeAzienda,psw,ad);
 
+
+
+        for (Role r:roles){
+            az.addRole(r);
+        }
         //Aggiunta coppie ID emp-Role
         for (Employee emp:employees){
             int id = emp.getID();
@@ -155,6 +154,7 @@ public class TextParser {
         String name=null;
         String area=null;
         String descr = null;
+        boolean state=false;
         boolean go = true;
         while(go){
             token = nextToken();
@@ -163,8 +163,9 @@ public class TextParser {
                 case "Name": name = readText(); break;
                 case "Area": area = readText(); break;
                 case "Description": descr = readText(); break;
+                case "State": state = Boolean.getBoolean(readText());
                 case "/Role":
-                    Role r = new Role(name,area,descr); roles.add(r); break;
+                    Role r = new Role(name,area,descr); r.setStateRole(state); roles.add(r); break;
                 case "/Roles": go = false;
             }
         }
@@ -198,9 +199,17 @@ public class TextParser {
             throw new IllegalArgumentException("Atteso token");
         if (!token.equals("Description"))
             throw new IllegalArgumentException(" Atteso: Description trovato:" + token);
-        boolean go = true;
 
         String descrArea = readText();
+
+        token = nextToken();//<State>
+
+        if (token == null)
+            throw new IllegalArgumentException("Atteso token");
+        if (!token.equals("State"))
+            throw new IllegalArgumentException(" Atteso: State trovato:" + token);
+
+        boolean state = Boolean.getBoolean(readText());
 
         token = nextToken();//<Couples>
 
@@ -217,7 +226,7 @@ public class TextParser {
         String nameCouple = null;
         String areaCouple = null;
         String descrCouple = null;
-        go = true;
+        boolean go = true;
         while(go){
             token = nextToken();
             switch(token){
@@ -246,7 +255,7 @@ public class TextParser {
         while (go){
             token = nextToken();
             switch(token){
-                case "Area": area = readArea(); listAreas.add(area); break;
+                case "Area": area = readArea(); area.setStateArea(state); listAreas.add(area); break;
                 case "/ListAreas": go = false;
             }
         }
@@ -267,7 +276,6 @@ public class TextParser {
             throw new IllegalArgumentException(" Atteso: Employees trovato:" + token);
 
         int ID=0;
-        int psw=0;
         String name=null;
         String surname=null;
         String email=null;
@@ -280,9 +288,8 @@ public class TextParser {
                 case "Name": name = readText(); break;
                 case "Surname": surname = readText(); break;
                 case "Email": email = readText(); break;
-                case "Password": psw = Integer.parseInt(readText()); break;
                 case "/Employee":
-                    Employee emp = new Employee(name,surname,email,ID,psw); listEmp.add(emp); break;
+                    Employee emp = new Employee(name,surname,email,ID); listEmp.add(emp); break;
                 case "/Employees": go = false;
             }
         }

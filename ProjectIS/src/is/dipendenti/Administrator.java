@@ -13,27 +13,21 @@ public class Administrator implements AdministratorIF {
     //E' unico
     //Ha la possibilità
     private final int maxIdPossible = 10000;
-    private int maxEmployees;
     private final Organigramma organigramma;
     private LinkedList<Employee> employees = new LinkedList<>();
     private HashSet<Role> roles = new HashSet<>();
 
-    public Administrator(int maxEmp, Organigramma organigramma){
-        this.maxEmployees = maxEmp;
+    public Administrator(Organigramma organigramma){
         this.organigramma=organigramma;
     }
     //GETTERS
-    public int getMaxEmployees() {return maxEmployees;}
     public Organigramma getOrganigramma(){ return organigramma;}
     public LinkedList<Employee> getEmployees() {
         return employees;
     }
     public HashSet<Role> getRoles() {return roles;}
 
-    //SETTERS
-    public void setMaxEmployees(int maxEmployees) {
-        if (maxEmployees>0 && maxEmployees<maxIdPossible) this.maxEmployees = maxEmployees;
-    }
+
 
     @Override
     public void addEmployee(Role role,Employee emp) {
@@ -75,14 +69,13 @@ public class Administrator implements AdministratorIF {
     @Override
     public int giveID(){
         int N = employees.size();
-        if (N<maxEmployees){
-            int id = 0;
-            while (id<maxIdPossible){
-                if (differentByOthers(id,N))
-                    return id;
-                id++;
-            }
-        }return -1;
+        int id = 0;
+        while (id<maxIdPossible){
+            if (differentByOthers(id,N))
+                return id;
+            id++;
+        }
+        return -1;
     }
     private boolean differentByOthers(int id,int N){
         for (int i = 0;i<N;i++){

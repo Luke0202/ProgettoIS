@@ -22,30 +22,13 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
-    public void openMaxEmployees(String max) {
-        pw.println("<MaxEmployees>"+max+"</MaxEmployees>");
-    }
-
-    @Override
-    public void closeMaxEmployees() {}
-
-    @Override
-    public void openAdmin() {
-        pw.println("<Admin>");
-    }
-    @Override
-    public void closeAdmin() {
-        pw.println("</Admin>");
-    }
-
-    @Override
-    public void openHeadquarter(String h) {pw.println("<Headquarter>"+h+"</Headquarter");}
+    public void openHeadquarter(String h) {pw.println("<Headquarter>"+h+"</Headquarter>");}
 
     @Override
     public void closeHeadquarter() {}
 
     @Override
-    public void openType(String type) {pw.println("Type"+type+"/Type");}
+    public void openType(String type) {pw.println("<Type>"+type+"</Type");}
 
     @Override
     public void closeType() {}
@@ -75,7 +58,7 @@ public class TextBuilder implements TextBuilderIF {
     public void closeEmail() {}
 
     @Override
-    public void openPassword(int psw) {pw.println("<Password>"+psw+"</Password>");}
+    public void openPassword(String psw) {pw.println("<Password>"+psw+"</Password>");}
 
     @Override
     public void closePassword() {}
@@ -111,6 +94,12 @@ public class TextBuilder implements TextBuilderIF {
 
     @Override
     public void closeRole() {pw.println("</Role>");}
+
+    @Override
+    public void openState(boolean state) {pw.println("<State>"+state+"</State>");}
+
+    @Override
+    public void closeState() {}
 
     @Override
     public void openArea() {pw.println("<Area>");}

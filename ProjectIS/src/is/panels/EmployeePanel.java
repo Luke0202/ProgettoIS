@@ -4,15 +4,12 @@ import is.dipendenti.Administrator;
 import is.dipendenti.Employee;
 import is.dipendenti.Role;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
 import is.shapes.DataTable;
 import is.shapes.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class EmployeePanel extends JPanel {
     private Employee emp;
@@ -97,7 +94,7 @@ public class EmployeePanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);

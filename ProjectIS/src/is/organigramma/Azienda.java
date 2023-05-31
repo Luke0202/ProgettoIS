@@ -9,13 +9,15 @@ import java.util.Objects;
 
 public class Azienda implements AziendaIF{
     private final int cod;
+    private final String psw;
     private String name, headquarter, type;
     private final Administrator admin;
-    public Azienda(int cod,String name,String headquarter,String type,Administrator admin){
+    public Azienda(int cod,String name,String headquarter,String type,String psw, Administrator admin){
         this.cod = cod;
         this.name = name;
         this.type = type;
         this.headquarter=headquarter;
+        this.psw=psw;
         this.admin = admin;
     }
     //GETTERS
@@ -23,6 +25,7 @@ public class Azienda implements AziendaIF{
     public String getHeadquarter() { return headquarter;}
     public String getType(){return type;}
     public int getCod() {return cod;}
+    public String getPsw() {return psw;}
     public String getName() {
         return name;
     }
@@ -93,7 +96,7 @@ public class Azienda implements AziendaIF{
 
     @Override
     public void addEmployee(Role role, Employee emp){
-        if (getNEmployees()<admin.getMaxEmployees()) admin.addEmployee(role,emp);
+        admin.addEmployee(role,emp);
     }
 
     @Override
@@ -102,6 +105,11 @@ public class Azienda implements AziendaIF{
     @Override
     public void removeEmployee(Role role,Employee emp){ admin.removeEmployee(role,emp);}
 
+    @Override
+    public void addRole(Role role){admin.addRole(role);}
+
+    @Override
+    public void removeRole(Role role){admin.removeRole(role);}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -2,17 +2,14 @@ package is.panels;
 
 import is.dipendenti.Administrator;
 import is.dipendenti.Employee;
-import is.dipendenti.Role;
 import is.mediator.Mediator;
 import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
 import is.shapes.DataTable;
 import is.shapes.ImageZoom;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.util.Iterator;
 
 public class ListEmployeePanel extends JPanel {
     private Administrator admin;
@@ -82,7 +79,7 @@ public class ListEmployeePanel extends JPanel {
         JButton search = new JButton("Cerca");  search.setForeground(Color.white); search.setBackground(blue2);
         search.setBounds(340,330,140,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);

@@ -27,7 +27,7 @@ public class CreateEmployeePanel extends JPanel {
         headPanel.setBounds(0,0,1000,60);
 
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
-        JLabel head = new JLabel("Creazione nuova associazione");
+        JLabel head = new JLabel("Inserimento nuovo dipendente");
         head.setFont(f); head.setForeground(Color.black); head.setBounds(10,7,380,50);
         headPanel.add(head);
         //Adding Fields
@@ -50,22 +50,17 @@ public class CreateEmployeePanel extends JPanel {
         emailLab.setFont(f); emailLab.setForeground(blue); emailLab.setBounds(680,15,200,30);
         JTextField emailField = new JTextField(20); emailField.setText("Digita email");
         emailField.setBounds(680,50,280,30);
-        //Password Field
-        JLabel pswLab = new JLabel("Password: ");
-        pswLab.setFont(f); pswLab.setForeground(blue); pswLab.setBounds(20,150,200,30);
-        JTextField pswField = new JTextField(20); pswField.setText("Digita password");
-        pswField.setBounds(20,185,280,30);
         //Role Field
         JLabel roleLab = new JLabel("Ruolo: ");
-        roleLab.setFont(f); roleLab.setForeground(blue); roleLab.setBounds(350,150,200,30);
+        roleLab.setFont(f); roleLab.setForeground(blue); roleLab.setBounds(20,150,200,30);
         String[] array = findRoles();
         JComboBox<String> roleComboBox = new JComboBox<>(array);
-        roleComboBox.setBounds(350,185,350,30);
+        roleComboBox.setBounds(20,185,350,30);
         //SaveButtons
         JButton save = new JButton("SALVA");  save.setForeground(Color.white); save.setBackground(blue2);
         save.setBounds(20,350,200,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);
@@ -74,7 +69,6 @@ public class CreateEmployeePanel extends JPanel {
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
         fieldPanel.add(surnameLab); fieldPanel.add(surnameField);
         fieldPanel.add(emailLab); fieldPanel.add(emailField);
-        fieldPanel.add(pswLab); fieldPanel.add(pswField);
         fieldPanel.add(roleLab); fieldPanel.add(roleComboBox);
         fieldPanel.add(save);
         fieldPanel.add(lab);
@@ -84,13 +78,11 @@ public class CreateEmployeePanel extends JPanel {
         mediator.setNameCreateEmployee(nameField);
         mediator.setSurnameCreateEmployee(surnameField);
         mediator.setEmailCreateEmployee(emailField);
-        mediator.setPswCreateEmployee(pswField);
         mediator.setRoleCreateEmployee(roleComboBox);
         mediator.setSaveCreateEmployee(save);
         nameField.addActionListener(e -> mediator.textChanged(nameField));
         surnameField.addActionListener(e -> mediator.textChanged(surnameField));
         emailField.addActionListener(e -> mediator.textChanged(emailField));
-        pswField.addActionListener(e -> mediator.textChanged(pswField));
         roleComboBox.addActionListener(e -> mediator.boxComboChanged(roleComboBox));
         save.addActionListener(e -> mediator.buttonChanged(save));
     }

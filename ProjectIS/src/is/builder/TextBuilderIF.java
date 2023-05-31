@@ -4,10 +4,6 @@ public interface TextBuilderIF {
     //Costruzione documento contenente i dati dell'azienda
     void openAzienda();
     void closeAzienda();
-    void openMaxEmployees(String max);
-    void closeMaxEmployees();
-    void openAdmin();
-    void closeAdmin();
     void openHeadquarter(String h);
     void closeHeadquarter();
     void openType(String type);
@@ -18,7 +14,7 @@ public interface TextBuilderIF {
     void closeSurname();
     void openEmail(String email);
     void closeEmail();
-    void openPassword(int psw);
+    void openPassword(String psw);
     void closePassword();
     void openEmployee();
     void closeEmployee();
@@ -28,6 +24,8 @@ public interface TextBuilderIF {
     void closeRoles();
     void openRole();
     void closeRole();
+    void openState(boolean state);
+    void closeState();
     void openArea();
     void closeArea();
     void openListAreas();

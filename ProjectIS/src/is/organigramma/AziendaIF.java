@@ -11,6 +11,8 @@ public interface AziendaIF {
     void addEmployee(Role role, Employee d);
     void removeEmployee(Employee emp);
     void removeEmployee(Role role,Employee emp);
+    void addRole(Role role);
+    void removeRole(Role role);
     HashSet<Role> getRoles();
     HashSet<String> getAreas();
     HashSet<String> getNameRole();

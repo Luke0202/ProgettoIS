@@ -77,7 +77,7 @@ public class ListRolePanel extends JPanel {
         JButton search = new JButton("Cerca");  search.setForeground(Color.white); search.setBackground(blue2);
         search.setBounds(330,345,140,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);

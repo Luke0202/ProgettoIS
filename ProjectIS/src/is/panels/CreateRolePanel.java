@@ -1,7 +1,6 @@
 package is.panels;
 
 import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
 import is.mediator.Mediator;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
@@ -68,7 +67,7 @@ public class CreateRolePanel extends JPanel {
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
         saveV.setBounds(350,350,200,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);

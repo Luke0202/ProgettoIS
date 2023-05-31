@@ -1,13 +1,10 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
 import is.shapes.ImageZoom;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
 
 public class CreateAziendaPanel extends JPanel {
     private Mediator mediator;
@@ -55,11 +52,16 @@ public class CreateAziendaPanel extends JPanel {
         typeLab.setFont(f); typeLab.setForeground(blue); typeLab.setBounds(20,120,200,30);
         JTextField typeField = new JTextField(20); typeField.setText("Digita il settore");
         typeField.setBounds(20,155,280,30);
+        //Psw Field
+        JLabel pswLab = new JLabel("Password: ");
+        pswLab.setFont(f); pswLab.setForeground(blue); pswLab.setBounds(350,120,200,30);
+        JTextField pswField = new JTextField(20); pswField.setText("Digita la password di accesso al sistema");
+        pswField.setBounds(350,155,280,30);
         //SaveButtons
         JButton save = new JButton("SALVA");  save.setForeground(Color.white); save.setBackground(blue2);
         save.setBounds(20,350,200,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);
@@ -69,6 +71,7 @@ public class CreateAziendaPanel extends JPanel {
         fieldPanel.add(codLab); fieldPanel.add(codField);
         fieldPanel.add(headquarterLab); fieldPanel.add(headquarterField);
         fieldPanel.add(typeLab); fieldPanel.add(typeField);
+        fieldPanel.add(pswLab); fieldPanel.add(pswField);
         fieldPanel.add(save); fieldPanel.add(lab);
         add(fieldPanel); add(headPanel);
 
@@ -77,11 +80,13 @@ public class CreateAziendaPanel extends JPanel {
         mediator.setCodCreateAzienda(codField);
         mediator.setHeadquarterCreateAzienda(headquarterField);
         mediator.setTypeCreateAzienda(typeField);
+        mediator.setPswCreateAzienda(pswField);
         mediator.setSaveCreateAzienda(save);
         nameField.addActionListener(e -> mediator.textChanged(nameField));
         codField.addActionListener(e -> mediator.textChanged(codField));
         headquarterField.addActionListener(e -> mediator.textChanged(headquarterField));
         typeField.addActionListener(e->mediator.textChanged(typeField));
+        pswField.addActionListener(e->mediator.textChanged(pswField));
         save.addActionListener(e -> mediator.buttonChanged(save));
     }
 }

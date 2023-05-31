@@ -71,7 +71,7 @@ public class AziendaPanel extends JPanel {
         JLabel nEmployeesField = new JLabel(String.valueOf(N)); nEmployeesField.setFont(f2);
         nEmployeesField.setBounds(235, 155, 280, 30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")), 0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")), 0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);

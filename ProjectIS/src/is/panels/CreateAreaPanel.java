@@ -27,7 +27,7 @@ public class CreateAreaPanel extends JPanel {
 
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
         JLabel head = new JLabel("Creazione nuova area organizzativa");
-        head.setFont(f); head.setForeground(Color.black); head.setBounds(10,7,380,50);
+        head.setFont(f); head.setForeground(Color.black); head.setBounds(10,7,480,50);
         headPanel.add(head);
         //Adding Fields
         JPanel fieldPanel = new JPanel(null);
@@ -65,7 +65,7 @@ public class CreateAreaPanel extends JPanel {
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
         saveV.setBounds(350,350,200,30);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);

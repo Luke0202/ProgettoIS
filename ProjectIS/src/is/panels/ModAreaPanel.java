@@ -48,7 +48,7 @@ public class ModAreaPanel extends JPanel{
         nameField.setBounds(20,50,280,30);
         //DadLabel
         JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
-        dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,200,30);
+        dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,400,30);
 
         String[] array = findAreas();
         JComboBox<String> dadComboBox = new JComboBox<>(array);
@@ -79,7 +79,7 @@ public class ModAreaPanel extends JPanel{
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
         saveV.setBounds(350,350,200,30);   saveV.setEnabled(org.getStateArea()==false);
         //Image
-        ImageZoom icon = new ImageZoom(new ImageIcon(HomePanel.class.getResource("myLogo.png")),0.25);
+        ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         //Label
         JLabel lab = new JLabel(image);
