@@ -13,7 +13,7 @@ public class Administrator implements AdministratorIF {
     //E' unico
     //Ha la possibilità
     private final int maxIdPossible = 10000;
-    private final Organigramma organigramma;
+    private Organigramma organigramma;
     private LinkedList<Employee> employees = new LinkedList<>();
     private HashSet<Role> roles = new HashSet<>();
 
@@ -27,7 +27,8 @@ public class Administrator implements AdministratorIF {
     }
     public HashSet<Role> getRoles() {return roles;}
 
-
+    //SETTERS
+    public void setOrganigramma(Organigramma organigramma){this.organigramma=organigramma;}
 
     @Override
     public void addEmployee(Role role,Employee emp) {
@@ -42,7 +43,6 @@ public class Administrator implements AdministratorIF {
     @Override
     public void removeEmployee(Employee e) {
         employees.remove(e);
-        organigramma.removeEmployee(e.getID());
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
@@ -87,7 +87,7 @@ public class Administrator implements AdministratorIF {
     }
 
     private Organigramma findArea(Role r){
-        if (organigramma.getName().equals(r.getArea())) return organigramma;
+
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
@@ -98,8 +98,6 @@ public class Administrator implements AdministratorIF {
     @Override
     public HashSet<Role> getRoles(Employee emp){
         HashSet<Role> ret = new HashSet<>();
-
-        ret.addAll(organigramma.getRoles(emp));
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
@@ -114,8 +112,6 @@ public class Administrator implements AdministratorIF {
         HashSet<Organigramma> ret = new HashSet<>();
 
         int empID = emp.getID();
-
-        if (organigramma.containsID(empID)) ret.add(organigramma);
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
 
@@ -141,7 +137,6 @@ public class Administrator implements AdministratorIF {
 
     @Override
     public Organigramma getArea(String area){
-        if (organigramma.getName().equals(area)) return organigramma;
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
@@ -161,7 +156,6 @@ public class Administrator implements AdministratorIF {
         if (!containsInOrganigramma(role))  roles.remove(role);
     }
     private boolean containsInOrganigramma(Role role){
-        if (organigramma.contains(role)) return true;
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
@@ -172,7 +166,6 @@ public class Administrator implements AdministratorIF {
     @Override
     public HashSet<String> getAllAreas(){
         HashSet<String> ret = new HashSet<>();
-        ret.add(organigramma.getName());
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
@@ -182,12 +175,10 @@ public class Administrator implements AdministratorIF {
     }
     @Override
     public Organigramma getParent(Organigramma o){
-        if (organigramma.containsArea(o)) return organigramma;
-
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
-            if (cur.containsArea(o)) return cur;
+            if (cur.isChild(o)) return cur;
         }
         return null;
     }
@@ -198,7 +189,12 @@ public class Administrator implements AdministratorIF {
     }
 
     @Override
-    public void removeArea(Organigramma par, Organigramma org) {
-        par.removeChild(org);
+    public void removeArea(Organigramma org) {
+        for (Role role:roles){
+            if (role.getArea().equals(org.getName())) removeRole(role);
+        }
+        Organigramma par = getParent(org);
+        if (par==null) org = null;
+        else par.removeChild(org);
     }
 }

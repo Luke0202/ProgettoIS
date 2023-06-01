@@ -16,7 +16,7 @@ public interface AdministratorIF {
     HashSet<String> getAllAreas();
     Organigramma getParent(Organigramma o);
     void addArea(Organigramma par,Organigramma org);
-    void removeArea(Organigramma par,Organigramma org);
+    void removeArea(Organigramma org);
     HashSet<Integer> getIDEmployees();
     HashSet<Employee> getEmployee(Role role);
     Organigramma getArea(String area);

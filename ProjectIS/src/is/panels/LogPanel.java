@@ -32,10 +32,10 @@ public class LogPanel extends JPanel{
         //Access
         JTextField idField = new JTextField(20);  idField.setBounds(485,370,120,30);
         JTextField pswField = new JTextField(20);   pswField.setBounds(485,410,120,30);
-        JButton confLog = new JButton("Conferma");  confLog.setForeground(Color.white); confLog.setBackground(blue2);
+        JButton confLog = new JButton("Accedi");  confLog.setForeground(Color.white); confLog.setBackground(blue2);
         confLog.setBounds(450,455,110,30);   confLog.setEnabled(false); confLog.setOpaque(true);
         JButton newAziendaButton = new JButton("Crea Nuova Azienda");  newAziendaButton.setForeground(Color.white);
-        newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(415,520,180,30); newAziendaButton.setOpaque(true);
+        newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(414,520,180,30); newAziendaButton.setOpaque(true);
         newAziendaButton.setEnabled(true);
         //Using mediator
         mediator.setIdLog(idField);

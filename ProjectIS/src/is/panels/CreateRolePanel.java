@@ -2,19 +2,14 @@ package is.panels;
 
 import is.dipendenti.Administrator;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
 import is.shapes.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class CreateRolePanel extends JPanel {
-    private Mediator mediator;
     public CreateRolePanel(Mediator mediator) {
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator = mediator;
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -81,25 +76,19 @@ public class CreateRolePanel extends JPanel {
         fieldPanel.add(lab);
 
         //Using mediator
-        mediator.setNameRoleField(nameField);
-        mediator.setAreaComboBox(areaComboBox);
-        mediator.setSaveBRole(saveB);
-        mediator.setSaveVRole(saveV);
+        mediator.setNameCreateRole(nameField);
+        mediator.setAreaCreateRole(areaComboBox);
+        mediator.setSaveBCreateRole(saveB);
+        mediator.setSaveVCreateRole(saveV);
         nameField.addActionListener(e -> mediator.textChanged(nameField));
         areaComboBox.addActionListener(e -> mediator.boxComboChanged(areaComboBox));
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
     private String[] findAreas(Administrator admin){
-        Organigramma org = admin.getOrganigramma();
 
-        HashSet<String> areas = new HashSet<>();
+        HashSet<String> areas = admin.getAllAreas();
 
-        areas.add(org.getName());
-        Iterator<OrganigrammaIF> it = org.iterator();
-        while(it.hasNext()){
-            areas.add(((Organigramma)it.next()).getName());
-        }
         String[] array;
         if (areas.size()==0){
             array = new String[1];

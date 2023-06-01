@@ -1,9 +1,9 @@
 <Azienda>
-<ID>3332</ID>
+<ID>11</ID>
 <Name>Leonardo</Name>
-<Headquarter>lione</Headquarter>
-<Type>CyberSecurity</Type
-<Password>44</Password>
+<Headquarter>Roma</Headquarter>
+<Type>Automobilistico</Type
+<Password>22</Password>
 <Employees>
 </Employees>
 <Roles>
@@ -11,11 +11,20 @@
 <Organigramma>
 <Area>
 <Name>Leonardo</Name>
-<Description>Codice ATECO: 3332, Sede centrale: lione, Settore: CyberSecurity.</Description>
+<Description>Codice ATECO: 11, Sede centrale: Roma, Settore: Automobilistico.</Description>
 <State>false</State>
 <Couples>
 </Couples>
 <ListAreas>
+<Area>
+<Name>Pallavolo</Name>
+<Description> </Description>
+<State>true</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
 </ListAreas>
 </Area>
 </Organigramma>

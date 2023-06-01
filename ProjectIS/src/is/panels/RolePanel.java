@@ -13,11 +13,10 @@ import java.util.HashSet;
 
 public class RolePanel extends JPanel {
     private Role role;
-    private Administrator admin;
     private Mediator mediator;
-    public RolePanel(Role role,Administrator admin,Mediator mediator) {
-        if (role == null || admin==null || mediator==null) throw new IllegalArgumentException("Dati non validi");
-        this.role = role; this.admin=admin; this.mediator=mediator;
+    public RolePanel(Role role,Mediator mediator) {
+        if (role == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
+        this.role = role; this.mediator=mediator;
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -51,7 +50,7 @@ public class RolePanel extends JPanel {
         //StateLabel
         JLabel stateLab = new JLabel("Stato: ");
         stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
-        JLabel stateLab2 = new JLabel((role.getStateRole()==false) ? "BOZZA":"VALIDATA");
+        JLabel stateLab2 = new JLabel((!role.getStateRole()) ? "BOZZA":"VALIDATA");
         stateLab2.setBounds(680,50,280,30);
         //Button
         JButton removeButton = new JButton("Elimina Ruolo");  removeButton.setForeground(Color.white);
@@ -68,7 +67,7 @@ public class RolePanel extends JPanel {
         JLabel empLab = new JLabel("Dipendendi: ");
         empLab.setFont(f); empLab.setForeground(blue); empLab.setBounds(20,315,200,30);
         //Table
-        HashSet<Employee> employees = admin.getEmployee(role);
+        HashSet<Employee> employees = mediator.getAzienda().getAdmin().getEmployee(role);
         String[] columnNames = {"ID","Nome","Cognome","Email"};
 
         Object[][] data = new Object[employees.size()][columnNames.length];

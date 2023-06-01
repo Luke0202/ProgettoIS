@@ -1,5 +1,6 @@
 package is.organigramma;
 
+import java.util.HashSet;
 import java.util.Iterator;
 
 public interface OrganigrammaIF extends AreaOrganizationIF,Iterable<OrganigrammaIF>{
@@ -7,6 +8,7 @@ public interface OrganigrammaIF extends AreaOrganizationIF,Iterable<Organigramma
     void removeChild(int i);
     void removeChild(OrganigrammaIF area);
     int getNChildren();
-    boolean containsArea(OrganigrammaIF area);
+    boolean isSubArea(OrganigrammaIF area);
     Iterator<OrganigrammaIF> iterator();
+    boolean isChild(OrganigrammaIF o);
 }

@@ -41,20 +41,15 @@ public class ListAreaPanel extends JPanel {
         String[] columnNames = {"Nome Area","Numero Dipendenti","Nome Area di Riferimento","Stato"};
         Object[][] data = new Object[admin.getAllAreas().size()][columnNames.length];
 
-        data[0][0] = org.getName();
-        data[0][1] = org.getNEmployees();
-        data[0][2] = "Nessuna";
-        data[0][3] = (org.getStateArea()==false) ? "BOZZA":"VALIDATA";
-
         Iterator<OrganigrammaIF> it = org.iterator();
-        int i = 1;
+        int i = 0;
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
             data[i][0] = cur.getName();
             data[i][1] = cur.getNEmployees();
             Organigramma orgPar = admin.getParent(cur);
-            data[i][2] = orgPar.getName();
-            data[i][3] = (cur.getStateArea()==false) ? "BOZZA":"VALIDATA";
+            data[i][2] = (orgPar==null) ? "Nessuna":orgPar.getName();
+            data[i][3] = (!cur.getStateArea()) ? "BOZZA":"VALIDATA";
             i++;
         }
 

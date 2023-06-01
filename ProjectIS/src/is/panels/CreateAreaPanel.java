@@ -35,12 +35,12 @@ public class CreateAreaPanel extends JPanel {
         fieldPanel.setBounds(0,50,1000,950);
         f = new Font("TimesNewRoman",Font.ITALIC,20);
         //Name Field
-        JLabel nameLab = new JLabel("Nome Area: ");
+        JLabel nameLab = new JLabel("Nome area: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
         JTextField nameField = new JTextField(20); nameField.setText("Digita nome area");
         nameField.setBounds(20,50,280,30);
         //DadLabel
-        JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
+        JLabel dadLab = new JLabel("Nome area di riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,280,30);
 
         String[] array = findAreas(mediator.getAzienda().getAdmin());
@@ -80,20 +80,16 @@ public class CreateAreaPanel extends JPanel {
         add(fieldPanel); add(headPanel);
 
         //Using mediator
-        mediator.setNameField(nameField);
-        mediator.setDadComboBox(dadComboBox);
-        mediator.setSaveBPanel(saveB);
-        mediator.setSaveVPanel(saveV);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        dadComboBox.addActionListener(e -> mediator.boxComboChanged(dadComboBox));
+        mediator.setNameCreateArea(nameField);
+        mediator.setDadCreateArea(dadComboBox);
+        mediator.setDescrCreateArea(descrArea);
+        mediator.setSaveBCreateArea(saveB);
+        mediator.setSaveVCreateArea(saveV);
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
     private String[] findAreas(Administrator admin){
         HashSet<String> tot = admin.getAllAreas();
-        Organigramma org = admin.getOrganigramma();
-        tot.removeAll(org.getSubAreas());
-        tot.remove(org.getName());
 
         String[] array;
         if (tot.size()==0){

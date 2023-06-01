@@ -9,14 +9,8 @@ import java.awt.*;
 import java.util.HashSet;
 
 public class ModAreaPanel extends JPanel{
-    private Mediator mediator;
-    private Administrator ad;
-    private Organigramma org;
-    public ModAreaPanel(Mediator mediator, Administrator ad,Organigramma orgToMod) {
-        if (mediator == null || ad == null || orgToMod==null) throw new IllegalArgumentException("Dati non validi");
-        this.mediator = mediator;
-        this.org = orgToMod;
-        this.ad = ad;
+    public ModAreaPanel(Organigramma orgToMod,Mediator mediator) {
+        if (mediator == null || orgToMod==null) throw new IllegalArgumentException("Dati non validi");
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -41,7 +35,7 @@ public class ModAreaPanel extends JPanel{
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
         JTextField nameField = new JTextField(20);
 
-        String nameText=org.getName();
+        String nameText=orgToMod.getName();
         if (nameText==null) nameText = "Digita nome area";
 
         nameField.setText(nameText);
@@ -50,7 +44,7 @@ public class ModAreaPanel extends JPanel{
         JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,400,30);
 
-        String[] array = findAreas();
+        String[] array = findAreas(mediator.getAzienda().getAdmin(),orgToMod);
         JComboBox<String> dadComboBox = new JComboBox<>(array);
         dadComboBox.setBounds(350,50,280,30);
         //StateLabel
@@ -58,14 +52,14 @@ public class ModAreaPanel extends JPanel{
         stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
 
 
-        JLabel stateLab2 = new JLabel((org.getStateArea()==false) ? "BOZZA":"VALIDATA");
+        JLabel stateLab2 = new JLabel((!orgToMod.getStateArea()) ? "BOZZA":"VALIDATA");
         stateLab2.setBounds(680,50,280,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
         JTextArea descrArea = new JTextArea(5,20);
 
-        String descrText=org.getDescription();
+        String descrText=orgToMod.getDescription();
         if (descrText==null) descrText = "Digita descrizione";
 
         descrArea.setText(descrText);
@@ -75,9 +69,9 @@ public class ModAreaPanel extends JPanel{
         descrScroll.setBounds(20,135,940,150);
         //SaveButtons
         JButton saveB = new JButton("SALVA IN BOZZA");  saveB.setForeground(Color.white); saveB.setBackground(blue2);
-        saveB.setBounds(20,350,200,30);    saveB.setEnabled(org.getStateArea()==false);
+        saveB.setBounds(20,350,200,30);    saveB.setEnabled(!orgToMod.getStateArea());
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
-        saveV.setBounds(350,350,200,30);   saveV.setEnabled(org.getStateArea()==false);
+        saveV.setBounds(350,350,200,30);   saveV.setEnabled(!orgToMod.getStateArea());
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -95,17 +89,19 @@ public class ModAreaPanel extends JPanel{
         add(headPanel); add(fieldPanel);
 
         //Using mediator
-        mediator.setNameField(nameField);
-        mediator.setDadComboBox(dadComboBox);
-        mediator.setSaveBPanel(saveB);
-        mediator.setSaveVPanel(saveV);
+        mediator.setOldArea(orgToMod);
+        mediator.setNameModArea(nameField);
+        mediator.setDadModArea(dadComboBox);
+        mediator.setDescrModArea(descrArea);
+        mediator.setSaveBModArea(saveB);
+        mediator.setSaveVModArea(saveV);
         nameField.addActionListener(e -> mediator.textChanged(nameField));
         dadComboBox.addActionListener(e -> mediator.boxComboChanged(dadComboBox));
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
-    private String[] findAreas(){
-        HashSet<String> tot = ad.getAllAreas();
+    private String[] findAreas(Administrator admin,Organigramma org){
+        HashSet<String> tot = admin.getAllAreas();
         tot.removeAll(org.getSubAreas());
         tot.remove(org.getName());
 

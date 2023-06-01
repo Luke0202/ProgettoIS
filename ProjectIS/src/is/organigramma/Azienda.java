@@ -45,9 +45,11 @@ public class Azienda implements AziendaIF{
     @Override
     public HashSet<String> getAreas(){
         HashSet<String> ret = new HashSet<>();
-        HashSet<Role> roles = admin.getRoles();
-        for (Role r:roles){
-            ret.add(r.getArea());
+
+        Organigramma organigramma=admin.getOrganigramma();
+
+        for (OrganigrammaIF o:organigramma){
+            ret.add(((Organigramma)o).getName());
         }
         return ret;
     }

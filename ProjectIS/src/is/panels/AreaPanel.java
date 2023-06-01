@@ -13,11 +13,12 @@ import java.util.Iterator;
 
 public class AreaPanel extends JPanel {
     private Organigramma org;
-    private Administrator admin;
     private Mediator mediator;
-    public AreaPanel(Organigramma org,Administrator admin,Mediator mediator) {
-        if (org == null || admin == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
-        this.org=org; this.admin=admin; this.mediator=mediator;
+    public AreaPanel(Organigramma org,Mediator mediator) {
+        if (org == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
+        this.org=org; this.mediator=mediator;
+
+        Administrator admin = mediator.getAzienda().getAdmin();
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -44,18 +45,22 @@ public class AreaPanel extends JPanel {
         nameField.setBounds(20,50,280,30);
         //DadLabel
         JLabel dadLab = new JLabel("Nome area di riferimento: ");
-        dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,200,30);
+        dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,280,30);
 
-        JTextField dadField = new JTextField(20); dadField.setText(findDadArea()); dadField.setEditable(false);
+        JTextField dadField = new JTextField(20); dadField.setText(findDadArea(admin)); dadField.setEditable(false);
         dadField.setBounds(350,50,200,30);
         //StateLabel
         JLabel stateLab = new JLabel("Stato: ");
         stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
-        JLabel stateLab2 = new JLabel((org.getStateArea()==false) ? "BOZZA":"VALIDATA");
+        JLabel stateLab2 = new JLabel((!org.getStateArea()) ? "BOZZA":"VALIDATA");
         stateLab2.setBounds(680,50,280,30);
         //Button
+        JButton modButton = new JButton("Modifica area");  modButton.setForeground(Color.white);
+        modButton.setBackground(blue2); modButton.setBounds(810,30,150,30);
+        modButton.setEnabled(!org.getStateArea());
         JButton removeButton = new JButton("Elimina area");  removeButton.setForeground(Color.white);
-        removeButton.setBackground(blue2); removeButton.setBounds(810,50,150,30);
+        removeButton.setEnabled(!dadField.getText().equals("Nessuna") && isRemovable(org));
+        removeButton.setBackground(blue2); removeButton.setBounds(810,70,150,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
@@ -100,25 +105,31 @@ public class AreaPanel extends JPanel {
         //Adding
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
         fieldPanel.add(dadLab); fieldPanel.add(dadField);
-        fieldPanel.add(stateLab); fieldPanel.add(stateLab2); fieldPanel.add(removeButton);
+        fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
+        fieldPanel.add(modButton); fieldPanel.add(removeButton);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
         fieldPanel.add(empLab); fieldPanel.add(scrollPane);
         fieldPanel.add(lab);
         add(fieldPanel); add(headPanel);
         //Mediator
-        mediator.setRemoveButtonArea(removeButton);
+        mediator.setNameArea(nameField);
+        mediator.setRemoveArea(removeButton);
+        mediator.setModArea(modButton);
+        modButton.addActionListener(e->mediator.buttonChanged(modButton));
         removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
     }
-    private String findDadArea(){
+    private String findDadArea(Administrator admin){
         Organigramma organigramma = admin.getOrganigramma();
+
         if (organigramma.getName().equals(org.getName()))
             return "Nessuna";
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
 
-        while(it.hasNext()){
-            Organigramma cur = (Organigramma) it.next();
-            if (cur.containsArea(org)) return cur.getName();
+        return admin.getParent(org).getName();
+    }
+    private boolean isRemovable(Organigramma org){
+        for (OrganigrammaIF o:org){
+            if (o.getNEmployees()>0) return false;
         }
-        return "Nessuna";
+        return true;
     }
 }

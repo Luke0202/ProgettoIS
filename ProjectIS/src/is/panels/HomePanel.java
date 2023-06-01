@@ -12,11 +12,6 @@ public class HomePanel extends JPanel {
         if (mediator == null) throw new IllegalArgumentException("Dato non valido");
         this.mediator = mediator;
 
-
-
-
-
-
         setLayout(null);
         Color blue = new Color(200,220,246);
         Color blue2 = new Color(0,51,200);

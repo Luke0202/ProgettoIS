@@ -182,7 +182,7 @@ public class TextParser {
 
         if (!isCorrect(token,"Couples")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        Organigramma org = new Organigramma(nameArea,descrArea);
+        Organigramma org = new Organigramma(nameArea,descrArea); org.setStateArea(state);
 
         Couple cou = null;
         int coupleID = 0;
@@ -216,7 +216,7 @@ public class TextParser {
         while (go){
             token = nextToken();
             switch(token){
-                case "Area": area = readArea(); area.setStateArea(state); listAreas.add(area); break;
+                case "Area": area = readArea(); listAreas.add(area); break;
                 case "/ListAreas": go = false;
             }
         }

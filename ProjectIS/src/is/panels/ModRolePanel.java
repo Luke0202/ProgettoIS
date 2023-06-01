@@ -55,9 +55,9 @@ public class ModRolePanel extends JPanel {
         descrScroll.setBounds(20,135,940,150);
         //SaveButtons
         JButton saveB = new JButton("SALVA IN BOZZA");  saveB.setForeground(Color.white); saveB.setBackground(blue2);
-        saveB.setBounds(20,350,200,30);    saveB.setEnabled(role.getStateRole()==false);
+        saveB.setBounds(20,350,200,30);    saveB.setEnabled(!role.getStateRole());
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
-        saveV.setBounds(350,350,200,30);   saveV.setEnabled(role.getStateRole()==false);
+        saveV.setBounds(350,350,200,30);   saveV.setEnabled(!role.getStateRole());
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();

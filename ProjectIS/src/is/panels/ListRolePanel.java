@@ -45,7 +45,7 @@ public class ListRolePanel extends JPanel {
             data[i][0]=r.getName();
             data[i][1]=r.getArea();
             data[i][2]=admin.getOrganigramma().getEmployees(r).size();
-            data[i][3]=(r.getStateRole()==false) ? "BOZZA":"VALIDATA";
+            data[i][3]=(!r.getStateRole()) ? "BOZZA":"VALIDATA";
             i++;
         }
 

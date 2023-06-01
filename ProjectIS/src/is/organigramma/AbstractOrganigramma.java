@@ -1,8 +1,6 @@
 package is.organigramma;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public abstract class AbstractOrganigramma implements OrganigrammaIF {
     private ArrayList<OrganigrammaIF> areas = new ArrayList<>();
@@ -35,7 +33,9 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         if (i<0 || i>=areas.size()) return null;
         return areas.get(i);
     }
-    public boolean containsArea(OrganigrammaIF area){
+    public boolean isSubArea(OrganigrammaIF area){
+        if (this.equals(area)) return false;
+
         Iterator<OrganigrammaIF> it = iterator();
         while(it.hasNext()){
             if (it.next().equals(area)) return true;
@@ -60,13 +60,33 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         return areas.size();
     }
 
+    public void visit(List<OrganigrammaIF> ls){
+        ls.add(this);
+        for(OrganigrammaIF o:areas){
+            ((Organigramma)o).visit(ls);
+        }
+    }
+
+    @Override
+    public boolean isChild(OrganigrammaIF o){
+        for (OrganigrammaIF child:areas){
+            if (child.equals(o)) return true;
+        }
+        return false;
+    }
     @Override
     public Iterator<OrganigrammaIF> iterator() {
         return new AreaIterator();
     }
     private class AreaIterator implements Iterator<OrganigrammaIF>{
-        Iterator<OrganigrammaIF> it = areas.iterator();
+        private Iterator<OrganigrammaIF> it = null;
+        private List<OrganigrammaIF> ls=new ArrayList<>();
         private OrganigrammaIF cur = null;
+
+        public AreaIterator(){
+            visit(ls);
+            it = ls.iterator();
+        }
         @Override
         public boolean hasNext() {
             return it.hasNext();
@@ -82,6 +102,7 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         public void remove() {
             if (cur == null) throw new NoSuchElementException();
             it.remove();
+            AbstractOrganigramma.this.removeChild(cur);
             cur = null;
         }
     }
@@ -108,7 +129,7 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         sb.append("<"+name+">\n");
         int N = getNChildren();
         for (int i = 0;i<N;i++){
-            sb.append(getChild(i).toString());
+            sb.append(getChild(i).toString()+"\n");
         }
         sb.append("</"+name+">");
         return sb.toString();

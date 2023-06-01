@@ -72,6 +72,14 @@ public class AziendaPanel extends JPanel {
         nEmployeesLab.setBounds(20,155,200,30);
         JLabel nEmployeesField = new JLabel(String.valueOf(N)); nEmployeesField.setFont(f2);
         nEmployeesField.setBounds(235, 155, 280, 30);
+        //Number of Areas
+        int M = azienda.getAreas().size();
+        JLabel nAreasLab = new JLabel("Numero aree: ");
+        nAreasLab.setFont(f);
+        nAreasLab.setForeground(blue);
+        nAreasLab.setBounds(455,155,200,30);
+        JLabel nAreasField = new JLabel(String.valueOf(M)); nAreasField.setFont(f2);
+        nAreasField.setBounds(615, 155, 280, 30);
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")), 0.25);
         ImageIcon image = icon.getImageIcon();
@@ -84,6 +92,7 @@ public class AziendaPanel extends JPanel {
         fieldPanel.add(presLab); fieldPanel.add(presField);
         fieldPanel.add(headquarterLab); fieldPanel.add(headquarterField);
         fieldPanel.add(nEmployeesLab); fieldPanel.add(nEmployeesField);
+        fieldPanel.add(nAreasLab); fieldPanel.add(nAreasField);
         fieldPanel.add(lab);
         add(fieldPanel); add(headPanel);
     }
