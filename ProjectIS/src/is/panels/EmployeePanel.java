@@ -12,12 +12,9 @@ import java.awt.*;
 import java.util.HashSet;
 
 public class EmployeePanel extends JPanel {
-    private Employee emp;
-    private Administrator admin;
-    private Mediator mediator;
-    public EmployeePanel(Employee emp,Administrator admin,Mediator mediator) {
-        if (emp == null || admin == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
-        this.emp=emp; this.admin=admin; this.mediator=mediator;
+
+    public EmployeePanel(Employee emp,Mediator mediator) {
+        if (emp == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -56,7 +53,7 @@ public class EmployeePanel extends JPanel {
         //ID Label
         JLabel IDLab = new JLabel("ID: ");
         IDLab.setFont(f); IDLab.setForeground(blue); IDLab.setBounds(20,100,200,30);
-        JTextField IDField = new JTextField(20); IDField.setText(emp.getEmail()); IDField.setEditable(false);
+        JTextField IDField = new JTextField(20); IDField.setText(String.valueOf(emp.getID())); IDField.setEditable(false);
         IDField.setBounds(20,140,280,30);
         //Button
         JButton removeButton = new JButton("Elimina Dipendente");  removeButton.setForeground(Color.white);
@@ -65,7 +62,7 @@ public class EmployeePanel extends JPanel {
         JLabel rolesLab = new JLabel("Ruoli: ");
         rolesLab.setFont(f); rolesLab.setForeground(blue); rolesLab.setBounds(20,180,200,30);
 
-        HashSet<Role> roles = admin.getRoles(emp);
+        HashSet<Role> roles = mediator.getAzienda().getRoles(emp);
         String[] columnNames = {"Nome","Area"};
         Object[][] data = new Object[roles.size()][columnNames.length];
 
@@ -110,7 +107,8 @@ public class EmployeePanel extends JPanel {
         add(headPanel); add(fieldPanel);
 
         //Mediator
-        mediator.setRemoveButtonEmployee(removeButton);
+        mediator.setIdEmployee(IDField);
+        mediator.setRemoveEmployee(removeButton);
         removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
     }
 }

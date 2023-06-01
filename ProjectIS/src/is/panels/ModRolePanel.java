@@ -73,7 +73,6 @@ public class ModRolePanel extends JPanel {
         mediator.setDescrModRole(descrArea);
         mediator.setSaveBModRole(saveB);
         mediator.setSaveVModRole(saveV);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }

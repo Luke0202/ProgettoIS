@@ -81,8 +81,6 @@ public class CreateRolePanel extends JPanel {
         mediator.setDescrCreateRole(descrArea);
         mediator.setSaveBCreateRole(saveB);
         mediator.setSaveVCreateRole(saveV);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        areaComboBox.addActionListener(e -> mediator.boxComboChanged(areaComboBox));
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }

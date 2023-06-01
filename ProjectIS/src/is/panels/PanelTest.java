@@ -97,7 +97,7 @@ public class PanelTest {
             case 9:RolePanel roleP = new RolePanel(r7,mediator); frame.add(roleP); break;
             case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;
             case 11: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(mediator); frame.add(listEmployeePanel); break;
-            case 12: EmployeePanel employeeP = new EmployeePanel(emp7,admin,mediator); frame.add(employeeP); break;
+            case 12: EmployeePanel employeeP = new EmployeePanel(emp7,mediator); frame.add(employeeP); break;
             case 13: AziendaPanel aziendaP = new AziendaPanel(mediator); frame.add(aziendaP); break;
             case 14: CreateAziendaPanel createAzienda = new CreateAziendaPanel(mediator); frame.add(createAzienda); break;
             case 15: HomePanel home = new HomePanel(mediator); frame.add(home);

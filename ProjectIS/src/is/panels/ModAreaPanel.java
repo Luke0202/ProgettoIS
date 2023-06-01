@@ -90,12 +90,9 @@ public class ModAreaPanel extends JPanel{
         //Using mediator
         mediator.setOldArea(orgToMod);
         mediator.setNameModArea(nameField);
-        mediator.setDadModArea(dadComboBox);
         mediator.setDescrModArea(descrArea);
         mediator.setSaveBModArea(saveB);
         mediator.setSaveVModArea(saveV);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        dadComboBox.addActionListener(e -> mediator.boxComboChanged(dadComboBox));
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }

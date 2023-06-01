@@ -1,5 +1,6 @@
 package is;
 
+import is.dipendenti.Employee;
 import is.dipendenti.Role;
 import is.mediator.Mediator;
 import is.organigramma.Azienda;
@@ -290,6 +291,22 @@ public class Pagination extends JFrame implements PaginationIF{
             public void exitAction(Pagination f){
                 f.remove(m);
             }
+        },
+        EMPLOYEE_PAGE{
+            private EmployeePanel e;
+            @Override
+            public void entryAction(Mediator mediator,Pagination f,Object obj){
+                e = new EmployeePanel((Employee) obj,mediator); f.add(e);
+                //Frame settings
+                f.setLocation(350,150);
+                f.setSize(1000,650);
+                f.setResizable(false);
+                f.setVisible(true);
+            }
+            @Override
+            public void exitAction(Pagination f){
+                f.remove(e);
+            }
         }
     }
 
@@ -365,6 +382,7 @@ public class Pagination extends JFrame implements PaginationIF{
             case 11: currentState.goAhead(this,StateCreation.EDIT_AREA_PAGE,obj); break;
             case 12: currentState.goAhead(this,StateCreation.ROLE_PAGE,obj); break;
             case 13: currentState.goAhead(this,StateCreation.EDIT_ROLE_PAGE,obj); break;
+            case 14: currentState.goAhead(this,StateCreation.EMPLOYEE_PAGE,obj); break;
             default: currentState.goAhead(this,StateCreation.LOG_IN_PAGE,null); break;
         }
     }

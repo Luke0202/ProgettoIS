@@ -82,11 +82,6 @@ public class CreateAziendaPanel extends JPanel {
         mediator.setTypeCreateAzienda(typeField);
         mediator.setPswCreateAzienda(pswField);
         mediator.setSaveCreateAzienda(save);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        codField.addActionListener(e -> mediator.textChanged(codField));
-        headquarterField.addActionListener(e -> mediator.textChanged(headquarterField));
-        typeField.addActionListener(e->mediator.textChanged(typeField));
-        pswField.addActionListener(e->mediator.textChanged(pswField));
         save.addActionListener(e -> mediator.buttonChanged(save));
     }
 }

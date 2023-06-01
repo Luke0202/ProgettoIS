@@ -78,10 +78,6 @@ public class CreateEmployeePanel extends JPanel {
         mediator.setEmailCreateEmployee(emailField);
         mediator.setRoleCreateEmployee(roleComboBox);
         mediator.setSaveCreateEmployee(save);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        surnameField.addActionListener(e -> mediator.textChanged(surnameField));
-        emailField.addActionListener(e -> mediator.textChanged(emailField));
-        roleComboBox.addActionListener(e -> mediator.boxComboChanged(roleComboBox));
         save.addActionListener(e -> mediator.buttonChanged(save));
     }
     private String[] findRoles(Administrator admin){

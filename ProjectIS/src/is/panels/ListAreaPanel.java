@@ -93,7 +93,6 @@ public class ListAreaPanel extends JPanel {
         //Mediator
         mediator.setNameListArea(nameField);
         mediator.setSearchListArea(search);
-        nameField.addActionListener(e->mediator.textChanged(nameField));
         search.addActionListener(e->mediator.buttonChanged(search));
     }
 }

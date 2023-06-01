@@ -5,6 +5,7 @@ import is.dipendenti.Employee;
 import is.dipendenti.Role;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Azienda implements AziendaIF{
@@ -65,6 +66,9 @@ public class Azienda implements AziendaIF{
 
     @Override
     public HashSet<Role> getRoles(Employee emp) {return admin.getRoles(emp);}
+
+    @Override
+    public LinkedList<Employee> getEmployees(){return admin.getEmployees();}
 
     @Override
     public HashSet<String> getAreas(Employee emp) {

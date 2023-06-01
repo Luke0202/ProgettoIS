@@ -20,4 +20,5 @@ public interface AziendaIF {
     HashSet<String> getAreas(Employee emp);
     HashSet<String> getNameRoles(Employee emp);
     HashSet<Integer> getIDEmployees();
+    LinkedList<Employee> getEmployees();
 }

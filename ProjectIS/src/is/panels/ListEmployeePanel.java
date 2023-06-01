@@ -57,8 +57,8 @@ public class ListEmployeePanel extends JPanel {
         for (int j = 0;j<6;j++){
             column = table.getColumnModel().getColumn(j);
             if (j==0) column.setPreferredWidth(180);
-            if (j==1) column.setPreferredWidth(180);
-            if (j==2) column.setPreferredWidth(190);
+            if (j==1) column.setPreferredWidth(150);
+            if (j==2) column.setPreferredWidth(215);
             if (j==3) column.setPreferredWidth(100);
             if (j==4) column.setPreferredWidth(90);
             if (j==5) column.setPreferredWidth(90);
@@ -90,8 +90,6 @@ public class ListEmployeePanel extends JPanel {
         //Mediator
         mediator.setIdListEmployee(idField);
         mediator.setSearchListEmployee(search);
-        idField.addActionListener(e->mediator.textChanged(idField));
         search.addActionListener(e->mediator.buttonChanged(search));
-
     }
 }

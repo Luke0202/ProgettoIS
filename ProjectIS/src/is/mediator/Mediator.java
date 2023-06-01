@@ -3,6 +3,7 @@ package is.mediator;
 import is.Pagination;
 import is.PaginationIF;
 import is.dipendenti.Administrator;
+import is.dipendenti.Employee;
 import is.dipendenti.Role;
 import is.organigramma.Azienda;
 import is.organigramma.Couple;
@@ -14,20 +15,17 @@ import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Locale;
+import java.util.*;
 
 public class Mediator implements MediatorIF{
     private JMenuItem createA,listA,createR,listR,createE,listE,detA;
     private JTextField idLog,pswLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
             emailCreateEmployee,pswCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
-            nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole;
+            nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole, idEmployee;
     private JButton confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveBCreateRole, saveVCreateRole, saveBModRole,saveVModRole,
-           saveCreateEmployee,modArea, removeArea, removeButtonEmployee, modRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
+           saveCreateEmployee,modArea, removeArea, removeEmployee, modRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
     searchListRole, saveVModArea,saveBModArea;
-    private JComboBox<String> dadCreateArea, areaCreateRole,roleCreateEmployee, dadModArea;
+    private JComboBox<String> dadCreateArea, areaCreateRole,roleCreateEmployee;
     private JFrame frame;
     private JTextArea descrCreateArea,descrModArea, descrCreateRole, descrModRole;
     private Organigramma oldArea=null;
@@ -72,7 +70,6 @@ public class Mediator implements MediatorIF{
     //ModAreaPanel
     public void setOldArea(Organigramma oldArea){this.oldArea=oldArea;}
     public void setNameModArea(JTextField nameModArea){this.nameModArea=nameModArea;}
-    public void setDadModArea(JComboBox<String> dadModArea){this.dadModArea=dadModArea;}
     public void setDescrModArea(JTextArea descrModArea){this.descrModArea=descrModArea;}
     public void setSaveBModArea(JButton saveBModArea){this.saveBModArea=saveBModArea;}
     public void setSaveVModArea(JButton saveVModArea){this.saveVModArea=saveVModArea;}
@@ -100,13 +97,16 @@ public class Mediator implements MediatorIF{
     public void setSaveVModRole(JButton saveVModRole){this.saveVModRole = saveVModRole;}
 
 
+    //EmployeePanel
+    public void setIdEmployee(JTextField idEmployee){this.idEmployee=idEmployee;}
+
     public void setNameCreateEmployee(JTextField nameCreateEmployee){this.nameCreateEmployee=nameCreateEmployee;}
     public void setSurnameCreateEmployee(JTextField surnameCreateEmployee){this.surnameCreateEmployee=surnameCreateEmployee;}
     public void setEmailCreateEmployee(JTextField emailCreateEmployee){this.emailCreateEmployee=emailCreateEmployee;}
     public void setRoleCreateEmployee(JComboBox<String> roleCreateEmployee){this.roleCreateEmployee=roleCreateEmployee;}
     public void setSaveCreateEmployee(JButton saveCreateEmployee){this.saveCreateEmployee=saveCreateEmployee;}
 
-    public void setRemoveButtonEmployee(JButton removeButtonEmployee){this.removeButtonEmployee=removeButtonEmployee;}
+    public void setRemoveEmployee(JButton removeEmployee){this.removeEmployee=removeEmployee;}
 
     //RolePanel
     public void setModRole(JButton modRole){this.modRole = modRole;}
@@ -367,7 +367,7 @@ public class Mediator implements MediatorIF{
 
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
-            
+
             if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
 
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
@@ -455,6 +455,8 @@ public class Mediator implements MediatorIF{
             }
         }
         if (widget == saveVCreateRole) {
+
+
             if (!nameCreateRole.getText().trim().equals("Digita nome ruolo") && !nameCreateRole.getText().trim().isEmpty()) {
                 String name = nameCreateRole.getText().trim();
 
@@ -615,9 +617,81 @@ public class Mediator implements MediatorIF{
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
             pag.goAhead(2, null);
         }
-    }
-    @Override
-    public void boxComboChanged(JComboBox widget) {
+        if (widget==saveCreateEmployee){
+            String name = nameCreateEmployee.getText().trim();
+            String surname = surnameCreateEmployee.getText().trim();
+            String email = emailCreateEmployee.getText().trim();
 
+            if (name.isEmpty() || name.equals("Digita nome") || surname.isEmpty() || surname.equals("Digita cognome") ||
+            email.isEmpty() || email.equals("Digita email")){
+                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+                return;
+            }
+
+            int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
+            if (i != 0) return; //No oppure Cancel
+
+            int j = roleCreateEmployee.getSelectedIndex();
+            String role = roleCreateEmployee.getItemAt(j);
+            StringTokenizer st = new StringTokenizer(role," - ");
+            String nameRole = st.nextToken();
+            String areaRole = st.nextToken();
+            //Capitalizing first letter
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+            surname = surname.substring(0, 1).toUpperCase() + surname.substring(1);
+            email = email.substring(0, 1).toUpperCase() + email.substring(1);
+
+
+            Employee emp = new Employee(name,surname,email,azienda.getAdmin().giveID());
+            for (Role r:azienda.getRoles()){
+                if (r.getName().equals(nameRole) && r.getArea().equals(areaRole)){
+                    azienda.addEmployee(r,emp);
+                }
+            }
+
+            JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
+            pag.goAhead(2, null);
+        }
+        if (widget==searchListEmployee){
+            //Check nameListArea
+            String ID = idListEmployee.getText().trim();
+
+            if (!ID.matches("\\d+")){
+                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+                return;
+            }
+            int id = Integer.parseInt(ID);
+
+
+            for(Employee emp:azienda.getEmployees()){
+                if (emp.getID()==id){
+                    pag.goAhead(14,emp);
+                    return;
+                }
+            }
+
+            JOptionPane.showMessageDialog(frame, "Dipendente non presente nel sistema.");
+        }
+        if(widget==removeEmployee){
+            //Deleting area
+            int i = JOptionPane.showConfirmDialog(frame,"Procedere con la rimozione ?");
+            if (i == 0) {
+                //Option selected: Yes
+                int id = Integer.parseInt(idEmployee.getText());
+
+                LinkedList<Employee> employees=azienda.getEmployees();
+                Iterator<Employee> it = employees.iterator();
+                while(it.hasNext()){
+                    Employee emp = it.next();
+                    if (emp.getID()==id){
+                        it.remove();
+                        break;
+                    }
+                }
+
+                JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
+                pag.goAhead(2, null);
+            }
+        }
     }
 }
