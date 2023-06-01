@@ -4,6 +4,9 @@ import is.dipendenti.Administrator;
 import is.dipendenti.Employee;
 import is.dipendenti.Role;
 import is.mediator.Mediator;
+import is.organigramma.Couple;
+import is.organigramma.Organigramma;
+import is.organigramma.OrganigrammaIF;
 import is.shapes.DataTable;
 import is.shapes.ImageZoom;
 
@@ -42,19 +45,23 @@ public class RolePanel extends JPanel {
         JTextField nameField = new JTextField(20); nameField.setText(role.getName()); nameField.setEditable(false);
         nameField.setBounds(20,50,280,30);
         //DadLabel
-        JLabel dadLab = new JLabel("Nome Area: ");
-        dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,200,30);
+        JLabel areaLab = new JLabel("Nome Area: ");
+        areaLab.setFont(f); areaLab.setForeground(blue); areaLab.setBounds(350,15,200,30);
 
-        JTextField dadField = new JTextField(20); dadField.setText(role.getArea()); dadField.setEditable(false);
-        dadField.setBounds(350,50,200,30);
+        JTextField areaField = new JTextField(20); areaField.setText(role.getArea()); areaField.setEditable(false);
+        areaField.setBounds(350,50,200,30);
         //StateLabel
         JLabel stateLab = new JLabel("Stato: ");
         stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
         JLabel stateLab2 = new JLabel((!role.getStateRole()) ? "BOZZA":"VALIDATA");
         stateLab2.setBounds(680,50,280,30);
         //Button
-        JButton removeButton = new JButton("Elimina Ruolo");  removeButton.setForeground(Color.white);
-        removeButton.setBackground(blue2); removeButton.setBounds(810,50,150,30);
+        JButton modButton = new JButton("Modifica ruolo");  modButton.setForeground(Color.white);
+        modButton.setBackground(blue2); modButton.setBounds(810,30,150,30);
+        modButton.setEnabled(!role.getStateRole());
+        JButton removeButton = new JButton("Elimina ruolo");  removeButton.setForeground(Color.white);
+        removeButton.setEnabled(isRemovable(role,mediator.getAzienda().getAdmin()));
+        removeButton.setBackground(blue2); removeButton.setBounds(810,70,150,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
@@ -99,14 +106,29 @@ public class RolePanel extends JPanel {
         //Adding
         add(fieldPanel);
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
-        fieldPanel.add(dadLab); fieldPanel.add(dadField);
-        fieldPanel.add(stateLab); fieldPanel.add(stateLab2); fieldPanel.add(removeButton);
+        fieldPanel.add(areaLab); fieldPanel.add(areaField);
+        fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
+        fieldPanel.add(modButton); fieldPanel.add(removeButton);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
         fieldPanel.add(empLab); fieldPanel.add(scrollPane);
         fieldPanel.add(lab);
 
         //Mediator
-        mediator.setRemoveButtonRole(removeButton);
+        mediator.setNameRole(nameField);
+        mediator.setAreaRole(areaField);
+        mediator.setModRole(modButton);
+        mediator.setRemoveRole(removeButton);
+        modButton.addActionListener(e->mediator.buttonChanged(modButton));
         removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
+    }
+    private boolean isRemovable(Role role,Administrator admin){
+        //Un ruolo è rimuovibile se non ha alcun dipendente associato
+
+        for (OrganigrammaIF o:admin.getOrganigramma()){
+            for (Couple c:((Organigramma)o).getCouples()){
+                if (c.getRole().equals(role)) return false;
+            }
+        }
+        return true;
     }
 }

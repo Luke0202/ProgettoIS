@@ -11,10 +11,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ListRolePanel extends JPanel {
-    private Mediator mediator;
     public ListRolePanel(Mediator mediator){
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator=mediator;
 
         Administrator admin = mediator.getAzienda().getAdmin();
 
@@ -36,15 +34,16 @@ public class ListRolePanel extends JPanel {
         fieldPanel.setBackground(gray);
         fieldPanel.setBounds(0,60,1000,950);
 
-        Organigramma org = admin.getOrganigramma();
+
         String[] columnNames = {"Nome Ruolo","Nome Area","Numero Dipendenti","Stato"};
         Object[][] data = new Object[admin.getRoles().size()][columnNames.length];
 
         int i = 0;
+        Organigramma org = admin.getOrganigramma();
         for(Role r: admin.getRoles()){
             data[i][0]=r.getName();
             data[i][1]=r.getArea();
-            data[i][2]=admin.getOrganigramma().getEmployees(r).size();
+            data[i][2]= org.getEmployees(r).size();
             data[i][3]=(!r.getStateRole()) ? "BOZZA":"VALIDATA";
             i++;
         }

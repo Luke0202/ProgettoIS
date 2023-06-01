@@ -81,10 +81,10 @@ public class PanelTest {
         Azienda azienda = new Azienda(220293, "Spacex","Florida","Aerospaziale",psw,admin);
 
         //Mediator
-        Mediator mediator = new Mediator(); mediator.setFrame(frame);
+        Mediator mediator = new Mediator(); mediator.setFrame(frame); mediator.setAzienda(azienda);
 
 
-        int i = 14;
+        int i = 9;
         switch(i){
             case 1:LogPanel log = new LogPanel(mediator); frame.add(log); break;
             case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
@@ -92,7 +92,7 @@ public class PanelTest {
             case 4:ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
             case 5:AreaPanel areaP = new AreaPanel(o,mediator); frame.add(areaP); break;
             case 6:CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
-            case 7:ModRolePanel modRole = new ModRolePanel(mediator,admin,r1); frame.add(modRole); break;
+            case 7:ModRolePanel modRole = new ModRolePanel(r1,mediator); frame.add(modRole); break;
             case 8:ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;
             case 9:RolePanel roleP = new RolePanel(r7,mediator); frame.add(roleP); break;
             case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;

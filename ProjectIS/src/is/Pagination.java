@@ -1,5 +1,6 @@
 package is;
 
+import is.dipendenti.Role;
 import is.mediator.Mediator;
 import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
@@ -257,6 +258,38 @@ public class Pagination extends JFrame implements PaginationIF{
             public void exitAction(Pagination f){
                 f.remove(m);
             }
+        },
+        ROLE_PAGE{
+            private RolePanel r;
+            @Override
+            public void entryAction(Mediator mediator,Pagination f,Object obj){
+                r = new RolePanel((Role) obj,mediator); f.add(r);
+                //Frame settings
+                f.setLocation(350,150);
+                f.setSize(1000,650);
+                f.setResizable(false);
+                f.setVisible(true);
+            }
+            @Override
+            public void exitAction(Pagination f){
+                f.remove(r);
+            }
+        },
+        EDIT_ROLE_PAGE{
+            private ModRolePanel m;
+            @Override
+            public void entryAction(Mediator mediator,Pagination f,Object obj){
+                m = new ModRolePanel((Role)obj,mediator); f.add(m);
+                //Frame settings
+                f.setLocation(350,150);
+                f.setSize(1000,650);
+                f.setResizable(false);
+                f.setVisible(true);
+            }
+            @Override
+            public void exitAction(Pagination f){
+                f.remove(m);
+            }
         }
     }
 
@@ -330,6 +363,8 @@ public class Pagination extends JFrame implements PaginationIF{
             case 9: currentState.goAhead(this,StateCreation.LIST_ROLE_PAGE,null); break;
             case 10: currentState.goAhead(this,StateCreation.AREA_PAGE,obj); break;
             case 11: currentState.goAhead(this,StateCreation.EDIT_AREA_PAGE,obj); break;
+            case 12: currentState.goAhead(this,StateCreation.ROLE_PAGE,obj); break;
+            case 13: currentState.goAhead(this,StateCreation.EDIT_ROLE_PAGE,obj); break;
             default: currentState.goAhead(this,StateCreation.LOG_IN_PAGE,null); break;
         }
     }

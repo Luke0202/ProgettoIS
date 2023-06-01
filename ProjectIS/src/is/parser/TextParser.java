@@ -137,7 +137,7 @@ public class TextParser {
             switch(token){
                 case "Role": break;
                 case "Name": name = readText(); break;
-                case "Area": area = readText(); break;
+                case "NameArea": area = readText(); break;
                 case "Description": descr = readText(); break;
                 case "State": state = Boolean.getBoolean(readText());
                 case "/Role":

@@ -8,14 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ModRolePanel extends JPanel {
-    private Mediator mediator;
-    private Administrator admin;
-    private Role role;
-    public ModRolePanel(Mediator mediator, Administrator admin, Role roleToMod) {
-        if (mediator==null || admin==null || roleToMod==null) throw new IllegalArgumentException("Dati non validi");
-        this.mediator = mediator;
-        this.admin = admin;
-        this.role=roleToMod;
+    public ModRolePanel(Role roleToMod, Mediator mediator) {
+        if (mediator==null || roleToMod==null) throw new IllegalArgumentException("Dati non validi");
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -38,7 +32,7 @@ public class ModRolePanel extends JPanel {
         //Name Role
         JLabel nameLab = new JLabel("Nome Ruolo: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
-        JTextField nameField = new JTextField(20); nameField.setText("Digita nome ruolo");
+        JTextField nameField = new JTextField(20); nameField.setText(roleToMod.getName());
         nameField.setBounds(20,50,280,30);
         //StateLabel
         JLabel stateLab = new JLabel("Stato: ");
@@ -48,16 +42,16 @@ public class ModRolePanel extends JPanel {
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
-        JTextArea descrArea = new JTextArea(5,20); descrArea.setText("Digita descrizione ruolo");
+        JTextArea descrArea = new JTextArea(5,20); descrArea.setText(roleToMod.getDescription());
         descrArea.setLineWrap(true);
         JScrollPane descrScroll = new JScrollPane(descrArea);//Controllo per vedere se è gia presente una descrizione per tale ruolo
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         descrScroll.setBounds(20,135,940,150);
         //SaveButtons
         JButton saveB = new JButton("SALVA IN BOZZA");  saveB.setForeground(Color.white); saveB.setBackground(blue2);
-        saveB.setBounds(20,350,200,30);    saveB.setEnabled(!role.getStateRole());
+        saveB.setBounds(20,350,200,30);    saveB.setEnabled(!roleToMod.getStateRole());
         JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
-        saveV.setBounds(350,350,200,30);   saveV.setEnabled(!role.getStateRole());
+        saveV.setBounds(350,350,200,30);   saveV.setEnabled(!roleToMod.getStateRole());
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -74,7 +68,9 @@ public class ModRolePanel extends JPanel {
         add(headPanel); add(fieldPanel);
 
         //Using mediator
-        mediator.setNameRoleModRole(nameField);
+        mediator.setOldRole(roleToMod);
+        mediator.setNameModRole(nameField);
+        mediator.setDescrModRole(descrArea);
         mediator.setSaveBModRole(saveB);
         mediator.setSaveVModRole(saveV);
         nameField.addActionListener(e -> mediator.textChanged(nameField));

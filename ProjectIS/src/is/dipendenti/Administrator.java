@@ -153,9 +153,9 @@ public class Administrator implements AdministratorIF {
     @Override
     public void removeRole(Role role){
         //se non ha dipendenti associati allora è possibile rimuoverlo
-        if (!containsInOrganigramma(role))  roles.remove(role);
+        if (!isInOrganigramma(role))  roles.remove(role);
     }
-    private boolean containsInOrganigramma(Role role){
+    private boolean isInOrganigramma(Role role){
 
         Iterator<OrganigrammaIF> it = organigramma.iterator();
         while(it.hasNext()){

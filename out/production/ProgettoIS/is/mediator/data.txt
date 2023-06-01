@@ -7,6 +7,12 @@
 <Employees>
 </Employees>
 <Roles>
+<Role>
+<Name>Impiegato</Name>
+<NameArea>Leonardo</NameArea>
+<Description>Digita descrizione ruolo</Description>
+<State>false</State>
+</Role>
 </Roles>
 <Organigramma>
 <Area>
@@ -19,7 +25,7 @@
 <Area>
 <Name>Pallavolo</Name>
 <Description> </Description>
-<State>true</State>
+<State>false</State>
 <Couples>
 </Couples>
 <ListAreas>

@@ -49,7 +49,7 @@ public class CreateRolePanel extends JPanel {
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
-        JTextArea descrArea = new JTextArea(5,20); descrArea.setText("Digita descrizione ruolo");
+        JTextArea descrArea = new JTextArea(5,20); descrArea.setText("Digita descrizione");
         descrArea.setLineWrap(true);
         JScrollPane descrScroll = new JScrollPane(descrArea);//Controllo per vedere se è gia presente una descrizione per tale ruolo
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -78,6 +78,7 @@ public class CreateRolePanel extends JPanel {
         //Using mediator
         mediator.setNameCreateRole(nameField);
         mediator.setAreaCreateRole(areaComboBox);
+        mediator.setDescrCreateRole(descrArea);
         mediator.setSaveBCreateRole(saveB);
         mediator.setSaveVCreateRole(saveV);
         nameField.addActionListener(e -> mediator.textChanged(nameField));

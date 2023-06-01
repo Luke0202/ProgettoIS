@@ -36,7 +36,6 @@ public class ModAreaPanel extends JPanel{
         JTextField nameField = new JTextField(20);
 
         String nameText=orgToMod.getName();
-        if (nameText==null) nameText = "Digita nome area";
 
         nameField.setText(nameText);
         nameField.setBounds(20,50,280,30);
