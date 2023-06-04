@@ -1,7 +1,6 @@
 package is.organigramma;
 
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
+import is.visitor.AreaVisitor;
 
 import java.util.*;
 
@@ -131,8 +130,7 @@ public class Organigramma extends AbstractOrganigramma {
     }
 
     @Override
-    public void accept() {
-
+    public void accept(AreaVisitor visitor) {
+        visitor.visit(this);
     }
-
 }

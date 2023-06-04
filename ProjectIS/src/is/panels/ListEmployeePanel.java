@@ -1,22 +1,22 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
+
+import is.organigramma.Azienda;
+import is.organigramma.Employee;
 import is.mediator.Mediator;
 import is.organigramma.Organigramma;
-import is.shapes.DataTable;
-import is.shapes.ImageZoom;
-
+import is.decorator.DataTable;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ListEmployeePanel extends JPanel {
-    private Mediator mediator;
     public ListEmployeePanel(Mediator mediator){
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator=mediator;
-        Administrator admin = mediator.getAzienda().getAdmin();
+
+        Azienda azienda = mediator.getAzienda();
+
         setLayout(null);
         Color blue = new Color(3, 2, 179);
         Color blue2 = new Color(0,51,200);
@@ -35,18 +35,18 @@ public class ListEmployeePanel extends JPanel {
         fieldPanel.setBackground(gray);
         fieldPanel.setBounds(0,60,1000,950);
 
-        Organigramma org = admin.getOrganigramma();
+        Organigramma org = azienda.getOrganigramma();
         String[] columnNames = {"Cognome","Nome","Email","ID","Numero ruoli","Numero Aree"};
-        Object[][] data = new Object[admin.getEmployees().size()][columnNames.length];
+        Object[][] data = new Object[azienda.getNEmployees()][columnNames.length];
 
         int i = 0;
-        for (Employee emp: admin.getEmployees()){
+        for (Employee emp: azienda.getEmployees()){
             data[i][0] = emp.getSurname();
             data[i][1] = emp.getName();
             data[i][2] = emp.getEmail();
             data[i][3] = emp.getID();
-            data[i][4] = admin.getRoles(emp).size();
-            data[i][5] = admin.getAreas(emp).size();
+            data[i][4] = azienda.getRoles(emp).size();
+            data[i][5] = azienda.getAreasName(emp).size();
             i++;
         }
 

@@ -60,10 +60,10 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         return areas.size();
     }
 
-    public void visit(List<OrganigrammaIF> ls){
+    public void preOrder(List<OrganigrammaIF> ls){
         ls.add(this);
         for(OrganigrammaIF o:areas){
-            ((Organigramma)o).visit(ls);
+            ((Organigramma)o).preOrder(ls);
         }
     }
 
@@ -84,7 +84,7 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         private OrganigrammaIF cur = null;
 
         public AreaIterator(){
-            visit(ls);
+            preOrder(ls);
             it = ls.iterator();
         }
         @Override

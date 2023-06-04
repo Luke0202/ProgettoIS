@@ -1,10 +1,10 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Role;
-import is.mediator.Mediator;
-import is.shapes.ImageZoom;
 
+import is.organigramma.Azienda;
+import is.organigramma.Role;
+import is.mediator.Mediator;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
@@ -13,7 +13,6 @@ public class CreateEmployeePanel extends JPanel {
     private Mediator mediator;
     public CreateEmployeePanel(Mediator mediator) {
         if (mediator == null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator = mediator;
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -51,7 +50,7 @@ public class CreateEmployeePanel extends JPanel {
         //Role Field
         JLabel roleLab = new JLabel("Ruolo: ");
         roleLab.setFont(f); roleLab.setForeground(blue); roleLab.setBounds(20,150,200,30);
-        String[] array = findRoles(mediator.getAzienda().getAdmin());
+        String[] array = findRoles(mediator.getAzienda());
         JComboBox<String> roleComboBox = new JComboBox<>(array);
         roleComboBox.setBounds(20,185,350,30);
         //SaveButtons
@@ -80,8 +79,8 @@ public class CreateEmployeePanel extends JPanel {
         mediator.setSaveCreateEmployee(save);
         save.addActionListener(e -> mediator.buttonChanged(save));
     }
-    private String[] findRoles(Administrator admin){
-        HashSet<Role> roles = admin.getRoles();
+    private String[] findRoles(Azienda azienda){
+        HashSet<Role> roles = azienda.getRoles();
 
         HashSet<String> rol = new HashSet<>();
         for (Role r:roles){

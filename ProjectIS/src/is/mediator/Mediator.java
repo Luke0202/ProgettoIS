@@ -1,16 +1,13 @@
 package is.mediator;
 
-import is.Pagination;
-import is.PaginationIF;
-import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
+import is.state.Pagination;
+import is.state.PaginationIF;
+import is.organigramma.Employee;
+import is.organigramma.Role;
 import is.organigramma.Azienda;
-import is.organigramma.Couple;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
-import is.parser.AziendaParse;
-
+import is.parser.TextPlainParser;
 import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,10 +17,10 @@ import java.util.*;
 public class Mediator implements MediatorIF{
     private JMenuItem createA,listA,createR,listR,createE,listE,detA;
     private JTextField idLog,pswLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
-            emailCreateEmployee,pswCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
+            emailCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
             nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole, idEmployee;
     private JButton confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveBCreateRole, saveVCreateRole, saveBModRole,saveVModRole,
-           saveCreateEmployee,modArea, removeArea, removeEmployee, modRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
+           saveCreateEmployee,editArea, removeArea, removeEmployee, editRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
     searchListRole, saveVModArea,saveBModArea;
     private JComboBox<String> dadCreateArea, areaCreateRole,roleCreateEmployee;
     private JFrame frame;
@@ -82,10 +79,8 @@ public class Mediator implements MediatorIF{
     public void setSaveVCreateRole(JButton saveVCreateRole){this.saveVCreateRole = saveVCreateRole;}
 
     //AreaPanel
-    public void setNameRole(JTextField nameRole){this.nameRole = nameRole;}
-    public void setAreaRole(JTextField areaRole){this.areaRole = areaRole;}
     public void setNameArea(JTextField nameArea){this.nameArea=nameArea;}
-    public void setModArea(JButton modArea){this.modArea=modArea;}
+    public void setEditArea(JButton editArea){this.editArea=editArea;}
     public void setRemoveArea(JButton removeArea){this.removeArea=removeArea;}
 
 
@@ -96,41 +91,50 @@ public class Mediator implements MediatorIF{
     public void setSaveBModRole(JButton saveBModRole){this.saveBModRole = saveBModRole;}
     public void setSaveVModRole(JButton saveVModRole){this.saveVModRole = saveVModRole;}
 
-
     //EmployeePanel
     public void setIdEmployee(JTextField idEmployee){this.idEmployee=idEmployee;}
+    public void setRemoveEmployee(JButton removeEmployee){this.removeEmployee=removeEmployee;}
 
+    //CreateEmployeePanel
     public void setNameCreateEmployee(JTextField nameCreateEmployee){this.nameCreateEmployee=nameCreateEmployee;}
     public void setSurnameCreateEmployee(JTextField surnameCreateEmployee){this.surnameCreateEmployee=surnameCreateEmployee;}
     public void setEmailCreateEmployee(JTextField emailCreateEmployee){this.emailCreateEmployee=emailCreateEmployee;}
     public void setRoleCreateEmployee(JComboBox<String> roleCreateEmployee){this.roleCreateEmployee=roleCreateEmployee;}
     public void setSaveCreateEmployee(JButton saveCreateEmployee){this.saveCreateEmployee=saveCreateEmployee;}
 
-    public void setRemoveEmployee(JButton removeEmployee){this.removeEmployee=removeEmployee;}
-
     //RolePanel
-    public void setModRole(JButton modRole){this.modRole = modRole;}
+    public void setNameRole(JTextField nameRole){this.nameRole = nameRole;}
+    public void setAreaRole(JTextField areaRole){this.areaRole = areaRole;}
+    public void setEditRole(JButton editRole){this.editRole = editRole;}
     public void setRemoveRole(JButton removeRole){this.removeRole=removeRole;}
 
-
+    //CreateAziendaPanel
     public void setNameCreateAzienda(JTextField nameCreateAzienda){this.nameCreateAzienda=nameCreateAzienda;}
     public void setCodCreateAzienda(JTextField codCreateAzienda){this.codCreateAzienda=codCreateAzienda;}
     public void setHeadquarterCreateAzienda(JTextField headquarterCreateAzienda){this.headquarterCreateAzienda=headquarterCreateAzienda;}
     public void setTypeCreateAzienda(JTextField typeCreateAzienda){this.typeCreateAzienda=typeCreateAzienda;}
+    public void setPswCreateAzienda(JTextField pswCreateAzienda){this.pswCreateAzienda = pswCreateAzienda;}
     public void setSaveCreateAzienda(JButton saveCreateAzienda){this.saveCreateAzienda=saveCreateAzienda;}
+
+    //ListAreaPanel
     public void setNameListArea(JTextField nameListArea){this.nameListArea=nameListArea;}
+    public void setSearchListArea(JButton searchListArea){this.searchListArea=searchListArea;}
+
+    //ListEmployeePanel
     public void setIdListEmployee(JTextField idListEmployee){this.idListEmployee=idListEmployee;}
+    public void setSearchListEmployee(JButton searchListEmployee){this.searchListEmployee = searchListEmployee;}
+
+    //ListRolePanel
     public void setNameListRole(JTextField nameListRole){this.nameListRole=nameListRole;}
     public void setAreaListRole(JTextField areaListRole){this.areaListRole=areaListRole;}
-    public void setSearchListArea(JButton searchListArea){this.searchListArea=searchListArea;}
-    public void setSearchListEmployee(JButton searchListEmployee){this.searchListEmployee = searchListEmployee;}
     public void setSearchListRole(JButton searchListRole){this.searchListRole=searchListRole;}
-    public void setPswCreateAzienda(JTextField pswCreateAzienda){this.pswCreateAzienda = pswCreateAzienda;}
+
+
     public void setAzienda(Azienda azienda){this.azienda=azienda;}
     public void setPag(PaginationIF pag){this.pag=pag;}
-
-    public Azienda getAzienda(){return this.azienda;}
     public void setFrame(JFrame frame){ this.frame=frame;}
+    public Azienda getAzienda(){return this.azienda;}
+
 
     @Override
     public void menuChanged(JMenuItem widget) {
@@ -203,12 +207,12 @@ public class Mediator implements MediatorIF{
 
             //Scrittura dati sul file di testo
             String description = "Codice ATECO: " + cod + ", Sede centrale: " + hq + ", Settore: " + type + ".";
-            Administrator ad = new Administrator(new Organigramma(name, description));
-            Azienda azienda = new Azienda(Integer.parseInt(cod), name, hq, type, psw, ad);
+
+            Azienda azienda = new Azienda(Integer.parseInt(cod), name, hq, type, psw, new Organigramma(name, description));
             String path = Mediator.class.getResource("data.txt").getPath();
             try {
                 PrintWriter pw = new PrintWriter(new FileWriter(path));
-                AziendaParse az = new AziendaParse(azienda, pw);
+                TextPlainParser az = new TextPlainParser(azienda, pw);
                 az.doParse();
                 setAzienda(azienda);
             } catch (IOException e) {
@@ -224,7 +228,7 @@ public class Mediator implements MediatorIF{
             if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
                 String name = nameCreateArea.getText().trim();
                 //Check existing name
-                for (OrganigrammaIF o : azienda.getAdmin().getOrganigramma()) {
+                for (OrganigrammaIF o : azienda.getOrganigramma()) {
                     if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                         JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
                         return;
@@ -239,7 +243,7 @@ public class Mediator implements MediatorIF{
 
                 String descr = descrCreateArea.getText().trim();
 
-                if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
 
                 descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -249,9 +253,9 @@ public class Mediator implements MediatorIF{
 
                 Organigramma org = new Organigramma(name, descr);
                 if (area.equals("Nessuna area di riferimento")) {
-                    azienda.getAdmin().setOrganigramma(org);
+                    azienda.setOrganigramma(org);
                 } else {
-                    Organigramma organigramma = azienda.getAdmin().getOrganigramma();
+                    Organigramma organigramma = azienda.getOrganigramma();
 
                     Iterator<OrganigrammaIF> it = organigramma.iterator();
                     while (it.hasNext()) {
@@ -269,7 +273,7 @@ public class Mediator implements MediatorIF{
             if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
                 String name = nameCreateArea.getText().trim();
                 //Check existing name
-                for (OrganigrammaIF o : azienda.getAdmin().getOrganigramma()) {
+                for (OrganigrammaIF o : azienda.getOrganigramma()) {
                     if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                         JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
                         return;
@@ -282,7 +286,7 @@ public class Mediator implements MediatorIF{
                 name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
                 String descr = descrCreateArea.getText();
-                if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
 
                 descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -293,9 +297,9 @@ public class Mediator implements MediatorIF{
                 //Cambiamento stato
                 org.setStateArea(true);
                 if (area.equals("Nessuna area di riferimento")) {
-                    azienda.getAdmin().setOrganigramma(org);
+                    azienda.setOrganigramma(org);
                 } else {
-                    Organigramma organigramma = azienda.getAdmin().getOrganigramma();
+                    Organigramma organigramma = azienda.getOrganigramma();
 
                     Iterator<OrganigrammaIF> it = organigramma.iterator();
                     while (it.hasNext()) {
@@ -312,7 +316,7 @@ public class Mediator implements MediatorIF{
         if (widget == searchListArea) {
             //Check nameListArea
             String name = nameListArea.getText().trim();
-            for (OrganigrammaIF o : azienda.getAdmin().getOrganigramma()) {
+            for (OrganigrammaIF o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     pag.goAhead(10, o);
                     return;
@@ -327,15 +331,15 @@ public class Mediator implements MediatorIF{
             if (i == 0) {
                 //Option selected: Yes
                 String name = nameArea.getText();
-                Organigramma org = azienda.getAdmin().getArea(name);
-                azienda.getAdmin().removeArea(org);
+                Organigramma org = azienda.getArea(name);
+                azienda.removeArea(org);
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
                 pag.goAhead(2, null);
             }
         }
-        if (widget == modArea) {
+        if (widget == editArea) {
             String name = nameArea.getText();
-            Organigramma org = azienda.getAdmin().getArea(name);
+            Organigramma org = azienda.getArea(name);
             pag.goAhead(11, org);
         }
         if (widget == saveBModArea) {
@@ -345,7 +349,7 @@ public class Mediator implements MediatorIF{
             //Caso area uguale alla precedente
             if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
                 if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldArea.setDescription(descr);
 
@@ -355,7 +359,7 @@ public class Mediator implements MediatorIF{
             }
 
             //Check existing name
-            for (OrganigrammaIF o : azienda.getAdmin().getOrganigramma()) {
+            for (OrganigrammaIF o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
                     return;
@@ -368,7 +372,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = " ";
 
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -385,7 +389,7 @@ public class Mediator implements MediatorIF{
             //Caso area uguale alla precedente
             if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
                 if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldArea.setDescription(descr);
                 }
@@ -395,7 +399,7 @@ public class Mediator implements MediatorIF{
             }
 
             //Check existing name
-            for (OrganigrammaIF o : azienda.getAdmin().getOrganigramma()) {
+            for (OrganigrammaIF o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
                     return;
@@ -408,7 +412,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
 
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -440,13 +444,13 @@ public class Mediator implements MediatorIF{
 
                 String descr = descrCreateRole.getText().trim();
 
-                if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
 
                 descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
                 Role role = new Role(name, area, descr);
 
-                azienda.getAdmin().addRole(role);
+                azienda.addRole(role);
 
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
                 pag.goAhead(2, null);
@@ -478,14 +482,14 @@ public class Mediator implements MediatorIF{
 
                 String descr = descrCreateRole.getText().trim();
 
-                if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
 
                 descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
                 Role role = new Role(name, area, descr);
                 role.setStateRole(true);
 
-                azienda.getAdmin().addRole(role);
+                azienda.addRole(role);
 
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
                 pag.goAhead(2, null);
@@ -528,7 +532,7 @@ public class Mediator implements MediatorIF{
                 pag.goAhead(2, null);
             }
         }
-        if (widget == modRole) {
+        if (widget == editRole) {
             String name = nameRole.getText();
             String area = areaRole.getText();
             HashSet<Role> roles=azienda.getRoles();
@@ -547,7 +551,7 @@ public class Mediator implements MediatorIF{
             //Caso ruolo uguale al precedente
             if (oldRole.getName().toLowerCase().equals(name.toLowerCase())){
                 if (!oldRole.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldRole.setDescription(descr);
 
@@ -568,7 +572,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             oldRole.setName(name); oldRole.setDescription(descr);
@@ -585,7 +589,7 @@ public class Mediator implements MediatorIF{
             if (oldRole.getName().toLowerCase().equals(name.toLowerCase())){
                 if (!oldRole.getDescription().toLowerCase().equals(descr.toLowerCase())){
 
-                    if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldRole.setDescription(descr);
 
@@ -609,7 +613,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr == "") descr = " ";
+            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             oldRole.setName(name); oldRole.setDescription(descr); oldRole.setStateRole(true);
@@ -642,7 +646,7 @@ public class Mediator implements MediatorIF{
             email = email.substring(0, 1).toUpperCase() + email.substring(1);
 
 
-            Employee emp = new Employee(name,surname,email,azienda.getAdmin().giveID());
+            Employee emp = new Employee(name,surname,email,azienda.giveID());
             for (Role r:azienda.getRoles()){
                 if (r.getName().equals(nameRole) && r.getArea().equals(areaRole)){
                     azienda.addEmployee(r,emp);
@@ -679,7 +683,8 @@ public class Mediator implements MediatorIF{
                 //Option selected: Yes
                 int id = Integer.parseInt(idEmployee.getText());
 
-                LinkedList<Employee> employees=azienda.getEmployees();
+                HashSet<Employee> employees=azienda.getEmployees();
+
                 Iterator<Employee> it = employees.iterator();
                 while(it.hasNext()){
                     Employee emp = it.next();

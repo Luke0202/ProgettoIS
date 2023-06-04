@@ -1,14 +1,13 @@
 package is.organigramma;
 
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
+import is.visitor.AreaVisitor;
 
 import java.util.HashSet;
 
 public interface AreaOrganizationIF{
     void addEmployee(Role role,int id);
     void removeEmployee(int id);
-    void accept();
+    void accept(AreaVisitor visitor);
     HashSet<Role> getRoles();
     HashSet<Integer> getEmployees();
     HashSet<String> getAreasOfEmployee(Employee emp);

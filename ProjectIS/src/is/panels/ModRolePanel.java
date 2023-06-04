@@ -1,9 +1,8 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Role;
+import is.organigramma.Role;
 import is.mediator.Mediator;
-import is.shapes.ImageZoom;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 

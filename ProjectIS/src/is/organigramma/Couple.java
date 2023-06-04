@@ -1,8 +1,5 @@
 package is.organigramma;
 
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
-
 public class Couple {
     private Role role;
     private int ID;

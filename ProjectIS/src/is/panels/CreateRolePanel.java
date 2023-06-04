@@ -1,8 +1,8 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
 import is.mediator.Mediator;
-import is.shapes.ImageZoom;
+import is.decorator.ImageZoom;
+import is.organigramma.Azienda;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
@@ -10,6 +10,8 @@ import java.util.HashSet;
 public class CreateRolePanel extends JPanel {
     public CreateRolePanel(Mediator mediator) {
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
+
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -38,7 +40,7 @@ public class CreateRolePanel extends JPanel {
         JLabel areaLab = new JLabel("Scegli Area: ");
         areaLab.setFont(f); areaLab.setForeground(blue); areaLab.setBounds(350,15,200,30);
 
-        String[] array = findAreas(mediator.getAzienda().getAdmin());
+        String[] array = findAreas(azienda);
         JComboBox<String> areaComboBox = new JComboBox<>(array);
         areaComboBox.setBounds(350,50,280,30);
         //StateLabel
@@ -84,9 +86,9 @@ public class CreateRolePanel extends JPanel {
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
-    private String[] findAreas(Administrator admin){
+    private String[] findAreas(Azienda azienda){
 
-        HashSet<String> areas = admin.getAllAreas();
+        HashSet<String> areas = azienda.getAreasName();
 
         String[] array;
         if (areas.size()==0){

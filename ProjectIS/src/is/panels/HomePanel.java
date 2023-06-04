@@ -1,16 +1,14 @@
 package is.panels;
 
 import is.mediator.Mediator;
-import is.shapes.ImageZoom;
+import is.decorator.ImageZoom;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class HomePanel extends JPanel {
-    private Mediator mediator;
     public HomePanel(Mediator mediator){
         if (mediator == null) throw new IllegalArgumentException("Dato non valido");
-        this.mediator = mediator;
 
         setLayout(null);
         Color blue = new Color(200,220,246);

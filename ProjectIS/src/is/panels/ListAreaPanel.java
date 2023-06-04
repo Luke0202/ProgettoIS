@@ -1,23 +1,21 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
 import is.mediator.Mediator;
+import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
-import is.shapes.DataTable;
-import is.shapes.ImageZoom;
+import is.decorator.DataTable;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.Iterator;
 
 public class ListAreaPanel extends JPanel {
-    private Mediator mediator;
     public ListAreaPanel(Mediator mediator){
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator=mediator;
 
-        Administrator admin = mediator.getAzienda().getAdmin();
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color gray = new Color(230,230,230);
@@ -37,9 +35,9 @@ public class ListAreaPanel extends JPanel {
         fieldPanel.setBackground(gray);
         fieldPanel.setBounds(0,60,1000,950);
 
-        Organigramma org = admin.getOrganigramma();
+        Organigramma org = azienda.getOrganigramma();
         String[] columnNames = {"Nome Area","Numero Dipendenti","Nome Area di Riferimento","Stato"};
-        Object[][] data = new Object[admin.getAllAreas().size()][columnNames.length];
+        Object[][] data = new Object[azienda.getNAreas()][columnNames.length];
 
         Iterator<OrganigrammaIF> it = org.iterator();
         int i = 0;
@@ -47,7 +45,7 @@ public class ListAreaPanel extends JPanel {
             Organigramma cur = (Organigramma) it.next();
             data[i][0] = cur.getName();
             data[i][1] = cur.getNEmployees();
-            Organigramma orgPar = admin.getParent(cur);
+            Organigramma orgPar = azienda.getParent(cur);
             data[i][2] = (orgPar==null) ? "Nessuna":orgPar.getName();
             data[i][3] = (!cur.getStateArea()) ? "BOZZA":"VALIDATA";
             i++;

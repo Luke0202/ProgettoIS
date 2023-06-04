@@ -5,12 +5,6 @@
 <Type>Automobilistico</Type
 <Password>22</Password>
 <Employees>
-<Employee>
-<ID>0</ID>
-<Name>Marco</Name>
-<Surname>Tommasini</Surname>
-<Email>Fffff</Email>
-</Employee>
 </Employees>
 <Roles>
 <Role>
@@ -26,14 +20,6 @@
 <Description>Codice ATECO: 11, Sede centrale: Roma, Settore: Automobilistico.</Description>
 <State>false</State>
 <Couples>
-<Couple>
-<ID>0</ID>
-<Role>
-<Name>Impiegato</Name>
-<NameArea>Leonardo</NameArea>
-<Description>Digita descrizione ruolo</Description>
-</Role>
-</Couple>
 </Couples>
 <ListAreas>
 <Area>

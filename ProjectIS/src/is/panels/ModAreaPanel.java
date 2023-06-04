@@ -1,9 +1,8 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
 import is.mediator.Mediator;
 import is.organigramma.*;
-import is.shapes.ImageZoom;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
@@ -11,6 +10,8 @@ import java.util.HashSet;
 public class ModAreaPanel extends JPanel{
     public ModAreaPanel(Organigramma orgToMod,Mediator mediator) {
         if (mediator == null || orgToMod==null) throw new IllegalArgumentException("Dati non validi");
+
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -43,7 +44,7 @@ public class ModAreaPanel extends JPanel{
         JLabel dadLab = new JLabel("Nome Area di Riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,400,30);
 
-        String[] array = findAreas(mediator.getAzienda().getAdmin(),orgToMod);
+        String[] array = findAreas(azienda,orgToMod);
         JComboBox<String> dadComboBox = new JComboBox<>(array);
         dadComboBox.setBounds(350,50,280,30);
         //StateLabel
@@ -96,8 +97,8 @@ public class ModAreaPanel extends JPanel{
         saveB.addActionListener(e -> mediator.buttonChanged(saveB));
         saveV.addActionListener(e -> mediator.buttonChanged(saveV));
     }
-    private String[] findAreas(Administrator admin,Organigramma org){
-        HashSet<String> tot = admin.getAllAreas();
+    private String[] findAreas(Azienda azienda,Organigramma org){
+        HashSet<String> tot = azienda.getAreasName();
         tot.removeAll(org.getSubAreas());
         tot.remove(org.getName());
 

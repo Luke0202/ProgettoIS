@@ -1,11 +1,11 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Role;
+import is.organigramma.Azienda;
+import is.organigramma.Role;
 import is.mediator.Mediator;
 import is.organigramma.Organigramma;
-import is.shapes.DataTable;
-import is.shapes.ImageZoom;
+import is.decorator.DataTable;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class ListRolePanel extends JPanel {
     public ListRolePanel(Mediator mediator){
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
 
-        Administrator admin = mediator.getAzienda().getAdmin();
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3, 2, 179);
@@ -36,11 +36,11 @@ public class ListRolePanel extends JPanel {
 
 
         String[] columnNames = {"Nome Ruolo","Nome Area","Numero Dipendenti","Stato"};
-        Object[][] data = new Object[admin.getRoles().size()][columnNames.length];
+        Object[][] data = new Object[azienda.getNRoles()][columnNames.length];
 
         int i = 0;
-        Organigramma org = admin.getOrganigramma();
-        for(Role r: admin.getRoles()){
+        Organigramma org = azienda.getOrganigramma();
+        for(Role r: azienda.getRoles()){
             data[i][0]=r.getName();
             data[i][1]=r.getArea();
             data[i][2]= org.getEmployees(r).size();

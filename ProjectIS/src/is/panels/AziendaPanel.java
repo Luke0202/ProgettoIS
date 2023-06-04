@@ -2,16 +2,15 @@ package is.panels;
 
 import is.mediator.Mediator;
 import is.organigramma.Azienda;
-import is.shapes.ImageZoom;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 
 public class AziendaPanel extends JPanel {
-    private Mediator mediator;
 
     public AziendaPanel(Mediator mediator) {
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
-        this.mediator=mediator;
+
         Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
@@ -65,7 +64,7 @@ public class AziendaPanel extends JPanel {
         headquarterField.setFont(f2);
         headquarterField.setBounds(620, 85, 280, 30);
         //Number of Employees
-        int N = azienda.getIDEmployees().size();
+        int N = azienda.getNEmployees();
         JLabel nEmployeesLab = new JLabel("Numero dipendenti: ");
         nEmployeesLab.setFont(f);
         nEmployeesLab.setForeground(blue);
@@ -73,7 +72,7 @@ public class AziendaPanel extends JPanel {
         JLabel nEmployeesField = new JLabel(String.valueOf(N)); nEmployeesField.setFont(f2);
         nEmployeesField.setBounds(235, 155, 280, 30);
         //Number of Areas
-        int M = azienda.getAreas().size();
+        int M = azienda.getNAreas();
         JLabel nAreasLab = new JLabel("Numero aree: ");
         nAreasLab.setFont(f);
         nAreasLab.setForeground(blue);

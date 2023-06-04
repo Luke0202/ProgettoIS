@@ -1,25 +1,19 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
+import is.organigramma.*;
 import is.mediator.Mediator;
-import is.organigramma.Couple;
-import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
-import is.shapes.DataTable;
-import is.shapes.ImageZoom;
+import is.decorator.DataTable;
+import is.decorator.ImageZoom;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 
 public class RolePanel extends JPanel {
-    private Role role;
-    private Mediator mediator;
     public RolePanel(Role role,Mediator mediator) {
         if (role == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
-        this.role = role; this.mediator=mediator;
+
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -60,7 +54,7 @@ public class RolePanel extends JPanel {
         modButton.setBackground(blue2); modButton.setBounds(810,30,150,30);
         modButton.setEnabled(!role.getStateRole());
         JButton removeButton = new JButton("Elimina ruolo");  removeButton.setForeground(Color.white);
-        removeButton.setEnabled(isRemovable(role,mediator.getAzienda().getAdmin()));
+        removeButton.setEnabled(isRemovable(role,azienda));
         removeButton.setBackground(blue2); removeButton.setBounds(810,70,150,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
@@ -74,7 +68,7 @@ public class RolePanel extends JPanel {
         JLabel empLab = new JLabel("Dipendendi: ");
         empLab.setFont(f); empLab.setForeground(blue); empLab.setBounds(20,315,200,30);
         //Table
-        HashSet<Employee> employees = mediator.getAzienda().getAdmin().getEmployee(role);
+        HashSet<Employee> employees = azienda.getEmployee(role);
         String[] columnNames = {"ID","Nome","Cognome","Email"};
 
         Object[][] data = new Object[employees.size()][columnNames.length];
@@ -116,15 +110,15 @@ public class RolePanel extends JPanel {
         //Mediator
         mediator.setNameRole(nameField);
         mediator.setAreaRole(areaField);
-        mediator.setModRole(modButton);
+        mediator.setEditRole(modButton);
         mediator.setRemoveRole(removeButton);
         modButton.addActionListener(e->mediator.buttonChanged(modButton));
         removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
     }
-    private boolean isRemovable(Role role,Administrator admin){
+    private boolean isRemovable(Role role,Azienda azienda){
         //Un ruolo è rimuovibile se non ha alcun dipendente associato
 
-        for (OrganigrammaIF o:admin.getOrganigramma()){
+        for (OrganigrammaIF o:azienda.getOrganigramma()){
             for (Couple c:((Organigramma)o).getCouples()){
                 if (c.getRole().equals(role)) return false;
             }

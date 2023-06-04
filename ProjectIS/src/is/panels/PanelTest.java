@@ -1,8 +1,7 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
-import is.dipendenti.Role;
+import is.organigramma.Employee;
+import is.organigramma.Role;
 import is.mediator.Mediator;
 import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
@@ -32,11 +31,10 @@ public class PanelTest {
     public void primoTest(){
 
         //Dati Azienda
-        Organigramma o = new Organigramma("Consiglio di amministrazione","è il consiglio");
-        Administrator admin = new Administrator(o);
-
-
         String psw ="ccc5";
+        Organigramma org = new Organigramma("Consiglio di amministrazione","è il consiglio");
+        Azienda azienda = new Azienda(220293, "Spacex","Florida","Aerospaziale",psw,org);
+
 
         Role r1 = new Role("segretario","Consiglio di amministrazione","è il segretario");
         Role r2 = new Role("bidello","Consiglio di amministrazione","è il segretario2");
@@ -48,37 +46,37 @@ public class PanelTest {
         Role r8 = new Role("Piromane","Consiglio di amministrazione","è il segretario5");
         Role r9 = new Role("Ciclista","Consiglio di amministrazione","è il segretario5");
 
-        admin.addRole(r1);
-        admin.addRole(r2);
-        admin.addRole(r3);
-        admin.addRole(r4);
-        admin.addRole(r5);
-        admin.addRole(r6);
-        admin.addRole(r7);
-        admin.addRole(r8);
-        admin.addRole(r9);
+        azienda.addRole(r1);
+        azienda.addRole(r2);
+        azienda.addRole(r3);
+        azienda.addRole(r4);
+        azienda.addRole(r5);
+        azienda.addRole(r6);
+        azienda.addRole(r7);
+        azienda.addRole(r8);
+        azienda.addRole(r9);
 
 
-        Employee emp1 = new Employee("Luca","Antonio","ddd",admin.giveID());
-        admin.addEmployee(r1,emp1);
-        Employee emp2 = new Employee("Mario","Antonio","ddd",admin.giveID());
-        admin.addEmployee(r2,emp2);
-        Employee emp3 = new Employee("Gianni","Antonio","sa",admin.giveID());
-        admin.addEmployee(r3,emp3);
-        Employee emp4 = new Employee("Armando","Antonio","dae",admin.giveID());
-        admin.addEmployee(r4,emp4);
-        Employee emp5 = new Employee("Roberto","Antonio","dafe",admin.giveID());
-        admin.addEmployee(r5,emp5);
-        Employee emp6 = new Employee("Fabio","Antonio","dafe",admin.giveID());
-        admin.addEmployee(r6,emp6);
-        Employee emp7 = new Employee("Marco","Antonio","dafe",admin.giveID());
-        admin.addEmployee(r7,emp7);
-        Employee emp8 = new Employee("Tommaso","Antonio","dafe",admin.giveID());
-        admin.addEmployee(r7,emp8);
-        Employee emp9 = new Employee("Martino","Antonio","dafe",admin.giveID());
-        admin.addEmployee(r7,emp9);
+        Employee emp1 = new Employee("Luca","Antonio","ddd",azienda.giveID());
+        azienda.addEmployee(r1,emp1);
+        Employee emp2 = new Employee("Mario","Antonio","ddd",azienda.giveID());
+        azienda.addEmployee(r2,emp2);
+        Employee emp3 = new Employee("Gianni","Antonio","sa",azienda.giveID());
+        azienda.addEmployee(r3,emp3);
+        Employee emp4 = new Employee("Armando","Antonio","dae",azienda.giveID());
+        azienda.addEmployee(r4,emp4);
+        Employee emp5 = new Employee("Roberto","Antonio","dafe",azienda.giveID());
+        azienda.addEmployee(r5,emp5);
+        Employee emp6 = new Employee("Fabio","Antonio","dafe",azienda.giveID());
+        azienda.addEmployee(r6,emp6);
+        Employee emp7 = new Employee("Marco","Antonio","dafe",azienda.giveID());
+        azienda.addEmployee(r7,emp7);
+        Employee emp8 = new Employee("Tommaso","Antonio","dafe",azienda.giveID());
+        azienda.addEmployee(r8,emp8);
+        Employee emp9 = new Employee("Martino","Antonio","dafe",azienda.giveID());
+        azienda.addEmployee(r9,emp9);
 
-        Azienda azienda = new Azienda(220293, "Spacex","Florida","Aerospaziale",psw,admin);
+
 
         //Mediator
         Mediator mediator = new Mediator(); mediator.setFrame(frame); mediator.setAzienda(azienda);
@@ -88,9 +86,9 @@ public class PanelTest {
         switch(i){
             case 1:LogPanel log = new LogPanel(mediator); frame.add(log); break;
             case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
-            case 3:ModAreaPanel modArea = new ModAreaPanel(o,mediator); frame.add(modArea); break;
+            case 3:ModAreaPanel modArea = new ModAreaPanel(org,mediator); frame.add(modArea); break;
             case 4:ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
-            case 5:AreaPanel areaP = new AreaPanel(o,mediator); frame.add(areaP); break;
+            case 5:AreaPanel areaP = new AreaPanel(org,mediator); frame.add(areaP); break;
             case 6:CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
             case 7:ModRolePanel modRole = new ModRolePanel(r1,mediator); frame.add(modRole); break;
             case 8:ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;

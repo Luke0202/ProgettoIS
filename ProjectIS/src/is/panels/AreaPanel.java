@@ -1,24 +1,21 @@
 package is.panels;
 
-import is.dipendenti.Administrator;
-import is.dipendenti.Employee;
+import is.organigramma.Azienda;
+import is.organigramma.Employee;
 import is.mediator.Mediator;
 import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
-import is.shapes.DataTable;
-import is.shapes.ImageZoom;
+import is.decorator.DataTable;
+import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Iterator;
 
 public class AreaPanel extends JPanel {
-    private Organigramma org;
-    private Mediator mediator;
+
     public AreaPanel(Organigramma org,Mediator mediator) {
         if (org == null || mediator==null) throw new IllegalArgumentException("Dati non validi");
-        this.org=org; this.mediator=mediator;
 
-        Administrator admin = mediator.getAzienda().getAdmin();
+        Azienda azienda = mediator.getAzienda();
 
         setLayout(null);
         Color blue = new Color(3,2,179);
@@ -47,7 +44,7 @@ public class AreaPanel extends JPanel {
         JLabel dadLab = new JLabel("Nome area di riferimento: ");
         dadLab.setFont(f); dadLab.setForeground(blue); dadLab.setBounds(350,15,280,30);
 
-        JTextField dadField = new JTextField(20); dadField.setText(findDadArea(admin)); dadField.setEditable(false);
+        JTextField dadField = new JTextField(20); dadField.setText(findDadArea(azienda,org)); dadField.setEditable(false);
         dadField.setBounds(350,50,200,30);
         //StateLabel
         JLabel stateLab = new JLabel("Stato: ");
@@ -78,7 +75,7 @@ public class AreaPanel extends JPanel {
         Object[][] data = new Object[org.getNEmployees()][columnNames.length];
 
         int i = 0;
-        for (Employee e:admin.getEmployees()){
+        for (Employee e:azienda.getEmployees()){
             if (org.containsID(e.getID())){
                 data[i][0] = e.getSurname();
                 data[i][1] = e.getName();
@@ -114,17 +111,17 @@ public class AreaPanel extends JPanel {
         //Mediator
         mediator.setNameArea(nameField);
         mediator.setRemoveArea(removeButton);
-        mediator.setModArea(modButton);
+        mediator.setEditArea(modButton);
         modButton.addActionListener(e->mediator.buttonChanged(modButton));
         removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
     }
-    private String findDadArea(Administrator admin){
-        Organigramma organigramma = admin.getOrganigramma();
+    private String findDadArea(Azienda azienda,Organigramma org){
+        Organigramma organigramma = azienda.getOrganigramma();
 
         if (organigramma.getName().equals(org.getName()))
             return "Nessuna";
 
-        return admin.getParent(org).getName();
+        return azienda.getParent(org).getName();
     }
     private boolean isRemovable(Organigramma org){
         for (OrganigrammaIF o:org){
