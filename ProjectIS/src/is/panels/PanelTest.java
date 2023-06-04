@@ -33,7 +33,7 @@ public class PanelTest {
         //Dati Azienda
         String psw ="ccc5";
         Organigramma org = new Organigramma("Consiglio di amministrazione","è il consiglio");
-        Azienda azienda = new Azienda(220293, "Spacex","Florida","Aerospaziale",psw,org);
+        Azienda azienda = new Azienda("220293", "Spacex","Florida","Aerospaziale",psw,org);
 
 
         Role r1 = new Role("segretario","Consiglio di amministrazione","è il segretario");

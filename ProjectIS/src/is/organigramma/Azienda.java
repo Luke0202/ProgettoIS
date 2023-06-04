@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 public class Azienda extends AbstractAzienda{
-    private final int cod;
-    private final String psw;
+    private final String psw, cod;
     private String name, headquarter, type;
-    public Azienda(int cod,String name,String headquarter,String type,String psw,Organigramma organigramma){
+    public Azienda(String cod,String name,String headquarter,String type,String psw,Organigramma organigramma){
         super(organigramma);
+        if (cod.matches("[\\d\\.]+")) throw new IllegalArgumentException("Codice non valido");
         this.cod = cod;
         this.name = name;
         this.type = type;
@@ -20,7 +20,7 @@ public class Azienda extends AbstractAzienda{
     //GETTERS
     public String getHeadquarter() { return headquarter;}
     public String getType(){return type;}
-    public int getCod() {return cod;}
+    public String getCod() {return cod;}
     public String getPsw() {return psw;}
     public String getName() {
         return name;

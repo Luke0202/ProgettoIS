@@ -28,8 +28,8 @@ public class Pagination extends JFrame implements PaginationIF {
             @Override
             public void entryAction(Mediator mediator, Pagination f,Object obj) {
                 //Getting data
-                URL url = Mediator.class.getResource("data.txt");
-                AziendaParser tx = new AziendaParser(url.getPath());
+                File file = new File("data.txt");
+                AziendaParser tx = new AziendaParser(file.getPath());
                 Azienda azienda = tx.build();
                 mediator.setAzienda(azienda);//Per conoscere principalmente le credenziali di accesso
                 //Panel
@@ -326,9 +326,19 @@ public class Pagination extends JFrame implements PaginationIF {
                 if (i == 0){
                     //Option: yes
                     if (mediator.getAzienda()!=null){
-                        String path = Mediator.class.getResource("data.txt").getPath();
+
+                        File f = new File("data.txt");
+                        if (!f.exists()){
+                            try{
+                                f.createNewFile();
+                            }
+                            catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
+
                         try{
-                            PrintWriter pw = new PrintWriter(new FileWriter(path));
+                            PrintWriter pw = new PrintWriter(new FileWriter(f.getPath()));
 
                             TextPlainParser az = new TextPlainParser(mediator.getAzienda(),pw); az.doParse();
                         }catch(IOException e){
@@ -342,10 +352,18 @@ public class Pagination extends JFrame implements PaginationIF {
 
         mediator.setPag(this);
         //File contenente i dati dell'azienda
-        URL url = Mediator.class.getResource("data.txt");
+        File f = new File("data.txt");
+        if (!f.exists()){
+            try{
+                f.createNewFile();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
 
         try{
-            BufferedReader br = new BufferedReader(new FileReader(url.getPath()));
+            BufferedReader br = new BufferedReader(new FileReader(f.getPath()));
             if (br.readLine()==null){
                 //File vuoto -> Creazione Azienda
                 transition(StateCreation.CREATE_AZIENDA_PAGE,null);

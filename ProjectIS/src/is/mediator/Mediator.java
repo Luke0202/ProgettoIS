@@ -9,6 +9,7 @@ import is.organigramma.Organigramma;
 import is.organigramma.OrganigrammaIF;
 import is.parser.TextPlainParser;
 import javax.swing.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,10 +17,10 @@ import java.util.*;
 
 public class Mediator implements MediatorIF{
     private JMenuItem createA,listA,createR,listR,createE,listE,detA;
-    private JTextField idLog,pswLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
+    private JTextField nameLog,pswLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
             emailCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
             nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole, idEmployee;
-    private JButton confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveBCreateRole, saveVCreateRole, saveBModRole,saveVModRole,
+    private JButton confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveCreateRole, saveModRole,
            saveCreateEmployee,editArea, removeArea, removeEmployee, editRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
     searchListRole, saveVModArea,saveBModArea;
     private JComboBox<String> dadCreateArea, areaCreateRole,roleCreateEmployee;
@@ -40,8 +41,8 @@ public class Mediator implements MediatorIF{
         this.confLog = confLog;
     }
     public void setNewAziendaLog(JButton newAziendaLog){ this.newAziendaLog=newAziendaLog;}
-    public void setIdLog(JTextField idLog){
-        this.idLog = idLog;
+    public void setNameLog(JTextField nameLog){
+        this.nameLog = nameLog;
     }
     public void setPswLog(JTextField pswLog){
         this.pswLog = pswLog;
@@ -75,8 +76,7 @@ public class Mediator implements MediatorIF{
     public void setNameCreateRole(JTextField nameCreateRole){this.nameCreateRole=nameCreateRole;}
     public void setAreaCreateRole(JComboBox<String> areaCreateRole){this.areaCreateRole=areaCreateRole;}
     public void setDescrCreateRole(JTextArea descrCreateRole){this.descrCreateRole=descrCreateRole;}
-    public void setSaveBCreateRole(JButton saveBCreateRole){this.saveBCreateRole = saveBCreateRole;}
-    public void setSaveVCreateRole(JButton saveVCreateRole){this.saveVCreateRole = saveVCreateRole;}
+    public void setSaveCreateRole(JButton saveCreateRole){this.saveCreateRole = saveCreateRole;}
 
     //AreaPanel
     public void setNameArea(JTextField nameArea){this.nameArea=nameArea;}
@@ -88,8 +88,8 @@ public class Mediator implements MediatorIF{
     public void setOldRole(Role oldRole){this.oldRole=oldRole;}
     public void setNameModRole(JTextField nameModRole){this.nameModRole = nameModRole ;}
     public void setDescrModRole(JTextArea descrModRole){this.descrModRole=descrModRole;}
-    public void setSaveBModRole(JButton saveBModRole){this.saveBModRole = saveBModRole;}
-    public void setSaveVModRole(JButton saveVModRole){this.saveVModRole = saveVModRole;}
+    public void setSaveModRole(JButton saveModRole){this.saveModRole = saveModRole;}
+
 
     //EmployeePanel
     public void setIdEmployee(JTextField idEmployee){this.idEmployee=idEmployee;}
@@ -145,7 +145,12 @@ public class Mediator implements MediatorIF{
 
         if (widget==listA) pag.goAhead(5,null);
 
-        if (widget==createE) pag.goAhead(6,null);
+        if (widget==createE){
+            if (azienda.getRoles().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Nessun ruolo presente. Creare prima un ruolo.");
+                pag.goAhead(8,null);
+            }else pag.goAhead(6,null);
+        }
 
         if (widget==listE) pag.goAhead(7,null);
 
@@ -156,21 +161,21 @@ public class Mediator implements MediatorIF{
 
     @Override
     public void textChanged(JTextField widget) {
-        if (widget == idLog || widget==pswLog){
-            if (!idLog.getText().isEmpty() && !pswLog.getText().isEmpty()) confLog.setEnabled(true);
+        if (widget == nameLog || widget==pswLog){
+            if (nameLog.getText().equals("") || pswLog.getText().equals("")) confLog.setEnabled(false);
+            else confLog.setEnabled(true);
         }
     }
-    private boolean checkCredential(String id, String psw){
-        if (!id.trim().matches("\\d+")) return false;
-        return azienda.getCod()==Integer.parseInt(id.trim()) && azienda.getPsw().equals(psw.trim());
+    private boolean checkCredential(String name, String psw){
+        return azienda.getName().toLowerCase().equals(name.toLowerCase()) && azienda.getPsw().equals(psw);
     }
     @Override
     public void buttonChanged(JButton widget) {
         if (widget == confLog) {
-            String id = idLog.getText().trim();
-            String psw = pswLog.getText().trim();
+            String name = nameLog.getText().trim();
+            String psw = pswLog.getText();
 
-            if (checkCredential(id, psw)) {
+            if (checkCredential(name, psw)) {
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
                         , "Accesso effettuato !");
                 pag.goAhead(2, null);
@@ -187,10 +192,10 @@ public class Mediator implements MediatorIF{
             String type = typeCreateAzienda.getText().trim();
             String psw = pswCreateAzienda.getText().trim();
             if (name.equals("Digita nome azienda") || name.isEmpty()
-                    || cod.equals("Digita codice ATECO") || cod.isEmpty()
+                    || cod.equals("Digita codice ATECO") || cod.isEmpty() || !cod.matches("[\\d\\.]+")
                     || hq.equals("Digita il luogo della sede") || hq.isEmpty()
                     || type.equals("Digita il settore") || type.isEmpty()
-                    || psw.equals("Digita la password di accesso al sistema") || psw.isEmpty() || !cod.matches("\\d+")) {
+                    || psw.equals("Digita la password di accesso al sistema") || psw.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
                 return;
             }
@@ -208,10 +213,11 @@ public class Mediator implements MediatorIF{
             //Scrittura dati sul file di testo
             String description = "Codice ATECO: " + cod + ", Sede centrale: " + hq + ", Settore: " + type + ".";
 
-            Azienda azienda = new Azienda(Integer.parseInt(cod), name, hq, type, psw, new Organigramma(name, description));
-            String path = Mediator.class.getResource("data.txt").getPath();
+            Azienda azienda = new Azienda(cod, name, hq, type, psw, new Organigramma(name, description));
+
+            File f = new File("data.txt");
             try {
-                PrintWriter pw = new PrintWriter(new FileWriter(path));
+                PrintWriter pw = new PrintWriter(new FileWriter(f.getPath()));
                 TextPlainParser az = new TextPlainParser(azienda, pw);
                 az.doParse();
                 setAzienda(azienda);
@@ -264,7 +270,7 @@ public class Mediator implements MediatorIF{
                     }
                 }
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(5, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -279,7 +285,8 @@ public class Mediator implements MediatorIF{
                         return;
                     }
                 }
-                int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
+                int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
+                        "Vuoi confermare i dati ?");
                 if (i != 0) return; //No oppure Cancel
 
                 //Capitalizing first letter
@@ -308,7 +315,7 @@ public class Mediator implements MediatorIF{
                     }
                 }
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(5, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -334,7 +341,7 @@ public class Mediator implements MediatorIF{
                 Organigramma org = azienda.getArea(name);
                 azienda.removeArea(org);
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(5, null);
             }
         }
         if (widget == editArea) {
@@ -355,7 +362,7 @@ public class Mediator implements MediatorIF{
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
-                pag.goAhead(2, null);
+                pag.goAhead(5, null);
             }
 
             //Check existing name
@@ -380,7 +387,7 @@ public class Mediator implements MediatorIF{
             oldArea.setName(name); oldArea.setDescription(descr);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(2, null);
+            pag.goAhead(5, null);
         }
         if (widget == saveVModArea) {
             String name = nameModArea.getText().trim();
@@ -395,7 +402,7 @@ public class Mediator implements MediatorIF{
                 }
                 oldArea.setStateArea(true);
                 JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-                pag.goAhead(2, null);
+                pag.goAhead(5, null);
             }
 
             //Check existing name
@@ -406,7 +413,8 @@ public class Mediator implements MediatorIF{
                 }
             }
 
-            int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
+            int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
+                    "Vuoi confermare i dati ?");
             if (i != 0) return; //No oppure Cancel
 
             //Capitalizing first letter
@@ -419,9 +427,9 @@ public class Mediator implements MediatorIF{
             oldArea.setName(name); oldArea.setDescription(descr); oldArea.setStateArea(true);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(2, null);
+            pag.goAhead(5, null);
         }
-        if (widget == saveBCreateRole) {
+        if (widget == saveCreateRole) {
             if (!nameCreateRole.getText().trim().equals("Digita nome ruolo") && !nameCreateRole.getText().trim().isEmpty()) {
                 String name = nameCreateRole.getText().trim();
 
@@ -453,46 +461,7 @@ public class Mediator implements MediatorIF{
                 azienda.addRole(role);
 
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(2, null);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
-            }
-        }
-        if (widget == saveVCreateRole) {
-
-
-            if (!nameCreateRole.getText().trim().equals("Digita nome ruolo") && !nameCreateRole.getText().trim().isEmpty()) {
-                String name = nameCreateRole.getText().trim();
-
-                int j = areaCreateRole.getSelectedIndex();
-                String area = areaCreateRole.getItemAt(j);
-
-                for (Role role: azienda.getRoles()){
-                    if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().toLowerCase().equals(area.toLowerCase())) {
-                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: ruolo già esistente.");
-                        return;
-                    }
-                }
-
-                int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
-                if (i != 0) return; //No oppure Cancel
-
-                //Capitalizing first letter
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-                String descr = descrCreateRole.getText().trim();
-
-                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-
-                descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                Role role = new Role(name, area, descr);
-                role.setStateRole(true);
-
-                azienda.addRole(role);
-
-                JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(9, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -529,7 +498,7 @@ public class Mediator implements MediatorIF{
                 }
 
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(9, null);
             }
         }
         if (widget == editRole) {
@@ -543,7 +512,7 @@ public class Mediator implements MediatorIF{
                 }
             }
         }
-        if (widget == saveBModRole){
+        if (widget == saveModRole){
             String name = nameModRole.getText().trim();
             String area = oldRole.getArea();//Area rimane invariata
             String descr = descrModRole.getText().trim();
@@ -557,7 +526,7 @@ public class Mediator implements MediatorIF{
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
-                pag.goAhead(2, null);
+                pag.goAhead(9, null);
             }
             //Check existing name
             for (Role role: azienda.getRoles()){
@@ -578,48 +547,7 @@ public class Mediator implements MediatorIF{
             oldRole.setName(name); oldRole.setDescription(descr);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(2, null);
-        }
-        if (widget == saveVModRole){
-            String name = nameModRole.getText().trim();
-            String area = oldRole.getArea();//Area rimane invariata
-            String descr = descrModRole.getText().trim();
-
-            //Caso ruolo uguale al precedente
-            if (oldRole.getName().toLowerCase().equals(name.toLowerCase())){
-                if (!oldRole.getDescription().toLowerCase().equals(descr.toLowerCase())){
-
-                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-                    descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-                    oldRole.setDescription(descr);
-
-
-                }
-                oldRole.setStateRole(true);
-                JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-                pag.goAhead(2, null);
-            }
-            //Check existing role
-            for (Role role: azienda.getRoles()){
-                if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().equals(area) &&
-                        role.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: ruolo già esistente.");
-                    return;
-                }
-            }
-            int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
-            if (i != 0) return; //No oppure Cancel
-
-            //Capitalizing first letter
-            name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-            descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-            oldRole.setName(name); oldRole.setDescription(descr); oldRole.setStateRole(true);
-
-            JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(2, null);
+            pag.goAhead(9, null);
         }
         if (widget==saveCreateEmployee){
             String name = nameCreateEmployee.getText().trim();
@@ -654,7 +582,7 @@ public class Mediator implements MediatorIF{
             }
 
             JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-            pag.goAhead(2, null);
+            pag.goAhead(7, null);
         }
         if (widget==searchListEmployee){
             //Check nameListArea
@@ -695,7 +623,7 @@ public class Mediator implements MediatorIF{
                 }
 
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(2, null);
+                pag.goAhead(7, null);
             }
         }
     }

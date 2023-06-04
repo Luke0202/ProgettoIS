@@ -15,13 +15,13 @@ import java.util.StringTokenizer;
 public class AziendaParser {
     //Analizza un file.txt e lo converte in un Azienda
     //Lettura di un file.txt e conversione in un Aziendaa
-    private final String urlString;
+    private final String path;
     private BufferedReader br;
     private String token;
     private StringTokenizer st;
     private HashSet<Couple> couples = new HashSet<>();
-    public AziendaParser(String urlString){
-        this.urlString=urlString;
+    public AziendaParser(String path){
+        this.path=path;
     }
     public Azienda build() {
         Azienda az=null;
@@ -34,7 +34,7 @@ public class AziendaParser {
     }
     private Azienda doParse() {
         try {
-            br = new BufferedReader(new FileReader(urlString));
+            br = new BufferedReader(new FileReader(path));
         } catch (IOException e) {
             throw new IllegalArgumentException("Errore di lettura");
         }
@@ -60,41 +60,41 @@ public class AziendaParser {
 
     }
 
-    private boolean isCorrect(String tok,String expected){
+    private boolean isCorrect(String expected){
         return token != null && token.equals(expected);
     }
     private Azienda readAzienda(){
         token = nextToken();//<Azienda>
 
-        if (!isCorrect(token,"Azienda")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Azienda")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        token = nextToken();//<ID>
+        token = nextToken();//<Cod>
 
-        if (!isCorrect(token,"ID")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Cod")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        int IDAzienda = Integer.parseInt(readText());
+        String codAzienda = readText();
 
         token = nextToken();//<Name>
 
-        if (!isCorrect(token,"Name")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Name")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String nameAzienda = readText();
 
         token = nextToken();//<Headquarter>
 
-        if (!isCorrect(token,"Headquarter")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Headquarter")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String hqAzienda = readText();
 
         token = nextToken();//<Type>
 
-        if (!isCorrect(token,"Type")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Type")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String typeAzienda = readText();
 
         token = nextToken();//<Password>
 
-        if (!isCorrect(token,"Password")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Password")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String psw = readText();
 
@@ -102,7 +102,7 @@ public class AziendaParser {
         HashSet<Role> roles = readRoles();
         Organigramma org = readOrganigramma();
 
-        Azienda az = new Azienda(IDAzienda,nameAzienda,hqAzienda,typeAzienda,psw,org);
+        Azienda az = new Azienda(codAzienda,nameAzienda,hqAzienda,typeAzienda,psw,org);
 
         for (Role r:roles){
             az.addRole(r);
@@ -123,12 +123,11 @@ public class AziendaParser {
         HashSet<Role> roles = new HashSet<>();
         token = nextToken();//<Roles>
 
-        if (!isCorrect(token,"Roles")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Roles")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String name=null;
         String area=null;
         String descr = null;
-        boolean state=false;
         boolean go = true;
         while(go){
             token = nextToken();
@@ -137,9 +136,7 @@ public class AziendaParser {
                 case "Name": name = readText(); break;
                 case "NameArea": area = readText(); break;
                 case "Description": descr = readText(); break;
-                case "State": state = Boolean.getBoolean(readText());
-                case "/Role":
-                    Role r = new Role(name,area,descr); r.setStateRole(state); roles.add(r); break;
+                case "/Role": Role r = new Role(name,area,descr); roles.add(r); break;
                 case "/Roles": go = false;
             }
         }
@@ -160,25 +157,25 @@ public class AziendaParser {
 
         token = nextToken();//<Name>
 
-        if (!isCorrect(token,"Name")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Name")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String nameArea = readText();
 
         token = nextToken();//<Description>
 
-        if (!isCorrect(token,"Description")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Description")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         String descrArea = readText();
 
         token = nextToken();//<State>
 
-        if (!isCorrect(token,"State")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("State")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         boolean state = Boolean.getBoolean(readText());
 
         token = nextToken();//<Couples>
 
-        if (!isCorrect(token,"Couples")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Couples")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         Organigramma org = new Organigramma(nameArea,descrArea); org.setStateArea(state);
 
@@ -205,7 +202,7 @@ public class AziendaParser {
 
         token = nextToken();//<listAreas>
 
-        if (!isCorrect(token,"ListAreas")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("ListAreas")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
 
         LinkedList<Organigramma> listAreas = new LinkedList<>();
@@ -229,7 +226,7 @@ public class AziendaParser {
 
         token = nextToken();//<Employees>
 
-        if (!isCorrect(token,"Employees")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
+        if (!isCorrect("Employees")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
         int ID=0;
         String name=null;

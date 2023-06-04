@@ -44,15 +44,11 @@ public class RolePanel extends JPanel {
 
         JTextField areaField = new JTextField(20); areaField.setText(role.getArea()); areaField.setEditable(false);
         areaField.setBounds(350,50,200,30);
-        //StateLabel
-        JLabel stateLab = new JLabel("Stato: ");
-        stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
-        JLabel stateLab2 = new JLabel((!role.getStateRole()) ? "BOZZA":"VALIDATA");
-        stateLab2.setBounds(680,50,280,30);
+
         //Button
         JButton modButton = new JButton("Modifica ruolo");  modButton.setForeground(Color.white);
         modButton.setBackground(blue2); modButton.setBounds(810,30,150,30);
-        modButton.setEnabled(!role.getStateRole());
+
         JButton removeButton = new JButton("Elimina ruolo");  removeButton.setForeground(Color.white);
         removeButton.setEnabled(isRemovable(role,azienda));
         removeButton.setBackground(blue2); removeButton.setBounds(810,70,150,30);
@@ -101,7 +97,6 @@ public class RolePanel extends JPanel {
         add(fieldPanel);
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
         fieldPanel.add(areaLab); fieldPanel.add(areaField);
-        fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
         fieldPanel.add(modButton); fieldPanel.add(removeButton);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
         fieldPanel.add(empLab); fieldPanel.add(scrollPane);

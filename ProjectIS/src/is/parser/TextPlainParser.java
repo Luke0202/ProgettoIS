@@ -27,7 +27,7 @@ public class TextPlainParser {
 
         //Azienda
         builder.openAzienda();
-        builder.openID(azienda.getCod()); builder.closeID();
+        builder.openCod(azienda.getCod()); builder.closeCod();
         builder.openName(azienda.getName()); builder.closeName();
         builder.openHeadquarter(azienda.getHeadquarter()); builder.closeHeadquarter();
         builder.openType(azienda.getType()); builder.closeType();
@@ -51,7 +51,6 @@ public class TextPlainParser {
             builder.openName(role.getName()); builder.closeName();
             builder.openNameArea(role.getArea()); builder.closeNameArea();
             builder.openDescription(role.getDescription()); builder.closeDescription();
-            builder.openState(role.getStateRole()); builder.closeState();
             builder.closeRole();
         }
         builder.closeRoles();

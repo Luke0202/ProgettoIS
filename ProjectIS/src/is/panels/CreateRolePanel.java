@@ -57,10 +57,8 @@ public class CreateRolePanel extends JPanel {
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         descrScroll.setBounds(20,135,940,150);
         //SaveButtons
-        JButton saveB = new JButton("SALVA IN BOZZA");  saveB.setForeground(Color.white); saveB.setBackground(blue2);
-        saveB.setBounds(20,350,200,30);
-        JButton saveV = new JButton("SALVA E VALIDA");  saveV.setForeground(Color.white); saveV.setBackground(blue2);
-        saveV.setBounds(350,350,200,30);
+        JButton save = new JButton("SALVA");  save.setForeground(Color.white); save.setBackground(blue2);
+        save.setBounds(20,350,200,30);
         //Image
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -74,17 +72,15 @@ public class CreateRolePanel extends JPanel {
         fieldPanel.add(areaLab); fieldPanel.add(areaComboBox);
         fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
-        fieldPanel.add(saveB); fieldPanel.add(saveV);
+        fieldPanel.add(save);
         fieldPanel.add(lab);
 
         //Using mediator
         mediator.setNameCreateRole(nameField);
         mediator.setAreaCreateRole(areaComboBox);
         mediator.setDescrCreateRole(descrArea);
-        mediator.setSaveBCreateRole(saveB);
-        mediator.setSaveVCreateRole(saveV);
-        saveB.addActionListener(e -> mediator.buttonChanged(saveB));
-        saveV.addActionListener(e -> mediator.buttonChanged(saveV));
+        mediator.setSaveCreateRole(save);
+        save.addActionListener(e -> mediator.buttonChanged(save));
     }
     private String[] findAreas(Azienda azienda){
 

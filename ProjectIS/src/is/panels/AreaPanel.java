@@ -56,7 +56,7 @@ public class AreaPanel extends JPanel {
         modButton.setBackground(blue2); modButton.setBounds(810,30,150,30);
         modButton.setEnabled(!org.getStateArea());
         JButton removeButton = new JButton("Elimina area");  removeButton.setForeground(Color.white);
-        removeButton.setEnabled(!dadField.getText().equals("Nessuna") && isRemovable(org));
+        removeButton.setEnabled(!org.getStateArea() && !dadField.getText().equals("Nessuna") && isRemovable(org));
         removeButton.setBackground(blue2); removeButton.setBounds(810,70,150,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");

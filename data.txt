@@ -1,0 +1,22 @@
+<Azienda>
+<Cod>11.33.4</Cod>
+<Name>Dd</Name>
+<Headquarter>Sss</Headquarter>
+<Type>Dd</Type
+<Password>11</Password>
+<Employees>
+</Employees>
+<Roles>
+</Roles>
+<Organigramma>
+<Area>
+<Name>Dd</Name>
+<Description>Codice ATECO: 11.33.4, Sede centrale: Sss, Settore: Dd.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</Organigramma>
+</Azienda>

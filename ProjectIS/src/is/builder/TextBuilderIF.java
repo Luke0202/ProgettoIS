@@ -4,6 +4,8 @@ public interface TextBuilderIF {
     //Costruzione documento contenente i dati dell'azienda
     void openAzienda();
     void closeAzienda();
+    void openCod(String cod);
+    void closeCod();
     void openHeadquarter(String h);
     void closeHeadquarter();
     void openType(String type);

@@ -22,6 +22,14 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     @Override
+    public void openCod(String cod) {
+        pw.println("<Cod>"+cod+"</Cod>");
+    }
+
+    @Override
+    public void closeCod() {}
+
+    @Override
     public void openHeadquarter(String h) {pw.println("<Headquarter>"+h+"</Headquarter>");}
 
     @Override

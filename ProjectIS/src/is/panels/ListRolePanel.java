@@ -35,7 +35,7 @@ public class ListRolePanel extends JPanel {
         fieldPanel.setBounds(0,60,1000,950);
 
 
-        String[] columnNames = {"Nome Ruolo","Nome Area","Numero Dipendenti","Stato"};
+        String[] columnNames = {"Nome Ruolo","Nome Area","Numero Dipendenti"};
         Object[][] data = new Object[azienda.getNRoles()][columnNames.length];
 
         int i = 0;
@@ -44,7 +44,6 @@ public class ListRolePanel extends JPanel {
             data[i][0]=r.getName();
             data[i][1]=r.getArea();
             data[i][2]= org.getEmployees(r).size();
-            data[i][3]=(!r.getStateRole()) ? "BOZZA":"VALIDATA";
             i++;
         }
 
@@ -53,12 +52,11 @@ public class ListRolePanel extends JPanel {
         DataTable table = new DataTable(data, columnNames);
         //Dimension of column
         TableColumn column = null;
-        for (int j = 0;j<4;j++){
+        for (int j = 0;j<3;j++){
             column = table.getColumnModel().getColumn(j);
             if (j==0) column.setPreferredWidth(200);
             if (j==1) column.setPreferredWidth(220);
             if (j==2) column.setPreferredWidth(140);
-            if (j==3) column.setPreferredWidth(110);
         }
 
         //ScrollPane

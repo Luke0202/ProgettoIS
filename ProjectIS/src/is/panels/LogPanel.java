@@ -28,7 +28,7 @@ public class LogPanel extends JPanel{
         head.setFont(f); head.setForeground(Color.red); head.setBounds(410,280,200,100);
         add(head);
         //Access
-        JTextField idField = new JTextField(20);  idField.setBounds(485,370,120,30);
+        JTextField nameField = new JTextField(20);  nameField.setBounds(485,370,120,30);
         JTextField pswField = new JTextField(20);   pswField.setBounds(485,410,120,30);
         JButton confLog = new JButton("Accedi");  confLog.setForeground(Color.white); confLog.setBackground(blue2);
         confLog.setBounds(450,455,110,30);   confLog.setEnabled(false); confLog.setOpaque(true);
@@ -36,18 +36,18 @@ public class LogPanel extends JPanel{
         newAziendaButton.setBackground(blue2); newAziendaButton.setBounds(414,520,180,30); newAziendaButton.setOpaque(true);
         newAziendaButton.setEnabled(true);
         //Using mediator
-        mediator.setIdLog(idField);
+        mediator.setNameLog(nameField);
         mediator.setPswLog(pswField);
         mediator.setConfLog(confLog);
         mediator.setNewAziendaLog(newAziendaButton);
-        idField.addActionListener(e -> mediator.textChanged(idField));
+        nameField.addActionListener(e -> mediator.textChanged(nameField));
         pswField.addActionListener(e -> mediator.textChanged(pswField));
         confLog.addActionListener(e -> mediator.buttonChanged(confLog));
         newAziendaButton.addActionListener(e->mediator.buttonChanged(newAziendaButton));
 
-        JLabel reqId = new JLabel("ID: "); reqId.setBounds(410,370,100,30); add(reqId);
+        JLabel reqId = new JLabel("Nome azienda: "); reqId.setBounds(385,370,100,30); add(reqId);
         JLabel reqPsw = new JLabel("Password: "); reqPsw.setBounds(410,410,100,30); add(reqId);
 
-        add(idField); add(pswField); add(reqId); add(reqPsw); add(confLog); add(newAziendaButton);
+        add(nameField); add(pswField); add(reqId); add(reqPsw); add(confLog); add(newAziendaButton);
     }
 }

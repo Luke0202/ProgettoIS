@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Role {
     private String name,description,area;
-    private boolean stateRole=false;
     public Role(String name, String area, String description){
         this.name = name;
         this.area = area;
@@ -18,7 +17,6 @@ public class Role {
         return area;
     }
     public String getDescription(){ return description;}
-    public boolean getStateRole(){return stateRole;}
     //SETTERS
     public void setName(String name) {
         this.name = name;
@@ -29,7 +27,6 @@ public class Role {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setStateRole(boolean stateRole){this.stateRole=stateRole;}
 
     @Override
     public boolean equals(Object o) {
