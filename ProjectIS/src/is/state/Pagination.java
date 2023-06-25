@@ -8,21 +8,20 @@ import is.organigramma.Organigramma;
 import is.panels.*;
 import is.parser.TextPlainParser;
 import is.parser.AziendaParser;
-
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
-import java.net.URL;
+
 
 public class Pagination extends JFrame implements PaginationIF {
 
-    private interface StateCreationIF {
+    private interface StateIF {
         default void entryAction(Mediator mediator, Pagination f,Object obj) {}
         default void exitAction(Pagination f) {}
-        default void goAhead(Pagination f,StateCreation state,Object obj){f.transition(state,obj);}
+        default void goAhead(Pagination f, State state, Object obj){f.transition(state,obj);}
     }
-    private enum StateCreation implements StateCreationIF{
+    private enum State implements StateIF {
         LOG_IN_PAGE{
             private LogPanel l;
             @Override
@@ -107,13 +106,13 @@ public class Pagination extends JFrame implements PaginationIF {
                 //Mediator
                 mediator.setItem(createA,listA,createR,listR,createE,listE,detA);
 
-                createA.addActionListener(e -> mediator.menuChanged(createA));
-                listA.addActionListener(e -> mediator.menuChanged(listA));
-                createR.addActionListener(e -> mediator.menuChanged(createR));
-                listR.addActionListener(e -> mediator.menuChanged(listR));
-                createE.addActionListener(e -> mediator.menuChanged(createE));
-                listE.addActionListener(e -> mediator.menuChanged(listE));
-                detA.addActionListener(e -> mediator.menuChanged(detA));
+                createA.addActionListener(e -> mediator.widgetChanged(createA));
+                listA.addActionListener(e -> mediator.widgetChanged(listA));
+                createR.addActionListener(e -> mediator.widgetChanged(createR));
+                listR.addActionListener(e -> mediator.widgetChanged(listR));
+                createE.addActionListener(e -> mediator.widgetChanged(createE));
+                listE.addActionListener(e -> mediator.widgetChanged(listE));
+                detA.addActionListener(e -> mediator.widgetChanged(detA));
             }
         },
         DETT_AZIENDA_PAGE{
@@ -311,7 +310,7 @@ public class Pagination extends JFrame implements PaginationIF {
     }
 
 
-    private StateCreationIF currentState;
+    private State currentState;
 
     private Mediator mediator;
 
@@ -340,7 +339,7 @@ public class Pagination extends JFrame implements PaginationIF {
                         try{
                             PrintWriter pw = new PrintWriter(new FileWriter(f.getPath()));
 
-                            TextPlainParser az = new TextPlainParser(mediator.getAzienda(),pw); az.doParse();
+                            TextPlainParser tx = new TextPlainParser(mediator.getAzienda(),pw); tx.doParse();
                         }catch(IOException e){
                             e.printStackTrace();
                         }
@@ -350,7 +349,7 @@ public class Pagination extends JFrame implements PaginationIF {
             }
         });
 
-        mediator.setPag(this);
+        mediator.setPagination(this);
         //File contenente i dati dell'azienda
         File f = new File("data.txt");
         if (!f.exists()){
@@ -366,10 +365,10 @@ public class Pagination extends JFrame implements PaginationIF {
             BufferedReader br = new BufferedReader(new FileReader(f.getPath()));
             if (br.readLine()==null){
                 //File vuoto -> Creazione Azienda
-                transition(StateCreation.CREATE_AZIENDA_PAGE,null);
+                transition(State.CREATE_AZIENDA_PAGE,null);
             }else{
                 //Transizione verso l'area di log-in
-                transition(StateCreation.LOG_IN_PAGE,null);
+                transition(State.LOG_IN_PAGE,null);
             }
         }catch(IOException e){
             e.printStackTrace();
@@ -377,7 +376,7 @@ public class Pagination extends JFrame implements PaginationIF {
     }
 
 
-    private final void transition(StateCreation nextState,Object obj) {
+    private final void transition(State nextState, Object obj) {
         if (currentState != null)
             currentState.exitAction(this);
         currentState = nextState;
@@ -385,23 +384,23 @@ public class Pagination extends JFrame implements PaginationIF {
     }// transition
 
     @Override
-    public void goAhead(int i,Object obj) {
+    public void avanza(int i,Object obj) {
         switch(i){
-            case 1: currentState.goAhead(this,StateCreation.CREATE_AZIENDA_PAGE,null); break;
-            case 2: currentState.goAhead(this,StateCreation.HOME_PAGE,null); break;
-            case 3: currentState.goAhead(this,StateCreation.DETT_AZIENDA_PAGE,null); break;
-            case 4: currentState.goAhead(this,StateCreation.CREATE_AREA_PAGE,null); break;
-            case 5: currentState.goAhead(this,StateCreation.LIST_AREA_PAGE,null); break;
-            case 6: currentState.goAhead(this,StateCreation.CREATE_EMPLOYEE_PAGE,null); break;
-            case 7: currentState.goAhead(this,StateCreation.LIST_EMPLOYEE_PAGE,null); break;
-            case 8: currentState.goAhead(this,StateCreation.CREATE_ROLE_PAGE,null); break;
-            case 9: currentState.goAhead(this,StateCreation.LIST_ROLE_PAGE,null); break;
-            case 10: currentState.goAhead(this,StateCreation.AREA_PAGE,obj); break;
-            case 11: currentState.goAhead(this,StateCreation.EDIT_AREA_PAGE,obj); break;
-            case 12: currentState.goAhead(this,StateCreation.ROLE_PAGE,obj); break;
-            case 13: currentState.goAhead(this,StateCreation.EDIT_ROLE_PAGE,obj); break;
-            case 14: currentState.goAhead(this,StateCreation.EMPLOYEE_PAGE,obj); break;
-            default: currentState.goAhead(this,StateCreation.LOG_IN_PAGE,null); break;
+            case 1: currentState.goAhead(this, State.CREATE_AZIENDA_PAGE,null); break;
+            case 2: currentState.goAhead(this, State.HOME_PAGE,null); break;
+            case 3: currentState.goAhead(this, State.DETT_AZIENDA_PAGE,null); break;
+            case 4: currentState.goAhead(this, State.CREATE_AREA_PAGE,null); break;
+            case 5: currentState.goAhead(this, State.LIST_AREA_PAGE,null); break;
+            case 6: currentState.goAhead(this, State.CREATE_EMPLOYEE_PAGE,null); break;
+            case 7: currentState.goAhead(this, State.LIST_EMPLOYEE_PAGE,null); break;
+            case 8: currentState.goAhead(this, State.CREATE_ROLE_PAGE,null); break;
+            case 9: currentState.goAhead(this, State.LIST_ROLE_PAGE,null); break;
+            case 10: currentState.goAhead(this, State.AREA_PAGE,obj); break;
+            case 11: currentState.goAhead(this, State.EDIT_AREA_PAGE,obj); break;
+            case 12: currentState.goAhead(this, State.ROLE_PAGE,obj); break;
+            case 13: currentState.goAhead(this, State.EDIT_ROLE_PAGE,obj); break;
+            case 14: currentState.goAhead(this, State.EMPLOYEE_PAGE,obj); break;
+            default: currentState.goAhead(this, State.LOG_IN_PAGE,null); break;
         }
     }
 }

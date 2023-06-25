@@ -2,13 +2,13 @@ package is.organigramma;
 
 import java.util.*;
 
-public abstract class AbstractOrganigramma implements OrganigrammaIF {
-    private ArrayList<OrganigrammaIF> areas = new ArrayList<>();
+public abstract class AbstractCompositeArea implements CompositeArea {
+    private ArrayList<Area> areas = new ArrayList<>();
 
     protected String name,description;
     public boolean stateArea = false; //false: BOZZA  true:VALIDATA
 
-    public AbstractOrganigramma(String name,String description){
+    public AbstractCompositeArea(String name, String description){
         this.name = name; this.description=description;
     }
     //GETTERS
@@ -29,21 +29,23 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
     }
     public void setStateArea(boolean stateArea) {this.stateArea = stateArea;}
 
-    public OrganigrammaIF getChild(int i){
+    @Override
+    public Area getChild(int i){
         if (i<0 || i>=areas.size()) return null;
         return areas.get(i);
     }
-    public boolean isSubArea(OrganigrammaIF area){
+    @Override
+    public boolean isSubArea(Area area){
         if (this.equals(area)) return false;
 
-        Iterator<OrganigrammaIF> it = iterator();
+        Iterator<Area> it = iterator();
         while(it.hasNext()){
             if (it.next().equals(area)) return true;
         }
         return false;
     }
     @Override
-    public void addChild(OrganigrammaIF area) {
+    public void addChild(Area area) {
         areas.add(area);
     }
 
@@ -53,58 +55,25 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
     }
 
     @Override
-    public void removeChild(OrganigrammaIF org) { areas.remove(org);}
+    public void removeChild(Area area) { areas.remove(area);}
 
     @Override
     public int getNChildren() {
         return areas.size();
     }
-
-    public void preOrder(List<OrganigrammaIF> ls){
+    private void preOrder(List<Area> ls){
         ls.add(this);
-        for(OrganigrammaIF o:areas){
-            ((Organigramma)o).preOrder(ls);
+        for(Area a:areas){
+            ((AbstractCompositeArea)a).preOrder(ls);
         }
     }
 
     @Override
-    public boolean isChild(OrganigrammaIF o){
-        for (OrganigrammaIF child:areas){
+    public boolean isChild(Area o){
+        for (Area child:areas){
             if (child.equals(o)) return true;
         }
         return false;
-    }
-    @Override
-    public Iterator<OrganigrammaIF> iterator() {
-        return new AreaIterator();
-    }
-    private class AreaIterator implements Iterator<OrganigrammaIF>{
-        private Iterator<OrganigrammaIF> it = null;
-        private List<OrganigrammaIF> ls=new ArrayList<>();
-        private OrganigrammaIF cur = null;
-
-        public AreaIterator(){
-            preOrder(ls);
-            it = ls.iterator();
-        }
-        @Override
-        public boolean hasNext() {
-            return it.hasNext();
-        }
-
-        @Override
-        public OrganigrammaIF next() {
-            cur = it.next();
-            return cur;
-        }
-
-        @Override
-        public void remove() {
-            if (cur == null) throw new NoSuchElementException();
-            it.remove();
-            AbstractOrganigramma.this.removeChild(cur);
-            cur = null;
-        }
     }
     @Override
     public boolean equals(Object o) {
@@ -134,4 +103,38 @@ public abstract class AbstractOrganigramma implements OrganigrammaIF {
         sb.append("</"+name+">");
         return sb.toString();
     }
+
+    @Override
+    public Iterator<Area> iterator() {
+        return new AreaIterator();
+    }
+    private class AreaIterator implements Iterator<Area>{
+        private Iterator<Area> it = null;
+        private List<Area> ls=new ArrayList<>();
+        private Area cur = null;
+
+        public AreaIterator(){
+            preOrder(ls);
+            it = ls.iterator();
+        }
+        @Override
+        public boolean hasNext() {
+            return it.hasNext();
+        }
+
+        @Override
+        public Area next() {
+            cur = it.next();
+            return cur;
+        }
+
+        @Override
+        public void remove() {
+            if (cur == null) throw new NoSuchElementException();
+            it.remove();
+            AbstractCompositeArea.this.removeChild(cur);
+            cur = null;
+        }
+    }
+
 }

@@ -90,6 +90,6 @@ public class ListEmployeePanel extends JPanel {
         //Mediator
         mediator.setIdListEmployee(idField);
         mediator.setSearchListEmployee(search);
-        search.addActionListener(e->mediator.buttonChanged(search));
+        search.addActionListener(e->mediator.widgetChanged(search));
     }
 }

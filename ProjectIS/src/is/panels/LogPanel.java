@@ -40,10 +40,10 @@ public class LogPanel extends JPanel{
         mediator.setPswLog(pswField);
         mediator.setConfLog(confLog);
         mediator.setNewAziendaLog(newAziendaButton);
-        nameField.addActionListener(e -> mediator.textChanged(nameField));
-        pswField.addActionListener(e -> mediator.textChanged(pswField));
-        confLog.addActionListener(e -> mediator.buttonChanged(confLog));
-        newAziendaButton.addActionListener(e->mediator.buttonChanged(newAziendaButton));
+        nameField.addActionListener(e -> mediator.widgetChanged(nameField));
+        pswField.addActionListener(e -> mediator.widgetChanged(pswField));
+        confLog.addActionListener(e -> mediator.widgetChanged(confLog));
+        newAziendaButton.addActionListener(e->mediator.widgetChanged(newAziendaButton));
 
         JLabel reqId = new JLabel("Nome azienda: "); reqId.setBounds(385,370,100,30); add(reqId);
         JLabel reqPsw = new JLabel("Password: "); reqPsw.setBounds(410,410,100,30); add(reqId);

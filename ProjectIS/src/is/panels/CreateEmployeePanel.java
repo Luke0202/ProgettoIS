@@ -77,7 +77,7 @@ public class CreateEmployeePanel extends JPanel {
         mediator.setEmailCreateEmployee(emailField);
         mediator.setRoleCreateEmployee(roleComboBox);
         mediator.setSaveCreateEmployee(save);
-        save.addActionListener(e -> mediator.buttonChanged(save));
+        save.addActionListener(e -> mediator.widgetChanged(save));
     }
     private String[] findRoles(Azienda azienda){
         HashSet<Role> roles = azienda.getRoles();

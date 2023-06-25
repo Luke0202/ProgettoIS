@@ -108,6 +108,6 @@ public class EmployeePanel extends JPanel {
         //Mediator
         mediator.setIdEmployee(IDField);
         mediator.setRemoveEmployee(removeButton);
-        removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
+        removeButton.addActionListener(e->mediator.widgetChanged(removeButton));
     }
 }

@@ -88,6 +88,6 @@ public class ListRolePanel extends JPanel {
         mediator.setNameListRole(nameField);
         mediator.setAreaListRole(areaField);
         mediator.setSearchListRole(search);
-        search.addActionListener(e->mediator.buttonChanged(search));
+        search.addActionListener(e->mediator.widgetChanged(search));
     }
 }

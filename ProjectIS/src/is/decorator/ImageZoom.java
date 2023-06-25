@@ -3,20 +3,18 @@ package is.decorator;
 import javax.swing.*;
 import java.awt.*;
 
-public class ImageZoom implements ImageMod {
+public class ImageZoom extends ImageDecorator {
     private double zoom = 1.0;
-    private ImageIcon imageIcon;
     private boolean changed = false;
 
     public ImageZoom(ImageIcon imageIcon,double zoom){
+        this.imageIcon=imageIcon;
         this.zoom = zoom;
         this.changed = true;
-        this.imageIcon = imageIcon;
     }
     public ImageZoom(ImageIcon imageIcon){
-        this.imageIcon = imageIcon;
+        this.imageIcon=imageIcon;
     }
-
 
     @Override
     public Image getImage(){
@@ -26,7 +24,7 @@ public class ImageZoom implements ImageMod {
         }
         return imageIcon.getImage();
     }
-    @Override
+
     public ImageIcon getImageIcon(){
         if (changed){
             scale(zoom);
@@ -39,7 +37,7 @@ public class ImageZoom implements ImageMod {
         changed=true;
     }
 
-    @Override
+
     public void scale(double zoomFact) {
         if (zoomFact <= 0)
             throw new IllegalArgumentException("Fattore di zoom inserito non valido");

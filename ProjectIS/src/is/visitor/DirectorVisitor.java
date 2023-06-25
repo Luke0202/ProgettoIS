@@ -39,7 +39,7 @@ public class DirectorVisitor implements AreaVisitor{
 
         builder.openListAreas();
         for (int i = 0;i<organigramma.getNChildren();i++){
-            ((Organigramma) organigramma.getChild(i)).accept(this);
+            organigramma.getChild(i).accept(this);
         }
         builder.closeListAreas();
         builder.closeArea();

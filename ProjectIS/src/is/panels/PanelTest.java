@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 public class PanelTest {
     private JFrame frame;
 
-    public void primaDiTutto(){
+    public PanelTest(int j){
         frame = new JFrame("Applicazione");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
@@ -22,30 +22,38 @@ public class PanelTest {
             }
         });
 
-    }
-    public static void main(String[] args){
-        PanelTest p = new PanelTest();
-        p.primaDiTutto();
-        p.primoTest();
-    }
-    public void primoTest(){
+        //Definizione Aree
+        Organigramma o = new Organigramma("Azienda","");
+        Organigramma o1 = new Organigramma("Consiglio di amministrazione","");
+        Organigramma o2 = new Organigramma("Area vendite","");
+        Organigramma o3 = new Organigramma("Custom care","");
+        Organigramma o4 = new Organigramma("Marketing","");
+        Organigramma o5 = new Organigramma("Acquisti","");
+        Organigramma o6 = new Organigramma("Produzione","");
 
-        //Dati Azienda
-        String psw ="ccc5";
-        Organigramma org = new Organigramma("Consiglio di amministrazione","è il consiglio");
-        Azienda azienda = new Azienda("220293", "Spacex","Florida","Aerospaziale",psw,org);
+        //Tree Structure
+        o.addChild(o1);
+        o1.addChild(o2);
+        o1.addChild(o5);
+        o1.addChild(o6);
+        o2.addChild(o3);
+        o2.addChild(o4);
 
+        //Definizione Azienda
+        String psw ="1234";//Password aziendale
+        Azienda azienda = new Azienda("010101", "Spacex","Florida","Aerospaziale",psw,o);
 
-        Role r1 = new Role("segretario","Consiglio di amministrazione","è il segretario");
-        Role r2 = new Role("bidello","Consiglio di amministrazione","è il segretario2");
-        Role r3 = new Role("recluta","Consiglio di amministrazione","è il segretario3");
-        Role r4 = new Role("architetto","Consiglio di amministrazione","è il segretario4");
-        Role r5 = new Role("ingegnere","Consiglio di amministrazione","è il segretario5");
-        Role r6 = new Role("Progettista","Consiglio di amministrazione","è il segretario5");
-        Role r7 = new Role("Impiegato","Consiglio di amministrazione","è il segretario5");
-        Role r8 = new Role("Piromane","Consiglio di amministrazione","è il segretario5");
-        Role r9 = new Role("Ciclista","Consiglio di amministrazione","è il segretario5");
+        //Definizione ruoli
+        Role r1 = new Role("direttore","Consiglio di amministrazione","");
+        Role r2 = new Role("vice-direttore","Consiglio di amministrazione","");
+        Role r3 = new Role("venditore","Area vendite","");
+        Role r4 = new Role("supervisore","Custom care","");
+        Role r5 = new Role("rappresentante","Custom care","");
+        Role r6 = new Role("responsabile assistenza clienti","Custom care","");
+        Role r7 = new Role("E-Commerce manager","Marketing","");
+        Role r8 = new Role("venditore","Acquisti","");
 
+        //Aggiunta ruoli
         azienda.addRole(r1);
         azienda.addRole(r2);
         azienda.addRole(r3);
@@ -54,48 +62,44 @@ public class PanelTest {
         azienda.addRole(r6);
         azienda.addRole(r7);
         azienda.addRole(r8);
-        azienda.addRole(r9);
 
 
-        Employee emp1 = new Employee("Luca","Antonio","ddd",azienda.giveID());
+        //Definizione dipendenti
+        Employee emp1 = new Employee("Luca","Granata","",azienda.giveID());
         azienda.addEmployee(r1,emp1);
-        Employee emp2 = new Employee("Mario","Antonio","ddd",azienda.giveID());
+        Employee emp2 = new Employee("Mario","Tommasini","",azienda.giveID());
         azienda.addEmployee(r2,emp2);
-        Employee emp3 = new Employee("Gianni","Antonio","sa",azienda.giveID());
-        azienda.addEmployee(r3,emp3);
-        Employee emp4 = new Employee("Armando","Antonio","dae",azienda.giveID());
+        Employee emp3 = new Employee("Gianni","Filice","",azienda.giveID());
+        azienda.addEmployee(r3,emp3); azienda.addEmployee(r8,emp3);
+        Employee emp4 = new Employee("Armando","Basta","",azienda.giveID());
         azienda.addEmployee(r4,emp4);
-        Employee emp5 = new Employee("Roberto","Antonio","dafe",azienda.giveID());
+        Employee emp5 = new Employee("Roberto","Cerchiara","",azienda.giveID());
         azienda.addEmployee(r5,emp5);
-        Employee emp6 = new Employee("Fabio","Antonio","dafe",azienda.giveID());
+        Employee emp6 = new Employee("Fabio","Graceffa","",azienda.giveID());
         azienda.addEmployee(r6,emp6);
-        Employee emp7 = new Employee("Marco","Antonio","dafe",azienda.giveID());
+        Employee emp7 = new Employee("Marco","Quaglio","",azienda.giveID());
         azienda.addEmployee(r7,emp7);
-        Employee emp8 = new Employee("Tommaso","Antonio","dafe",azienda.giveID());
+        Employee emp8 = new Employee("Tommaso","Dodaro","",azienda.giveID());
         azienda.addEmployee(r8,emp8);
-        Employee emp9 = new Employee("Martino","Antonio","dafe",azienda.giveID());
-        azienda.addEmployee(r9,emp9);
-
 
 
         //Mediator
         Mediator mediator = new Mediator(); mediator.setFrame(frame); mediator.setAzienda(azienda);
 
-
-        int i = 9;
-        switch(i){
+        //Scelta pannello da mostrare
+        switch(j){
             case 1:LogPanel log = new LogPanel(mediator); frame.add(log); break;
             case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
-            case 3:ModAreaPanel modArea = new ModAreaPanel(org,mediator); frame.add(modArea); break;
+            case 3:ModAreaPanel modArea = new ModAreaPanel((Organigramma) o.getChild(0),mediator); frame.add(modArea); break;
             case 4:ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
-            case 5:AreaPanel areaP = new AreaPanel(org,mediator); frame.add(areaP); break;
+            case 5:AreaPanel areaP = new AreaPanel(o1,mediator); frame.add(areaP); break;
             case 6:CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
-            case 7:ModRolePanel modRole = new ModRolePanel(r1,mediator); frame.add(modRole); break;
+            case 7:ModRolePanel modRole = new ModRolePanel(r7,mediator); frame.add(modRole); break;
             case 8:ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;
-            case 9:RolePanel roleP = new RolePanel(r7,mediator); frame.add(roleP); break;
+            case 9:RolePanel roleP = new RolePanel(r3,mediator); frame.add(roleP); break;
             case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;
             case 11: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(mediator); frame.add(listEmployeePanel); break;
-            case 12: EmployeePanel employeeP = new EmployeePanel(emp7,mediator); frame.add(employeeP); break;
+            case 12: EmployeePanel employeeP = new EmployeePanel(emp5,mediator); frame.add(employeeP); break;
             case 13: AziendaPanel aziendaP = new AziendaPanel(mediator); frame.add(aziendaP); break;
             case 14: CreateAziendaPanel createAzienda = new CreateAziendaPanel(mediator); frame.add(createAzienda); break;
             case 15: HomePanel home = new HomePanel(mediator); frame.add(home);
@@ -107,5 +111,8 @@ public class PanelTest {
         frame.setSize(1000,650);
         frame.setResizable(false);
         frame.setVisible(true);
+    }
+    public static void main(String[] args){
+        PanelTest panel = new PanelTest(5);
     }
 }

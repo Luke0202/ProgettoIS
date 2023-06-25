@@ -66,7 +66,7 @@ public class AbstractAzienda implements AziendaIF{
     public void removeEmployee(Employee emp) {
         employees.remove(emp);
 
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
             cur.removeEmployee(emp.getID());
@@ -90,7 +90,7 @@ public class AbstractAzienda implements AziendaIF{
     public HashSet<Role> getRoles(Employee emp) {
         HashSet<Role> ret = new HashSet<>();
 
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma org = (Organigramma) it.next();
             ret.addAll(org.getRoles(emp));
@@ -138,8 +138,8 @@ public class AbstractAzienda implements AziendaIF{
     public HashSet<String> getAreasName() {
         HashSet<String> ret = new HashSet<>();
 
-        for (OrganigrammaIF org:organigramma){
-            ret.add(((Organigramma)org).getName());
+        for (Area a:organigramma){
+            ret.add(((Organigramma)a).getName());
         }
 
         return ret;
@@ -157,7 +157,7 @@ public class AbstractAzienda implements AziendaIF{
 
     @Override
     public Organigramma getArea(String area) {
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
             if (cur.getName().equals(area)) return cur;
@@ -167,7 +167,7 @@ public class AbstractAzienda implements AziendaIF{
 
     @Override
     public Organigramma getParent(Organigramma o) {
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
             if (cur.isChild(o)) return cur;
@@ -212,7 +212,7 @@ public class AbstractAzienda implements AziendaIF{
     }
     private Organigramma findArea(Role role){
 
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
             if (cur.getName().equals(role.getArea())) return cur;
@@ -221,7 +221,7 @@ public class AbstractAzienda implements AziendaIF{
     }
     private boolean isInOrganigramma(Role role){
 
-        Iterator<OrganigrammaIF> it = organigramma.iterator();
+        Iterator<Area> it = organigramma.iterator();
         while(it.hasNext()){
             if (it.next().contains(role)) return true;
         }

@@ -4,7 +4,6 @@ import is.organigramma.*;
 import is.mediator.Mediator;
 import is.decorator.DataTable;
 import is.decorator.ImageZoom;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
@@ -107,14 +106,14 @@ public class RolePanel extends JPanel {
         mediator.setAreaRole(areaField);
         mediator.setEditRole(modButton);
         mediator.setRemoveRole(removeButton);
-        modButton.addActionListener(e->mediator.buttonChanged(modButton));
-        removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
+        modButton.addActionListener(e->mediator.widgetChanged(modButton));
+        removeButton.addActionListener(e->mediator.widgetChanged(removeButton));
     }
     private boolean isRemovable(Role role,Azienda azienda){
         //Un ruolo è rimuovibile se non ha alcun dipendente associato
 
-        for (OrganigrammaIF o:azienda.getOrganigramma()){
-            for (Couple c:((Organigramma)o).getCouples()){
+        for (Area a:azienda.getOrganigramma()){
+            for (Couple c:((Organigramma)a).getCouples()){
                 if (c.getRole().equals(role)) return false;
             }
         }

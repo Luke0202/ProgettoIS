@@ -94,8 +94,8 @@ public class ModAreaPanel extends JPanel{
         mediator.setDescrModArea(descrArea);
         mediator.setSaveBModArea(saveB);
         mediator.setSaveVModArea(saveV);
-        saveB.addActionListener(e -> mediator.buttonChanged(saveB));
-        saveV.addActionListener(e -> mediator.buttonChanged(saveV));
+        saveB.addActionListener(e -> mediator.widgetChanged(saveB));
+        saveV.addActionListener(e -> mediator.widgetChanged(saveV));
     }
     private String[] findAreas(Azienda azienda,Organigramma org){
         HashSet<String> tot = azienda.getAreasName();

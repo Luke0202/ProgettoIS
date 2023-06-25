@@ -1,9 +1,10 @@
 package is.panels;
 
 import is.mediator.Mediator;
+import is.organigramma.Area;
 import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
+import is.organigramma.CompositeArea;
 import is.decorator.DataTable;
 import is.decorator.ImageZoom;
 import javax.swing.*;
@@ -39,7 +40,7 @@ public class ListAreaPanel extends JPanel {
         String[] columnNames = {"Nome Area","Numero Dipendenti","Nome Area di Riferimento","Stato"};
         Object[][] data = new Object[azienda.getNAreas()][columnNames.length];
 
-        Iterator<OrganigrammaIF> it = org.iterator();
+        Iterator<Area> it = org.iterator();
         int i = 0;
         while(it.hasNext()){
             Organigramma cur = (Organigramma) it.next();
@@ -91,6 +92,6 @@ public class ListAreaPanel extends JPanel {
         //Mediator
         mediator.setNameListArea(nameField);
         mediator.setSearchListArea(search);
-        search.addActionListener(e->mediator.buttonChanged(search));
+        search.addActionListener(e->mediator.widgetChanged(search));
     }
 }

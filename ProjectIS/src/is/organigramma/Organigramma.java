@@ -4,7 +4,7 @@ import is.visitor.AreaVisitor;
 
 import java.util.*;
 
-public class Organigramma extends AbstractOrganigramma {
+public class Organigramma extends AbstractCompositeArea {
     private HashSet<Couple> couples = new HashSet<>();//Coppie nomeRuolo e IDDipendenti
     public Organigramma(String name,String description){
         super(name,description);
@@ -75,7 +75,7 @@ public class Organigramma extends AbstractOrganigramma {
         if (containsID(ID))
             listAreas.add(getName());
 
-        Iterator<OrganigrammaIF> it = iterator();
+        Iterator<Area> it = iterator();
         while(it.hasNext()){
             Organigramma cur = (Organigramma)it.next();
             if (cur.containsID(ID))
@@ -102,7 +102,8 @@ public class Organigramma extends AbstractOrganigramma {
     @Override
     public HashSet<String> getSubAreas(){
         HashSet<String> ret = new HashSet<>();
-        Iterator<OrganigrammaIF> it = iterator();
+        Iterator<Area> it = iterator();
+        it.next();
         while(it.hasNext()){
             ret.add(((Organigramma)it.next()).getName());
         }
@@ -117,8 +118,7 @@ public class Organigramma extends AbstractOrganigramma {
         }
         return employees;
     }
-    @Override
-    public int getNEmployees(){ return getEmployees().size();}
+
 
     @Override
     public HashSet<Integer> getEmployees(Role r) {

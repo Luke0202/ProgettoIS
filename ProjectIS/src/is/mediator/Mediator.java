@@ -6,7 +6,7 @@ import is.organigramma.Employee;
 import is.organigramma.Role;
 import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
+import is.organigramma.Area;
 import is.parser.TextPlainParser;
 import javax.swing.*;
 import java.io.File;
@@ -131,46 +131,43 @@ public class Mediator implements MediatorIF{
 
 
     public void setAzienda(Azienda azienda){this.azienda=azienda;}
-    public void setPag(PaginationIF pag){this.pag=pag;}
+    public void setPagination(PaginationIF pag){this.pag=pag;}
     public void setFrame(JFrame frame){ this.frame=frame;}
     public Azienda getAzienda(){return this.azienda;}
 
 
-    @Override
-    public void menuChanged(JMenuItem widget) {
-        //Redirecting
-        if(widget==detA) pag.goAhead(3,null);
-
-        if (widget==createA)pag.goAhead(4,null);
-
-        if (widget==listA) pag.goAhead(5,null);
-
-        if (widget==createE){
-            if (azienda.getRoles().isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Nessun ruolo presente. Creare prima un ruolo.");
-                pag.goAhead(8,null);
-            }else pag.goAhead(6,null);
-        }
-
-        if (widget==listE) pag.goAhead(7,null);
-
-        if (widget==createR) pag.goAhead(8,null);
-
-        if (widget==listR) pag.goAhead(9,null);
-    }
-
-    @Override
-    public void textChanged(JTextField widget) {
-        if (widget == nameLog || widget==pswLog){
-            if (nameLog.getText().equals("") || pswLog.getText().equals("")) confLog.setEnabled(false);
-            else confLog.setEnabled(true);
-        }
-    }
     private boolean checkCredential(String name, String psw){
         return azienda.getName().toLowerCase().equals(name.toLowerCase()) && azienda.getPsw().equals(psw);
     }
     @Override
-    public void buttonChanged(JButton widget) {
+    public void widgetChanged(JComponent widget) {
+        //Gestione JMenuItem
+        if(widget==detA) pag.avanza(3,null);
+
+        if (widget==createA)pag.avanza(4,null);
+
+        if (widget==listA) pag.avanza(5,null);
+
+        if (widget==createE){
+            if (azienda.getRoles().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Nessun ruolo presente. Creare prima un ruolo.");
+                pag.avanza(8,null);
+            }else pag.avanza(6,null);
+        }
+
+        if (widget==listE) pag.avanza(7,null);
+
+        if (widget==createR) pag.avanza(8,null);
+
+        if (widget==listR) pag.avanza(9,null);
+
+        //Gestione JTextField
+        if (widget == nameLog || widget==pswLog){
+            if (nameLog.getText().equals("") || pswLog.getText().equals("")) confLog.setEnabled(false);
+            else confLog.setEnabled(true);
+        }
+
+        //Gestione JButton
         if (widget == confLog) {
             String name = nameLog.getText().trim();
             String psw = pswLog.getText();
@@ -178,7 +175,7 @@ public class Mediator implements MediatorIF{
             if (checkCredential(name, psw)) {
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
                         , "Accesso effettuato !");
-                pag.goAhead(2, null);
+                pag.avanza(2, null);
             } else {
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
                         , "Accesso negato.");
@@ -224,17 +221,17 @@ public class Mediator implements MediatorIF{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            pag.goAhead(2, null);
+            pag.avanza(2, null);
 
         }
         if (widget == newAziendaLog) {
-            pag.goAhead(1, null);
+            pag.avanza(1, null);
         }
         if (widget == saveBCreateArea) {
             if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
                 String name = nameCreateArea.getText().trim();
                 //Check existing name
-                for (OrganigrammaIF o : azienda.getOrganigramma()) {
+                for (Area o : azienda.getOrganigramma()) {
                     if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                         JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
                         return;
@@ -263,14 +260,14 @@ public class Mediator implements MediatorIF{
                 } else {
                     Organigramma organigramma = azienda.getOrganigramma();
 
-                    Iterator<OrganigrammaIF> it = organigramma.iterator();
+                    Iterator<Area> it = organigramma.iterator();
                     while (it.hasNext()) {
                         Organigramma cur = (Organigramma) it.next();
                         if (cur.getName().equals(area)) cur.addChild(org);
                     }
                 }
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(5, null);
+                pag.avanza(5, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -279,7 +276,7 @@ public class Mediator implements MediatorIF{
             if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
                 String name = nameCreateArea.getText().trim();
                 //Check existing name
-                for (OrganigrammaIF o : azienda.getOrganigramma()) {
+                for (Area o : azienda.getOrganigramma()) {
                     if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                         JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
                         return;
@@ -308,14 +305,14 @@ public class Mediator implements MediatorIF{
                 } else {
                     Organigramma organigramma = azienda.getOrganigramma();
 
-                    Iterator<OrganigrammaIF> it = organigramma.iterator();
+                    Iterator<Area> it = organigramma.iterator();
                     while (it.hasNext()) {
                         Organigramma cur = (Organigramma) it.next();
                         if (cur.getName().equals(area)) cur.addChild(org);
                     }
                 }
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(5, null);
+                pag.avanza(5, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -323,9 +320,9 @@ public class Mediator implements MediatorIF{
         if (widget == searchListArea) {
             //Check nameListArea
             String name = nameListArea.getText().trim();
-            for (OrganigrammaIF o : azienda.getOrganigramma()) {
+            for (Area o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
-                    pag.goAhead(10, o);
+                    pag.avanza(10, o);
                     return;
                 }
             }
@@ -341,13 +338,13 @@ public class Mediator implements MediatorIF{
                 Organigramma org = azienda.getArea(name);
                 azienda.removeArea(org);
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(5, null);
+                pag.avanza(5, null);
             }
         }
         if (widget == editArea) {
             String name = nameArea.getText();
             Organigramma org = azienda.getArea(name);
-            pag.goAhead(11, org);
+            pag.avanza(11, org);
         }
         if (widget == saveBModArea) {
             String name = nameModArea.getText().trim();
@@ -362,11 +359,11 @@ public class Mediator implements MediatorIF{
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
-                pag.goAhead(5, null);
+                pag.avanza(5, null);
             }
 
             //Check existing name
-            for (OrganigrammaIF o : azienda.getOrganigramma()) {
+            for (Area o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
                     return;
@@ -387,7 +384,7 @@ public class Mediator implements MediatorIF{
             oldArea.setName(name); oldArea.setDescription(descr);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(5, null);
+            pag.avanza(5, null);
         }
         if (widget == saveVModArea) {
             String name = nameModArea.getText().trim();
@@ -402,11 +399,11 @@ public class Mediator implements MediatorIF{
                 }
                 oldArea.setStateArea(true);
                 JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-                pag.goAhead(5, null);
+                pag.avanza(5, null);
             }
 
             //Check existing name
-            for (OrganigrammaIF o : azienda.getOrganigramma()) {
+            for (Area o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
                     return;
@@ -427,7 +424,7 @@ public class Mediator implements MediatorIF{
             oldArea.setName(name); oldArea.setDescription(descr); oldArea.setStateArea(true);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(5, null);
+            pag.avanza(5, null);
         }
         if (widget == saveCreateRole) {
             if (!nameCreateRole.getText().trim().equals("Digita nome ruolo") && !nameCreateRole.getText().trim().isEmpty()) {
@@ -461,7 +458,7 @@ public class Mediator implements MediatorIF{
                 azienda.addRole(role);
 
                 JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.goAhead(9, null);
+                pag.avanza(9, null);
             } else {
                 JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
             }
@@ -473,7 +470,7 @@ public class Mediator implements MediatorIF{
 
             for (Role role : azienda.getRoles()) {
                 if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().toLowerCase().equals(area.toLowerCase())) {
-                    pag.goAhead(12, role);
+                    pag.avanza(12, role);
                     return;
                 }
             }
@@ -498,7 +495,7 @@ public class Mediator implements MediatorIF{
                 }
 
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(9, null);
+                pag.avanza(9, null);
             }
         }
         if (widget == editRole) {
@@ -507,7 +504,7 @@ public class Mediator implements MediatorIF{
             HashSet<Role> roles=azienda.getRoles();
             for(Role r:roles){
                 if (r.getName().equals(name) && r.getArea().equals(area)){
-                    pag.goAhead(13, r);
+                    pag.avanza(13, r);
                     break;
                 }
             }
@@ -526,7 +523,7 @@ public class Mediator implements MediatorIF{
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
-                pag.goAhead(9, null);
+                pag.avanza(9, null);
             }
             //Check existing name
             for (Role role: azienda.getRoles()){
@@ -547,7 +544,7 @@ public class Mediator implements MediatorIF{
             oldRole.setName(name); oldRole.setDescription(descr);
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-            pag.goAhead(9, null);
+            pag.avanza(9, null);
         }
         if (widget==saveCreateEmployee){
             String name = nameCreateEmployee.getText().trim();
@@ -576,13 +573,14 @@ public class Mediator implements MediatorIF{
 
             Employee emp = new Employee(name,surname,email,azienda.giveID());
             for (Role r:azienda.getRoles()){
-                if (r.getName().equals(nameRole) && r.getArea().equals(areaRole)){
+                if (r.getName().toLowerCase().equals(nameRole.toLowerCase()) &&
+                        r.getArea().toLowerCase().equals(areaRole.toLowerCase())){
                     azienda.addEmployee(r,emp);
                 }
             }
 
             JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-            pag.goAhead(7, null);
+            pag.avanza(7, null);
         }
         if (widget==searchListEmployee){
             //Check nameListArea
@@ -597,7 +595,7 @@ public class Mediator implements MediatorIF{
 
             for(Employee emp:azienda.getEmployees()){
                 if (emp.getID()==id){
-                    pag.goAhead(14,emp);
+                    pag.avanza(14,emp);
                     return;
                 }
             }
@@ -623,7 +621,7 @@ public class Mediator implements MediatorIF{
                 }
 
                 JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-                pag.goAhead(7, null);
+                pag.avanza(7, null);
             }
         }
     }

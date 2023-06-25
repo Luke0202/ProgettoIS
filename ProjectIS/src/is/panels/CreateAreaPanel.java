@@ -83,8 +83,8 @@ public class CreateAreaPanel extends JPanel {
         mediator.setDescrCreateArea(descrArea);
         mediator.setSaveBCreateArea(saveB);
         mediator.setSaveVCreateArea(saveV);
-        saveB.addActionListener(e -> mediator.buttonChanged(saveB));
-        saveV.addActionListener(e -> mediator.buttonChanged(saveV));
+        saveB.addActionListener(e -> mediator.widgetChanged(saveB));
+        saveV.addActionListener(e -> mediator.widgetChanged(saveV));
     }
     private String[] findAreas(Azienda azienda){
         HashSet<String> tot = azienda.getAreasName();

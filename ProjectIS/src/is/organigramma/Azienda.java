@@ -9,7 +9,7 @@ public class Azienda extends AbstractAzienda{
     private String name, headquarter, type;
     public Azienda(String cod,String name,String headquarter,String type,String psw,Organigramma organigramma){
         super(organigramma);
-        if (cod.matches("[\\d\\.]+")) throw new IllegalArgumentException("Codice non valido");
+        if (!cod.matches("[\\d\\.]+")) throw new IllegalArgumentException("Codice non valido");
         this.cod = cod;
         this.name = name;
         this.type = type;
@@ -26,11 +26,6 @@ public class Azienda extends AbstractAzienda{
         return name;
     }
 
-
-    //SETTERS
-    public void setHeadquarter(String headquarter) {this.headquarter = headquarter;}
-    public void setType(String type){this.type=type;}
-    public void setName(String name){this.name = name;}
 
     @Override
     public boolean equals(Object o) {

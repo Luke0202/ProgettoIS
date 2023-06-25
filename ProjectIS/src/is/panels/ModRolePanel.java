@@ -33,11 +33,6 @@ public class ModRolePanel extends JPanel {
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
         JTextField nameField = new JTextField(20); nameField.setText(roleToMod.getName());
         nameField.setBounds(20,50,280,30);
-        //StateLabel
-        JLabel stateLab = new JLabel("Stato: ");
-        stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(350,15,200,30);
-        JLabel stateLab2 = new JLabel("BOZZA");
-        stateLab2.setBounds(350,50,280,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
@@ -58,7 +53,6 @@ public class ModRolePanel extends JPanel {
 
         //Adding
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
-        fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
         fieldPanel.add(save);
         fieldPanel.add(lab);
@@ -69,6 +63,6 @@ public class ModRolePanel extends JPanel {
         mediator.setNameModRole(nameField);
         mediator.setDescrModRole(descrArea);
         mediator.setSaveModRole(save);
-        save.addActionListener(e -> mediator.buttonChanged(save));
+        save.addActionListener(e -> mediator.widgetChanged(save));
     }
 }

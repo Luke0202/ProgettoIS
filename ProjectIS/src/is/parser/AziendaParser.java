@@ -171,7 +171,10 @@ public class AziendaParser {
 
         if (!isCorrect("State")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        boolean state = Boolean.getBoolean(readText());
+        boolean state;
+        String s = readText();
+        if (s.equals("true")) state = true;
+        else state = false;
 
         token = nextToken();//<Couples>
 

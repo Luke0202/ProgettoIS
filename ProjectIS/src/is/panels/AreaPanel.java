@@ -1,10 +1,7 @@
 package is.panels;
 
-import is.organigramma.Azienda;
-import is.organigramma.Employee;
+import is.organigramma.*;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
-import is.organigramma.OrganigrammaIF;
 import is.decorator.DataTable;
 import is.decorator.ImageZoom;
 import javax.swing.*;
@@ -112,8 +109,8 @@ public class AreaPanel extends JPanel {
         mediator.setNameArea(nameField);
         mediator.setRemoveArea(removeButton);
         mediator.setEditArea(modButton);
-        modButton.addActionListener(e->mediator.buttonChanged(modButton));
-        removeButton.addActionListener(e->mediator.buttonChanged(removeButton));
+        modButton.addActionListener(e->mediator.widgetChanged(modButton));
+        removeButton.addActionListener(e->mediator.widgetChanged(removeButton));
     }
     private String findDadArea(Azienda azienda,Organigramma org){
         Organigramma organigramma = azienda.getOrganigramma();
@@ -124,8 +121,8 @@ public class AreaPanel extends JPanel {
         return azienda.getParent(org).getName();
     }
     private boolean isRemovable(Organigramma org){
-        for (OrganigrammaIF o:org){
-            if (o.getNEmployees()>0) return false;
+        for (Area a:org){
+            if (a.getNEmployees()>0) return false;
         }
         return true;
     }

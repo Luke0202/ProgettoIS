@@ -1,21 +1,30 @@
 <Azienda>
-<Cod>11.33.4</Cod>
-<Name>Dd</Name>
-<Headquarter>Sss</Headquarter>
-<Type>Dd</Type
-<Password>11</Password>
+<Cod>22</Cod>
+<Name>Aaa</Name>
+<Headquarter>Aaa</Headquarter>
+<Type>Sss</Type
+<Password>22</Password>
 <Employees>
 </Employees>
 <Roles>
 </Roles>
 <Organigramma>
 <Area>
-<Name>Dd</Name>
-<Description>Codice ATECO: 11.33.4, Sede centrale: Sss, Settore: Dd.</Description>
+<Name>Aaa</Name>
+<Description>Codice ATECO: 22, Sede centrale: Aaa, Settore: Sss.</Description>
 <State>false</State>
 <Couples>
 </Couples>
 <ListAreas>
+<Area>
+<Name>Ee</Name>
+<Description>  </Description>
+<State>true</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
 </ListAreas>
 </Area>
 </Organigramma>

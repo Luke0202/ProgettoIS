@@ -43,11 +43,6 @@ public class CreateRolePanel extends JPanel {
         String[] array = findAreas(azienda);
         JComboBox<String> areaComboBox = new JComboBox<>(array);
         areaComboBox.setBounds(350,50,280,30);
-        //StateLabel
-        JLabel stateLab = new JLabel("Stato: ");
-        stateLab.setFont(f); stateLab.setForeground(blue); stateLab.setBounds(680,15,200,30);
-        JLabel stateLab2 = new JLabel("BOZZA");
-        stateLab2.setBounds(680,50,280,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
@@ -70,7 +65,6 @@ public class CreateRolePanel extends JPanel {
         add(fieldPanel);
         fieldPanel.add(nameLab); fieldPanel.add(nameField);
         fieldPanel.add(areaLab); fieldPanel.add(areaComboBox);
-        fieldPanel.add(stateLab); fieldPanel.add(stateLab2);
         fieldPanel.add(descrLab); fieldPanel.add(descrScroll);
         fieldPanel.add(save);
         fieldPanel.add(lab);
@@ -80,7 +74,7 @@ public class CreateRolePanel extends JPanel {
         mediator.setAreaCreateRole(areaComboBox);
         mediator.setDescrCreateRole(descrArea);
         mediator.setSaveCreateRole(save);
-        save.addActionListener(e -> mediator.buttonChanged(save));
+        save.addActionListener(e -> mediator.widgetChanged(save));
     }
     private String[] findAreas(Azienda azienda){
 
