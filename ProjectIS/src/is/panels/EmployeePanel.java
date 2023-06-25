@@ -1,9 +1,9 @@
 package is.panels;
 
+import is.DataTable;
 import is.organigramma.Employee;
 import is.organigramma.Role;
 import is.mediator.Mediator;
-import is.decorator.DataTable;
 import is.decorator.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;

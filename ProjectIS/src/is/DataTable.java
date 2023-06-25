@@ -1,17 +1,12 @@
-package is.decorator;
+package is;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-public class DataTable extends TableDecorator {
-
-    public DataTable(JTable table){
-        this.table=table; this.table.setFillsViewportHeight(true); super.setForeground(Color.black);
-    }
-
+public class DataTable extends JTable {
     public DataTable(Object[][] d,String[] col){
-        this.table = new JTable(d,col); super.setFillsViewportHeight(true); super.setForeground(Color.black);
+        super(d,col); super.setFillsViewportHeight(true); super.setForeground(Color.black);
     }
 
     @Override
@@ -20,7 +15,7 @@ public class DataTable extends TableDecorator {
     }
     @Override
     public Component prepareRenderer(TableCellRenderer r, int row, int columns){
-        Component c = this.table.prepareRenderer(r,row,columns);
+        Component c = super.prepareRenderer(r,row,columns);
 
         if (row%2==0) c.setBackground(Color.white);
         else c.setBackground(Color.lightGray);

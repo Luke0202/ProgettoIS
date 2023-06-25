@@ -25,7 +25,7 @@ public class HomePanel extends JPanel {
         //Header
         Font f = new Font("TimesNewRoman",Font.BOLD,43);
         JLabel head = new JLabel("MyOrg",SwingConstants.CENTER);
-        head.setFont(f); head.setForeground(Color.red); head.setBounds(395,400,200,100);
+        head.setFont(f); head.setForeground(Color.black); head.setBounds(395,400,200,100);
         add(head);
     }
 }

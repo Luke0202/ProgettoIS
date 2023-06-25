@@ -144,7 +144,7 @@ public class Mediator implements MediatorIF{
         //Gestione JMenuItem
         if(widget==detA) pag.avanza(3,null);
 
-        if (widget==createA)pag.avanza(4,null);
+        if (widget==createA) pag.avanza(4,null);
 
         if (widget==listA) pag.avanza(5,null);
 
@@ -188,14 +188,18 @@ public class Mediator implements MediatorIF{
             String hq = headquarterCreateAzienda.getText().trim();
             String type = typeCreateAzienda.getText().trim();
             String psw = pswCreateAzienda.getText().trim();
-            if (name.equals("Digita nome azienda") || name.isEmpty()
-                    || cod.equals("Digita codice ATECO") || cod.isEmpty() || !cod.matches("[\\d\\.]+")
-                    || hq.equals("Digita il luogo della sede") || hq.isEmpty()
-                    || type.equals("Digita il settore") || type.isEmpty()
-                    || psw.equals("Digita la password di accesso al sistema") || psw.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+
+            //Controllo correttezza dati
+            if (name.isEmpty() || cod.isEmpty() || hq.isEmpty() || type.isEmpty() || psw.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo vuoto. Digita correttamente i dati!");
                 return;
             }
+
+            if (!cod.matches("[\\d\\.]+")){
+                JOptionPane.showMessageDialog(frame, "Codice ateco non valido. Digita correttamente i dati!");
+                return;
+            }
+
             //DATI VALIDI
             //Richiesta conferma
             int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");

@@ -1,8 +1,8 @@
 package is.panels;
 
+import is.DataTable;
 import is.organigramma.*;
 import is.mediator.Mediator;
-import is.decorator.DataTable;
 import is.decorator.ImageZoom;
 import javax.swing.*;
 import java.awt.*;

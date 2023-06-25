@@ -31,28 +31,28 @@ public class CreateAziendaPanel extends JPanel {
         //Name Field
         JLabel nameLab = new JLabel("Nome Azienda: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
-        JTextField nameField = new JTextField(20); nameField.setText("Digita nome azienda");
+        JTextField nameField = new JTextField(20);
         nameField.setBounds(20,50,280,30);
         //Cod Label
         JLabel codLab = new JLabel("Codice ATECO: ");
         codLab.setFont(f); codLab.setForeground(blue); codLab.setBounds(350,15,280,30);
 
-        JTextField codField = new JTextField(20); codField.setText("Digita codice ATECO");
+        JTextField codField = new JTextField(20);
         codField.setBounds(350,50,280,30);
         //Headquarter Field
         JLabel headquarterLab = new JLabel("Sede centrale: ");
         headquarterLab.setFont(f); headquarterLab.setForeground(blue); headquarterLab.setBounds(680,15,200,30);
-        JTextField headquarterField = new JTextField(20); headquarterField.setText("Digita il luogo della sede");
+        JTextField headquarterField = new JTextField(20);
         headquarterField.setBounds(680,50,280,30);
         //Type Field
         JLabel typeLab = new JLabel("Settore azienda: ");
         typeLab.setFont(f); typeLab.setForeground(blue); typeLab.setBounds(20,120,200,30);
-        JTextField typeField = new JTextField(20); typeField.setText("Digita il settore");
+        JTextField typeField = new JTextField(20);
         typeField.setBounds(20,155,280,30);
         //Psw Field
         JLabel pswLab = new JLabel("Password: ");
         pswLab.setFont(f); pswLab.setForeground(blue); pswLab.setBounds(350,120,200,30);
-        JTextField pswField = new JTextField(20); pswField.setText("Digita la password di accesso al sistema");
+        JTextField pswField = new JTextField(20);
         pswField.setBounds(350,155,280,30);
         //SaveButtons
         JButton save = new JButton("SALVA");  save.setForeground(Color.white); save.setBackground(blue2);
