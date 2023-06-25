@@ -35,7 +35,7 @@ public class CreateAreaPanel extends JPanel {
         //Name Field
         JLabel nameLab = new JLabel("Nome area: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
-        JTextField nameField = new JTextField(20); nameField.setText("Digita nome area");
+        JTextField nameField = new JTextField(20);
         nameField.setBounds(20,50,280,30);
         //DadLabel
         JLabel dadLab = new JLabel("Nome area di riferimento: ");
@@ -52,7 +52,7 @@ public class CreateAreaPanel extends JPanel {
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
-        JTextArea descrArea = new JTextArea(5,20); descrArea.setText("Digita descrizione");
+        JTextArea descrArea = new JTextArea(5,20);
         descrArea.setLineWrap(true);
         JScrollPane descrScroll = new JScrollPane(descrArea);
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

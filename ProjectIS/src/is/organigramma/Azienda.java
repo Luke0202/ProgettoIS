@@ -1,7 +1,5 @@
 package is.organigramma;
 
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public class Azienda extends AbstractAzienda{

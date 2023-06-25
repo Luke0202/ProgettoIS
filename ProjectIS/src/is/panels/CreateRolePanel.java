@@ -34,7 +34,7 @@ public class CreateRolePanel extends JPanel {
         //Name Role
         JLabel nameLab = new JLabel("Nome Ruolo: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
-        JTextField nameField = new JTextField(20); nameField.setText("Digita nome ruolo");
+        JTextField nameField = new JTextField(20);
         nameField.setBounds(20,50,280,30);
         //Name Area
         JLabel areaLab = new JLabel("Scegli Area: ");
@@ -46,7 +46,7 @@ public class CreateRolePanel extends JPanel {
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f); descrLab.setForeground(blue); descrLab.setBounds(20,100,200,30);
-        JTextArea descrArea = new JTextArea(5,20); descrArea.setText("Digita descrizione");
+        JTextArea descrArea = new JTextArea(5,20);
         descrArea.setLineWrap(true);
         JScrollPane descrScroll = new JScrollPane(descrArea);//Controllo per vedere se è gia presente una descrizione per tale ruolo
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

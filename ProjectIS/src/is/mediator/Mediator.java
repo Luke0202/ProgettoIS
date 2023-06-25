@@ -232,94 +232,94 @@ public class Mediator implements MediatorIF{
             pag.avanza(1, null);
         }
         if (widget == saveBCreateArea) {
-            if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
-                String name = nameCreateArea.getText().trim();
-                //Check existing name
-                for (Area o : azienda.getOrganigramma()) {
-                    if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
-                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
-                        return;
-                    }
-                }
-
-                int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
-                if (i != 0) return; //No oppure Cancel
-
-                //Capitalizing first letter
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-                String descr = descrCreateArea.getText().trim();
-
-                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-
-                descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                int j = dadCreateArea.getSelectedIndex();
-                String area = dadCreateArea.getItemAt(j);
-
-
-                Organigramma org = new Organigramma(name, descr);
-                if (area.equals("Nessuna area di riferimento")) {
-                    azienda.setOrganigramma(org);
-                } else {
-                    Organigramma organigramma = azienda.getOrganigramma();
-
-                    Iterator<Area> it = organigramma.iterator();
-                    while (it.hasNext()) {
-                        Organigramma cur = (Organigramma) it.next();
-                        if (cur.getName().equals(area)) cur.addChild(org);
-                    }
-                }
-                JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.avanza(5, null);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+            if (nameCreateArea.getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Nome inserito non valido. Digita correttamente i dati!");
+                return;
             }
+            String name = nameCreateArea.getText().trim();
+            //Check existing name
+            for (Area o : azienda.getOrganigramma()) {
+                if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
+                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
+                    return;
+                }
+            }
+
+            int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
+            if (i != 0) return; //No oppure Cancel
+
+            //Capitalizing first letter
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+            String descr = descrCreateArea.getText().trim();
+
+            if (descr.isEmpty()) descr = "  ";
+
+            descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
+
+            int j = dadCreateArea.getSelectedIndex();
+            String area = dadCreateArea.getItemAt(j);
+
+
+            Organigramma org = new Organigramma(name, descr);
+            if (area.equals("Nessuna area di riferimento")) {
+                azienda.setOrganigramma(org);
+            } else {
+                Organigramma organigramma = azienda.getOrganigramma();
+
+                Iterator<Area> it = organigramma.iterator();
+                while (it.hasNext()) {
+                    Organigramma cur = (Organigramma) it.next();
+                    if (cur.getName().equals(area)) cur.addChild(org);
+                }
+            }
+            JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
+            pag.avanza(5, null);
         }
         if (widget == saveVCreateArea) {
-            if (!nameCreateArea.getText().trim().equals("Digita nome area") && !nameCreateArea.getText().trim().isEmpty()) {
-                String name = nameCreateArea.getText().trim();
-                //Check existing name
-                for (Area o : azienda.getOrganigramma()) {
-                    if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
-                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
-                        return;
-                    }
-                }
-                int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
-                        "Vuoi confermare i dati ?");
-                if (i != 0) return; //No oppure Cancel
-
-                //Capitalizing first letter
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-                String descr = descrCreateArea.getText();
-                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-
-                descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                int j = dadCreateArea.getSelectedIndex();
-                String area = dadCreateArea.getItemAt(j);
-
-                Organigramma org = new Organigramma(name, descr);
-                //Cambiamento stato
-                org.setStateArea(true);
-                if (area.equals("Nessuna area di riferimento")) {
-                    azienda.setOrganigramma(org);
-                } else {
-                    Organigramma organigramma = azienda.getOrganigramma();
-
-                    Iterator<Area> it = organigramma.iterator();
-                    while (it.hasNext()) {
-                        Organigramma cur = (Organigramma) it.next();
-                        if (cur.getName().equals(area)) cur.addChild(org);
-                    }
-                }
-                JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.avanza(5, null);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+            if (nameCreateArea.getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Nome inserito non valido. Digita correttamente i dati!");
+                return;
             }
+            String name = nameCreateArea.getText().trim();
+            //Check existing name
+            for (Area o : azienda.getOrganigramma()) {
+                if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
+                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: nome area già esistente.");
+                    return;
+                }
+            }
+            int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
+                    "Vuoi confermare i dati ?");
+            if (i != 0) return; //No oppure Cancel
+
+            //Capitalizing first letter
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+            String descr = descrCreateArea.getText();
+            if (descr.isEmpty()) descr = "  ";
+
+            descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
+
+            int j = dadCreateArea.getSelectedIndex();
+            String area = dadCreateArea.getItemAt(j);
+
+            Organigramma org = new Organigramma(name, descr);
+            //Cambiamento stato
+            org.setStateArea(true);
+            if (area.equals("Nessuna area di riferimento")) {
+                azienda.setOrganigramma(org);
+            } else {
+                Organigramma organigramma = azienda.getOrganigramma();
+
+                Iterator<Area> it = organigramma.iterator();
+                while (it.hasNext()) {
+                    Organigramma cur = (Organigramma) it.next();
+                    if (cur.getName().equals(area)) cur.addChild(org);
+                }
+            }
+            JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
+            pag.avanza(5, null);
         }
         if (widget == searchListArea) {
             //Check nameListArea
@@ -356,17 +356,19 @@ public class Mediator implements MediatorIF{
 
             //Caso area uguale alla precedente
             if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
+                //Analisi caso di modifica della descrizione
                 if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
+                    if (descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldArea.setDescription(descr);
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
                 pag.avanza(5, null);
+                return;
             }
 
-            //Check existing name
+            //Controllo di modifica con il nome di un'area già esistente
             for (Area o : azienda.getOrganigramma()) {
                 if (name.toLowerCase().equals(((Organigramma) o).getName().toLowerCase())) {
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
@@ -380,7 +382,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = " ";
+            if (descr.isEmpty()) descr = " ";
 
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -396,14 +398,16 @@ public class Mediator implements MediatorIF{
 
             //Caso area uguale alla precedente
             if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
+                //Caso modifica della descrizione
                 if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
+                    if (descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldArea.setDescription(descr);
                 }
                 oldArea.setStateArea(true);
                 JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 pag.avanza(5, null);
+                return;
             }
 
             //Check existing name
@@ -421,7 +425,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
+            if (descr.isEmpty()) descr = "  ";
 
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
@@ -431,41 +435,41 @@ public class Mediator implements MediatorIF{
             pag.avanza(5, null);
         }
         if (widget == saveCreateRole) {
-            if (!nameCreateRole.getText().trim().equals("Digita nome ruolo") && !nameCreateRole.getText().trim().isEmpty()) {
-                String name = nameCreateRole.getText().trim();
-
-                int j = areaCreateRole.getSelectedIndex();
-                String area = areaCreateRole.getItemAt(j);
-
-
-                for (Role role: azienda.getRoles()){
-                    if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().toLowerCase().equals(area.toLowerCase())) {
-                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: ruolo già esistente.");
-                        return;
-                    }
-                }
-
-                int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
-                if (i != 0) return; //No oppure Cancel
-
-                //Capitalizing first letter
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
-
-                String descr = descrCreateRole.getText().trim();
-
-                if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
-
-                descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                Role role = new Role(name, area, descr);
-
-                azienda.addRole(role);
-
-                JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
-                pag.avanza(9, null);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+            if (nameCreateRole.getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Ruolo inserito non valido. Digita correttamente i dati!");
+                return;
             }
+            String name = nameCreateRole.getText().trim();
+
+            int j = areaCreateRole.getSelectedIndex();
+            String area = areaCreateRole.getItemAt(j);
+
+
+            for (Role role: azienda.getRoles()){
+                if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().toLowerCase().equals(area.toLowerCase())) {
+                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con il salvataggio: ruolo già esistente.");
+                    return;
+                }
+            }
+
+            int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
+            if (i != 0) return; //No oppure Cancel
+
+            //Capitalizing first letter
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+            String descr = descrCreateRole.getText().trim();
+
+            if (descr.isEmpty()) descr = "  ";
+
+            descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
+
+            Role role = new Role(name, area, descr);
+
+            azienda.addRole(role);
+
+            JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
+            pag.avanza(9, null);
         }
         if (widget == searchListRole) {
             //Check nameListArea
@@ -520,16 +524,19 @@ public class Mediator implements MediatorIF{
 
             //Caso ruolo uguale al precedente
             if (oldRole.getName().toLowerCase().equals(name.toLowerCase())){
+                //Caso modifica descrizione
                 if (!oldRole.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
+                    if (descr.isEmpty()) descr = "  ";
                     descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
                     oldRole.setDescription(descr);
 
                     JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
                 }
                 pag.avanza(9, null);
+                return;
             }
-            //Check existing name
+
+            //Controllo nome già esistente
             for (Role role: azienda.getRoles()){
                 if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().equals(area)){
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: ruolo già esistente.");
@@ -542,7 +549,7 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
-            if (descr.trim().equals("Digita descrizione") || descr.isEmpty()) descr = "  ";
+            if (descr.isEmpty()) descr = "  ";
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             oldRole.setName(name); oldRole.setDescription(descr);
@@ -555,9 +562,8 @@ public class Mediator implements MediatorIF{
             String surname = surnameCreateEmployee.getText().trim();
             String email = emailCreateEmployee.getText().trim();
 
-            if (name.isEmpty() || name.equals("Digita nome") || surname.isEmpty() || surname.equals("Digita cognome") ||
-            email.isEmpty() || email.equals("Digita email")){
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+            if (name.isEmpty() || surname.isEmpty() || email.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo vuoto. Digita correttamente i dati !");
                 return;
             }
 
@@ -591,7 +597,7 @@ public class Mediator implements MediatorIF{
             String ID = idListEmployee.getText().trim();
 
             if (!ID.matches("\\d+")){
-                JOptionPane.showMessageDialog(frame, "Digita correttamente i dati !");
+                JOptionPane.showMessageDialog(frame, "Id non valido!");
                 return;
             }
             int id = Integer.parseInt(ID);

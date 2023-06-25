@@ -35,17 +35,17 @@ public class CreateEmployeePanel extends JPanel {
         //Name Field
         JLabel nameLab = new JLabel("Nome: ");
         nameLab.setFont(f); nameLab.setForeground(blue); nameLab.setBounds(20,15,200,30);
-        JTextField nameField = new JTextField(20); nameField.setText("Digita nome");
+        JTextField nameField = new JTextField(20);
         nameField.setBounds(20,50,280,30);
         //Surname Field
         JLabel surnameLab = new JLabel("Cognome: ");
         surnameLab.setFont(f); surnameLab.setForeground(blue); surnameLab.setBounds(350,15,280,30);
-        JTextField surnameField = new JTextField(20); surnameField.setText("Digita cognome");
+        JTextField surnameField = new JTextField(20);
         surnameField.setBounds(350,50,280,30);
         //Email Field
         JLabel emailLab = new JLabel("Email: ");
         emailLab.setFont(f); emailLab.setForeground(blue); emailLab.setBounds(680,15,200,30);
-        JTextField emailField = new JTextField(20); emailField.setText("Digita email");
+        JTextField emailField = new JTextField(20);
         emailField.setBounds(680,50,280,30);
         //Role Field
         JLabel roleLab = new JLabel("Ruolo: ");
