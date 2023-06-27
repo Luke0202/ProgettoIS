@@ -12,26 +12,55 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+/**
+ * Tale classe ha l'obiettivo di analizzare un file.txt contenente
+ * i dati di un'azienda, memorizzati secondo il formato XML, con l'obiettivo
+ * di costruire un oggetto della classe Azienda.
+ * @author lucab
+ */
 public class AziendaParser {
-    //Analizza un file.txt e lo converte in un Azienda
-    //Lettura di un file.txt e conversione in un Aziendaa
+    //Percorso file
     private final String path;
+
+    //Oggetto che consente la lettura del file
     private BufferedReader br;
+
+    //Token per riconoscere i tag usati nel file.txt
     private String token;
+
+    //StringTokenizer necessario per separare i token dai dati aziendali
     private StringTokenizer st;
+
+    //Coppie ruolo-idDipendente
     private HashSet<Couple> couples = new HashSet<>();
+
     public AziendaParser(String path){
         this.path=path;
     }
+
+    /**
+     * Tale metodo ha la funzione di costruire l'Azienda.
+     * Vengono catturate eventuali eccezioni che possono
+     * essere lanciate dalla funzione doParse.
+     * @return Azienda
+     */
     public Azienda build() {
         Azienda az=null;
         try {
             az=doParse();
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return az;
     }
+
+    /**
+     * Tale metodo definisce l'oggetto di lettura file.
+     * Avvia inoltre il metodo readAzienda inizializzando
+     * la procedura di lettura dati.
+     * @return Azienda
+     */
     private Azienda doParse() {
         try {
             br = new BufferedReader(new FileReader(path));
@@ -40,9 +69,17 @@ public class AziendaParser {
         }
         return readAzienda();
     }
-    private String nextToken() {
-        while (st == null || !st.hasMoreTokens()) {
 
+    /**
+     *
+     * @return
+     */
+    private String nextToken() {
+
+        //Si considerano i casi in cui o lo stringTokenizer non è stato ancora definito o lo stringTokenizer non presenta più token
+        while (st == null || !st.hasMoreTokens()) {
+            //Viene definito uno stringTokenizer per ogni riga del file
+            //Se lo stringTokenizer non presenta più token, allora bisogna selezionare la riga successiva del file
             String line = null;
             try {
                 line = br.readLine();
@@ -50,20 +87,39 @@ public class AziendaParser {
                 e.printStackTrace();
             }
 
+            //Caso in cui sono state analizzate tutte le righe del file
             if (line == null)
                 return null;//Fine file
 
+            //Definizione nuovo stringTokenizer
             st = new StringTokenizer(line,"[><]");
         }
 
-        return st.nextToken();//<....>
-
+        //Un token contiene il contenuto di un tag o un dato dell'azienda
+        return st.nextToken();
     }
 
+    /**
+     * Tale metodo verifica che il token ottenuto analizzando il file
+     * sia coincidente con il tag atteso.
+     * Se restituisce false, è possibile che qualcuno abbia manomesso il
+     * file contenente i dati aziendali.
+     * @param expected esprime il tag che noi ci aspettiamo analizzando la
+     *                 composizione del file in formato XML
+     * @return boolean
+     */
     private boolean isCorrect(String expected){
         return token != null && token.equals(expected);
     }
+
+    /**
+     * Tale metodo ha la funzione di leggere i dati relativi all'azienda, in merito
+     * a informazioni generali sull'azienda, ruoli definiti in azienda, dipendenti assunti
+     * e organigramma aziendale.
+     * @return Azienda
+     */
     private Azienda readAzienda(){
+        //Token di ingresso per la lettura dell'azienda
         token = nextToken();//<Azienda>
 
         if (!isCorrect("Azienda")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
@@ -98,20 +154,29 @@ public class AziendaParser {
 
         String psw = readText();
 
+        //Lettura dipendenti
         LinkedList<Employee> employees = readEmployees();
+
+        //Lettura ruoli
         HashSet<Role> roles = readRoles();
+
+        //Lettura organigramma
         Organigramma org = readOrganigramma();
 
+        //Creazione azienda
         Azienda az = new Azienda(codAzienda,nameAzienda,hqAzienda,typeAzienda,psw,org);
 
+        //Aggiunta ruoli
         for (Role r:roles){
             az.addRole(r);
         }
+
         //Aggiunta coppie ID emp-Role
         for (Employee emp:employees){
             int id = emp.getID();
             for (Couple c:couples){
                 if (c.getID()==id){
+                    //Aggiunta coppia
                     az.addEmployee(c.getRole(),emp);
                 }
             }
@@ -119,40 +184,60 @@ public class AziendaParser {
         return az;
     }
 
+    /**
+     * Tale metodo ha la funzione di leggere i ruoli definiti in azienda.
+     * @return insieme di ruoli
+     */
     private HashSet<Role> readRoles(){
+        //HashSet da restituire
         HashSet<Role> roles = new HashSet<>();
+
+        //Token di ingresso per la lettura dei ruoli
         token = nextToken();//<Roles>
 
         if (!isCorrect("Roles")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
+        //Variabili per la definizione di ogni singolo ruolo
         String name=null;
         String area=null;
         String descr = null;
+        //Variabile booleana utile a sancire la fine della lettura
         boolean go = true;
         while(go){
-            token = nextToken();
+            token = nextToken(); //token successivo
             switch(token){
-                case "Role": break;
-                case "Name": name = readText(); break;
-                case "NameArea": area = readText(); break;
-                case "Description": descr = readText(); break;
-                case "/Role": Role r = new Role(name,area,descr); roles.add(r); break;
-                case "/Roles": go = false;
+                case "Role": break; //Nuovo ruolo da leggere
+                case "Name": name = readText(); break; //Lettura nome ruolo
+                case "NameArea": area = readText(); break; //Lettura nome area
+                case "Description": descr = readText(); break; //Lettura descrizione
+                case "/Role": Role r = new Role(name,area,descr); roles.add(r); break; //Salvataggio ruolo
+                case "/Roles": go = false; //Non ci sono più ruoli da leggere
             }
         }
         return roles;
     }
 
+    /**
+     * Tale metodo ha la funzione di leggere l'organigramma aziendale.
+     * @return Organigramma
+     */
     private Organigramma readOrganigramma(){
+        //Token di ingresso per la lettura dell'organigramma
         token = nextToken();//<Organigramma>
 
         token = nextToken();
-        if (token.equals("/Organigramma")) return null;
-        else if (token.equals("Area")) return readArea();
+        if (token.equals("/Organigramma")) return null; //Non sono presenti aree
+        else if (token.equals("Area")) return readArea(); //È presente almeno un'area da leggere
 
+        //Token non riconosciuto
         throw new IllegalArgumentException("Wrong token. Token found: " + token);
     }
 
+    /**
+     * Tale metodo ha la funzione di leggere un'area, includendo
+     * eventuali sotto-aree da cui è composta.
+     * @return Organigramma
+     */
     private Organigramma readArea(){
 
         token = nextToken();//<Name>
@@ -171,34 +256,40 @@ public class AziendaParser {
 
         if (!isCorrect("State")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        boolean state;
+        //Individuazione stato area
         String s = readText();
-        if (s.equals("true")) state = true;
-        else state = false;
+        boolean state = s.equals("true");
 
         token = nextToken();//<Couples>
 
         if (!isCorrect("Couples")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-        Organigramma org = new Organigramma(nameArea,descrArea); org.setStateArea(state);
+        //Creazione organigramma
+        Organigramma org = new Organigramma(nameArea,descrArea);
+        //Modifica stato
+        org.setStateArea(state);
 
+        //Variabili necessarie per la lettura delle coppie ruolo-idDipendente
         Couple cou = null;
-        int coupleID = 0;
         Role r = null;
+
+        int coupleID = 0;
         String nameCouple = null;
         String areaCouple = null;
         String descrCouple = null;
+
+        //Variabile booleana utile a sancire la fine della lettura delle coppie
         boolean go = true;
         while(go){
-            token = nextToken();
+            token = nextToken();//Token successivo
             switch(token){
-                case "ID": coupleID = Integer.parseInt(readText()); break;
-                case "Name": nameCouple = readText(); break;
-                case "NameArea": areaCouple = readText(); break;
-                case "Description": descrCouple = readText(); break;
-                case "/Role": r = new Role(nameCouple,areaCouple,descrCouple); break;
-                case "/Couple": cou = new Couple(r,coupleID); couples.add(cou); break;
-                case "/Couples": go = false;
+                case "ID": coupleID = Integer.parseInt(readText()); break; //Lettura idDipendente
+                case "Name": nameCouple = readText(); break; //Lettura nome ruolo
+                case "NameArea": areaCouple = readText(); break; //Lettura area
+                case "Description": descrCouple = readText(); break; //Lettura descrizione
+                case "/Role": r = new Role(nameCouple,areaCouple,descrCouple); break; //Creazione ruolo
+                case "/Couple": cou = new Couple(r,coupleID); couples.add(cou); break; //Creazione coppia
+                case "/Couples": go = false; //Non ci sono più coppie da leggere
                 default: break;
             }
         }
@@ -207,54 +298,75 @@ public class AziendaParser {
 
         if (!isCorrect("ListAreas")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-
+        //Lettura sotto-aree
         LinkedList<Organigramma> listAreas = new LinkedList<>();
+
         Organigramma area = null;
+        //Variabile booleana utile a sancire la fine della lettura
         go = true;
         while (go){
-            token = nextToken();
+            token = nextToken();//Token successivo
             switch(token){
-                case "Area": area = readArea(); listAreas.add(area); break;
-                case "/ListAreas": go = false;
+                case "Area": area = readArea(); listAreas.add(area); break; //Lettura nuova sotto-area
+                case "/ListAreas": go = false; //NOn ci sono più sotto-aree da leggere
             }
         }
+
         nextToken();//</Area>
+
+        //Aggiunta sotto-aree
         for (int i=0;i<listAreas.size();i++){
             org.addChild(listAreas.get(i));
         }
         return org;
     }
+
+    /**
+     * Tale metodo ha la funzione di leggere i dipendenti dell'azienda.
+     * @return lista dei dipendenti
+     */
     private LinkedList<Employee> readEmployees(){
+        //LinkedList da restituire
         LinkedList<Employee> listEmp = new LinkedList<>();
 
         token = nextToken();//<Employees>
 
         if (!isCorrect("Employees")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
+
+        //Variabili per la definizione di ogni singolo dipendente
         int ID=0;
         String name=null;
         String surname=null;
         String email=null;
+        //Variabile booleana utile a sancire la fine della lettura
         boolean go = true;
         while(go){
-            token = nextToken();
+            token = nextToken(); //Token successivo
             switch(token){
-                case "Employee": break;
-                case "ID":ID = Integer.parseInt(readText()); break;
-                case "Name": name = readText(); break;
-                case "Surname": surname = readText(); break;
-                case "Email": email = readText(); break;
+                case "Employee": break; //Lettura dipendente
+                case "ID":ID = Integer.parseInt(readText()); break; //Lettura id dipendente
+                case "Name": name = readText(); break; //Lettura nome dipendente
+                case "Surname": surname = readText(); break; //Lettura cognome dipendente
+                case "Email": email = readText(); break; //Lettura email dipendente
                 case "/Employee":
-                    Employee emp = new Employee(name,surname,email,ID); listEmp.add(emp); break;
-                case "/Employees": go = false;
+                    Employee emp = new Employee(name,surname,email,ID); listEmp.add(emp); break; //Creazione nuovo dipendente
+                case "/Employees": go = false; //Non ci sono più dipendenti da leggere
             }
         }
         return listEmp;
     }
+
+    /**
+     * Tale metodo ha la funzione di leggere una porzione di file,
+     * restituendone il contenuto.
+     * @return String
+     */
     private String readText(){
         token = nextToken();//content
+
         nextToken();//<...>
         if (token == null) throw new IllegalArgumentException("Atteso token");
         else return token;
     }
-}
+}//AziendaParser

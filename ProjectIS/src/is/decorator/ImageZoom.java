@@ -3,6 +3,15 @@ package is.decorator;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Tale classe estende ImageDecorator. Definisce un decoratore concreto.
+ * È possibile manipolare, attraverso tale classe, la grandezza di un oggetto
+ * ImageIcon. Per rilevare eventuali cambiamento in merito alla grandezza sull'oggetto
+ * originale, è stata definita la variabile booleana changed.
+ * Il double zoom, di default pari a 1.0, esprime di quanto l'immagine corrente è
+ * stata zoomata rispetto all'immagine originale.
+ * @author lucab
+ */
 public class ImageZoom extends ImageDecorator {
     private double zoom = 1.0;
     private boolean changed = false;
@@ -10,41 +19,60 @@ public class ImageZoom extends ImageDecorator {
     public ImageZoom(ImageIcon imageIcon,double zoom){
         this.imageIcon=imageIcon;
         this.zoom = zoom;
-        this.changed = true;
+        if (zoom!=1.0)
+            this.changed = true;
     }
     public ImageZoom(ImageIcon imageIcon){
         this.imageIcon=imageIcon;
     }
 
+    //SETTERS
+    public void setZoom(double zoom){
+        if (zoom<=0)
+            throw new IllegalArgumentException("Fattore di zoom inserito non valido");
+        this.zoom = zoom;
+        changed=true;
+    }
+
+    /**
+     * Restituisce l'immagine, effettuando eventuali
+     * modifiche richieste sulla grandezza dell'immagine.
+     * @return Image object
+     */
     @Override
     public Image getImage(){
+        //Verifica su eventuali richieste di cambiamento della grandezza dell'immagine
         if (changed){
-            scale(zoom);
+            scale();
             changed=false;
         }
         return imageIcon.getImage();
     }
 
+    /**
+     * Restituisce un oggetto ImageIcon, effettuando
+     * eventuali modifiche richieste sulla grandezza dell'immagine.
+     * @return ImageIcon object
+     */
     public ImageIcon getImageIcon(){
+        //Verifica su eventuali richieste di cambiamento della grandezza dell'immagine
         if (changed){
-            scale(zoom);
+            scale();
             changed=false;
         }
         return imageIcon;
     }
-    public void setZoom(double zoom){
-        this.zoom = zoom;
-        changed=true;
-    }
 
 
-    public void scale(double zoomFact) {
-        if (zoomFact <= 0)
-            throw new IllegalArgumentException("Fattore di zoom inserito non valido");
-        this.zoom*=zoomFact;
+    /**
+     * Effettua lo zoom dell'immagine.
+    */
+    private void scale() {
         Image ima = imageIcon.getImage();
-        double newWid = ima.getWidth(null)*zoomFact;
-        double newHei = ima.getHeight(null)*zoomFact;
+        //nuove dimensioni immagine
+        double newWid = ima.getWidth(null)*zoom;
+        double newHei = ima.getHeight(null)*zoom;
+        //modifica immagine
         this.imageIcon.setImage(ima.getScaledInstance((int)newWid, (int)newHei,java.awt.Image.SCALE_SMOOTH));
     }
-}
+}//ImageZoom

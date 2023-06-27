@@ -1,30 +1,53 @@
 package is.organigramma;
 
+import java.util.Objects;
+
+/**
+ * Tale classe associa un ruolo ad un determinato dipendente,
+ * caratterizzato da un id.
+ * @author lucab
+ */
 public class Couple {
     private Role role;
-    private int ID;
+
+    //identificatore dipendente
+    private int id;
 
     public Couple(Role role, Employee employee){
         this.role = role;
-        ID = employee.getID();
+        id = employee.getID();
     }
-    public Couple(Role role, int ID){
+    public Couple(Role role, int id){
         this.role = role;
-        this.ID = ID;
+        this.id = id;
     }
+
+    //GETTERS
     public Role getRole() {
         return role;
     }
-
     public int getID() {
-        return ID;
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Couple couple = (Couple) o;
+        return id == couple.id && Objects.equals(role, couple.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(role, id);
     }
 
     @Override
     public String toString() {
         return "Couple{" +
                 "role=" + role +
-                ", ID=" + ID +
+                ", ID=" + id +
                 '}';
     }
-}
+}//Couple

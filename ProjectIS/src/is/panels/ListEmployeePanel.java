@@ -5,40 +5,50 @@ import is.DataTable;
 import is.organigramma.Azienda;
 import is.organigramma.Employee;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
 import is.decorator.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
+/**
+ * Tale classe estende JPanel. Definisce un pannello
+ * contenente la lista dei dipendenti dell'azienda.
+ */
 public class ListEmployeePanel extends JPanel {
     public ListEmployeePanel(Mediator mediator){
+        //Verifica validità mediator
         if (mediator==null) throw new IllegalArgumentException("Mediator non valido");
 
         Azienda azienda = mediator.getAzienda();
 
-        setLayout(null);
+        //Colors
         Color blue = new Color(3, 2, 179);
         Color blue2 = new Color(0,51,200);
         Color gray = new Color(230,230,230);
-        setBounds(0,0,1000,1000);
+        //Panel options
+        setLayout(null);
+        setBounds(0,0,1000,1000); //Confini JPanel
         //Header
-        JPanel headPanel = new JPanel(null); headPanel.setBackground(Color.white);
-        headPanel.setBounds(0,0,1000,60);
-
+        JPanel headPanel = new JPanel(null);
+        headPanel.setBackground(Color.white); //Definizione sfondo
+        headPanel.setBounds(0,0,1000,60); //Confini headPanel
+        //Label of headPanel
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
         JLabel head = new JLabel("Elenco dipendenti");
-        head.setFont(f); head.setForeground(Color.black); head.setBounds(10,7,380,50);
-        headPanel.add(head);
-        //Adding Fields
-        JPanel fieldPanel = new JPanel(null);
-        fieldPanel.setBackground(gray);
-        fieldPanel.setBounds(0,60,1000,950);
+        head.setFont(f);
+        head.setForeground(Color.black);
+        head.setBounds(10,7,380,50);
 
-        Organigramma org = azienda.getOrganigramma();
+        //Aggiunta campi per visionare la lista dei dipendenti
+        JPanel fieldPanel = new JPanel(null);
+        fieldPanel.setBackground(gray); //Definizione sfondo
+        fieldPanel.setBounds(0,60,1000,950); //Confini fieldPanel
+
+        //Tipologia colonne della tabella contenente i dipendenti
         String[] columnNames = {"Cognome","Nome","Email","ID","Numero ruoli","Numero Aree"};
         Object[][] data = new Object[azienda.getNEmployees()][columnNames.length];
 
+        //Getting data
         int i = 0;
         for (Employee emp: azienda.getEmployees()){
             data[i][0] = emp.getSurname();
@@ -52,7 +62,7 @@ public class ListEmployeePanel extends JPanel {
 
         //Table
         DataTable table = new DataTable(data, columnNames);
-        //Dimension of column
+        //Dimension of columns
         TableColumn column = null;
         for (int j = 0;j<6;j++){
             column = table.getColumnModel().getColumn(j);
@@ -67,29 +77,36 @@ public class ListEmployeePanel extends JPanel {
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(15,50,955,200);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //Search
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Consente lo scorrimento verticale
+        //Search employee
         JLabel searchLab = new JLabel("Cerca dipendente: ");
-        searchLab.setFont(f); searchLab.setForeground(blue); searchLab.setBounds(20,290,280,30);
+        searchLab.setFont(f);
+        searchLab.setForeground(blue);
+        searchLab.setBounds(20,290,280,30);
 
-        JTextField idField = new JTextField(20); idField.setText("Digita ID dipendente");
+        JTextField idField = new JTextField(20); //Campo in cui bisogna inserire l'id del dipendente che si vuole cercare
+        idField.setText("Digita ID dipendente");
         idField.setBounds(20,330,280,30);
 
-        JButton search = new JButton("Cerca");  search.setForeground(Color.white); search.setBackground(blue2);
+        //Button
+        JButton search = new JButton("Cerca");  //Button per la ricerca di un dipendente
+        search.setForeground(Color.white);
+        search.setBackground(blue2);
         search.setBounds(340,330,140,30);
-        //Image
+        //Logo applicazione
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
-        //Label
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);
-        //ADDING
+        //Adding
+        headPanel.add(head);
         fieldPanel.add(scrollPane); fieldPanel.add(lab);
         fieldPanel.add(searchLab); fieldPanel.add(idField); fieldPanel.add(search);
         add(fieldPanel); add(headPanel);
         //Mediator
         mediator.setIdListEmployee(idField);
         mediator.setSearchListEmployee(search);
+        //Listener
         search.addActionListener(e->mediator.widgetChanged(search));
     }
-}
+}//ListEmployeePanel

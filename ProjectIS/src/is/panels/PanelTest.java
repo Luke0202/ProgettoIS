@@ -9,6 +9,15 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Tale classe effettua un testing sui pannelli definiti
+ * nel package is.panels. In base a un indice è possibile
+ * selezionare il pannello che si vuole mostrare.
+ * Lo scopo unico della classe è quello di visionare un singolo
+ * pannello, pertanto la pressione di buttons potrebbe generare
+ * errori.
+ * @author lucab
+ */
 public class PanelTest {
     private JFrame frame;
 
@@ -88,21 +97,22 @@ public class PanelTest {
 
         //Scelta pannello da mostrare
         switch(j){
-            case 1:LogPanel log = new LogPanel(mediator); frame.add(log); break;
-            case 2:CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
-            case 3:ModAreaPanel modArea = new ModAreaPanel((Organigramma) o.getChild(0),mediator); frame.add(modArea); break;
-            case 4:ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
-            case 5:AreaPanel areaP = new AreaPanel(o1,mediator); frame.add(areaP); break;
-            case 6:CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
-            case 7:ModRolePanel modRole = new ModRolePanel(r7,mediator); frame.add(modRole); break;
-            case 8:ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;
-            case 9:RolePanel roleP = new RolePanel(r3,mediator); frame.add(roleP); break;
-            case 10: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;
-            case 11: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(mediator); frame.add(listEmployeePanel); break;
-            case 12: EmployeePanel employeeP = new EmployeePanel(emp5,mediator); frame.add(employeeP); break;
-            case 13: AziendaPanel aziendaP = new AziendaPanel(mediator); frame.add(aziendaP); break;
-            case 14: CreateAziendaPanel createAzienda = new CreateAziendaPanel(mediator); frame.add(createAzienda); break;
-            case 15: HomePanel home = new HomePanel(mediator); frame.add(home);
+            case 0: LogPanel log = new LogPanel(mediator); frame.add(log); break;
+            case 1: CreateAziendaPanel createAzienda = new CreateAziendaPanel(mediator); frame.add(createAzienda); break;
+            case 2: HomePanel home = new HomePanel(mediator); frame.add(home); break;
+            case 3: AziendaPanel aziendaP = new AziendaPanel(mediator); frame.add(aziendaP); break;
+            case 4: CreateAreaPanel createArea = new CreateAreaPanel(mediator); frame.add(createArea); break;
+            case 5: ListAreaPanel listArea = new ListAreaPanel(mediator); frame.add(listArea); break;
+            case 6: CreateEmployeePanel assoPanel = new CreateEmployeePanel(mediator); frame.add(assoPanel); break;
+            case 7: ListEmployeePanel listEmployeePanel = new ListEmployeePanel(mediator); frame.add(listEmployeePanel); break;
+            case 8: CreateRolePanel createRole = new CreateRolePanel(mediator); frame.add(createRole); break;
+            case 9: ListRolePanel listRole = new ListRolePanel(mediator); frame.add(listRole); break;
+            case 10: AreaPanel areaP = new AreaPanel(o1,mediator); frame.add(areaP); break;
+            case 11: ModAreaPanel modArea = new ModAreaPanel((Organigramma) o.getChild(0),mediator); frame.add(modArea); break;
+            case 12: RolePanel roleP = new RolePanel(r3,mediator); frame.add(roleP); break;
+            case 13: ModRolePanel modRole = new ModRolePanel(r7,mediator); frame.add(modRole); break;
+            case 14: EmployeePanel employeeP = new EmployeePanel(emp5,mediator); frame.add(employeeP); break;
+            case 15: AccessPanel accessP = new AccessPanel(mediator); frame.add(accessP); break;
             default:  break;
         }
 
@@ -113,6 +123,7 @@ public class PanelTest {
         frame.setVisible(true);
     }
     public static void main(String[] args){
+
         PanelTest panel = new PanelTest(5);
     }
 }

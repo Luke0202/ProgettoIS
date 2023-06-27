@@ -1,12 +1,14 @@
 package is;
 
-import is.mediator.Mediator;
 import is.state.Pagination;
 import is.state.PaginationIF;
 
+/**
+ * Tale classe ha la funzione di lanciare l'applicazione per la gestione di un'azienda.
+ * @author lucab
+ */
 public class Application {
     public static void main(String[] args){
-        Mediator m = new Mediator();
-        PaginationIF p = new Pagination(m);
+        PaginationIF p = new Pagination();
     }
-}
+}//Application

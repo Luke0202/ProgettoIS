@@ -2,9 +2,18 @@ package is.organigramma;
 
 import java.util.Objects;
 
-
+/**
+ * Tale classe descrive un dipendente.
+ * Un dipendente è identificato da un id ed è caratterizzato da
+ * un nome, un cognome e una email.
+ * @author lucab
+ */
 public class Employee {
+
+    //id dipendente
     private final int ID;
+
+    //nome, cognome e email di un dipendente.
     private String name, surname, email;
 
     public Employee(String name, String surname, String email,int ID){
@@ -14,6 +23,7 @@ public class Employee {
         this.ID = ID;
     }
 
+    //GETTERS
     public int getID(){ return ID;  }
     public String getName() {
         return name;
@@ -57,4 +67,4 @@ public class Employee {
         sb.append(".");
         return sb.toString();
     }
-}
+}//Employee

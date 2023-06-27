@@ -1,17 +1,27 @@
 <Azienda>
-<Cod>2222</Cod>
-<Name>Azienda1</Name>
-<Headquarter>Roma</Headquarter>
-<Type>Rr</Type
-<Password>2222</Password>
+<Cod>1</Cod>
+<Name>A</Name>
+<Headquarter>22</Headquarter>
+<Type>A</Type
+<Password>1</Password>
 <Employees>
 </Employees>
 <Roles>
+<Role>
+<Name>Impiegato</Name>
+<NameArea>A</NameArea>
+<Description>  </Description>
+</Role>
+<Role>
+<Name>Lavoratore</Name>
+<NameArea>A</NameArea>
+<Description>  </Description>
+</Role>
 </Roles>
 <Organigramma>
 <Area>
-<Name>Azienda1</Name>
-<Description>Codice ATECO: 2222, Sede centrale: Roma, Settore: Rr.</Description>
+<Name>A</Name>
+<Description>Codice ATECO: 1, Sede centrale: 22, Settore: A.</Description>
 <State>false</State>
 <Couples>
 </Couples>

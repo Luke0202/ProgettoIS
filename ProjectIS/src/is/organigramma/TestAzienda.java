@@ -4,10 +4,18 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+/**
+ * Tale classe ha la funzione di verificare le classi definite nel
+ * package is.organigramma.
+ * @author lucab
+ */
 @TestMethodOrder(OrderAnnotation.class)
 public class TestAzienda {
+    //Organigramma aziendale
     private Organigramma o;
+
     private Azienda azienda;
+
     @Test
     @BeforeEach
     public void primaDiTutto(){
@@ -30,7 +38,7 @@ public class TestAzienda {
 
         //Definizione Azienda
         String psw ="1234";//Password aziendale
-        azienda = new Azienda("010101", "Spacex","Florida","Aerospaziale",psw,o);
+        azienda = new Azienda("010101", "Spacex","Hawthorne","Aerospaziale",psw,o);
 
         //Definizione ruoli
         Role r1 = new Role("direttore","Consiglio di amministrazione","");
@@ -74,13 +82,20 @@ public class TestAzienda {
 
     @Test
     @Order(1)
-    @DisplayName("Verifica formazione organigramma")
+    @DisplayName("Verifica struttura organigramma")
     public void primoTest(){
+        Area consiglioAmministrazione = o.getChild(0);
+        Area areaVendite = ((Organigramma)consiglioAmministrazione).getChild(0);
+
         //Verifica presenza di sottoaree
         assertFalse(o.getSubAreas().isEmpty());
 
         //Verifica numero di sottoaree
         assertEquals(o.getSubAreas().size(),6);
+
+        //Verifica numero aree figlie
+        assertEquals(((Organigramma) consiglioAmministrazione).getNChildren(),3);
+        assertEquals(((Organigramma) areaVendite).getNChildren(),2);
     }
 
     @Test
@@ -95,7 +110,7 @@ public class TestAzienda {
         Area customCare = ((Organigramma)areaVendite).getChild(0);
         Area marketing = ((Organigramma)areaVendite).getChild(1);
 
-        //Ruoli di Consiglio di Amministrazione
+        //Ruoli Consiglio di Amministrazione
         assertEquals(consiglioAmministrazione.getRoles().size(),2);
 
         //Ruoli Area Vendite
@@ -138,10 +153,10 @@ public class TestAzienda {
         //Verifica presenza di tre dipendenti nell'area "custom care"
         assertEquals(customCare.getNEmployees(),3);
 
-        //Verifica assenza di dipendenti nell'area produzione
-        assertEquals(produzione.getNEmployees(),0);
+        //Verifica assenza di dipendenti nell'area "produzione"
+        assertTrue(produzione.getEmployees().isEmpty());
 
-        //Verifico l'assenza di dipendenti in "marketing" aventi il ruolo di responsabile
+        //Verifica assenza di dipendenti nell'area "marketing" con il ruolo di responsabile
         assertTrue(marketing.getEmployees(new Role("responsabile","Marketing","")).isEmpty());
     }
 
@@ -162,10 +177,10 @@ public class TestAzienda {
         assertEquals(azienda.getArea("Consiglio di amministrazione"),o.getChild(0));
 
         //Verifica che "azienda" è l'area padre di "consiglio di amministrazione"
-        Organigramma consiglioAmministrazione =(Organigramma) o.getChild(0);
+        Organigramma consiglioAmministrazione = (Organigramma) o.getChild(0);
         assertEquals(azienda.getParent(consiglioAmministrazione),o);
 
-        //Verifica numero di aree in cui lavora il dipendente Gianni Filice
+        //Verifica numero di aree in cui lavora il dipendente "Gianni Filice"
         assertEquals(azienda.getAreasName(new Employee("Gianni","Filice","",2)).size(),2);
     }
 }

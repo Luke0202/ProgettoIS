@@ -2,12 +2,21 @@ package is.organigramma;
 
 import java.util.Objects;
 
+/**
+ * Questa classe estende AbstractAzienda.
+ * Definisce le caratteristiche che contraddistinguono un'azienda.
+ * @author lucab
+ */
 public class Azienda extends AbstractAzienda{
+    //Definizione password di accesso aziendale e definizione codice ateco
     private final String psw, cod;
+
+    //Definizione nome, sede centrale e settore
     private String name, headquarter, type;
     public Azienda(String cod,String name,String headquarter,String type,String psw,Organigramma organigramma){
         super(organigramma);
-        if (!cod.matches("[\\d\\.]+")) throw new IllegalArgumentException("Codice non valido");
+        //REGEX per verificare la validità del codice
+        if (!cod.matches("[\\d\\.]+")) throw new IllegalArgumentException("Codice ATECO non valido");
         this.cod = cod;
         this.name = name;
         this.type = type;
@@ -47,4 +56,4 @@ public class Azienda extends AbstractAzienda{
                 ", sector='" + type + '\'' +
                 '}';
     }
-}
+}//Azienda

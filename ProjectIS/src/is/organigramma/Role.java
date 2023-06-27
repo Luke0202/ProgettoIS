@@ -2,13 +2,22 @@ package is.organigramma;
 
 import java.util.Objects;
 
+/**
+ * Tale classe descrive un ruolo.
+ * Un ruolo è identificato da un nome e da un'area. Inoltre è
+ * caratterizzato da una descrizione.
+ * @author lucab
+ */
 public class Role {
+    //nome, descrizione e area di un ruolo
     private String name,description,area;
+
     public Role(String name, String area, String description){
         this.name = name;
         this.area = area;
         this.description=description;
     }
+
     //GETTERS
     public String getName() {
         return name;
@@ -16,7 +25,10 @@ public class Role {
     public String getArea() {
         return area;
     }
-    public String getDescription(){ return description;}
+    public String getDescription(){
+        return description;
+    }
+
     //SETTERS
     public void setName(String name) {
         this.name = name;
@@ -49,4 +61,4 @@ public class Role {
                 ", area='" + area + '\'' +
                 '}';
     }
-}
+}//Role
