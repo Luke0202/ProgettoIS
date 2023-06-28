@@ -11,6 +11,8 @@ import java.util.*;
 public class Organigramma extends AbstractCompositeArea {
 
     //Coppie ruolo-dipendente
+    //Le coppie di tale insieme comprendono solo i ruoli assegnati ai vari dipendenti
+    //I ruoli, definiti per tale area, che non sono stati ancora assegnati, non si trovano nelle coppie
     private HashSet<Couple> couples = new HashSet<>();
 
     //Nome e descrizione di un'area

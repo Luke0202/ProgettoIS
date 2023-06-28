@@ -15,7 +15,8 @@ public interface AziendaIF {
     void addEmployee(Role role, Employee d);
     void removeEmployee(Employee emp);
     void removeEmployee(int id);
-    void removeEmployee(Role role,Employee emp);
+    void removeRoleFromEmployee(Role role, Employee emp);
+    void removeRoleFromEmployee(Role role, int id);
     int giveID();
 
     //About Roles

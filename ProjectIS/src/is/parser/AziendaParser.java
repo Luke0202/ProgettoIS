@@ -164,11 +164,11 @@ public class AziendaParser {
         Organigramma org = readOrganigramma();
 
         //Creazione azienda
-        Azienda az = new Azienda(codAzienda,nameAzienda,hqAzienda,typeAzienda,psw,org);
+        Azienda azienda = new Azienda(codAzienda,nameAzienda,hqAzienda,typeAzienda,psw,org);
 
         //Aggiunta ruoli
         for (Role r:roles){
-            az.addRole(r);
+            azienda.addRole(r);
         }
 
         //Aggiunta coppie ID emp-Role
@@ -177,11 +177,11 @@ public class AziendaParser {
             for (Couple c:couples){
                 if (c.getID()==id){
                     //Aggiunta coppia
-                    az.addEmployee(c.getRole(),emp);
+                    azienda.addEmployee(c.getRole(),emp);
                 }
             }
         }
-        return az;
+        return azienda;
     }
 
     /**
@@ -333,27 +333,30 @@ public class AziendaParser {
 
         if (!isCorrect("Employees")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
 
-
         //Variabili per la definizione di ogni singolo dipendente
-        int ID=0;
+        int id=0;
         String name=null;
         String surname=null;
         String email=null;
+        Employee emp=null;
         //Variabile booleana utile a sancire la fine della lettura
         boolean go = true;
+
         while(go){
             token = nextToken(); //Token successivo
+
             switch(token){
-                case "Employee": break; //Lettura dipendente
-                case "ID":ID = Integer.parseInt(readText()); break; //Lettura id dipendente
+                case "Employee": break; //Inizio lettura dipendente
+                case "ID":id = Integer.parseInt(readText()); break; //Lettura id dipendente
                 case "Name": name = readText(); break; //Lettura nome dipendente
                 case "Surname": surname = readText(); break; //Lettura cognome dipendente
                 case "Email": email = readText(); break; //Lettura email dipendente
                 case "/Employee":
-                    Employee emp = new Employee(name,surname,email,ID); listEmp.add(emp); break; //Creazione nuovo dipendente
+                    emp = new Employee(name,surname,email,id); listEmp.add(emp); break; //Creazione nuovo dipendente
                 case "/Employees": go = false; //Non ci sono più dipendenti da leggere
             }
         }
+
         return listEmp;
     }
 

@@ -61,10 +61,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(400);
-        sb.append("Dipendente: " + surname + " " + name + ". Id: " + ID + "\nRuoli: ");
-        sb.setLength(sb.length() - 2);
-        sb.append(".");
-        return sb.toString();
+        return "Dipendente: " + surname + " " + name + ", Id: " + ID + ".";
     }
 }//Employee

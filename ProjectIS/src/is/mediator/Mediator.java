@@ -7,12 +7,7 @@ import is.organigramma.Role;
 import is.organigramma.Azienda;
 import is.organigramma.Organigramma;
 import is.organigramma.Area;
-import is.parser.TextPlainParser;
 import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -28,8 +23,8 @@ public class Mediator implements MediatorIF{
             nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole, idEmployee;
     private JButton newRoleEmployee,newAziendaAccess,confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveCreateRole, saveModRole,
            saveCreateEmployee,editArea, removeArea, removeEmployee, editRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
-    searchListRole, saveVModArea,saveBModArea;
-    private JComboBox<String> dadCreateArea, areaCreateRole,roleCreateEmployee,roleEmployee;
+    searchListRole, saveVModArea,saveBModArea,remRoleEmployee;
+    private JComboBox<String> dadComboCreateArea, areaComboCreateRole,roleComboCreateEmployee,rolesComboEmployee, rolesRemComboEmployee;
 
     private JTextArea descrCreateArea,descrModArea, descrCreateRole, descrModRole;
 
@@ -70,7 +65,7 @@ public class Mediator implements MediatorIF{
 
     //About CreateAreaPanel
     public void setNameCreateArea(JTextField nameCreateArea){this.nameCreateArea=nameCreateArea;}
-    public void setDadCreateArea(JComboBox<String> dadCreateArea){this.dadCreateArea=dadCreateArea;}
+    public void setDadComboCreateArea(JComboBox<String> dadComboCreateArea){this.dadComboCreateArea=dadComboCreateArea;}
     public void setDescrCreateArea(JTextArea descrCreateArea){this.descrCreateArea=descrCreateArea;}
     public void setSaveBCreateArea(JButton saveBCreateArea){this.saveBCreateArea=saveBCreateArea;}
     public void setSaveVCreateArea(JButton saveVCreateArea){this.saveVCreateArea=saveVCreateArea;}
@@ -84,7 +79,7 @@ public class Mediator implements MediatorIF{
 
     //About CreateRolePanel
     public void setNameCreateRole(JTextField nameCreateRole){this.nameCreateRole=nameCreateRole;}
-    public void setAreaCreateRole(JComboBox<String> areaCreateRole){this.areaCreateRole=areaCreateRole;}
+    public void setAreaComboCreateRole(JComboBox<String> areaComboCreateRole){this.areaComboCreateRole=areaComboCreateRole;}
     public void setDescrCreateRole(JTextArea descrCreateRole){this.descrCreateRole=descrCreateRole;}
     public void setSaveCreateRole(JButton saveCreateRole){this.saveCreateRole = saveCreateRole;}
 
@@ -102,15 +97,17 @@ public class Mediator implements MediatorIF{
 
     //About EmployeePanel
     public void setIdEmployee(JTextField idEmployee){this.idEmployee=idEmployee;}
-    public void setNewRoleEmployee(JButton newRoleEmployee){this.newRoleEmployee=newRoleEmployee;}
     public void setRemoveEmployee(JButton removeEmployee){this.removeEmployee=removeEmployee;}
-    public void setRoleEmployee(JComboBox<String> roleEmployee){this.roleEmployee=roleEmployee;}
+    public void setNewRoleEmployee(JButton newRoleEmployee){this.newRoleEmployee=newRoleEmployee;}
+    public void setRemRoleEmployee(JButton remRoleEmployee){this.remRoleEmployee=remRoleEmployee;}
+    public void setRolesComboEmployee(JComboBox<String> rolesComboEmployee){this.rolesComboEmployee=rolesComboEmployee;}
+    public void setRolesRemComboEmployee(JComboBox<String> rolesRemComboEmployee){this.rolesRemComboEmployee=rolesRemComboEmployee;}
 
     //About CreateEmployeePanel
     public void setNameCreateEmployee(JTextField nameCreateEmployee){this.nameCreateEmployee=nameCreateEmployee;}
     public void setSurnameCreateEmployee(JTextField surnameCreateEmployee){this.surnameCreateEmployee=surnameCreateEmployee;}
     public void setEmailCreateEmployee(JTextField emailCreateEmployee){this.emailCreateEmployee=emailCreateEmployee;}
-    public void setRoleCreateEmployee(JComboBox<String> roleCreateEmployee){this.roleCreateEmployee=roleCreateEmployee;}
+    public void setRoleComboCreateEmployee(JComboBox<String> roleComboCreateEmployee){this.roleComboCreateEmployee=roleComboCreateEmployee;}
     public void setSaveCreateEmployee(JButton saveCreateEmployee){this.saveCreateEmployee=saveCreateEmployee;}
 
     //About RolePanel
@@ -170,10 +167,12 @@ public class Mediator implements MediatorIF{
             //L'utente viene rimandato al pannello contenente i dettagli aziendali
             pag.avanza(Pagination.DETT_AZIENDA,null);
 
-        if (widget==createA)
+        if (widget==createA){
             //Richiesta creazione area
+
             //L'utente viene rimandato al pannello di creazione area
             pag.avanza(Pagination.CREATE_AREA,null);
+        }
 
         if (widget==listA)
             //Richiesta di accesso alla lista delle aree
@@ -185,7 +184,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica presenza di almeno un ruolo
             if (azienda.getRoles().isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Nessun ruolo assegnabile al dipendente.\nCreare prima un ruolo.");
+                JOptionPane.showMessageDialog(frame, "Nessun ruolo da assegnare al dipendente.\nCreare prima un ruolo.");
                 //L'utente viene rimandato al pannello di creazione ruolo
                 pag.avanza(Pagination.CREATE_ROLE,null);
             }else
@@ -236,6 +235,22 @@ public class Mediator implements MediatorIF{
                         , "Accesso negato.");
             }
         }
+        if (widget == newAziendaAccess){
+            //Richiesta creazione azienda
+
+            //L'utente viene rimandato al pannello di creazione azienda
+            pag.avanza(Pagination.CREATE_AZIENDA,null);
+        }
+        if (widget == newAziendaLog){
+            //Richiesta creazione azienda
+
+            //Richiesta conferma
+            int i = JOptionPane.showConfirmDialog(frame, "Vuoi cancellare l'azienda presente nel sistema per memorizzarne una nuova?");
+            if (i != 0) return; //L'utente non ha confermato
+
+            //L'utente viene rimandato al pannello di creazione azienda
+            pag.avanza(Pagination.CREATE_AZIENDA,null);
+        }
         if (widget == saveCreateAzienda) {
             //Button di creazione di un azienda
 
@@ -267,29 +282,13 @@ public class Mediator implements MediatorIF{
             type = type.substring(0, 1).toUpperCase() + type.substring(1);
 
             //Creazione azienda
-            String description = "Codice ATECO: " + cod + ", Sede centrale: " + hq + ", Settore: " + type + ".";
-            Azienda azienda = new Azienda(cod, name, hq, type, psw, new Organigramma(name, description));
+            String description = "Azienda: "+name+", Codice ATECO: " + cod + ", Sede centrale: " + hq + ", Settore: " + type + ".";
+            Azienda azienda = new Azienda(cod, name, hq, type, psw, new Organigramma("Area dirigenziale", description));
             setAzienda(azienda);
 
-            //Scrittura azienda su memoria secondaria
-            File f = new File("data.txt");
-            try {
-                PrintWriter pw = new PrintWriter(new FileWriter(f.getPath()),true);
-                //Scrittura file
-                TextPlainParser az = new TextPlainParser(azienda, pw);
-                az.doParse();
-                pw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            JOptionPane.showMessageDialog(frame, "Caricamento avvenuto con successo.");
             //L'utente viene rimandato alla homepage
             pag.avanza(Pagination.HOME, null);
-        }
-        if (widget == newAziendaAccess || widget == newAziendaLog){
-            //Richiesta creazione azienda
-            //L'utente viene rimandato al pannello di creazione azienda
-            pag.avanza(Pagination.CREATE_AZIENDA,null);
         }
         if (widget == saveBCreateArea) {
             //Richiesta salvataggio in BOZZA di un'area
@@ -321,8 +320,8 @@ public class Mediator implements MediatorIF{
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
-            int j = dadCreateArea.getSelectedIndex();
-            String nameArea = dadCreateArea.getItemAt(j);
+            int j = dadComboCreateArea.getSelectedIndex();
+            String nameArea = dadComboCreateArea.getItemAt(j);
 
             //Area da aggiungere
             Organigramma org = new Organigramma(name, descr);
@@ -373,8 +372,8 @@ public class Mediator implements MediatorIF{
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
-            int j = dadCreateArea.getSelectedIndex();
-            String nameArea = dadCreateArea.getItemAt(j);
+            int j = dadComboCreateArea.getSelectedIndex();
+            String nameArea = dadComboCreateArea.getItemAt(j);
 
             //Area da aggiungere
             Organigramma org = new Organigramma(name, descr);
@@ -556,8 +555,8 @@ public class Mediator implements MediatorIF{
             String name = nameCreateRole.getText().trim();
 
             //Getting name area
-            int j = areaCreateRole.getSelectedIndex();
-            String area = areaCreateRole.getItemAt(j);
+            int j = areaComboCreateRole.getSelectedIndex();
+            String area = areaComboCreateRole.getItemAt(j);
 
             //Verifica ruolo già esistente
             for (Role role: azienda.getRoles()){
@@ -708,8 +707,8 @@ public class Mediator implements MediatorIF{
             if (i != 0) return; //L'utente non ha confermato i dati
 
             //Getting role
-            int j = roleCreateEmployee.getSelectedIndex();
-            String role = roleCreateEmployee.getItemAt(j);
+            int j = roleComboCreateEmployee.getSelectedIndex();
+            String role = roleComboCreateEmployee.getItemAt(j);
             String[] parts = role.split(" - ");
             String nameRole = parts[0];
             String nameArea = parts[1];
@@ -760,32 +759,80 @@ public class Mediator implements MediatorIF{
 
             //Richiesta conferma
             int i = JOptionPane.showConfirmDialog(frame,"Assegnare il nuovo ruolo ?");
-            if (i != 0) return; //L'utente non ha confermato i dati
+            if (i != 0) return; //L'utente non ha confermato
 
             //Getting role
-            int j = roleEmployee.getSelectedIndex();
-            String role = roleEmployee.getItemAt(j);
+            int j = rolesComboEmployee.getSelectedIndex();
+            String role = rolesComboEmployee.getItemAt(j);
             String[] parts = role.split(" - ");
             String nameRole = parts[0];
             String nameArea = parts[1];
 
+            //Id dipendente
             int id = Integer.parseInt(idEmployee.getText());
 
             //Assegnazione ruolo al dipendente
             for (Role r:azienda.getRoles()){
                 if (r.getName().equals(nameRole) && r.getArea().equals(nameArea)){
                     azienda.addRoleToEmployee(r,id);
+                    break;
                 }
             }
-            //L'utente viene rimandato alla lista dei dipendenti
-            pag.avanza(Pagination.LIST_EMPLOYEE, null);
+
+            //Ricavo il dipendente
+            Employee emp=null;
+            for (Employee e:azienda.getEmployees()){
+                if (e.getID()==id){
+                    emp = e; break;
+                }
+            }
+            JOptionPane.showMessageDialog(frame, "Ruolo assegnato con successo.");
+            //L'utente viene rimandato al pannello di gestione del dipendente
+            pag.avanza(Pagination.EMPLOYEE,emp);
+        }
+        if (widget == remRoleEmployee){
+            //Richiesta di rimozione ruolo
+
+            //Richiesta conferma
+            int i = JOptionPane.showConfirmDialog(frame,"Rimuovere il ruolo ?");
+            if (i != 0) return; //L'utente non ha confermato
+
+            //Getting role
+            int j = rolesRemComboEmployee.getSelectedIndex();
+            String role = rolesRemComboEmployee.getItemAt(j);
+            String[] parts = role.split(" - ");
+            String nameRole = parts[0];
+            String nameArea = parts[1];
+
+            //Id dipendente
+            int id = Integer.parseInt(idEmployee.getText());
+
+            //Ricavo il dipendente
+            Employee emp=null;
+            for (Employee e:azienda.getEmployees()){
+                if (e.getID()==id){
+                    emp = e; break;
+                }
+            }
+
+            //Rimozione ruolo
+            for (Role r:azienda.getRoles()){
+                if (r.getName().equals(nameRole) && r.getArea().equals(nameArea)){
+                    azienda.removeRoleFromEmployee(r,emp);
+                    break;
+                }
+            }
+
+            JOptionPane.showMessageDialog(frame, "Ruolo rimosso con successo.");
+            //L'utente viene rimandato al pannello di gestione del dipendente
+            pag.avanza(Pagination.EMPLOYEE,emp);
         }
         if(widget==removeEmployee){
             //Richiesta di rimozione di un dipendente
 
             //Richiesta conferma
             int i = JOptionPane.showConfirmDialog(frame,"Procedere con la rimozione ?");
-            if (i != 0) return; //L'utente non ha confermato i dati
+            if (i != 0) return; //L'utente non ha confermato
 
             //Option selected: Yes
             int id = Integer.parseInt(idEmployee.getText());

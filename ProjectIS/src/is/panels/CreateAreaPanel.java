@@ -103,7 +103,7 @@ public class CreateAreaPanel extends JPanel {
         add(fieldPanel); add(headPanel);
         //Using mediator
         mediator.setNameCreateArea(nameField);
-        mediator.setDadCreateArea(dadComboBox);
+        mediator.setDadComboCreateArea(dadComboBox);
         mediator.setDescrCreateArea(descrArea);
         mediator.setSaveBCreateArea(saveB);
         mediator.setSaveVCreateArea(saveV);

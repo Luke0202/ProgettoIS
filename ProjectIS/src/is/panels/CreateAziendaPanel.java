@@ -69,10 +69,10 @@ public class CreateAziendaPanel extends JPanel {
         JTextField typeField = new JTextField(20); //Campo contenente il settore dell'azienda
         typeField.setBounds(20,155,280,30);
         //Psw Field
-        JLabel pswLab = new JLabel("Password: ");
+        JLabel pswLab = new JLabel("Password di accesso: ");
         pswLab.setFont(f);
         pswLab.setForeground(blue);
-        pswLab.setBounds(350,120,200,30);
+        pswLab.setBounds(350,120,280,30);
 
         JTextField pswField = new JTextField(20); //Campo contenente la password aziendale
         pswField.setBounds(350,155,280,30);

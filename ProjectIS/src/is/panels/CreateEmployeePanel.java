@@ -102,7 +102,7 @@ public class CreateEmployeePanel extends JPanel {
         mediator.setNameCreateEmployee(nameField);
         mediator.setSurnameCreateEmployee(surnameField);
         mediator.setEmailCreateEmployee(emailField);
-        mediator.setRoleCreateEmployee(roleComboBox);
+        mediator.setRoleComboCreateEmployee(roleComboBox);
         mediator.setSaveCreateEmployee(save);
         //Listener
         save.addActionListener(e -> mediator.widgetChanged(save));

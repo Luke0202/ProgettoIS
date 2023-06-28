@@ -133,15 +133,35 @@ public class EmployeePanel extends JPanel {
         rolesTotLab.setBounds(20,360,200,30);
 
         String[] array = findRoles(emp,mediator.getAzienda());
-        JComboBox<String> roleComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli assegnabili ad un dipendente
-        roleComboBox.setBounds(20,400,350,30);
+        JComboBox<String> rolesComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli assegnabili ad un dipendente
+        rolesComboBox.setBounds(20,400,350,30);
 
         //Button
         JButton newRoleButton = new JButton("Aggiungi ruolo"); //Button per aggiungere un ruolo ad un dipendente
         newRoleButton.setForeground(Color.white);
         newRoleButton.setBackground(blue2);
         newRoleButton.setBounds(400,400,150,30);
-        newRoleButton.setEnabled(!roleComboBox.getItemAt(0).equals("Nessun ruolo presente"));
+        newRoleButton.setEnabled(!rolesComboBox.getItemAt(0).equals("Nessun ruolo disponibile"));
+
+        //Ruoli che si possono rimuovere da un dipendente
+        //Se il dipendente presenta un unico ruolo, allora non sarà possibile rimuoverlo
+        JLabel rolesRemLab = new JLabel("Ruoli rimovibili: ");
+        rolesRemLab.setFont(f);
+        rolesRemLab.setForeground(blue);
+        rolesRemLab.setBounds(20,440,200,30);
+
+        //Ricavo i ruoli che si possono rimuovere da un dipendente
+        array = getRoles(emp,mediator.getAzienda());
+        JComboBox<String> rolesRemComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli di un dipendente
+        rolesRemComboBox.setBounds(20,480,350,30);
+
+        //Button
+        JButton remRoleButton = new JButton("Rimuovi ruolo"); //Button per rimuovere un ruolo da un dipendente
+        remRoleButton.setForeground(Color.white);
+        remRoleButton.setBackground(blue2);
+        remRoleButton.setBounds(400,480,150,30);
+        remRoleButton.setEnabled(rolesRemComboBox.getItemCount()>1); //Abilitato se sono presenti almeno due ruoli
+
         //Logo applicazione
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
@@ -156,16 +176,21 @@ public class EmployeePanel extends JPanel {
         fieldPanel.add(IDLab); fieldPanel.add(IDField); fieldPanel.add(removeButton);
         fieldPanel.add(rolesLab); fieldPanel.add(scrollPane);
         fieldPanel.add(lab); fieldPanel.add(rolesTotLab);
-        fieldPanel.add(roleComboBox); fieldPanel.add(newRoleButton);
+        fieldPanel.add(rolesComboBox); fieldPanel.add(newRoleButton);
+        fieldPanel.add(rolesRemLab); fieldPanel.add(rolesRemComboBox);
+        fieldPanel.add(remRoleButton);
         add(headPanel); add(fieldPanel);
 
         //Mediator
         mediator.setIdEmployee(IDField);
         mediator.setNewRoleEmployee(newRoleButton);
         mediator.setRemoveEmployee(removeButton);
-        mediator.setRoleEmployee(roleComboBox);
+        mediator.setRolesComboEmployee(rolesComboBox);
+        mediator.setRolesRemComboEmployee(rolesRemComboBox);
+        mediator.setRemRoleEmployee(remRoleButton);
         //Listeners
         newRoleButton.addActionListener(e->mediator.widgetChanged(newRoleButton));
+        remRoleButton.addActionListener(e->mediator.widgetChanged(remRoleButton));
         removeButton.addActionListener(e->mediator.widgetChanged(removeButton));
     }
 
@@ -173,15 +198,15 @@ public class EmployeePanel extends JPanel {
      * Restituisce la lista dei ruoli che si possono assegnare
      * ad un determinato dipendente. La lista non comprende i ruoli
      * che già possiede.
-     * @param emp
-     * @param azienda
-     * @return
+     * @param emp dipendente al quale si può assegnare un ruolo
+     * @param azienda azienda contenente tutti i ruoli definiti
+     * @return lista contenente le coppie nomeRuolo-AreaDiCompetenza
      */
     private static String[] findRoles(Employee emp,Azienda azienda){
         //Ricavo ruoli che si possono assegnare al dipendente emp
         HashSet<String> ruoliValidi = new HashSet<>();
 
-        //Insieme dei ruoli che il dipendente già possiede
+        //Insieme dei ruoli del dipendente emp
         HashSet<Role> rolesOfEmp = azienda.getRoles(emp);
 
         //Aggiunta ruoli validi
@@ -194,10 +219,32 @@ public class EmployeePanel extends JPanel {
         String[] array;
         if (ruoliValidi.size()==0){
             array = new String[1];
-            array[0] = "Nessun ruolo presente";
+            array[0] = "Nessun ruolo disponibile";
         } else{
             array = ruoliValidi.toArray(new String[ruoliValidi.size()]);
         }
         return array;
+    }
+
+    /**
+     * Restituisce i ruoli di un dipendente.
+     * @param emp dipendente del quale si vogliono i ruoli
+     * @param azienda Azienda
+     * @return lista contenente le coppie nomeRuolo-AreaDiCompetenza
+     */
+    private static String[] getRoles(Employee emp,Azienda azienda){
+        //Ricavo i ruoli di un dipendente
+        HashSet<String> roles = new HashSet<>();
+
+        //Insieme dei ruoli del dipendente emp
+        HashSet<Role> rolesOfEmp = azienda.getRoles(emp);
+
+        //Conversione ruolo in stringa
+        for (Role r:rolesOfEmp){
+            roles.add(r.getName()+" - "+r.getArea());
+        }
+
+        //Conversione in String[]
+        return roles.toArray(new String[roles.size()]);
     }
 }//EmployeePanel

@@ -45,7 +45,7 @@ public class Role {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return role.name == this.name && role.area.equals(this.area);
+        return role.name.equals(this.name) && role.area.equals(this.area);
     }
 
     @Override

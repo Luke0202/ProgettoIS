@@ -69,7 +69,7 @@ public class Pagination extends JFrame implements PaginationIF {
             @Override
             public void entryAction(Mediator mediator, Pagination f,Object obj) {
                 //Getting data
-                File file = new File("data.txt");
+                File file = new File(path);
                 //Costruzione azienda a partire dal file data.txt
                 AziendaParser tx = new AziendaParser(file.getPath());
                 Azienda azienda = tx.build();
@@ -394,11 +394,17 @@ public class Pagination extends JFrame implements PaginationIF {
     //Stato corrente
     private State currentState;
 
+    //Percorso file
+    private static String path;
+
     private Mediator mediator;
 
     public Pagination(){
         //Definizione mediator
         mediator = new Mediator();
+
+        //Percorso file
+        path = "data.txt";
 
         //Frame options
         this.setTitle("Gestione Azienda");
@@ -416,7 +422,7 @@ public class Pagination extends JFrame implements PaginationIF {
                 //devono essere memorizzate in memoria secondaria
                 if (mediator.getAzienda()!=null){
                     //Getting file
-                    File f = new File("data.txt");
+                    File f = new File(path);
                     //Se il file è inesistente, allora bisogna crearlo
                     if (!f.exists()){
                         try{
@@ -446,7 +452,8 @@ public class Pagination extends JFrame implements PaginationIF {
         //Lettura Azienda
 
         //Se il file è inesistente, allora deve essere creato
-        File f = new File("data.txt");
+        File f = new File(path);
+
         if (!f.exists()){
             try{
                 f.createNewFile();
@@ -460,6 +467,7 @@ public class Pagination extends JFrame implements PaginationIF {
         //Altrimenti viene rimandato al pannello di accesso al sistema
         try{
             BufferedReader br = new BufferedReader(new FileReader(f.getPath()));
+            
             if (br.readLine()==null){
                 //File vuoto -> Creazione Azienda
                 transition(State.ACCESS_PAGE,null);

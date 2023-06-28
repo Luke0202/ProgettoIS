@@ -106,6 +106,7 @@ public class AbstractAzienda implements AziendaIF{
      */
     @Override
     public void addEmployee(Role role, Employee emp) {
+
         //Verifica presenza ruolo
         if (roles.contains(role)){
 
@@ -208,7 +209,7 @@ public class AbstractAzienda implements AziendaIF{
      * @param emp dipendente al quale rimuovere il ruolo
      */
     @Override
-    public void removeEmployee(Role role, Employee emp) {
+    public void removeRoleFromEmployee(Role role, Employee emp) {
         //Verifica presenza ruolo
         if (roles.contains(role)){
 
@@ -222,6 +223,36 @@ public class AbstractAzienda implements AziendaIF{
             //Verifica condizione di licenziamento di un dipendente
             if (organigramma.getRoles(emp).isEmpty())
                 employees.remove(emp);
+        }
+    }
+
+    /**
+     * Permette di levare un ruolo ad un dipendente.
+     * Se tale dipendente, a seguito della rimozione,
+     * non presenta più alcun ruolo, egli risulta licenziato.
+     * @param role ruolo da levare a un dipendente
+     * @param id id dipendente
+     */
+    @Override
+    public void removeRoleFromEmployee(Role role, int id) {
+        //Verifica presenza ruolo
+        if (roles.contains(role)){
+
+            //Ricavo l'area a partire dal ruolo
+            Organigramma org = findArea(role);
+            if (org == null) return;
+
+            //Rimozione coppia ruolo-dipendente dall'area
+            org.removeEmployee(role,id);
+
+            //Verifica condizione di licenziamento di un dipendente
+            for (Employee emp:employees){
+                if (emp.getID()==id){
+                    if (organigramma.getRoles(emp).isEmpty())
+                        employees.remove(emp);
+                    break;
+                }
+            }
         }
     }
 
