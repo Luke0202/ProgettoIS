@@ -1,53 +1,58 @@
 <Azienda>
 <Cod>1</Cod>
-<Name>B</Name>
+<Name>A</Name>
 <Headquarter>A</Headquarter>
 <Type>A</Type
 <Password>1</Password>
 <Employees>
 <Employee>
 <ID>0</ID>
-<Name>C</Name>
-<Surname>C</Surname>
-<Email>C</Email>
+<Name>A</Name>
+<Surname>A</Surname>
+<Email>A</Email>
 </Employee>
 </Employees>
 <Roles>
 <Role>
-<Name>E2</Name>
-<NameArea>A</NameArea>
-<Description>Sss</Description>
-</Role>
-<Role>
-<Name>E1</Name>
-<NameArea>A</NameArea>
+<Name>E</Name>
+<NameArea>Ttt</NameArea>
 <Description>  </Description>
 </Role>
 </Roles>
 <Organigramma>
 <Area>
-<Name>A</Name>
-<Description>Codice ATECO: 1, Sede centrale: A, Settore: A.</Description>
+<Name>Area dirigenziale</Name>
+<Description>Azienda: A, Codice ATECO: 1, Sede centrale: A, Settore: A.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Ttt</Name>
+<Description>  </Description>
 <State>false</State>
 <Couples>
 <Couple>
 <ID>0</ID>
 <Role>
-<Name>E1</Name>
-<NameArea>A</NameArea>
+<Name>E</Name>
+<NameArea>Ttt</NameArea>
 <Description>  </Description>
-</Role>
-</Couple>
-<Couple>
-<ID>0</ID>
-<Role>
-<Name>E2</Name>
-<NameArea>A</NameArea>
-<Description>Sss</Description>
 </Role>
 </Couple>
 </Couples>
 <ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Ww</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
 </ListAreas>
 </Area>
 </Organigramma>

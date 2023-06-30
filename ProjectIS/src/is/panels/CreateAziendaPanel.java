@@ -1,7 +1,7 @@
 package is.panels;
 
 import is.mediator.Mediator;
-import is.decorator.ImageZoom;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 

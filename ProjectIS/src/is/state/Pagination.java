@@ -1,13 +1,13 @@
 package is.state;
 
-import is.organigramma.Employee;
-import is.organigramma.Role;
+import is.azienda.Employee;
+import is.azienda.Role;
 import is.mediator.Mediator;
-import is.organigramma.Azienda;
-import is.organigramma.Organigramma;
+import is.azienda.Azienda;
+import is.azienda.Organigramma;
 import is.panels.*;
-import is.parser.TextPlainParser;
-import is.parser.AziendaParser;
+import is.textParser.TextPlainParser;
+import is.aziendaParser.AziendaParser;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

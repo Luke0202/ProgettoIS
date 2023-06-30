@@ -1,9 +1,9 @@
 package is.panels;
 
-import is.DataTable;
-import is.organigramma.*;
+import is.item.DataTable;
+import is.azienda.*;
 import is.mediator.Mediator;
-import is.decorator.ImageZoom;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 
@@ -78,7 +78,7 @@ public class AreaPanel extends JPanel {
 
         JButton removeButton = new JButton("Elimina area");  //Button per eliminare un'area
         removeButton.setForeground(Color.white);
-        removeButton.setEnabled(!org.getStateArea() && !dadField.getText().equals("Nessuna") && isRemovable(org));
+        removeButton.setEnabled(!dadField.getText().equals("Nessuna") && isRemovable(org));
         removeButton.setBackground(blue2);
         removeButton.setBounds(810,70,150,30);
         //DescriptionArea
@@ -170,15 +170,16 @@ public class AreaPanel extends JPanel {
     }
 
     /**
-     * Verifica se un organigrmma è cancellabile o meno.
-     * Se l'organigramma, contando tutte le sotto-aree,
-     * presenta almeno un dipendente, allora non risulta
-     * possibile rimuovere l'organigramma.
+     * Verifica se un'area è cancellabile o meno.
+     * Se l'area e tutte le sotto-aree presentano
+     * complessivamente almeno un dipendente, allora
+     * l'area non può essere rimossa.
      * @param org organigramma da rimuovere
      * @return boolean
      */
     private static boolean isRemovable(Organigramma org){
         for (Area a:org){
+            //Verifica presenza di dipendenti
             if (a.getNEmployees()>0) return false;
         }
         return true;

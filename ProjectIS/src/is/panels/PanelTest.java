@@ -1,10 +1,10 @@
 package is.panels;
 
-import is.organigramma.Employee;
-import is.organigramma.Role;
+import is.azienda.Employee;
+import is.azienda.Role;
 import is.mediator.Mediator;
-import is.organigramma.Azienda;
-import is.organigramma.Organigramma;
+import is.azienda.Azienda;
+import is.azienda.Organigramma;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -32,13 +32,13 @@ public class PanelTest {
         });
 
         //Definizione Aree
-        Organigramma o = new Organigramma("Azienda","");
-        Organigramma o1 = new Organigramma("Consiglio di amministrazione","");
-        Organigramma o2 = new Organigramma("Area vendite","");
-        Organigramma o3 = new Organigramma("Custom care","");
-        Organigramma o4 = new Organigramma("Marketing","");
-        Organigramma o5 = new Organigramma("Acquisti","");
-        Organigramma o6 = new Organigramma("Produzione","");
+        Organigramma o = new Organigramma("Azienda"," ");
+        Organigramma o1 = new Organigramma("Consiglio di amministrazione"," ");
+        Organigramma o2 = new Organigramma("Area vendite"," ");
+        Organigramma o3 = new Organigramma("Custom care"," ");
+        Organigramma o4 = new Organigramma("Marketing"," ");
+        Organigramma o5 = new Organigramma("Acquisti"," ");
+        Organigramma o6 = new Organigramma("Produzione"," ");
 
         //Tree Structure
         o.addChild(o1);
@@ -53,14 +53,14 @@ public class PanelTest {
         Azienda azienda = new Azienda("010101", "Spacex","Florida","Aerospaziale",psw,o);
 
         //Definizione ruoli
-        Role r1 = new Role("direttore","Consiglio di amministrazione","");
-        Role r2 = new Role("vice-direttore","Consiglio di amministrazione","");
-        Role r3 = new Role("venditore","Area vendite","");
-        Role r4 = new Role("supervisore","Custom care","");
-        Role r5 = new Role("rappresentante","Custom care","");
-        Role r6 = new Role("responsabile assistenza clienti","Custom care","");
-        Role r7 = new Role("E-Commerce manager","Marketing","");
-        Role r8 = new Role("venditore","Acquisti","");
+        Role r1 = new Role("direttore","Consiglio di amministrazione"," ");
+        Role r2 = new Role("vice-direttore","Consiglio di amministrazione"," ");
+        Role r3 = new Role("venditore","Area vendite"," ");
+        Role r4 = new Role("supervisore","Custom care"," ");
+        Role r5 = new Role("rappresentante","Custom care"," ");
+        Role r6 = new Role("responsabile assistenza clienti","Custom care"," ");
+        Role r7 = new Role("E-Commerce manager","Marketing"," ");
+        Role r8 = new Role("venditore","Acquisti"," ");
 
         //Aggiunta ruoli
         azienda.addRole(r1);
@@ -74,21 +74,21 @@ public class PanelTest {
 
 
         //Definizione dipendenti
-        Employee emp1 = new Employee("Luca","Granata","",azienda.giveID());
+        Employee emp1 = new Employee("Luca","Granata"," ",azienda.giveID());
         azienda.addEmployee(r1,emp1);
-        Employee emp2 = new Employee("Mario","Tommasini","",azienda.giveID());
+        Employee emp2 = new Employee("Mario","Tommasini"," ",azienda.giveID());
         azienda.addEmployee(r2,emp2);
-        Employee emp3 = new Employee("Gianni","Filice","",azienda.giveID());
+        Employee emp3 = new Employee("Gianni","Filice"," ",azienda.giveID());
         azienda.addEmployee(r3,emp3); azienda.addEmployee(r8,emp3);
-        Employee emp4 = new Employee("Armando","Basta","",azienda.giveID());
+        Employee emp4 = new Employee("Armando","Basta"," ",azienda.giveID());
         azienda.addEmployee(r4,emp4);
-        Employee emp5 = new Employee("Roberto","Cerchiara","",azienda.giveID());
+        Employee emp5 = new Employee("Roberto","Cerchiara"," ",azienda.giveID());
         azienda.addEmployee(r5,emp5);
-        Employee emp6 = new Employee("Fabio","Graceffa","",azienda.giveID());
+        Employee emp6 = new Employee("Fabio","Graceffa"," ",azienda.giveID());
         azienda.addEmployee(r6,emp6);
-        Employee emp7 = new Employee("Marco","Quaglio","",azienda.giveID());
+        Employee emp7 = new Employee("Marco","Quaglio"," ",azienda.giveID());
         azienda.addEmployee(r7,emp7);
-        Employee emp8 = new Employee("Tommaso","Dodaro","",azienda.giveID());
+        Employee emp8 = new Employee("Tommaso","Dodaro"," ",azienda.giveID());
         azienda.addEmployee(r8,emp8);
 
 
@@ -123,7 +123,6 @@ public class PanelTest {
         frame.setVisible(true);
     }
     public static void main(String[] args){
-
         PanelTest panel = new PanelTest(5);
     }
 }

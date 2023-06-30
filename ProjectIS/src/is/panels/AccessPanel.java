@@ -1,6 +1,6 @@
 package is.panels;
 
-import is.decorator.ImageZoom;
+import is.item.ImageZoom;
 import is.mediator.Mediator;
 import javax.swing.*;
 import java.awt.*;

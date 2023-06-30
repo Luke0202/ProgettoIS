@@ -1,11 +1,11 @@
 package is.panels;
 
-import is.DataTable;
-import is.organigramma.Azienda;
-import is.organigramma.Role;
+import is.item.DataTable;
+import is.azienda.Azienda;
+import is.azienda.Role;
 import is.mediator.Mediator;
-import is.organigramma.Organigramma;
-import is.decorator.ImageZoom;
+import is.azienda.Organigramma;
+import is.item.ImageZoom;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;

@@ -1,8 +1,8 @@
 package is.panels;
 
 import is.mediator.Mediator;
-import is.organigramma.Azienda;
-import is.decorator.ImageZoom;
+import is.azienda.Azienda;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 

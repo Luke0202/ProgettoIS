@@ -1,8 +1,8 @@
 package is.panels;
 
 import is.mediator.Mediator;
-import is.organigramma.*;
-import is.decorator.ImageZoom;
+import is.azienda.*;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
@@ -113,6 +113,7 @@ public class ModAreaPanel extends JPanel{
         mediator.setOldArea(orgToMod);
         mediator.setNameModArea(nameField);
         mediator.setDescrModArea(descrArea);
+        mediator.setDadComboModArea(dadComboBox);
         mediator.setSaveBModArea(saveB);
         mediator.setSaveVModArea(saveV);
         //Listeners

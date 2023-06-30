@@ -1,9 +1,9 @@
 package is.panels;
 
-import is.DataTable;
-import is.organigramma.*;
+import is.item.DataTable;
+import is.azienda.*;
 import is.mediator.Mediator;
-import is.decorator.ImageZoom;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;

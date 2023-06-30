@@ -1,10 +1,10 @@
 package is.panels;
 
 
-import is.organigramma.Azienda;
-import is.organigramma.Role;
+import is.azienda.Azienda;
+import is.azienda.Role;
 import is.mediator.Mediator;
-import is.decorator.ImageZoom;
+import is.item.ImageZoom;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;

@@ -1,0 +1,227 @@
+<Azienda>
+<Cod>010101</Cod>
+<Name>Spacex</Name>
+<Headquarter>Hawthorne</Headquarter>
+<Type>Aerospaziale</Type
+<Password>1234</Password>
+<Employees>
+<Employee>
+<ID>1</ID>
+<Name>Mario</Name>
+<Surname>Tommasini</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>2</ID>
+<Name>Gianni</Name>
+<Surname>Filice</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>3</ID>
+<Name>Armando</Name>
+<Surname>Basta</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>4</ID>
+<Name>Roberto</Name>
+<Surname>Cerchiara</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>5</ID>
+<Name>Fabio</Name>
+<Surname>Graceffa</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>6</ID>
+<Name>Marco</Name>
+<Surname>Quaglio</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>7</ID>
+<Name>Tommaso</Name>
+<Surname>Dodaro</Surname>
+<Email> </Email>
+</Employee>
+<Employee>
+<ID>0</ID>
+<Name>Luca</Name>
+<Surname>Granata</Surname>
+<Email> </Email>
+</Employee>
+</Employees>
+<Roles>
+<Role>
+<Name>venditore</Name>
+<NameArea>Area vendite</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>supervisore</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>direttore</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>rappresentante</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>vice-direttore</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>venditore</Name>
+<NameArea>Acquisti</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>E-Commerce manager</Name>
+<NameArea>Marketing</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>responsabile assistenza clienti</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+</Roles>
+<Organigramma>
+<Area>
+<Name>Consiglio di amministrazione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>1</ID>
+<Role>
+<Name>vice-direttore</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+<Couple>
+<ID>0</ID>
+<Role>
+<Name>direttore</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Area vendite</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>2</ID>
+<Role>
+<Name>venditore</Name>
+<NameArea>Area vendite</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Custom care</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>4</ID>
+<Role>
+<Name>rappresentante</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+<Couple>
+<ID>5</ID>
+<Role>
+<Name>responsabile assistenza clienti</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+<Couple>
+<ID>3</ID>
+<Role>
+<Name>supervisore</Name>
+<NameArea>Custom care</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Marketing</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>6</ID>
+<Role>
+<Name>E-Commerce manager</Name>
+<NameArea>Marketing</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Acquisti</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>2</ID>
+<Role>
+<Name>venditore</Name>
+<NameArea>Acquisti</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+<Couple>
+<ID>7</ID>
+<Role>
+<Name>venditore</Name>
+<NameArea>Acquisti</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Produzione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+</Organigramma>
+</Azienda>

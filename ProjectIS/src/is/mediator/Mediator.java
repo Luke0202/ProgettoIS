@@ -2,11 +2,11 @@ package is.mediator;
 
 import is.state.Pagination;
 import is.state.PaginationIF;
-import is.organigramma.Employee;
-import is.organigramma.Role;
-import is.organigramma.Azienda;
-import is.organigramma.Organigramma;
-import is.organigramma.Area;
+import is.azienda.Employee;
+import is.azienda.Role;
+import is.azienda.Azienda;
+import is.azienda.Organigramma;
+import is.azienda.Area;
 import javax.swing.*;
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class Mediator implements MediatorIF{
     private JButton newRoleEmployee,newAziendaAccess,confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveCreateRole, saveModRole,
            saveCreateEmployee,editArea, removeArea, removeEmployee, editRole, removeRole, saveCreateAzienda,searchListArea, searchListEmployee,
     searchListRole, saveVModArea,saveBModArea,remRoleEmployee;
-    private JComboBox<String> dadComboCreateArea, areaComboCreateRole,roleComboCreateEmployee,rolesComboEmployee, rolesRemComboEmployee;
+    private JComboBox<String> dadComboCreateArea,dadComboModArea, areaComboCreateRole,roleComboCreateEmployee,rolesComboEmployee, rolesRemComboEmployee;
 
     private JTextArea descrCreateArea,descrModArea, descrCreateRole, descrModRole;
 
@@ -74,6 +74,7 @@ public class Mediator implements MediatorIF{
     public void setOldArea(Organigramma oldArea){this.oldArea=oldArea;}
     public void setNameModArea(JTextField nameModArea){this.nameModArea=nameModArea;}
     public void setDescrModArea(JTextArea descrModArea){this.descrModArea=descrModArea;}
+    public void setDadComboModArea(JComboBox<String> dadComboModArea){this.dadComboModArea=dadComboModArea;}
     public void setSaveBModArea(JButton saveBModArea){this.saveBModArea=saveBModArea;}
     public void setSaveVModArea(JButton saveVModArea){this.saveVModArea=saveVModArea;}
 
@@ -443,24 +444,22 @@ public class Mediator implements MediatorIF{
             String name = nameModArea.getText().trim();
             String descr = descrModArea.getText().trim();
 
-            //Caso nomeArea uguale alla precedente
-            if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
+            if (descr.isEmpty()) descr = " ";
 
-                //Descrizione diversa
-                if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-                    if (descr.isEmpty()) descr = "  ";
+            //Getting nome area di riferimento
+            int j = dadComboModArea.getSelectedIndex();
+            String area = dadComboModArea.getItemAt(j);
 
-                    //Capitalizing first letter
-                    descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
+            //Caso nuova area identica alla precedente
+            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.toLowerCase().equals(oldArea.getDescription().toLowerCase())){
 
-                    //Modifica descrizione
-                    oldArea.setDescription(descr);
-
-                    JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
+                //Verifica coincidenza area padre
+                Organigramma org = azienda.getParent(oldArea);
+                if (org == null && area.equals("Nessuna area di riferimento") || org.getName().equals(area)){
+                    //L'utente viene rimandato alla lista delle aree
+                    pag.avanza(Pagination.LIST_AREA, null);
+                    return;
                 }
-                //L'utente viene rimandato alla lista delle aree
-                pag.avanza(Pagination.LIST_AREA, null);
-                return;
             }
 
             //Caso nome area scelto già presente nel sistema
@@ -476,14 +475,28 @@ public class Mediator implements MediatorIF{
             int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
             if (i != 0) return; //L'utente non ha confermato i dati
 
-            if (descr.isEmpty()) descr = " ";
-
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             //Modifica area
             oldArea.setName(name); oldArea.setDescription(descr);
+
+            //Modifica area di riferimento
+            if (!area.equals("Nessuna area di riferimento")){
+                //Area di riferimento modificata
+
+                //Getting area di riferimento
+                Organigramma dad = azienda.getParent(oldArea);
+
+                //Rimozione figlio
+                dad.removeChild(oldArea);
+
+                //Nuova area di riferimento
+                Organigramma newDad = azienda.getArea(area);
+
+                newDad.addChild(oldArea);
+            }
 
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
             //L'utente viene rimandato alla lista delle aree
@@ -494,29 +507,11 @@ public class Mediator implements MediatorIF{
 
             String name = nameModArea.getText().trim();
             String descr = descrModArea.getText().trim();
+            if (descr.isEmpty()) descr = " ";
 
-            //Caso nome area uguale alla precedente
-            if (oldArea.getName().toLowerCase().equals(name.toLowerCase())){
-
-                //Descrizione diversa
-                if (!oldArea.getDescription().toLowerCase().equals(descr.toLowerCase())){
-
-                    if (descr.isEmpty()) descr = "  ";
-
-                    //Capitilizing first letter
-                    descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                    //Modifica area
-                    oldArea.setDescription(descr);
-                }
-                //Cambio stato area
-                oldArea.setStateArea(true);
-                JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-
-                //L'utente viene rimandato alla lista delle aree
-                pag.avanza(Pagination.LIST_AREA, null);
-                return;
-            }
+            //Getting nome area di riferimento
+            int j = dadComboModArea.getSelectedIndex();
+            String area = dadComboModArea.getItemAt(j);
 
             //Caso nome area scelto già presente nel sistema
             for (Area a : azienda.getOrganigramma()) {
@@ -526,11 +521,10 @@ public class Mediator implements MediatorIF{
                 }
             }
 
+            //Richiedi conferma
             int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
                     "Vuoi confermare i dati ?");
-            if (i != 0) return; //L'utente non ha confermato i dati
-
-            if (descr.isEmpty()) descr = "  ";
+            if (i != 0) return; //L'utente non ha confermato
 
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
@@ -539,12 +533,29 @@ public class Mediator implements MediatorIF{
             //Modifica area
             oldArea.setName(name); oldArea.setDescription(descr); oldArea.setStateArea(true);
 
+            //Modifica area di riferimento
+
+            if (!area.equals("Nessuna area di riferimento")){
+                //Area di riferimento modificata
+
+                //Getting area di riferimento
+                Organigramma dad = azienda.getParent(oldArea);
+
+                //Rimozione figlio
+                dad.removeChild(oldArea);
+
+                //Nuova area di riferimento
+                Organigramma newDad = azienda.getArea(area);
+
+                newDad.addChild(oldArea);
+            }
+
             JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
             //L'utente viene rimandato alla lista delle aree
             pag.avanza(Pagination.LIST_AREA, null);
         }
         if (widget == saveCreateRole) {
-            //Richiesta salvataggio ruolo
+            //Richiesta creazione ruolo
 
             //Verifica validità ruolo
             if (nameCreateRole.getText().trim().isEmpty()){
@@ -643,22 +654,11 @@ public class Mediator implements MediatorIF{
             String name = nameModRole.getText().trim();
             String area = oldRole.getArea();//Nome area uguale al precedente, in quanto l'area non è modificabile
             String descr = descrModRole.getText().trim();
+            if (descr.isEmpty()) descr = "  ";
 
             //Caso ruolo uguale al precedente
-            if (oldRole.getName().toLowerCase().equals(name.toLowerCase())){
+            if (name.toLowerCase().equals(oldRole.getName().toLowerCase()) && descr.toLowerCase().equals(oldRole.getDescription().toLowerCase())){
 
-                //Descrizione diversa
-                if (!oldRole.getDescription().toLowerCase().equals(descr.toLowerCase())){
-
-                    if (descr.isEmpty()) descr = "  ";
-
-                    //Capitalizing first letter
-                    descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
-
-                    //Modifica ruolo
-                    oldRole.setDescription(descr);
-                    JOptionPane.showMessageDialog(frame, "Modifica effettuata.");
-                }
                 //L'utente viene rimandato alla lista dei ruoli
                 pag.avanza(Pagination.LIST_ROLE, null);
                 return;
@@ -676,7 +676,7 @@ public class Mediator implements MediatorIF{
             int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
             if (i != 0) return; //L'utente non ha confermato i dati
 
-            if (descr.isEmpty()) descr = "  ";
+
 
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
@@ -724,6 +724,7 @@ public class Mediator implements MediatorIF{
             for (Role r:azienda.getRoles()){
                 if (r.getName().equals(nameRole) && r.getArea().equals(nameArea)){
                     azienda.addEmployee(r,emp);
+                    break;
                 }
             }
 
