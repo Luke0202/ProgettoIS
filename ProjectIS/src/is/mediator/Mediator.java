@@ -233,7 +233,11 @@ public class Mediator implements MediatorIF{
                 pag.avanza(Pagination.HOME, null);
             } else {
                 JOptionPane.showMessageDialog(SwingUtilities.getAncestorOfClass(Pagination.class, widget)
-                        , "Accesso negato.");
+                        , "Credenziali invalide");
+                //Azzeramento campi
+                nameLog.setText("");
+                pswLog.setText("");
+                confLog.setEnabled(false);
             }
         }
         if (widget == newAziendaAccess){
@@ -451,7 +455,7 @@ public class Mediator implements MediatorIF{
             String area = dadComboModArea.getItemAt(j);
 
             //Caso nuova area identica alla precedente
-            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.toLowerCase().equals(oldArea.getDescription().toLowerCase())){
+            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.trim().toLowerCase().equals(oldArea.getDescription().trim().toLowerCase())){
 
                 //Verifica coincidenza area padre
                 Organigramma org = azienda.getParent(oldArea);
@@ -512,6 +516,27 @@ public class Mediator implements MediatorIF{
             //Getting nome area di riferimento
             int j = dadComboModArea.getSelectedIndex();
             String area = dadComboModArea.getItemAt(j);
+
+            //Caso nuova area identica alla precedente
+            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.trim().toLowerCase().equals(oldArea.getDescription().trim().toLowerCase())){
+
+                //Verifica coincidenza dell'area padre
+                Organigramma org = azienda.getParent(oldArea);
+                if (org == null && area.equals("Nessuna area di riferimento") || org.getName().equals(area)){
+
+                    //Richiesta conferma
+                    int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
+                            "Vuoi confermare i dati ?");
+                    if (i != 0) return; //L'utente non ha confermato
+
+                    //Validazione
+                    oldArea.setStateArea(true);
+                    JOptionPane.showMessageDialog(frame, "L'area è stata validata.");
+                    //L'utente viene rimandato alla lista delle aree
+                    pag.avanza(Pagination.LIST_AREA, null);
+                    return;
+                }
+            }
 
             //Caso nome area scelto già presente nel sistema
             for (Area a : azienda.getOrganigramma()) {

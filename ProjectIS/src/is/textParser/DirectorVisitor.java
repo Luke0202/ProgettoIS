@@ -1,6 +1,5 @@
 package is.textParser;
 
-import is.builder.TextBuilderIF;
 import is.azienda.Role;
 import is.azienda.Couple;
 import is.azienda.Organigramma;

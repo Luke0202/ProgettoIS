@@ -193,7 +193,9 @@ public class AbstractAzienda implements AziendaIF{
         Iterator<Employee> it = employees.iterator();
         while(it.hasNext()){
             if (it.next().getID()==id){
-                it.remove(); trovato = true; break;
+                it.remove();
+                trovato = true;
+                break;
             }
         }
 
@@ -202,7 +204,7 @@ public class AbstractAzienda implements AziendaIF{
 
         //Rimozione del dipendente da ogni area
         Iterator<Area> it2 = organigramma.iterator();
-        while(it.hasNext()){
+        while(it2.hasNext()){
             it2.next().removeEmployee(id);
         }
     }
@@ -227,13 +229,13 @@ public class AbstractAzienda implements AziendaIF{
             org.removeEmployee(role,emp.getID());
 
             //Verifica condizione di licenziamento di un dipendente
-            if (organigramma.getRoles(emp).isEmpty())
+            if (getRoles(emp).isEmpty())
                 employees.remove(emp);
         }
     }
 
     /**
-     * Permette di levare un ruolo ad un dipendente.
+     * Permette di dissociare un ruolo da un dipendente.
      * Se tale dipendente, a seguito della rimozione,
      * non presenta più alcun ruolo, egli risulta licenziato.
      * @param role ruolo da levare a un dipendente
@@ -254,9 +256,8 @@ public class AbstractAzienda implements AziendaIF{
             //Verifica condizione di licenziamento di un dipendente
             for (Employee emp:employees){
                 if (emp.getID()==id){
-                    if (organigramma.getRoles(emp).isEmpty())
+                    if (getRoles(emp).isEmpty())
                         employees.remove(emp);
-                    break;
                 }
             }
         }

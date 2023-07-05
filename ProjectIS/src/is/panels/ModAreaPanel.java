@@ -146,6 +146,18 @@ public class ModAreaPanel extends JPanel{
             array[0] = "Nessuna area di riferimento";
         } else{
             array = tot.toArray(new String[tot.size()]);
+            //Bisogna posizionare il padre dell'area "orgChild" in prima posizione
+            String nomePadre = azienda.getParent(orgChild).getName();
+
+            for (int i = 0;i<array.length;i++){
+                if (array[i].equals(nomePadre)){
+                    if (i!=0){
+                        array[i] = array[0];
+                        array[0] = nomePadre;
+                        break;
+                    }
+                }
+            }
         }
         return array;
     }

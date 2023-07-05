@@ -1,4 +1,4 @@
-package is.builder;
+package is.textParser;
 
 import java.io.PrintWriter;
 

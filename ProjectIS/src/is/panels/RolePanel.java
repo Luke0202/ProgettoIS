@@ -90,7 +90,7 @@ public class RolePanel extends JPanel {
         descrScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Consente solo lo scorrimento verticale
         descrScroll.setBounds(20,135,940,150);
         //Visione dei dipendenti che presentano tale ruolo
-        JLabel empLab = new JLabel("Dipendendi: ");
+        JLabel empLab = new JLabel("Dipendenti: ");
         empLab.setFont(f);
         empLab.setForeground(blue);
         empLab.setBounds(20,315,200,30);

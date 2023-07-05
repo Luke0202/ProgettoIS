@@ -1,4 +1,4 @@
-package is.builder;
+package is.textParser;
 
 /**
  * Tale interfaccia fornisce i metodi per la
