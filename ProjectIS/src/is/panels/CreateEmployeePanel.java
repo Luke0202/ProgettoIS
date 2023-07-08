@@ -67,7 +67,7 @@ public class CreateEmployeePanel extends JPanel {
         emailLab.setBounds(680,15,200,30);
 
         JTextField emailField = new JTextField(20); //Campo contenente l'email del dipendente
-        emailField.setBounds(680,50,280,30);
+        emailField.setBounds(680,50,290,30);
         //Role Field
         JLabel roleLab = new JLabel("Ruolo: ");
         roleLab.setFont(f);
@@ -76,7 +76,7 @@ public class CreateEmployeePanel extends JPanel {
 
         String[] array = findRoles(mediator.getAzienda());
         JComboBox<String> roleComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli dell'azienda
-        roleComboBox.setBounds(20,185,350,30);
+        roleComboBox.setBounds(20,185,400,30);
         //SaveButtons
         JButton save = new JButton("SALVA");  //Button di salvataggio
         save.setForeground(Color.white);

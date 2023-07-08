@@ -58,12 +58,12 @@ public class RolePanel extends JPanel {
         JLabel areaLab = new JLabel("Nome Area: ");
         areaLab.setFont(f);
         areaLab.setForeground(blue);
-        areaLab.setBounds(350,15,200,30);
+        areaLab.setBounds(350,15,280,30);
 
         JTextField areaField = new JTextField(20); //Campo contenente il nome dell'area in cui è stato definito il ruolo
         areaField.setText(role.getArea());
         areaField.setEditable(false);
-        areaField.setBounds(350,50,200,30);
+        areaField.setBounds(350,50,400,30);
         //Button
         JButton modButton = new JButton("Modifica ruolo"); //Button per la modifica di un ruolo
         modButton.setForeground(Color.white);

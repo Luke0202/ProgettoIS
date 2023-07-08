@@ -55,11 +55,11 @@ public class AziendaPanel extends JPanel {
         JLabel codLab = new JLabel("Codice ATECO: ");
         codLab.setFont(f);
         codLab.setForeground(blue);
-        codLab.setBounds(455, 15, 200, 30);
+        codLab.setBounds(540, 15, 200, 30);
 
         JLabel codField = new JLabel(String.valueOf(azienda.getCod())); //Campo contenente il codice ATECO dell'azienda
         codField.setFont(f2);
-        codField.setBounds(630, 15, 280, 30);
+        codField.setBounds(715, 15, 280, 30);
         //Settore
         JLabel presLab = new JLabel("Settore azienda: ");
         presLab.setFont(f);
@@ -73,11 +73,11 @@ public class AziendaPanel extends JPanel {
         JLabel headquarterLab = new JLabel("Sede centrale: ");
         headquarterLab.setFont(f);
         headquarterLab.setForeground(blue);
-        headquarterLab.setBounds(455,85,280,30);
+        headquarterLab.setBounds(540,85,280,30);
 
         JLabel headquarterField = new JLabel(azienda.getHeadquarter()); //Campo contenente la sede centrale dell'azienda
         headquarterField.setFont(f2);
-        headquarterField.setBounds(620, 85, 280, 30);
+        headquarterField.setBounds(705, 85, 280, 30);
         //Number of Employees
         int N = azienda.getNEmployees(); //Numero dipendenti in azienda
         JLabel nEmployeesLab = new JLabel("Numero dipendenti: ");
@@ -93,11 +93,11 @@ public class AziendaPanel extends JPanel {
         JLabel nAreasLab = new JLabel("Numero aree: ");
         nAreasLab.setFont(f);
         nAreasLab.setForeground(blue);
-        nAreasLab.setBounds(455,155,200,30);
+        nAreasLab.setBounds(540,155,200,30);
 
         JLabel nAreasField = new JLabel(String.valueOf(M)); //Campo contenente il numero delle aree in azienda
         nAreasField.setFont(f2);
-        nAreasField.setBounds(615, 155, 280, 30);
+        nAreasField.setBounds(700, 155, 280, 30);
         //Number of Roles
         int X = azienda.getRoles().size(); //Numero ruoli in azienda
         JLabel nRolesLab = new JLabel("Numero ruoli: ");

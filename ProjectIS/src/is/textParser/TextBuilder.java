@@ -69,7 +69,7 @@ public class TextBuilder implements TextBuilderIF {
      */
     @Override
     public void openType(String type) {
-        pw.println("<Type>"+type+"</Type");
+        pw.println("<Type>"+type+"</Type>");
     }
 
     /**

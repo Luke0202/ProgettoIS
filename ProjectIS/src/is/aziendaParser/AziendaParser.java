@@ -71,18 +71,23 @@ public class AziendaParser {
     }
 
     /**
-     *
-     * @return
+     * Tale metodo restituisce, mediante l'utilizzo
+     * di StringTokenizer, un token, il quale può indicare
+     * il contenuto informativo di un campo oppure un tag.
+     * @return token
      */
     private String nextToken() {
 
-        //Si considerano i casi in cui o lo stringTokenizer non è stato ancora definito o lo stringTokenizer non presenta più token
+        //Si considera il caso in cui o lo StringTokenizer non è stato ancora definito o lo stringTokenizer non presenta più token
         while (st == null || !st.hasMoreTokens()) {
-            //Viene definito uno stringTokenizer per ogni riga del file
-            //Se lo stringTokenizer non presenta più token, allora bisogna selezionare la riga successiva del file
+
             String line = null;
             try {
-                line = br.readLine();
+                //Gestione casi di informazioni definite su più righe del file
+                while(line == null || line.charAt(line.length()-1)!='>'){
+                    line = (line == null )?  br.readLine(): line+"\n"+br.readLine();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

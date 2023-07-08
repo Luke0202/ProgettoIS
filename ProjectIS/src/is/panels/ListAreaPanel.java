@@ -72,10 +72,10 @@ public class ListAreaPanel extends JPanel {
         TableColumn column = null;
         for (int j = 0;j<4;j++){
             column = table.getColumnModel().getColumn(j);
-            if (j==0) column.setPreferredWidth(220);
-            if (j==1) column.setPreferredWidth(140);
-            if (j==2) column.setPreferredWidth(220);
-            if (j==3) column.setPreferredWidth(110);
+            if (j==0) column.setPreferredWidth(260);
+            if (j==1) column.setPreferredWidth(85);
+            if (j==2) column.setPreferredWidth(260);
+            if (j==3) column.setPreferredWidth(85);
         }
 
         //ScrollPane

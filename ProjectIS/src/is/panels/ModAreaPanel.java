@@ -31,7 +31,7 @@ public class ModAreaPanel extends JPanel{
         headPanel.setBounds(0,0,1000,60); //Confini headPanel
         //Label of headPanel
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
-        JLabel head = new JLabel("Modifica Area organizzativa");
+        JLabel head = new JLabel("Modifica area organizzativa");
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);

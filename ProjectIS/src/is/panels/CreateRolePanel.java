@@ -31,7 +31,7 @@ public class CreateRolePanel extends JPanel {
         headPanel.setBounds(0,0,1000,60); //Confini headPanel
         //Label of headPanel
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
-        JLabel head = new JLabel("Inserimento nuovo Ruolo");
+        JLabel head = new JLabel("Inserimento nuovo ruolo");
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10,7,350,50);
@@ -57,7 +57,7 @@ public class CreateRolePanel extends JPanel {
 
         String[] array = findAreas(azienda);
         JComboBox<String> areaComboBox = new JComboBox<>(array);//ComboBox contenente le aree in azienda
-        areaComboBox.setBounds(350,50,280,30);
+        areaComboBox.setBounds(350,50,400,30);
         //DescriptionArea
         JLabel descrLab = new JLabel("Descrizione Ruolo: ");
         descrLab.setFont(f);

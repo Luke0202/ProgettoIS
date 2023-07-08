@@ -455,7 +455,7 @@ public class Mediator implements MediatorIF{
             String area = dadComboModArea.getItemAt(j);
 
             //Caso nuova area identica alla precedente
-            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.trim().toLowerCase().equals(oldArea.getDescription().trim().toLowerCase())){
+            if (name.equals(oldArea.getName()) && descr.equals(oldArea.getDescription().trim())){
 
                 //Verifica coincidenza area padre
                 Organigramma org = azienda.getParent(oldArea);
@@ -467,13 +467,19 @@ public class Mediator implements MediatorIF{
             }
 
             //Caso nome area scelto già presente nel sistema
-            for (Area a : azienda.getOrganigramma()) {
-                if (name.toLowerCase().equals(((Organigramma) a).getName().toLowerCase())) {
-                    //Area già esistente
-                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
-                    return;
+            if (!oldArea.getName().toLowerCase().equals(name.toLowerCase())){
+
+                for (Area a : azienda.getOrganigramma()) {
+                    String nomeArea2 = ((Organigramma) a).getName();
+
+                    if (name.toLowerCase().equals(nomeArea2.toLowerCase())) {
+                        //Area già esistente
+                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
+                        return;
+                    }
                 }
             }
+
 
             //Richiedi conferma
             int i = JOptionPane.showConfirmDialog(frame, "Vuoi confermare i dati ?");
@@ -518,7 +524,7 @@ public class Mediator implements MediatorIF{
             String area = dadComboModArea.getItemAt(j);
 
             //Caso nuova area identica alla precedente
-            if (name.toLowerCase().equals(oldArea.getName().toLowerCase()) && descr.trim().toLowerCase().equals(oldArea.getDescription().trim().toLowerCase())){
+            if (name.equals(oldArea.getName()) && descr.equals(oldArea.getDescription().trim())){
 
                 //Verifica coincidenza dell'area padre
                 Organigramma org = azienda.getParent(oldArea);
@@ -539,12 +545,17 @@ public class Mediator implements MediatorIF{
             }
 
             //Caso nome area scelto già presente nel sistema
-            for (Area a : azienda.getOrganigramma()) {
-                if (name.toLowerCase().equals(((Organigramma) a).getName().toLowerCase())) {
-                    JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
-                    return;
+            if (!oldArea.getName().toLowerCase().equals(name.toLowerCase())){
+
+                for (Area a : azienda.getOrganigramma()) {
+
+                    if (name.toLowerCase().equals(((Organigramma) a).getName().toLowerCase())) {
+                        JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: nome area già esistente.");
+                        return;
+                    }
                 }
             }
+
 
             //Richiedi conferma
             int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
@@ -682,7 +693,7 @@ public class Mediator implements MediatorIF{
             if (descr.isEmpty()) descr = "  ";
 
             //Caso ruolo uguale al precedente
-            if (name.toLowerCase().equals(oldRole.getName().toLowerCase()) && descr.toLowerCase().equals(oldRole.getDescription().toLowerCase())){
+            if (name.equals(oldRole.getName()) && descr.equals(oldRole.getDescription())){
 
                 //L'utente viene rimandato alla lista dei ruoli
                 pag.avanza(Pagination.LIST_ROLE, null);
@@ -691,7 +702,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica ruolo già esistente
             for (Role role: azienda.getRoles()){
-                if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().equals(area)){
+                if (role.getName().equals(name) && role.getArea().equals(area)){
                     JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: ruolo già esistente.");
                     return;
                 }
@@ -780,6 +791,21 @@ public class Mediator implements MediatorIF{
             //Dipendente non trovato
             JOptionPane.showMessageDialog(frame, "Dipendente non presente nel sistema.");
         }
+        if(widget==removeEmployee){
+            //Richiesta di rimozione di un dipendente
+
+            //Richiesta conferma
+            int i = JOptionPane.showConfirmDialog(frame,"Procedere con la rimozione ?");
+            if (i != 0) return; //L'utente non ha confermato
+
+            //Option selected: Yes
+            int id = Integer.parseInt(idEmployee.getText());
+            //Rimozione dipendente
+            azienda.removeEmployee(id);
+            JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
+            //L'utente viene rimandato alla lista dei dipendenti
+            pag.avanza(Pagination.LIST_EMPLOYEE, null);
+        }
         if (widget==newRoleEmployee){
             //Richiesta di assegnazione di un ruolo ad un dipendente
 
@@ -852,21 +878,6 @@ public class Mediator implements MediatorIF{
             JOptionPane.showMessageDialog(frame, "Ruolo rimosso con successo.");
             //L'utente viene rimandato al pannello di gestione del dipendente
             pag.avanza(Pagination.EMPLOYEE,emp);
-        }
-        if(widget==removeEmployee){
-            //Richiesta di rimozione di un dipendente
-
-            //Richiesta conferma
-            int i = JOptionPane.showConfirmDialog(frame,"Procedere con la rimozione ?");
-            if (i != 0) return; //L'utente non ha confermato
-
-            //Option selected: Yes
-            int id = Integer.parseInt(idEmployee.getText());
-            //Rimozione dipendente
-            azienda.removeEmployee(id);
-            JOptionPane.showMessageDialog(frame, "Rimozione avvenuta con successo.");
-            //L'utente viene rimandato alla lista dei dipendenti
-            pag.avanza(Pagination.LIST_EMPLOYEE, null);
         }
     }
 }//Mediator

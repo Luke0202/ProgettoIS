@@ -51,11 +51,11 @@ public class ListRolePanel extends JPanel {
 
         //Getting data
         int i = 0;
-        Organigramma org = azienda.getOrganigramma();
+
         for(Role r: azienda.getRoles()){
             data[i][0]=r.getName();
             data[i][1]=r.getArea();
-            data[i][2]= org.getEmployees(r).size();
+            data[i][2]=azienda.getEmployee(r).size();
             i++;
         }
 

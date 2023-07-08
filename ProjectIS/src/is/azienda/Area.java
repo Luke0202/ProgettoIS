@@ -6,8 +6,8 @@ import java.util.HashSet;
 /**
  * Questa interfaccia dichiara i metodi per la gestione
  * di dipendenti e ruoli per una singola area.
- * Presenta in aggiunta metodi per visitare l'area corrente
- * e le sotto-aree.
+ * Presenta, in aggiunta, metodi per l'ottenere determinate aree
+ * dell'organigramma e per visitare l'area corrente.
  * @author lucab
  */
 public interface Area {

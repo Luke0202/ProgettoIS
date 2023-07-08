@@ -73,7 +73,7 @@ public class EmployeePanel extends JPanel {
         JTextField emailField = new JTextField(20); //Contiene l'email del dipendente
         emailField.setText(emp.getEmail());
         emailField.setEditable(false);
-        emailField.setBounds(680,50,280,30);
+        emailField.setBounds(680,50,290,30);
         //ID Label
         JLabel IDLab = new JLabel("ID: ");
         IDLab.setFont(f);
@@ -88,7 +88,7 @@ public class EmployeePanel extends JPanel {
         JButton removeButton = new JButton("Elimina dipendente"); //Button per licenziare un dipendente
         removeButton.setForeground(Color.white);
         removeButton.setBackground(blue2);
-        removeButton.setBounds(400,140,150,30);
+        removeButton.setBounds(550,140,150,30);
         //Roles of employee
         JLabel rolesLab = new JLabel("Ruoli dipendente: ");
         rolesLab.setFont(f);
@@ -118,12 +118,12 @@ public class EmployeePanel extends JPanel {
         for (int j = 0;j<2;j++){
             column = table.getColumnModel().getColumn(j);
             if (j==0) column.setPreferredWidth(180);
-            if (j==1) column.setPreferredWidth(240);
+            if (j==1) column.setPreferredWidth(350);
         }
 
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(20,220,420,130);
+        scrollPane.setBounds(20,220,530,130);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Consente solo lo scorrimento verticale
 
         //Ruoli assegnabili ad un dipendente
@@ -134,13 +134,13 @@ public class EmployeePanel extends JPanel {
 
         String[] array = findRoles(emp,mediator.getAzienda());
         JComboBox<String> rolesComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli assegnabili ad un dipendente
-        rolesComboBox.setBounds(20,400,350,30);
+        rolesComboBox.setBounds(20,400,400,30);
 
         //Button
         JButton newRoleButton = new JButton("Aggiungi ruolo"); //Button per aggiungere un ruolo ad un dipendente
         newRoleButton.setForeground(Color.white);
         newRoleButton.setBackground(blue2);
-        newRoleButton.setBounds(400,400,150,30);
+        newRoleButton.setBounds(550,400,150,30);
         newRoleButton.setEnabled(!rolesComboBox.getItemAt(0).equals("Nessun ruolo disponibile"));
 
         //Ruoli che si possono rimuovere da un dipendente
@@ -153,13 +153,13 @@ public class EmployeePanel extends JPanel {
         //Ricavo i ruoli che si possono rimuovere da un dipendente
         array = getRoles(emp,mediator.getAzienda());
         JComboBox<String> rolesRemComboBox = new JComboBox<>(array); //ComboBox contenente i ruoli di un dipendente
-        rolesRemComboBox.setBounds(20,480,350,30);
+        rolesRemComboBox.setBounds(20,480,400,30);
 
         //Button
         JButton remRoleButton = new JButton("Rimuovi ruolo"); //Button per rimuovere un ruolo da un dipendente
         remRoleButton.setForeground(Color.white);
         remRoleButton.setBackground(blue2);
-        remRoleButton.setBounds(400,480,150,30);
+        remRoleButton.setBounds(550,480,150,30);
         remRoleButton.setEnabled(rolesRemComboBox.getItemCount()>1); //Abilitato se sono presenti almeno due ruoli
 
         //Logo applicazione

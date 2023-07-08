@@ -5,7 +5,8 @@ import java.util.*;
 
 /**
  * Tale classe fornisce i metodi di gestione dei dipendenti
- * e dei ruoli interni ad un'area.
+ * e dei ruoli interni ad un'area. Include metodi di visita
+ * dellorganigramma.
  * @author lucab
  */
 public class Organigramma extends AbstractCompositeArea {
@@ -243,7 +244,7 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Restituisce l'insiemi dei nomi delle sotto-aree.
+     * Restituisce l'insieme dei nomi delle sotto-aree.
      * Si considera l'area corrente come area radice della
      * gerarchia.
      * @return insieme dei nomi delle aree

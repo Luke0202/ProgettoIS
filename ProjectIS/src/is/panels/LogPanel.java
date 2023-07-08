@@ -40,14 +40,14 @@ public class LogPanel extends JPanel{
         reqId.setBounds(385,370,100,30);
 
         JTextField nameField = new JTextField(20);  //Campo in cui bisogna inserire il nome
-        nameField.setBounds(485,370,120,30);
+        nameField.setBounds(485,370,150,30);
 
         //Password
         JLabel reqPsw = new JLabel("Password: ");
         reqPsw.setBounds(410,410,100,30);
 
         JTextField pswField = new JTextField(20);  //Campo in cui bisogna inserire la password
-        pswField.setBounds(485,410,120,30);
+        pswField.setBounds(485,410,150,30);
 
         //Confirmation button
         JButton confLog = new JButton("Accedi"); //Button per accedere al sistema
@@ -55,7 +55,7 @@ public class LogPanel extends JPanel{
         confLog.setBackground(blue2);
         confLog.setEnabled(false);
         confLog.setOpaque(true);
-        confLog.setBounds(450,455,110,30);
+        confLog.setBounds(450,465,110,30);
 
         //Button to create a new azienda
         JButton newAziendaButton = new JButton("Crea Nuova Azienda"); //Button per la creazione di una nuova azienda
