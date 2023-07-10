@@ -1,6 +1,8 @@
 # ProgettoIS
 Progetto per Esame di Ingegneria del Software
 
+//SOMMARIO 
+
 MyOrg è un software per la gestione di un organigramma aziendale. 
 Consente all'utente di creare un'azienda da zero e di definire un organigramma aziendale, il quale è composto da aree organizzative disposte secondo una struttura gerarchica.
 L'applicazione permette di aggiornare dinamicamente la struttura di una determinata azienda. 
@@ -14,8 +16,6 @@ L'azienda comprende quindi:
 -insieme di dipendenti
 -insieme di ruoli
 -organigramma aziendale.
-
-L'azienda viene memorizzata in memoria secondaria, salvando i dati secondo il formato XML.
 
 //FUNZIONAMENTO
 
@@ -42,7 +42,7 @@ All'atto di creazione l'utente deve inserire:
 -Settore azienda
 -Password di accesso al sistema.
 
-IMPORTANTE!
+IMPORTANTE !
 Una volta confermata la password di accesso, quetsa non sarà più modificabile. Tenere quindi a mente la password così da accedere ai dati aziendali.
 
 Se invece è già stata salvata un'azienda, l'applicazione rimanda l'utente all'area di log-in.
@@ -61,7 +61,7 @@ Se l'applicazione viene lanciata mediate l'esecuzione del main della classe Appl
 In alternativa l'applicazione può lanciata da prompt dei comandi utilizzando il file jar, mediante il comando "java -jar percorso\file.jar".
 Il file "data.txt" viene memorizzato nella directory da cui l'utente lancia il comando.
 
-4) FUNZIONALITÀ
+4) SERVIZI OFFERTI
 
 Una volta definita l'azienda, l'applicazione consente all'utente di effettuare diverse operazioni.
 
@@ -86,11 +86,21 @@ In merito ai dipendenti, l'applicazione consente di:
 -Modificare le informazioni di un dipendente
 -Licenziare un dipendente
 -Assegnare un ruolo ad un dipendente
--Levare un ruolo da un dipendente (per rimuovere un ruolo, il dipendente deve possedere almeno due ruoli. Un dipendente non può rimanere senza ruolo!)
+-Dissociare un ruolo da un dipendente (per rimuovere un ruolo, il dipendente deve possedere almeno due ruoli. Un dipendente non può rimanere senza ruolo!)
 
 È possibile inoltre accedere alle informazioni generali dell'azienda.
 
 Per accedere alle varie funzionalità l'applicazione dispone di una barra del menu. 
+
+5) ESEMPIO FORNITO 
+
+Nella directory ProgettoIS è presente una sotto-directory denominata "esempi". 
+All'interno è disponibile un esempio pratico di organigramma aziendale definito e memorizzato con MyOrg. 
+È stato preso in esame l'organigramma dell'agenzia delle entrate.
+Per poter accedere a tali dati, è necessario trascinare il file "data.txt" nella directory ProgettoIS. Eventuali file denominati allo stesso modo, già presenti in ProgettoIS devono essere necessariamente spostati o rimossi (Deve esserci un unico file denominato "data.txt" in ProgettoIS).
+Per poter accedere al sistema inserire:
+-nome azienda: agenzia delle entrate
+-password: 1234
 
 
 Progetto realizzato da Luca Antonio Luigi Barbieri matricola: 220359.
