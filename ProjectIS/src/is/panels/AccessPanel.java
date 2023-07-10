@@ -34,7 +34,7 @@ public class AccessPanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(395,400,200,100);
         //Button
-        JButton newAziendaButton = new JButton("Crea Nuova Azienda"); //Button di creazione di una nuova azienda
+        JButton newAziendaButton = new JButton("Crea nuova azienda"); //Button di creazione di una nuova azienda
         newAziendaButton.setForeground(Color.white);
         newAziendaButton.setBackground(blue2);
         newAziendaButton.setOpaque(true);

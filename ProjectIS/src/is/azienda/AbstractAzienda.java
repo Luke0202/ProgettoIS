@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class AbstractAzienda implements AziendaIF{
 
     //Massimo Id utilizzabile per identificare un dipendente
-    private final int maxIdPossible = 10000;
+    private final int maxIdPossible = 50000;
 
     //Definizione organigramma
     private Organigramma organigramma;

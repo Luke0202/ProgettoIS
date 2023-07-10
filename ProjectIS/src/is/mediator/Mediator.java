@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class Mediator implements MediatorIF{
     private JMenuItem createA,listA,createR,listR,createE,listE,detA;
-    private JTextField nameLog,pswLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
+    private JTextField nameLog, nameCreateArea, nameCreateRole, nameModRole,nameCreateEmployee,surnameCreateEmployee,
             emailCreateEmployee, nameCreateAzienda, codCreateAzienda, headquarterCreateAzienda, typeCreateAzienda,
             nameListArea, idListEmployee, nameListRole, areaListRole, pswCreateAzienda, nameModArea, nameArea, nameRole,areaRole, idEmployee;
     private JButton newRoleEmployee,newAziendaAccess,confLog,newAziendaLog, saveBCreateArea, saveVCreateArea, saveCreateRole, saveModRole,
@@ -42,6 +42,8 @@ public class Mediator implements MediatorIF{
 
     private Azienda azienda=null;
 
+    private JPasswordField pswLog;
+
     //GETTERS
     public Azienda getAzienda(){return this.azienda;}
 
@@ -61,7 +63,7 @@ public class Mediator implements MediatorIF{
     public void setConfLog(JButton confLog){this.confLog = confLog;}
     public void setNewAziendaLog(JButton newAziendaLog){this.newAziendaLog=newAziendaLog;}
     public void setNameLog(JTextField nameLog){this.nameLog = nameLog;}
-    public void setPswLog(JTextField pswLog){this.pswLog = pswLog;}
+    public void setPswLog(JPasswordField pswLog){this.pswLog = pswLog;}
 
     //About CreateAreaPanel
     public void setNameCreateArea(JTextField nameCreateArea){this.nameCreateArea=nameCreateArea;}
@@ -208,17 +210,18 @@ public class Mediator implements MediatorIF{
             //L'utente viene rimandato al pannello contenente la lista dei ruoli
             pag.avanza(Pagination.LIST_ROLE,null);
 
-        //About JTextField in LogPanel
+        //About JTextField and JPasswordField in LogPanel
         if (widget == nameLog || widget==pswLog){
+
             //Button di accesso disabilitato in caso di presenza di campi vuoti
             if (nameLog.getText().equals("") || pswLog.getText().equals(""))
                 confLog.setEnabled(false);
             else
                 confLog.setEnabled(true);
+
         }
 
         //About JButton
-
         if (widget == confLog) {
             //Button di conferma credenziali, usato per accedere ai dati dell'azienda
 

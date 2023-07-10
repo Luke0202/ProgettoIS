@@ -46,7 +46,7 @@ public class LogPanel extends JPanel{
         JLabel reqPsw = new JLabel("Password: ");
         reqPsw.setBounds(410,410,100,30);
 
-        JTextField pswField = new JTextField(20);  //Campo in cui bisogna inserire la password
+        JPasswordField pswField = new JPasswordField(20);  //Campo in cui bisogna inserire la password
         pswField.setBounds(485,410,150,30);
 
         //Confirmation button
@@ -58,7 +58,7 @@ public class LogPanel extends JPanel{
         confLog.setBounds(450,465,110,30);
 
         //Button to create a new azienda
-        JButton newAziendaButton = new JButton("Crea Nuova Azienda"); //Button per la creazione di una nuova azienda
+        JButton newAziendaButton = new JButton("Crea nuova azienda"); //Button per la creazione di una nuova azienda
         newAziendaButton.setForeground(Color.white);
         newAziendaButton.setBackground(blue2);
         newAziendaButton.setOpaque(true);
