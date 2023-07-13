@@ -7,8 +7,10 @@ import is.mediator.Mediator;
 import is.azienda.Organigramma;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * Tale classe estende JPanel. Definisce un pannello
@@ -108,6 +110,35 @@ public class ListRolePanel extends JPanel {
         mediator.setAreaListRole(areaField);
         mediator.setSearchListRole(search);
         //Listener
+
+        //Attraverso un mouseListener effettuo la rimozione
+        //della scritta "Digita nome ruolo", quando l'utente
+        //clicca la prima volta sul campo
+        nameField.addMouseListener(new MouseInputAdapter() {
+            private boolean rimuoviScritta = true;
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (rimuoviScritta && nameField.getText().equals("Digita nome ruolo")){
+                    nameField.setText("");
+                    rimuoviScritta = false;
+                }
+            }
+        });
+
+        //Attraverso un mouseListener effettuo la rimozione
+        //della scritta "Digita nome area di riferimento", quando l'utente
+        //clicca la prima volta sul campo
+        areaField.addMouseListener(new MouseInputAdapter() {
+            private boolean rimuoviScritta = true;
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (rimuoviScritta && areaField.getText().equals("Digita nome area di riferimento")){
+                    areaField.setText("");
+                    rimuoviScritta = false;
+                }
+            }
+        });
+
         search.addActionListener(e->mediator.widgetChanged(search));
     }
 }//ListRolePanel

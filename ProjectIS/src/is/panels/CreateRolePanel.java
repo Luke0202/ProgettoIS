@@ -114,6 +114,8 @@ public class CreateRolePanel extends JPanel {
             array[0] = "Nessuna Area";
         } else{
             array = areas.toArray(new String[areas.size()]);
+            //Ordinamento
+            java.util.Arrays.sort(array);
         }
         return array;
     }

@@ -6,7 +6,6 @@ import is.mediator.Mediator;
 import is.azienda.Azienda;
 import is.azienda.Organigramma;
 import is.panels.*;
-import is.textParser.TextPlainParser;
 import is.aziendaParser.AziendaParser;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -391,23 +390,21 @@ public class Pagination extends JFrame implements PaginationIF {
     public static final int EDIT_ROLE = 13;
     public static final int EMPLOYEE = 14;
 
+    //Percorso file
+    private final static String path = "data.txt";
+
     //Stato corrente
     private State currentState;
 
-    //Percorso file
-    private static String path;
-
     private Mediator mediator;
+
 
     public Pagination(){
         //Definizione mediator
         mediator = new Mediator();
 
-        //Percorso file
-        path = "data.txt";
-
         //Frame options
-        this.setTitle("Gestione Azienda");
+        this.setTitle("MyOrg");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         //Listener per gestire la chiusura del frame
         this.addWindowListener(new WindowAdapter() {
@@ -417,31 +414,6 @@ public class Pagination extends JFrame implements PaginationIF {
                 if (i != 0) return; //L'utente non ha selezionato 'Si'
 
                 //Option: yes
-
-                //Se è presente un'azienda nel sistema, eventuali modifiche che sono state effettuate
-                //devono essere memorizzate in memoria secondaria
-                if (mediator.getAzienda()!=null){
-                    //Getting file
-                    File f = new File(path);
-                    //Se il file è inesistente, allora bisogna crearlo
-                    if (!f.exists()){
-                        try{
-                            f.createNewFile();
-                        }
-                        catch(IOException e){
-                            e.printStackTrace();
-                        }
-                    }
-                    //Una volta ottenuto il file bisogna memorizzare i dati aziendali
-                    try{
-                        //Definizione di un TextPlainParser per la scrittura del file
-                        PrintWriter pw = new PrintWriter(new FileWriter(f.getPath()),true);
-                        TextPlainParser tx = new TextPlainParser(mediator.getAzienda(),pw); tx.doParse(); pw.close();
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                //Uscita
                 System.exit(0);
             }
         });

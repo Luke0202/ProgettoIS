@@ -1,0 +1,597 @@
+<Azienda>
+<Cod>72.11.00</Cod>
+<Name>Agenzia Spaziale Italiana</Name>
+<Headquarter>Roma</Headquarter>
+<Type>Aerospaziale</Type>
+<Password>200769</Password>
+<Employees>
+<Employee>
+<ID>1</ID>
+<Name>Gabriella</Name>
+<Surname>Arrigo</Surname>
+<Email>gabriellaarrigo@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>2</ID>
+<Name>Marco</Name>
+<Surname>Ferrazzani</Surname>
+<Email>marcoferrazzani@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>3</ID>
+<Name>Domenico</Name>
+<Surname>Lopreiato</Surname>
+<Email>domenicolopreiato@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>4</ID>
+<Name>Paolo</Name>
+<Surname>Giommi</Surname>
+<Email>paologiommi@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>5</ID>
+<Name>Marco</Name>
+<Surname>Pizzarelli</Surname>
+<Email>marcopizzarelli@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>6</ID>
+<Name>Barbara</Name>
+<Surname>Negri</Surname>
+<Email>barbaranegri@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>7</ID>
+<Name>Federica</Name>
+<Surname>Iafolla</Surname>
+<Email>federicaiafolla@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>8</ID>
+<Name>Teodoro</Name>
+<Surname>Valente</Surname>
+<Email>teodorovalente@gmail.com</Email>
+</Employee>
+<Employee>
+<ID>0</ID>
+<Name>Giorgio</Name>
+<Surname>Saccoccia</Surname>
+<Email>giorgiosaccoccia@gmail.com</Email>
+</Employee>
+</Employees>
+<Roles>
+<Role>
+<Name>Esperto fisica spaziale</Name>
+<NameArea>Ricerca Spaziale</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Ricercatore</Name>
+<NameArea>Coordinamento Ricerca ed Alta Formazione</NameArea>
+<Description>I ricercatori dell’ASI sono gli scienziati che lavorano per l’Agenzia Spaziale Italiana e che si occupano di diversi ambiti della ricerca spaziale, come l’astronomia, l’astrofisica, l’esplorazione, l’osservazione della Terra, le telecomunicazioni e la navigazione.</Description>
+</Role>
+<Role>
+<Name>Responsabile volo umano</Name>
+<NameArea>Direzione Scienza e Ricerca</NameArea>
+<Description>Si occupa delle missioni con equipaggio umano e delle attività di ricerca sulla Stazione Spaziale Internazionale (ISS) e sulla futura Gateway lunare.</Description>
+</Role>
+<Role>
+<Name>Responsabile delle relazioni con i clienti</Name>
+<NameArea>Sistemi informatici</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario CdA</Name>
+<NameArea>Supporto Organi</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario</Name>
+<NameArea>Direzione Scienza e Ricerca</NameArea>
+<Description>Supporto tecnico di direzione</Description>
+</Role>
+<Role>
+<Name>Responsabile consultivo e societario</Name>
+<NameArea>Affari Legali e Societari</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Ingegnere della Sicurezza</Name>
+<NameArea>Direzione Sicurezza</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Analista</Name>
+<NameArea>Direzione Sicurezza</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario</Name>
+<NameArea>Direzione Generale</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Relazioni con UE</NameArea>
+<Description>Si occupa delle relazioni con le istituzioni dell’Unione Europea (UE) e del supporto alla partecipazione italiana ai programmi spaziali europei.</Description>
+</Role>
+<Role>
+<Name>Responsabile tecnico-scientifico</Name>
+<NameArea>Coordinamento Area Strategica e New Space Economy</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario</Name>
+<NameArea>Direzione IT, Logistica e Transizione Digitale</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Responsabile traffico spaziale</Name>
+<NameArea>Trasporto Spaziale</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Relazioni con ESA</NameArea>
+<Description>Si occupa delle relazioni con l’Agenzia Spaziale Europea (ESA) e delle politiche spaziali europee.</Description>
+</Role>
+<Role>
+<Name>Presidente</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description>Il presidente dell’ASI è il rappresentante legale dell’ente e ha il compito di indirizzare e coordinare le attività dell’Agenzia, in conformità con le direttive del Governo e del Comitato per le Politiche Aerospaziali (COMINT).</Description>
+</Role>
+<Role>
+<Name>Analista</Name>
+<NameArea>Direzione Affari Internazionali</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Progettista</Name>
+<NameArea>Direzione Programmi</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Segretario CTS</Name>
+<NameArea>Supporto Organi</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Portavoce</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Capo scienziato</Name>
+<NameArea>Direzione Scienza e Ricerca</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Responsabile relazioni sindacali</Name>
+<NameArea>Direzione Risorse Umane</NameArea>
+<Description> </Description>
+</Role>
+<Role>
+<Name>Analista</Name>
+<NameArea>Direzione Amministrazione, Finanza</NameArea>
+<Description>Analizza costi e parametri industriali</Description>
+</Role>
+<Role>
+<Name>Coordinatore comunità scientifica spaziale</Name>
+<NameArea>Coordinamento Scientifico</NameArea>
+<Description> </Description>
+</Role>
+</Roles>
+<Organigramma>
+<Area>
+<Name>Consiglio di amministrazione</Name>
+<Description>Azienda: Agenzia Spaziale Italiana, Codice ATECO: 72.11.00, Sede centrale: Roma, Settore: Aerospaziale.</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>8</ID>
+<Role>
+<Name>Presidente</Name>
+<NameArea>Consiglio di amministrazione</NameArea>
+<Description>Il presidente dell’ASI è il rappresentante legale dell’ente e ha il compito di indirizzare e coordinare le attività dell’Agenzia, in conformità con le direttive del Governo e del Comitato per le Politiche Aerospaziali (COMINT).</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Affari Legali e Societari</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Accordi e Rapporti con Stakeholders</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Supporto Organi</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Coordinamento Area Strategica e New Space Economy</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Ispezione generale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Generale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Direzione Sicurezza</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Sicurezza e Tecnologia</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Comunicazione Istituzionale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Multimedia</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Valorizzazione Immagine e Comunicazione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Risorse Umane</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Gestione Amministrativa</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Pianificazione Sviluppo e Reclutamento</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Normative e Welfare</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione IT, Logistica e Transizione Digitale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Sistemi informatici</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Coordinamento e Monitoraggio Progetti</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Servizi Logistici, Gestione e Manutenzione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Progettazione e Sviluppo Software</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Amministrazione, Finanza</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Contabilità e Finanza</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Contratti</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Acquisti</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Scienza e Ricerca</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>6</ID>
+<Role>
+<Name>Responsabile volo umano</Name>
+<NameArea>Direzione Scienza e Ricerca</NameArea>
+<Description>Si occupa delle missioni con equipaggio umano e delle attività di ricerca sulla Stazione Spaziale Internazionale (ISS) e sulla futura Gateway lunare.</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Coordinamento Scientifico</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Coordinamento Ricerca ed Alta Formazione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>4</ID>
+<Role>
+<Name>Ricercatore</Name>
+<NameArea>Coordinamento Ricerca ed Alta Formazione</NameArea>
+<Description>I ricercatori dell’ASI sono gli scienziati che lavorano per l’Agenzia Spaziale Italiana e che si occupano di diversi ambiti della ricerca spaziale, come l’astronomia, l’astrofisica, l’esplorazione, l’osservazione della Terra, le telecomunicazioni e la navigazione.</Description>
+</Role>
+</Couple>
+<Couple>
+<ID>5</ID>
+<Role>
+<Name>Ricercatore</Name>
+<NameArea>Coordinamento Ricerca ed Alta Formazione</NameArea>
+<Description>I ricercatori dell’ASI sono gli scienziati che lavorano per l’Agenzia Spaziale Italiana e che si occupano di diversi ambiti della ricerca spaziale, come l’astronomia, l’astrofisica, l’esplorazione, l’osservazione della Terra, le telecomunicazioni e la navigazione.</Description>
+</Role>
+</Couple>
+<Couple>
+<ID>7</ID>
+<Role>
+<Name>Ricercatore</Name>
+<NameArea>Coordinamento Ricerca ed Alta Formazione</NameArea>
+<Description>I ricercatori dell’ASI sono gli scienziati che lavorano per l’Agenzia Spaziale Italiana e che si occupano di diversi ambiti della ricerca spaziale, come l’astronomia, l’astrofisica, l’esplorazione, l’osservazione della Terra, le telecomunicazioni e la navigazione.</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Ricerca Spaziale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Affari Internazionali</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>1</ID>
+<Role>
+<Name>Analista</Name>
+<NameArea>Direzione Affari Internazionali</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Relazioni con ESA</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>2</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Relazioni con ESA</NameArea>
+<Description>Si occupa delle relazioni con l’Agenzia Spaziale Europea (ESA) e delle politiche spaziali europee.</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Relazioni con UE</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>3</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Relazioni con UE</NameArea>
+<Description>Si occupa delle relazioni con le istituzioni dell’Unione Europea (UE) e del supporto alla partecipazione italiana ai programmi spaziali europei.</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Programmi</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Trasporto Spaziale</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>0</ID>
+<Role>
+<Name>Responsabile traffico spaziale</Name>
+<NameArea>Trasporto Spaziale</NameArea>
+<Description> </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Esplorazione Strutture Orbitanti</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Telecomunicazioni e Navigazione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Gestione PNRR e Coordinamento Programmi</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+</Organigramma>
+</Azienda>

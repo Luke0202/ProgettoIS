@@ -5,6 +5,7 @@ import is.azienda.*;
 import is.mediator.Mediator;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.HashSet;
 
@@ -100,7 +101,7 @@ public class RolePanel extends JPanel {
         HashSet<Employee> employees = azienda.getEmployee(role);
 
         //Tipologia colonne della tabella contenente i dipendenti
-        String[] columnNames = {"ID","Nome","Cognome","Email"};
+        String[] columnNames = {"ID","Cognome","Nome","Email"};
 
         Object[][] data = new Object[employees.size()][columnNames.length];
 
@@ -108,14 +109,22 @@ public class RolePanel extends JPanel {
         int i = 0;
         for (Employee e:employees){
             data[i][0] = e.getID();
-            data[i][1] = e.getName();
-            data[i][2] = e.getSurname();
+            data[i][1] = e.getSurname();
+            data[i][2] = e.getName();
             data[i][3] = e.getEmail();
             i++;
         }
 
         //Definizione tabella
         DataTable table = new DataTable(data, columnNames);
+
+        //Dimension of columns
+        TableColumn column = null;
+        for (int j = 0;j<4;j++){
+            column = table.getColumnModel().getColumn(j);
+            if (j==0) column.setPreferredWidth(40);
+            if (j==3) column.setPreferredWidth(260);
+        }
 
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane(table);

@@ -222,6 +222,8 @@ public class EmployeePanel extends JPanel {
             array[0] = "Nessun ruolo disponibile";
         } else{
             array = ruoliValidi.toArray(new String[ruoliValidi.size()]);
+            //Ordinamento
+            java.util.Arrays.sort(array);
         }
         return array;
     }
@@ -245,6 +247,9 @@ public class EmployeePanel extends JPanel {
         }
 
         //Conversione in String[]
-        return roles.toArray(new String[roles.size()]);
+        String[] array = roles.toArray(new String[roles.size()]);
+        //Ordinamento
+        java.util.Arrays.sort(array);
+        return array;
     }
 }//EmployeePanel

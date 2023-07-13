@@ -7,8 +7,12 @@ import is.azienda.Azienda;
 import is.azienda.Organigramma;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 /**
@@ -112,6 +116,20 @@ public class ListAreaPanel extends JPanel {
         mediator.setNameListArea(nameField);
         mediator.setSearchListArea(search);
         //Listener
+
+        //Attraverso un mouseListener effettuo la rimozione
+        //della scritta "Digita nome area", quando l'utente
+        //clicca la prima volta sul campo
+        nameField.addMouseListener(new MouseInputAdapter() {
+            private boolean rimuoviScritta = true;
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (rimuoviScritta && nameField.getText().equals("Digita nome area")){
+                    nameField.setText("");
+                    rimuoviScritta = false;
+                }
+            }
+        });
         search.addActionListener(e->mediator.widgetChanged(search));
     }
 }//ListAreaPanel

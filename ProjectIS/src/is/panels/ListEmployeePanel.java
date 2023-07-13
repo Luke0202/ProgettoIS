@@ -7,8 +7,10 @@ import is.azienda.Employee;
 import is.mediator.Mediator;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * Tale classe estende JPanel. Definisce un pannello
@@ -107,6 +109,21 @@ public class ListEmployeePanel extends JPanel {
         mediator.setIdListEmployee(idField);
         mediator.setSearchListEmployee(search);
         //Listener
+
+        //Attraverso un mouseListener effettuo la rimozione
+        //della scritta "Digita ID dipendente", quando l'utente
+        //clicca la prima volta sul campo
+        idField.addMouseListener(new MouseInputAdapter() {
+            private boolean rimuoviScritta = true;
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (rimuoviScritta && idField.getText().equals("Digita ID dipendente")){
+                    idField.setText("");
+                    rimuoviScritta = false;
+                }
+            }
+        });
+
         search.addActionListener(e->mediator.widgetChanged(search));
     }
 }//ListEmployeePanel

@@ -3,6 +3,8 @@ package is.panels;
 import is.mediator.Mediator;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 /**
@@ -11,6 +13,11 @@ import java.awt.*;
  * @author lucab
  */
 public class LogPanel extends JPanel{
+
+    private JButton confLog;
+    private JTextField nameField;
+    private JPasswordField pswField;
+
     public LogPanel(Mediator mediator){
         //Verifica validità mediator
         if (mediator == null) throw new IllegalArgumentException("Mediator non valido");
@@ -39,18 +46,18 @@ public class LogPanel extends JPanel{
         JLabel reqId = new JLabel("Nome azienda: ");
         reqId.setBounds(385,370,100,30);
 
-        JTextField nameField = new JTextField(20);  //Campo in cui bisogna inserire il nome
+        nameField = new JTextField(20);  //Campo in cui bisogna inserire il nome
         nameField.setBounds(485,370,150,30);
 
         //Password
         JLabel reqPsw = new JLabel("Password: ");
         reqPsw.setBounds(410,410,100,30);
 
-        JPasswordField pswField = new JPasswordField(20);  //Campo in cui bisogna inserire la password
+        pswField = new JPasswordField(20);  //Campo in cui bisogna inserire la password
         pswField.setBounds(485,410,150,30);
 
         //Confirmation button
-        JButton confLog = new JButton("Accedi"); //Button per accedere al sistema
+        confLog = new JButton("Accedi"); //Button per accedere al sistema
         confLog.setForeground(Color.white);
         confLog.setBackground(blue2);
         confLog.setEnabled(false);
@@ -71,12 +78,43 @@ public class LogPanel extends JPanel{
         mediator.setConfLog(confLog);
         mediator.setNewAziendaLog(newAziendaButton);
         //Listeners
-        nameField.addActionListener(e -> mediator.widgetChanged(nameField));
-        pswField.addActionListener(e -> mediator.widgetChanged(pswField));
+        nameField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {gestisciButton();}
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {gestisciButton();}
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+        pswField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {gestisciButton();}
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {gestisciButton();}
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+        });
+
         confLog.addActionListener(e -> mediator.widgetChanged(confLog));
         newAziendaButton.addActionListener(e->mediator.widgetChanged(newAziendaButton));
 
         //Adding
         add(lab); add(title); add(nameField); add(pswField); add(reqId); add(reqPsw); add(confLog); add(newAziendaButton);
+    }
+
+    /**
+     * Tale metodo abilita o disabilita il pulsante per
+     * accedere al sistema, in base al contenuto di nameField
+     * e pswField. In presenza di campi vuoti il pulsante viene
+     * disabilitato.
+     */
+    private void gestisciButton(){
+        if (nameField.getText().isEmpty() || pswField.getText().isEmpty()){
+            confLog.setEnabled(false);
+        }else confLog.setEnabled(true);
     }
 }//LogPanel

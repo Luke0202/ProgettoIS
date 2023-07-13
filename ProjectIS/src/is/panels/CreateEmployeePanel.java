@@ -129,6 +129,8 @@ public class CreateEmployeePanel extends JPanel {
             array[0] = "Nessun ruolo presente";
         } else{
             array = rol.toArray(new String[rol.size()]);
+            //Ordinamento
+            java.util.Arrays.sort(array);
         }
         return array;
     }

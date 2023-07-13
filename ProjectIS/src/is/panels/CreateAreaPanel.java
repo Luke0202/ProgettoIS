@@ -128,6 +128,8 @@ public class CreateAreaPanel extends JPanel {
             array[0] = "Nessuna area di riferimento";
         } else{
             array = tot.toArray(new String[tot.size()]);
+            //Ordinamento array
+            java.util.Arrays.sort(array);
         }
         return array;
     }
