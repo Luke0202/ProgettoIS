@@ -21,7 +21,7 @@ L'azienda comprende quindi:
 
 ### ESECUZIONE
 
-L'applicazione è stata compilata con la versione più recente della Java RunTime (class file version 64.0). Per eseguire il file jar si richiede la versione 20.0.1 della JDK.
+Per eseguire il file jar, si richiede la versione 17.0.6 della JDK (class file version 61).
 
 In alternativa al jar, è possibile lanciare l'applicazione attraverso un apposito IDE (Es. IntelliJ).
 Una volta caricato il progetto, bisogna lanciare il main contenuto all'interno della classe Application.
