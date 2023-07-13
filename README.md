@@ -92,7 +92,7 @@ In merito ai dipendenti, l'applicazione consente di:
 
 Per accedere alle varie funzionalità l'applicazione dispone di una barra del menu. 
 
-### ESEMPI FORNITO 
+### ESEMPI FORNITI
 
 Nella directory ProgettoIS è presente una sotto-directory denominata "esempi". 
 All'interno sono disponibili due esempi pratici di aziende definite e memorizzate con MyOrg. 
