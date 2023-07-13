@@ -100,7 +100,7 @@ All'interno sono disponibili due esempi pratici di aziende definite e memorizzat
 Inizialmente, è stato preso in esame l'organigramma dell'agenzia delle entrate.
 Per poter accedere a tali dati, è necessario trascinare il file "data.txt" nella directory ProgettoIS. Eventuali file denominati allo stesso modo, già presenti in ProgettoIS devono essere necessariamente spostati o rimossi (Deve esserci un unico file denominato "data.txt" in ProgettoIS).
 Per poter accedere al sistema inserire:
-* Nome azienda: agenzia delle entrate
+* Nome azienda: Agenzia delle entrate
 * Password: 1234
 
 Successivamente, è stato preso in esame l'organigramma dell'Agenzia Spaziale Italiana.
