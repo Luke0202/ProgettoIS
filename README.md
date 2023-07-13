@@ -92,15 +92,20 @@ In merito ai dipendenti, l'applicazione consente di:
 
 Per accedere alle varie funzionalità l'applicazione dispone di una barra del menu. 
 
-### ESEMPIO FORNITO 
+### ESEMPI FORNITO 
 
 Nella directory ProgettoIS è presente una sotto-directory denominata "esempi". 
-All'interno è disponibile un esempio pratico di organigramma aziendale definito e memorizzato con MyOrg. 
-È stato preso in esame l'organigramma dell'agenzia delle entrate.
+All'interno sono disponibili due esempi pratici di aziende definite e memorizzate con MyOrg. 
+
+Inizialmente, è stato preso in esame l'organigramma dell'agenzia delle entrate.
 Per poter accedere a tali dati, è necessario trascinare il file "data.txt" nella directory ProgettoIS. Eventuali file denominati allo stesso modo, già presenti in ProgettoIS devono essere necessariamente spostati o rimossi (Deve esserci un unico file denominato "data.txt" in ProgettoIS).
 Per poter accedere al sistema inserire:
 * Nome azienda: agenzia delle entrate
 * Password: 1234
 
+Successivamente, è stato preso in esame l'organigramma dell'Agenzia Spaziale Italiana.
+Una volta eseguita la procedura descritta in precedenza, bisogna digitare nella schermata di log in i seguenti dati:
+* Nome azienda: Agenzia Spaziale Italiana
+* Password: 200769
 
 Progetto realizzato da Luca Antonio Luigi Barbieri matricola: 220359.
