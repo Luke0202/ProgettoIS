@@ -13,9 +13,9 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 /**
- * Tale classe ha l'obiettivo di analizzare un file.txt contenente
- * i dati di un'azienda, memorizzati secondo il formato XML, con l'obiettivo
- * di costruire un oggetto della classe Azienda.
+ * Tale classe analizza un file.txt contenente i dati di un'azienda,
+ * memorizzati in XML, con l'obiettivo di costruire un oggetto della
+ * classe Azienda.
  * @author lucab
  */
 public class AziendaParser {
@@ -78,23 +78,23 @@ public class AziendaParser {
      */
     private String nextToken() {
 
-        //Si considera il caso in cui o lo StringTokenizer non è stato ancora definito o lo stringTokenizer non presenta più token
         while (st == null || !st.hasMoreTokens()) {
-
+            //Casi in cui lo stringTokenizer non è stato ancora definito o non presenta più token
             String line = null;
+
             try {
-                //Gestione casi di informazioni definite su più righe del file
                 while(line == null || line.charAt(line.length()-1)!='>'){
+                    //Gestione caso in cui un'informazione è definita su più righe del file
                     line = (line == null )?  br.readLine(): line+"\n"+br.readLine();
+
+                    //Caso in cui sono state analizzate tutte le righe del file
+                    if (line == null)
+                        return null;//Fine file
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            //Caso in cui sono state analizzate tutte le righe del file
-            if (line == null)
-                return null;//Fine file
 
             //Definizione nuovo stringTokenizer
             st = new StringTokenizer(line,"[><]");
@@ -124,7 +124,7 @@ public class AziendaParser {
      * @return Azienda
      */
     private Azienda readAzienda(){
-        //Token di ingresso per la lettura dell'azienda
+        //Token d'ingresso per la lettura dell'azienda
         token = nextToken();//<Azienda>
 
         if (!isCorrect("Azienda")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
@@ -197,7 +197,7 @@ public class AziendaParser {
         //HashSet da restituire
         HashSet<Role> roles = new HashSet<>();
 
-        //Token di ingresso per la lettura dei ruoli
+        //Token d'ingresso per la lettura dei ruoli
         token = nextToken();//<Roles>
 
         if (!isCorrect("Roles")) throw new IllegalArgumentException("Wrong token. Token found: "+token);
@@ -206,7 +206,7 @@ public class AziendaParser {
         String name=null;
         String area=null;
         String descr = null;
-        //Variabile booleana utile a sancire la fine della lettura
+        //Variabile booleana per indicare la fine della lettura dei ruoli
         boolean go = true;
         while(go){
             token = nextToken(); //token successivo
@@ -227,7 +227,7 @@ public class AziendaParser {
      * @return Organigramma
      */
     private Organigramma readOrganigramma(){
-        //Token di ingresso per la lettura dell'organigramma
+        //Token d'ingresso per la lettura dell'organigramma
         token = nextToken();//<Organigramma>
 
         token = nextToken();
@@ -295,7 +295,6 @@ public class AziendaParser {
                 case "/Role": r = new Role(nameCouple,areaCouple,descrCouple); break; //Creazione ruolo
                 case "/Couple": cou = new Couple(r,coupleID); couples.add(cou); break; //Creazione coppia
                 case "/Couples": go = false; //Non ci sono più coppie da leggere
-                default: break;
             }
         }
 
@@ -307,13 +306,13 @@ public class AziendaParser {
         LinkedList<Organigramma> listAreas = new LinkedList<>();
 
         Organigramma area = null;
-        //Variabile booleana utile a sancire la fine della lettura
+        //Variabile booleana per indicare la fine della lettura dell'area
         go = true;
         while (go){
             token = nextToken();//Token successivo
             switch(token){
                 case "Area": area = readArea(); listAreas.add(area); break; //Lettura nuova sotto-area
-                case "/ListAreas": go = false; //NOn ci sono più sotto-aree da leggere
+                case "/ListAreas": go = false; //Non ci sono più sotto-aree da leggere
             }
         }
 
@@ -344,7 +343,7 @@ public class AziendaParser {
         String surname=null;
         String email=null;
         Employee emp=null;
-        //Variabile booleana utile a sancire la fine della lettura
+        //Variabile booleana per indicare la fine della lettura dei dipendenti
         boolean go = true;
 
         while(go){

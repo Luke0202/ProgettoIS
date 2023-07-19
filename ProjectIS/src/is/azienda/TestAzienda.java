@@ -37,7 +37,7 @@ public class TestAzienda {
         o2.addChild(o4);
 
         //Definizione Azienda
-        String psw ="1234";//Password aziendale
+        String psw ="1234";//Password di accesso aziendale
         azienda = new Azienda("010101", "Spacex","Hawthorne","Aerospaziale",psw,o);
 
         //Definizione ruoli
@@ -87,10 +87,10 @@ public class TestAzienda {
         Area consiglioAmministrazione = o.getChild(0);
         Area areaVendite = ((Organigramma)consiglioAmministrazione).getChild(0);
 
-        //Verifica presenza di sottoaree
+        //Verifica presenza di sotto-aree
         assertFalse(o.getSubAreas().isEmpty());
 
-        //Verifica numero di sottoaree
+        //Verifica numero di sotto-aree
         assertEquals(o.getSubAreas().size(),6);
 
         //Verifica numero aree figlie
@@ -176,11 +176,11 @@ public class TestAzienda {
         //Verifica presenza area "consiglio di amministrazione"
         assertEquals(azienda.getArea("Consiglio di amministrazione"),o.getChild(0));
 
-        //Verifica che "azienda" è l'area padre di "consiglio di amministrazione"
+        //Verifica che "Azienda" è l'area padre di "Consiglio di amministrazione"
         Organigramma consiglioAmministrazione = (Organigramma) o.getChild(0);
         assertEquals(azienda.getParent(consiglioAmministrazione),o);
 
         //Verifica numero di aree in cui lavora il dipendente "Gianni Filice"
         assertEquals(azienda.getAreasName(new Employee("Gianni","Filice","",2)).size(),2);
     }
-}
+}//TestAzienda

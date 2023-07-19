@@ -11,8 +11,7 @@ import java.util.HashSet;
  * Tale classe ha la funzione di salvare il contenuto
  * di un'azienda all'interno di un file.txt.
  * Per memorizzare il contenuto in memoria secondaria
- * si utilizza un TextBuilder, in grado di salvare i
- * dati aziendali in formato XML.
+ * si utilizza un TextBuilderIF.
  * @author lucab
  */
 public class TextPlainParser {

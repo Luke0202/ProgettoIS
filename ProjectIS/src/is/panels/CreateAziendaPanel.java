@@ -33,7 +33,7 @@ public class CreateAziendaPanel extends JPanel {
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
-        //Aggiunta campi di creazione azienda
+
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel

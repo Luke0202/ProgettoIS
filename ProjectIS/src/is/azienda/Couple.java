@@ -3,7 +3,7 @@ package is.azienda;
 import java.util.Objects;
 
 /**
- * Tale classe associa un ruolo ad un determinato dipendente,
+ * Tale classe associa un ruolo a un determinato dipendente,
  * caratterizzato da un id.
  * @author lucab
  */

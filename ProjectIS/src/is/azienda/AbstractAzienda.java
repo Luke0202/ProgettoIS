@@ -17,10 +17,10 @@ public class AbstractAzienda implements AziendaIF{
     //Definizione organigramma
     private Organigramma organigramma;
 
-    //Definizione lista dipendenti
+    //Definizione insieme dipendenti
     private HashSet<Employee> employees = new HashSet<>();
 
-    //Definizione lista ruoli
+    //Definizione insieme ruoli
     private HashSet<Role> roles = new HashSet<>();
 
     public AbstractAzienda(Organigramma organigramma){
@@ -45,7 +45,7 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Restituisce il numero di dipendenti che
-     * lavorano nell'azienda.
+     * lavorano in azienda.
      * @return numero dipendenti
      */
     @Override
@@ -80,8 +80,8 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Restituisce l'insieme degli identificatori
-     * dei dipendenti interni all'azienda.
-     * @return insieme di identificatori
+     * dei dipendenti in azienda.
+     * @return insieme d'identificatori
      */
     @Override
     public HashSet<Integer> getIdEmployees() {
@@ -95,13 +95,13 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Permette di assegnare un ruolo ad un determinato
+     * Permette di assegnare un ruolo a un determinato
      * dipendente. Il ruolo deve già esistere all'interno
      * dell'azienda, altrimenti non è possibile assegnare tale
-     * ruolo ad un dipendente.
-     * Se il dipendente è nuovo, egli viene aggiunto
+     * ruolo.
+     * Se il dipendente è nuovo, egli verrà aggiunto
      * in azienda.
-     * @param role ruolo da assegnare ad un dipendente
+     * @param role ruolo da assegnare a un dipendente
      * @param emp dipendente al quale assegnare un ruolo
      */
     @Override
@@ -123,11 +123,11 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Permette di assegnare un ruolo ad un determinato
+     * Permette di assegnare un ruolo a un determinato
      * dipendente. Il ruolo, così come il dipendente, deve
      * già esistere all'interno dell'azienda, altrimenti
-     * non è possibile assegnare tale ruolo ad un dipendente.
-     * @param role ruolo da assegnare ad un dipendente
+     * non è possibile assegnare tale ruolo a un dipendente.
+     * @param role ruolo da assegnare a un dipendente
      * @param id dipendente al quale assegnare un ruolo
      */
     @Override
@@ -210,10 +210,10 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Permette di levare un ruolo ad un dipendente.
+     * Permette di dissociare un ruolo da un dipendente.
      * Se tale dipendente, a seguito della rimozione,
      * non presenta più alcun ruolo, egli risulta licenziato.
-     * @param role ruolo da levare a un dipendente
+     * @param role ruolo da dissociare da un dipendente
      * @param emp dipendente al quale rimuovere il ruolo
      */
     @Override
@@ -291,7 +291,7 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Restituisce l'insieme dei nomi dei ruoli
-     * assegnati ad un determinato dipendente.
+     * assegnati a un determinato dipendente.
      * @param emp dipendente del quale si vogliono
      *            ottenere i nomi dei ruoli
      * @return insieme nomi ruoli
@@ -312,7 +312,7 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Restituisce i ruoli assegnati ad un determinato
+     * Restituisce i ruoli assegnati a un determinato
      * dipendente. Per ogni area, una volta verificata
      * la presenza del dipendente, vengono restituiti
      * i ruoli a lui assegnati.
@@ -402,7 +402,7 @@ public class AbstractAzienda implements AziendaIF{
         //Insieme dei ruoli del dipendente
         HashSet<Role> rolesOfEmp = getRoles(emp);
 
-        //Per ogni ruolo, ottengo il nome dell'area in cui è definito
+        //Per ogni ruolo, ottengo il nome dell'area in cui esso è definito
         for (Role role:rolesOfEmp){
             ret.add(role.getArea());
         }
@@ -446,7 +446,8 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Permette di aggiungere un'area, data la conoscenza dell'area padre.
+     * Permette di aggiungere un'area all'organigramma,
+     * data la conoscenza dell'area padre.
      * @param par area padre
      * @param org area figlia
      */
@@ -482,9 +483,8 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Restituisce l'identificatore da assegnare ad un dipendente.
-     * L'id massimo assegnabile è pari a maxIdPossible, il quale può
-     * esprimere un limite al numero di dipendenti assumibili da un'azienda.
+     * Restituisce l'identificatore da assegnare a un dipendente.
+     * Il massimo id assegnabile è pari a maxIdPossible.
      * @return id
      */
     @Override

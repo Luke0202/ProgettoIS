@@ -36,7 +36,6 @@ public class CreateRolePanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,350,50);
 
-        //Aggiunta campi di creazione ruolo
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -99,9 +98,9 @@ public class CreateRolePanel extends JPanel {
     }
 
     /**
-     * Restituisce la lista dei nomi delle aree in azienda.
+     * Restituisce i nomi delle aree in azienda.
      * @param azienda Azienda da visionare
-     * @return lista dei nomi
+     * @return array di stringhe
      */
     private static String[] findAreas(Azienda azienda){
         //Ricavo i nomi delle aree

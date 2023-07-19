@@ -14,8 +14,8 @@ import java.awt.event.WindowEvent;
  * nel package is.panels. In base a un indice è possibile
  * selezionare il pannello che si vuole mostrare.
  * Lo scopo unico della classe è quello di visionare un singolo
- * pannello, pertanto la pressione di buttons potrebbe generare
- * errori.
+ * pannello, pertanto la pressione di pulsanti nei vari pannelli
+ * potrebbe generare errori.
  * @author lucab
  */
 public class PanelTest {
@@ -123,6 +123,6 @@ public class PanelTest {
         frame.setVisible(true);
     }
     public static void main(String[] args){
-        PanelTest panel = new PanelTest(5);
+        PanelTest panel = new PanelTest(0);
     }
 }

@@ -8,8 +8,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 /**
- * Tale classe estende JPanel. Definisce un pannello di
- * log in per accedere all'azienda.
+ * Tale classe estende JPanel. Definisce il pannello di
+ * log in.
  * @author lucab
  */
 public class LogPanel extends JPanel{

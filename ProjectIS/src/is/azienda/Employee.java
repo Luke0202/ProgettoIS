@@ -3,7 +3,7 @@ package is.azienda;
 import java.util.Objects;
 
 /**
- * Tale classe descrive un dipendente.
+ * Tale classe definisce le caratteristiche che contraddistinguono un dipendente.
  * Un dipendente è identificato da un id ed è caratterizzato da
  * un nome, un cognome e una email.
  * @author lucab
@@ -13,7 +13,7 @@ public class Employee {
     //Id dipendente
     private final int ID;
 
-    //Nome, cognome e email di un dipendente.
+    //Nome, cognome ed email di un dipendente.
     private String name, surname, email;
 
     public Employee(String name, String surname, String email,int ID){

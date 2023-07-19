@@ -39,7 +39,6 @@ public class CreateEmployeePanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
 
-        //Aggiunta campi di creazione dipendente
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -109,9 +108,9 @@ public class CreateEmployeePanel extends JPanel {
     }
 
     /**
-     * Restituisce la lista dei ruoli definiti in azienda
+     * Restituisce i ruoli dell'azienda.
      * @param azienda Azienda da visionare
-     * @return lista di stringhe
+     * @return array di stringhe
      */
     private static String[] findRoles(Azienda azienda){
         //Ricavo ruoli dell'azienda

@@ -36,7 +36,7 @@ public class AziendaPanel extends JPanel {
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10, 7, 350, 50);
-        //Aggiungendo i campi dell'azienda
+
         JPanel fieldPanel = new JPanel(null); //Pannello che contiene i campi dell'azienda
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0, 50, 1000, 950); //Confini fieldPanel
@@ -105,7 +105,7 @@ public class AziendaPanel extends JPanel {
         nRolesLab.setForeground(blue);
         nRolesLab.setBounds(20,225,200,30);
 
-        JLabel nRolesField = new JLabel(String.valueOf(X)); //Campo contenente il numero di ruoli in azienda
+        JLabel nRolesField = new JLabel(String.valueOf(X)); //Campo contenente il numero dei ruoli in azienda
         nRolesField.setFont(f2);
         nRolesField.setBounds(235, 225, 280, 30);
         //Logo applicazione

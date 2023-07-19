@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  * Tale classe astratta estende ImageIcon.
- * È presente un riferimento ad un oggetto ImageIcon.
+ * È presente un riferimento a un oggetto ImageIcon.
  * @author lucab
  */
 public abstract class ImageDecorator extends ImageIcon{

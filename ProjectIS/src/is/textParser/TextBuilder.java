@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 /**
  * Tale classe implementa TextBuilderIF, definendo i metodi
- * per la rappresentazione dei dati aziendali secondo il formato XML.
+ * per la rappresentazione dei dati aziendali in XML.
  * @author lucab
  */
 public class TextBuilder implements TextBuilderIF {

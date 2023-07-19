@@ -2,7 +2,6 @@ package is.aziendaParser;
 
 import is.azienda.Azienda;
 import is.azienda.Employee;
-
 import java.net.URL;
 import java.util.HashSet;
 

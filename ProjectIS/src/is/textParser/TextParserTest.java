@@ -4,7 +4,6 @@ import is.azienda.Azienda;
 import is.azienda.Employee;
 import is.azienda.Organigramma;
 import is.azienda.Role;
-
 import java.io.*;
 import java.util.Scanner;
 

@@ -10,7 +10,7 @@ import java.util.HashSet;
 /**
  * Tale classe estende JPanel. Definisce un pannello
  * di creazione area. L'area può essere salvata in BOZZA
- * o può essere salvata e VALIDATA, ovvero una volta salvata
+ * o può essere salvata e VALIDATA. Una volta validata l'area
  * non risulta più modificabile.
  * @author lucab
  */
@@ -37,7 +37,7 @@ public class CreateAreaPanel extends JPanel {
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10,7,480,50);
-        //Aggiunta campi di creazione area
+
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Sfondo fieldPanel
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -83,7 +83,7 @@ public class CreateAreaPanel extends JPanel {
         saveB.setBackground(blue2);
         saveB.setBounds(20,350,200,30);
 
-        JButton saveV = new JButton("SALVA E VALIDA");  //Button per salvare e validare
+        JButton saveV = new JButton("SALVA E VALIDA");  //Button per salvare e VALIDARE
         saveV.setForeground(Color.white);
         saveV.setBackground(blue2);
         saveV.setBounds(350,350,200,30);
@@ -115,7 +115,7 @@ public class CreateAreaPanel extends JPanel {
     /**
      * Restituisce i nomi delle aree definite in azienda.
      * @param azienda Azienda da visionare
-     * @return lista contenente i nomi delle aree
+     * @return array dei nomi delle aree
      */
     private static String[] findAreas(Azienda azienda){
         //Ricavo i nomi delle aree dell'azienda

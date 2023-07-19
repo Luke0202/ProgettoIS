@@ -36,7 +36,7 @@ public class AreaPanel extends JPanel {
         head.setFont(f);
         head.setForeground(Color.black);
         head.setBounds(10,7,350,50);
-        //Aggiunta i campi dell'area
+
         JPanel fieldPanel = new JPanel(null); //Pannello che contiene i campi dell'area
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -150,10 +150,10 @@ public class AreaPanel extends JPanel {
     }
 
     /**
-     * Restituisce il nome dell'area genitore di un'area.
+     * Restituisce il nome dell'area genitore di una determinata area.
      * Se l'area, fornita in ingresso, coincide con
      * l'area radice, allora il metodo restituisce
-     * la string "Nessuna".
+     * la stringa "Nessuna".
      * @param azienda azienda che contiene l'organigramma
      * @param org area della quale si vuole identificare il padre
      * @return nome area padre

@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * Tale classe estende JPanel. Definisce un pannello
- * contenente la lista dei dipendenti dell'azienda.
+ * contenente l'elenco dei dipendenti dell'azienda.
  */
 public class ListEmployeePanel extends JPanel {
     public ListEmployeePanel(Mediator mediator){
@@ -45,7 +45,6 @@ public class ListEmployeePanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
 
-        //Aggiunta campi per visionare la lista dei dipendenti
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,60,1000,950); //Confini fieldPanel
@@ -122,9 +121,9 @@ public class ListEmployeePanel extends JPanel {
         mediator.setSearchListEmployee(search);
         //Listener
 
-        //Attraverso un mouseListener effettuo la rimozione
+        //Attraverso un mouseListener viene effettuata la rimozione
         //della scritta "Digita ID dipendente", quando l'utente
-        //clicca la prima volta sul campo
+        //clicca per la prima volta sul campo
         idField.addMouseListener(new MouseInputAdapter() {
             private boolean rimuoviScritta = true;
             @Override

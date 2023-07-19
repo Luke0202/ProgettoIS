@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 /**
  * Tale classe estende JPanel. Definisce un pannello contenente
- * tutte le aree definite in azienda.
+ * l'elenco delle aree definite in azienda.
  * @author lucab
  */
 public class ListAreaPanel extends JPanel {
@@ -48,7 +48,6 @@ public class ListAreaPanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
 
-        //Aggiunta campi per visionare la lista delle aree
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,60,1000,950); //Confini fieldPanel
@@ -127,9 +126,9 @@ public class ListAreaPanel extends JPanel {
         mediator.setSearchListArea(search);
         //Listener
 
-        //Attraverso un mouseListener effettuo la rimozione
+        //Attraverso un mouseListener viene effettuata la rimozione
         //della scritta "Digita nome area", quando l'utente
-        //clicca la prima volta sul campo
+        //clicca per la prima volta sul campo
         nameField.addMouseListener(new MouseInputAdapter() {
             private boolean rimuoviScritta = true;
             @Override

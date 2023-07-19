@@ -36,7 +36,6 @@ public class ModAreaPanel extends JPanel{
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
 
-        //Aggiunta campi per la modifica di un'area
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -122,13 +121,13 @@ public class ModAreaPanel extends JPanel{
     }
 
     /**
-     * Restituisce una lista dei nomi delle aree di riferimento
-     * che si possono attribuire ad una specifica area.
+     * Restituisce i nomi delle aree di riferimento
+     * che si possono attribuire a una specifica area.
      * @param azienda Azienda contenente tutte le aree
      * @param orgChild Area della quale si vogliono conoscere tutte le
      *                 possibili aree di riferimento che si possono
      *                 attribuire a tale area.
-     * @return lista dei nomi delle aree di riferimento
+     * @return array contenente i nomi delle aree di riferimento
      */
     private static String[] findAreas(Azienda azienda,Organigramma orgChild){
         //Ricavo i nomi delle aree dell'azienda

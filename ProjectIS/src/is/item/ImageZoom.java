@@ -6,9 +6,9 @@ import java.awt.*;
 /**
  * Tale classe estende ImageDecorator. Definisce un decoratore concreto.
  * È possibile manipolare, attraverso tale classe, la grandezza di un oggetto
- * ImageIcon. Per rilevare eventuali cambiamento in merito alla grandezza sull'oggetto
+ * ImageIcon. Per rilevare eventuali cambiamenti in merito alla grandezza sull'oggetto
  * originale, è stata definita la variabile booleana changed.
- * Il double zoom, di default pari a 1.0, esprime di quanto l'immagine corrente è
+ * La variabile zoom, di default pari a 1.0, esprime di quanto l'immagine corrente è
  * stata zoomata rispetto all'immagine originale.
  * @author lucab
  */
@@ -37,7 +37,7 @@ public class ImageZoom extends ImageDecorator {
     /**
      * Restituisce l'immagine, effettuando eventuali
      * modifiche richieste sulla grandezza dell'immagine.
-     * @return Image object
+     * @return oggetto di tipo Image
      */
     @Override
     public Image getImage(){
@@ -50,9 +50,9 @@ public class ImageZoom extends ImageDecorator {
     }
 
     /**
-     * Restituisce un oggetto ImageIcon, effettuando
+     * Restituisce un oggetto di tipo ImageIcon, effettuando
      * eventuali modifiche richieste sulla grandezza dell'immagine.
-     * @return ImageIcon object
+     * @return oggetto di tipo ImageIcon
      */
     public ImageIcon getImageIcon(){
         //Verifica su eventuali richieste di cambiamento della grandezza dell'immagine

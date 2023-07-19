@@ -39,7 +39,6 @@ public class RolePanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,350,50);
 
-        //Aggiunta campi per la visione di un ruolo
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,50,1000,950); //Confini fieldPanel
@@ -160,13 +159,13 @@ public class RolePanel extends JPanel {
 
     /**
      * Verifica se un ruolo è cancellabile o meno.
-     * Un ruolo si può rimuovere se non è associato a nessun dipendente.
-     * @param role
-     * @param azienda Azienda conen
+     * Un ruolo si può rimuovere se non è associato ad alcun dipendente.
+     * @param role Role
+     * @param azienda Azienda
      * @return
      */
     private boolean isRemovable(Role role,Azienda azienda){
-        //Un ruolo è rimuovibile se non ha alcun dipendente associato
+        //Un ruolo si può rimuovere se non ha alcun dipendente associato
         //L'area di riferimento del ruolo non deve presentare alcuna associazione ruolo-idDipendente, in cui è presente tale ruolo
         Organigramma org = azienda.getArea(role.getArea());
         return !org.contains(role);

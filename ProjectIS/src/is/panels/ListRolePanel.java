@@ -4,7 +4,6 @@ import is.item.DataTable;
 import is.azienda.Azienda;
 import is.azienda.Role;
 import is.mediator.Mediator;
-import is.azienda.Organigramma;
 import is.item.ImageZoom;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
@@ -14,7 +13,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * Tale classe estende JPanel. Definisce un pannello
- * contenente tutti i ruoli definiti in azienda.
+ * contenente l'elenco dei ruoli definiti in azienda.
  * @author lucab
  */
 public class ListRolePanel extends JPanel {
@@ -46,7 +45,6 @@ public class ListRolePanel extends JPanel {
         head.setForeground(Color.black);
         head.setBounds(10,7,380,50);
 
-        //Aggiunta campi per visionare la lista dei ruoli
         JPanel fieldPanel = new JPanel(null);
         fieldPanel.setBackground(gray); //Definizione sfondo
         fieldPanel.setBounds(0,60,1000,950); //Confini fieldPanel
@@ -127,9 +125,9 @@ public class ListRolePanel extends JPanel {
         mediator.setSearchListRole(search);
         //Listener
 
-        //Attraverso un mouseListener effettuo la rimozione
+        //Attraverso un mouseListener viene effettuata la rimozione
         //della scritta "Digita nome ruolo", quando l'utente
-        //clicca la prima volta sul campo
+        //clicca per la prima volta sul campo
         nameField.addMouseListener(new MouseInputAdapter() {
             private boolean rimuoviScritta = true;
             @Override
@@ -141,9 +139,9 @@ public class ListRolePanel extends JPanel {
             }
         });
 
-        //Attraverso un mouseListener effettuo la rimozione
+        //Attraverso un mouseListener viene effettuata la rimozione
         //della scritta "Digita nome area di riferimento", quando l'utente
-        //clicca la prima volta sul campo
+        //clicca per la prima volta sul campo
         areaField.addMouseListener(new MouseInputAdapter() {
             private boolean rimuoviScritta = true;
             @Override

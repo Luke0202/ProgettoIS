@@ -6,14 +6,13 @@ import java.util.*;
 /**
  * Tale classe fornisce i metodi di gestione dei dipendenti
  * e dei ruoli interni a un'area. Include metodi di visita
- * dellorganigramma.
+ * dell'organigramma.
  * @author lucab
  */
 public class Organigramma extends AbstractCompositeArea {
 
     //Coppie ruolo-dipendente
     //Le coppie di tale insieme comprendono solo i ruoli assegnati ai vari dipendenti
-    //I ruoli, definiti per tale area, che non sono stati ancora assegnati, non si trovano nelle coppie
     private HashSet<Couple> couples = new HashSet<>();
 
     //Nome e descrizione di un'area
@@ -63,7 +62,7 @@ public class Organigramma extends AbstractCompositeArea {
      * presentano un determinato ruolo.
      * Il ruolo deve appartenere all'area, altrimenti viene
      * restituito un insieme vuoto.
-     * @param role ruolo che devono possedere i dipendenti
+     * @param role ruolo da ricercare
      * @return insieme d'identificatori
      */
     @Override
@@ -83,7 +82,7 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Permette di assegnare un ruolo ad un determinato dipendente.
+     * Permette di assegnare un ruolo a un determinato dipendente.
      * Un dipendente è identificato dall'id.
      * Il ruolo deve appartenere all'area, altrimenti non viene
      * assegnato al dipendente.
@@ -116,7 +115,7 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Permettere di levare un ruolo da uno specifico dipendente.
+     * Permettere di dissociare un ruolo da uno specifico dipendente.
      * @param role ruolo da levare
      * @param id identificatore dipendente
      */
@@ -157,7 +156,7 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Restituisce l'insieme dei ruoli di un'area
+     * Restituisce l'insieme dei ruoli di un'area.
      * @return insieme di ruoli
      */
     @Override
@@ -173,7 +172,7 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Restituisce l'insieme dei ruoli di un'area, assegnati ad
+     * Restituisce l'insieme dei ruoli di un'area, assegnati a
      * un determinato dipendente.
      * @param emp dipendente da ricercare
      * @return insieme dei ruoli
@@ -195,7 +194,7 @@ public class Organigramma extends AbstractCompositeArea {
      * un determinato dipendente.
      * Si considera l'area corrente come area radice della gerarchia.
      * @param emp dipendente da ricercare
-     * @return insieme dei nome delle aree
+     * @return insieme dei nomi delle aree
      */
     @Override
     public HashSet<String> getAreasOfEmployee(Employee emp){
@@ -264,10 +263,8 @@ public class Organigramma extends AbstractCompositeArea {
     }
 
     /**
-     * Permette, attraverso un areaVisitor, di visitare
-     * l'organigramma. In particolare la visita ha come
-     * obiettivo la memorizzazione dell'organigramma in
-     * memoria secondaria
+     * Permette, attraverso un oggetto di tipo AreaVisitor, di visitare
+     * l'organigramma.
      * @param visitor
      */
     @Override

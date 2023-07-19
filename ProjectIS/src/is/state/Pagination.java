@@ -16,7 +16,7 @@ import java.io.*;
 /**
  * Tale classe estende JFrame e implementa PaginationIF.
  * Rappresenta il frame nel quale vengono aggiunti i pannelli
- * che il dipendente chiede di visionare. Ogni pannello viene
+ * che l'utente chiede di visionare. Ogni pannello viene
  * rappresentato da uno stato che può variare a seconda
  * di come l'utente interagisce con il sistema.
  * La classe presenta la variabile d'istanza currentState che
@@ -74,7 +74,9 @@ public class Pagination extends JFrame implements PaginationIF {
                 //Costruzione azienda a partire dal file data.txt
                 AziendaParser tx = new AziendaParser(file.getPath());
                 Azienda azienda = tx.build();
-                //Setting azienda per permettere al mediator di conoscere le credenziali di accesso al sistema
+
+                //Settaggio azienda
+                //Il mediator apprende così le credenziali di accesso al sistema
                 mediator.setAzienda(azienda);
                 //Panel
                 l = new LogPanel(mediator); frame.add(l);
@@ -436,16 +438,16 @@ public class Pagination extends JFrame implements PaginationIF {
             }
         }
 
-        //Se l'azienda esiste già, allora l'utente viene rimandato al pannello di log in
-        //Altrimenti viene rimandato al pannello di accesso al sistema
+        //Se l'azienda esiste già, allora l'utente viene reindirizzato alla schermata di log in
+        //Altrimenti viene reindirizzato al pannello di accesso al sistema
         try{
             BufferedReader br = new BufferedReader(new FileReader(f.getPath()));
             
             if (br.readLine()==null){
-                //File vuoto -> Creazione Azienda
+                //File vuoto -> Transizione verso la schermata di creazione azienda
                 transition(State.ACCESS_PAGE,null);
             }else{
-                //File non vuoto -> Transizione verso l'area di log-in
+                //File non vuoto -> Transizione verso la schermata di log-in
                 transition(State.LOG_IN_PAGE,null);
             }
             br.close();

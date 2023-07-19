@@ -3,13 +3,13 @@ package is.azienda;
 import java.util.Objects;
 
 /**
- * Tale classe descrive un ruolo.
+ * Tale classe definisce le caratteristiche di un ruolo.
  * Un ruolo è identificato da un nome e da un'area. Inoltre è
  * caratterizzato da una descrizione.
  * @author lucab
  */
 public class Role {
-    //nome, descrizione e area di un ruolo
+    //Nome, descrizione e area di un ruolo
     private String name,description,area;
 
     public Role(String name, String area, String description){

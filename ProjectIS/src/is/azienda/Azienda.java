@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author lucab
  */
 public class Azienda extends AbstractAzienda{
-    //Definizione password di accesso aziendale e definizione codice ateco
+    //Definizione password di accesso aziendale e definizione codice ATECO
     private final String psw, cod;
 
     //Definizione nome, sede centrale e settore
@@ -39,12 +39,13 @@ public class Azienda extends AbstractAzienda{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Azienda azienda = (Azienda) o;
-        return cod == azienda.cod;
+        return Objects.equals(cod, azienda.cod) && Objects.equals(name, azienda.name) &&
+                Objects.equals(headquarter, azienda.headquarter) && Objects.equals(type, azienda.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cod);
+        return Objects.hash(cod, name, headquarter, type);
     }
 
     @Override

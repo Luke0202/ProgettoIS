@@ -3,7 +3,7 @@ package is.mediator;
 import javax.swing.*;
 
 /**
- * Tale interfaccia fornisce un metodo di interazione con
+ * Tale interfaccia fornisce un metodo d'interazione con
  * altri oggetti.
  * @author lucab
  */

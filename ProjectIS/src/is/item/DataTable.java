@@ -5,10 +5,9 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 /**
- * Tale classe estende JTable. È possibile definire tabelle
- * non modificabili nel contenuto, che presentano colorazioni
- * differenti delle righe in base all'indice di riga e all'interazione
- * con l'utente.
+ * Tale classe estende JTable. È possibile definire tabelle con celle
+ * non modificabili, che presentano colorazioni differenti delle righe
+ * in base all'indice di riga e all'interazione con l'utente.
  * @author lucab
  */
 public class DataTable extends JTable {

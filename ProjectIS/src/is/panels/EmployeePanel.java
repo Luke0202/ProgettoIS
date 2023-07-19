@@ -195,12 +195,12 @@ public class EmployeePanel extends JPanel {
     }
 
     /**
-     * Restituisce la lista dei ruoli che si possono assegnare
-     * ad un determinato dipendente. La lista non comprende i ruoli
+     * Restituisce i ruoli che si possono assegnare
+     * a un determinato dipendente. La lista non comprende i ruoli
      * che già possiede.
      * @param emp dipendente al quale si può assegnare un ruolo
      * @param azienda azienda contenente tutti i ruoli definiti
-     * @return lista contenente le coppie nomeRuolo-AreaDiCompetenza
+     * @return array contenente le coppie nomeRuolo-AreaDiCompetenza
      */
     private static String[] findRoles(Employee emp,Azienda azienda){
         //Ricavo ruoli che si possono assegnare al dipendente emp
@@ -232,7 +232,7 @@ public class EmployeePanel extends JPanel {
      * Restituisce i ruoli di un dipendente.
      * @param emp dipendente del quale si vogliono i ruoli
      * @param azienda Azienda
-     * @return lista contenente le coppie nomeRuolo-AreaDiCompetenza
+     * @return array contenente le coppie nomeRuolo-AreaDiCompetenza
      */
     private static String[] getRoles(Employee emp,Azienda azienda){
         //Ricavo i ruoli di un dipendente

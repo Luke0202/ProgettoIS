@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * Tale classe implementa l'interfaccia CompositeArea e definisce i
  * metodi di gestione della struttura ad albero dell'organigramma.
- * La variabile booleana di stato stateArea indica se l'area può essere
- * soggetta o meno a modifica. Se è true allora l'area è stata validata,
+ * La variabile booleana stateArea indica se l'area può essere
+ * soggetta o meno a modifica. Se è true allora l'area risulta validata,
  * altrimenti è in bozza.
  * @author lucab
  */
@@ -86,8 +86,10 @@ public abstract class AbstractCompositeArea implements CompositeArea {
     /**
      * Indica se una specifica area appartiene alla gerarchia
      * che presenta come area radice l'area corrente.
+     * Se l'area da ricercare coincide con l'area corrente viene
+     * restituito false.
      * @param area area da ricercare
-     * @return presenza o meno dell'area nella gerarchia
+     * @return boolean che indica la presenza o meno dell'area nella gerarchia
      */
     @Override
     public boolean isSubArea(Area area){
@@ -95,8 +97,8 @@ public abstract class AbstractCompositeArea implements CompositeArea {
         if (this.equals(area)) return false;
 
         Iterator<Area> it = iterator();
-        //La prima area coincide con la corrente
-        it.next();
+
+        it.next();//L'area restituita da it.next() coincide con quella corrente
         while(it.hasNext()){
             //Verifica corrispondenza aree
             if (it.next().equals(area)) return true;
@@ -130,7 +132,7 @@ public abstract class AbstractCompositeArea implements CompositeArea {
     }
 
     /**
-     * Definizione del metodo iterator, per percorrere l'organigramma
+     * Definizione del metodo iterator, per percorrere le aree dell'organigramma
      * in maniera sequenziale.
      * @return Iterator
      */
