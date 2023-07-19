@@ -42,24 +42,24 @@ All'atto di creazione l'utente deve inserire:
 * Settore azienda
 * Password di accesso al sistema
 
-IMPORTANTE!
-Una volta confermata la password di accesso, questa non sarà più modificabile. Attenzione: ricorda la password per accedere in futuro all'applicativo.
-
 Se invece è stata già salvata un'azienda, l'applicazione reindirizza l'utente alla schermata di log-in.
 
 L'utente per accedere all'azienda deve inserire obbligatoriamente:
 * Nome azienda
 * Password di accesso
 
+IMPORTANTE!
+Una volta confermata la password di accesso, questa non sarà più modificabile. Attenzione: ricorda la password per accedere in futuro all'applicativo.
+
 In alternativa, dalla schermata di log-in è possibile memorizzarne una nuova azienda, cancellando quella corrente.
-P.S. Memorizzata la nuova azienda, non sarà più possibile recuperare quella precedente.
+Memorizzata la nuova azienda, non sarà più possibile recuperare quella precedente.
 
 ### MEMORIZZAZIONE AZIENDA
 
 L'azienda viene memorizzata all'interno di un file denominato "data.txt". 
 Se l'applicazione viene lanciata mediante l'esecuzione del main della classe Application, il file "data.txt" verrà memorizzato nella directory "ProgettoIS".
-In alternativa l'applicazione può essere lanciata da prompt dei comandi utilizzando il file jar, mediante il comando "java -jar percorso\file.jar".
-Il file "data.txt" viene memorizzato nella directory da cui l'utente lancia il comando.
+In alternativa, l'applicazione può essere lanciata da prompt dei comandi utilizzando il file jar, mediante il comando "java -jar percorso\file.jar".
+Il file "data.txt" verrà memorizzato nella directory da cui l'utente lancia il comando.
 
 ### SERVIZI OFFERTI
 
@@ -97,10 +97,10 @@ Per accedere alle varie funzionalità l'applicazione dispone di una barra del me
 Nella directory ProgettoIS è presente una sotto-directory denominata "esempi". 
 All'interno sono disponibili due esempi pratici di aziende definite e memorizzate con MyOrg. 
 
-Inizialmente, è stato preso in esame l'organigramma dell'agenzia delle entrate.
-Per poter accedere a tali dati, se l'applicazione viene lanciata mediante un IDE, è necessario trascinare il file "data.txt" nella directory ProgettoIS,
+Inizialmente, è stato preso in esame l'organigramma dell'Agenzia delle Entrate.
+Per poter accedere a tali dati, se l'applicazione viene lanciata mediante un IDE, è necessario trascinare il file "data.txt" nella directory ProgettoIS.
 Se invece si utilizza il file jar, bisogna trascinare il file "data.txt" nella directory nella quale è presente il jar.
-Eventuali file denominati allo stesso modo, già presenti nella directory devono essere necessariamente spostati o rimossi (Deve esserci un unico file denominato "data.txt" nella directory).
+Eventuali file denominati allo stesso modo, già presenti nella directory devono essere necessariamente spostati o rimossi (deve esserci un unico file denominato "data.txt" nella directory).
 Per poter accedere al sistema bisogna inserire:
 * Nome azienda: Agenzia delle entrate
 * Password: 1234
