@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * Tale classe fornisce i metodi di gestione dei dipendenti
- * e dei ruoli interni ad un'area. Include metodi di visita
+ * e dei ruoli interni a un'area. Include metodi di visita
  * dellorganigramma.
  * @author lucab
  */
@@ -43,7 +43,7 @@ public class Organigramma extends AbstractCompositeArea {
     /**
      * Restituisce l'insieme degli id dei dipendenti che
      * lavorano nell'area.
-     * @return insieme di identificatori
+     * @return insieme d'identificatori
      */
     @Override
     public HashSet<Integer> getEmployees(){
@@ -64,7 +64,7 @@ public class Organigramma extends AbstractCompositeArea {
      * Il ruolo deve appartenere all'area, altrimenti viene
      * restituito un insieme vuoto.
      * @param role ruolo che devono possedere i dipendenti
-     * @return insieme di identificatori
+     * @return insieme d'identificatori
      */
     @Override
     public HashSet<Integer> getEmployees(Role role) {
@@ -210,7 +210,7 @@ public class Organigramma extends AbstractCompositeArea {
             //Area corrente
             Organigramma cur = (Organigramma)it.next();
             //Verifica presenza dipendente
-            if (cur.containsID(ID))
+            if (cur.contains(ID))
                 //Aggiunta nome area
                 ret.add(cur.getName());
         }
@@ -223,7 +223,7 @@ public class Organigramma extends AbstractCompositeArea {
      * @return presenza o meno del dipendente
      */
     @Override
-    public boolean containsID(int empID){
+    public boolean contains(int empID){
         for(Couple c:couples){
             if (c.getID() == empID) return true;
         }

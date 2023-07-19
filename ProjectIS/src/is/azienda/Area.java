@@ -18,7 +18,7 @@ public interface Area {
     HashSet<Integer> getEmployees();
     HashSet<Integer> getEmployees(Role r);
     default int getNEmployees(){return getEmployees().size();}
-    boolean containsID(int empID);
+    boolean contains(int empID);
 
     //About roles
     void removeRole(Role r);

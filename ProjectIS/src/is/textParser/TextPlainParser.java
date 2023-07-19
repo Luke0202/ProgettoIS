@@ -1,19 +1,17 @@
 package is.textParser;
 
-
 import is.azienda.Employee;
 import is.azienda.Role;
 import is.azienda.Azienda;
 import is.azienda.Organigramma;
-
 import java.io.PrintWriter;
 import java.util.HashSet;
 
 /**
- * Tale classe ha la funzione di analizzare un Azienda
- * e salvare il contenuto all'interno di un file.txt.
+ * Tale classe ha la funzione di salvare il contenuto
+ * di un'azienda all'interno di un file.txt.
  * Per memorizzare il contenuto in memoria secondaria
- * si utilizza un TextBuilder, capace di salvare i
+ * si utilizza un TextBuilder, in grado di salvare i
  * dati aziendali in formato XML.
  * @author lucab
  */
@@ -41,32 +39,19 @@ public class TextPlainParser {
         HashSet<Role> roles = azienda.getRoles();
 
         //Memorizzazione azienda
-        builder.openAzienda();
-        builder.openCod(azienda.getCod()); builder.closeCod(); //Codice ATECO
-        builder.openName(azienda.getName()); builder.closeName(); //Nome azienda
-        builder.openHeadquarter(azienda.getHeadquarter()); builder.closeHeadquarter(); //Sede centrale
-        builder.openType(azienda.getType()); builder.closeType(); //Settore
-        builder.openPassword(azienda.getPsw()); builder.closePassword(); //Password
+        builder.openAzienda(azienda);
+
         //Memorizzazione dipendenti
         builder.openEmployees();
-        for (Employee emp:employees){
-            builder.openEmployee();
-            builder.openID(emp.getID()); builder.closeID(); //Id dipendente
-            builder.openName(emp.getName()); builder.closeName(); //Nome dipendente
-            builder.openSurname(emp.getSurname()); builder.closeSurname(); //Cognome dipendente
-            builder.openEmail(emp.getEmail()); builder.closeEmail(); //Email dipendente
-            builder.closeEmployee();
+        for (Employee employee:employees){
+            builder.addEmployee(employee);
         }
         builder.closeEmployees();
 
         //Memorizzazione ruoli
         builder.openRoles();
         for (Role role:roles){
-            builder.openRole();
-            builder.openName(role.getName()); builder.closeName(); //Nome ruolo
-            builder.openNameArea(role.getArea()); builder.closeNameArea(); //Area di competenza del ruolo
-            builder.openDescription(role.getDescription()); builder.closeDescription(); //Descrizione del ruolo
-            builder.closeRole();
+            builder.addRole(role);
         }
         builder.closeRoles();
 

@@ -29,41 +29,6 @@ public abstract class AbstractCompositeArea implements CompositeArea {
     }
 
     /**
-     * Restituisce una determinata area figlia
-     * in base alla posizione nel vettore delle aree.
-     * @param i posizione dell'area da restituire
-     * @return area
-     */
-    @Override
-    public Area getChild(int i){
-        //Verifica indice valido
-        if (i<0 || i>=areas.size()) return null;
-
-        return areas.get(i);
-    }
-
-    /**
-     * Indica se una specifica area appartiene alla gerarchia
-     * che presenta come area radice l'area corrente.
-     * @param area area da ricercare
-     * @return presenza o meno dell'area nella gerarchia
-     */
-    @Override
-    public boolean isSubArea(Area area){
-        //Area coincidente con quella corrente
-        if (this.equals(area)) return false;
-
-        Iterator<Area> it = iterator();
-        //La prima area coincide con la corrente
-        it.next();
-        while(it.hasNext()){
-            //Verifica corrispondenza aree
-            if (it.next().equals(area)) return true;
-        }
-        return false;
-    }
-
-    /**
      * Permette di nominare una specifica area come
      * area figlia.
      * @param area area da aggiungere.
@@ -96,12 +61,47 @@ public abstract class AbstractCompositeArea implements CompositeArea {
     }
 
     /**
+     * Restituisce una determinata area figlia
+     * in base alla posizione nel vettore delle aree.
+     * @param i posizione dell'area da restituire
+     * @return area
+     */
+    @Override
+    public Area getChild(int i){
+        //Verifica indice valido
+        if (i<0 || i>=areas.size()) return null;
+
+        return areas.get(i);
+    }
+
+    /**
      * Restituisce la dimensione del vettore delle aree.
      * @return dimensione
      */
     @Override
     public int getNChildren() {
         return areas.size();
+    }
+
+    /**
+     * Indica se una specifica area appartiene alla gerarchia
+     * che presenta come area radice l'area corrente.
+     * @param area area da ricercare
+     * @return presenza o meno dell'area nella gerarchia
+     */
+    @Override
+    public boolean isSubArea(Area area){
+        //Area coincidente con quella corrente
+        if (this.equals(area)) return false;
+
+        Iterator<Area> it = iterator();
+        //La prima area coincide con la corrente
+        it.next();
+        while(it.hasNext()){
+            //Verifica corrispondenza aree
+            if (it.next().equals(area)) return true;
+        }
+        return false;
     }
 
     /**

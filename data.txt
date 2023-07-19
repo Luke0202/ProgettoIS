@@ -1,0 +1,477 @@
+<Azienda>
+<Cod>84.11.10</Cod>
+<Name>Agenzia delle entrate</Name>
+<Headquarter>Roma</Headquarter>
+<Type>Amministrazione pubblica e difesa</Type>
+<Password>1234</Password>
+<Employees>
+<Employee>
+<ID>1</ID>
+<Name>Ubaldo</Name>
+<Surname>Pietrangeli</Surname>
+<Email>Div.risorse.coordinamentotecnico@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>2</ID>
+<Name>Giuseppe</Name>
+<Surname>Buono</Surname>
+<Email>Dc.tecnologieeinnovazione@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>3</ID>
+<Name>Claudio</Name>
+<Surname>Fabrizi</Surname>
+<Email>Dc.sccpi@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>4</ID>
+<Name>Ernesto Maria</Name>
+<Surname>Ruffini</Surname>
+<Email>Entrate.segreteriadirezione@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>5</ID>
+<Name>Pia</Name>
+<Surname>Ievolella</Surname>
+<Email>Entrate.segreteriadirezione@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>6</ID>
+<Name>Chiara</Name>
+<Surname>Trifiletti</Surname>
+<Email>Dc.au.supportorpct@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>7</ID>
+<Name>Umberto</Name>
+<Surname>Rizzuti</Surname>
+<Email>Dc.au.sviluppostrategiedicontrasto@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>8</ID>
+<Name>Giuseppe</Name>
+<Surname>Telesca</Surname>
+<Email>Dc.au.sviluppostrategiedicontrasto@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>9</ID>
+<Name>Laura</Name>
+<Surname>Caggeggi</Surname>
+<Email>Dc.au.sviluppostrategiedicontrasto@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>10</ID>
+<Name>Federica</Name>
+<Surname>Corbo</Surname>
+<Email>Dc.aall.segreteriaorganicollegiali@agenziaentrate.it</Email>
+</Employee>
+<Employee>
+<ID>0</ID>
+<Name>Antonio</Name>
+<Surname>Dorrello</Surname>
+<Email>Div.risorse@agenziaentrate.it</Email>
+</Employee>
+</Employees>
+<Roles>
+<Role>
+<Name>Capo Divisione</Name>
+<NameArea>Divisione Risorse</NameArea>
+<Description>  </Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Servizi Catastali, Cartografici e di Pubblicità Immobiliare</NameArea>
+<Description>  </Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direttore dell'agenzia</NameArea>
+<Description>Segreteria del Direttore
+Supporto amministrativo per l'esercizio delle funzioni attribuite al Direttore dell'Agenzia
+Supporto al Direttore nei rapporti con il Ministero dell'Economia e delle Finanze e con l'Agenzia delle Entrate–Riscossione per l'esercizio della funzione della riscossione nazionale
+Rapporti con le strutture di vertice
+Presidio dei collegamenti con le amministrazioni e organizzazioni nazionali ed estere per le attività di natura internazionale
+Istruttoria relativa al conferimento delle onorificenze</Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Divisione Risorse</NameArea>
+<Description>Segreteria del Capo Divisione
+Supporto tecnico-amministrativo per l’esercizio delle funzioni attribuite al Capo Divisione e per l’adozione degli atti di sua competenza
+Consuntivazione delle risorse della Divisione
+Indirizzo, coordinamento e supporto dell’attività delle Direzioni centrali dipendenti
+Coordinamento e monitoraggio delle attività di valutazione delle proposte normative sottoposte alla Divisione e trasmissione dei relativi elementi alla Direzione Centrale Coordinamento normativo
+Predisposizione degli elementi di risposta ai documenti di sindacato ispettivo e trasmissione degli stessi alla Direzione Centrale Coordinamento normativo</Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Logistica e Approvvigionamenti</NameArea>
+<Description>  </Description>
+</Role>
+<Role>
+<Name>Sviluppatore strategie di contrasto</Name>
+<NameArea>Direzione Centrale Audit</NameArea>
+<Description>Monitoraggio delle procedure informatizzate di supporto ai controlli e alle indagini conoscitive condotte dagli uffici della Direzione
+Assistenza all'utilizzo delle procedure informatiche
+Analisi delle procedure operative utilizzate dagli uffici dell'Agenzia e sviluppo di metodologie di controllo, anche mediante la realizzazione di specifiche procedure di office automation, attraverso le quali individuare atti o fatti per i quali emergono anomalie significative da sottoporre a verifica
+Elaborazione di dati e statistiche
+Analisi delle proposte e definizione degli applicativi</Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Risorse umane</NameArea>
+<Description>  </Description>
+</Role>
+<Role>
+<Name>Analista rischi</Name>
+<NameArea>Direzione Centrale Audit</NameArea>
+<Description>Formulazione della proposta complessiva del budget di produzione e del programma delle attività svolte sia a livello territoriale, rientranti nell'ambito di competenza della Direzione Centrale, che della stessa Direzione Centrale
+Definizione di metodologie e procedure operative volte ad assicurare l'efficacia del sistema di controllo di regolarità amministrativa e contabile da parte delle strutture dell'Agenzia
+Individuazione, anche sotto il profilo ICT, dei possibili rischi di disfunzioni o irregolarità nei processi dell'Agenzia.</Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Amministrazione e Pianificazione</NameArea>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Consuntivazione delle risorse della Direzione Centrale
+Formulazione della proposta complessiva di piano e di programma per le attività svolte a livello territoriale rientranti nell'ambito di competenza della Direzione Centrale</Description>
+</Role>
+<Role>
+<Name>Segretaria organi collegiali</Name>
+<NameArea>Direzione Centrale Affari Legali</NameArea>
+<Description>Supporto alle strutture di vertice nell’istruttoria e nell’elaborazione degli atti da sottoporre agli Organi collegiali
+Organizzazione delle sedute degli Organi collegiali e predisposizione dell’ordine del giorno
+Partecipazione alle sedute, redazione dei verbali, stesura delle deliberazioni, comunicazione degli esiti delle riunioni alle strutture competenti e, ove previsto, agli Uffici ministeriali
+Conservazione della documentazione relativa alle sedute
+Assolvimento degli obblighi di pubblicità e trasparenza concernenti gli Organi collegiali, ove non attribuiti ad altre strutture
+Esame degli atti, dei provvedimenti e dei documenti - esclusi quelli di contenuto tecnico-tributario - in firma al Direttore dell’Agenzia, al fine di assicurarne, anche mediante raccordo con altri uffici, la completezza e la coerenza giuridica a fronte dell’istruttoria svolta dalle strutture proponenti</Description>
+</Role>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Tecnologie e Innovazione</NameArea>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Supporto specialistico al Direttore Centrale per l'attuazione dei compiti di cui all'articolo 17 del Codice dell'amministrazione digitale
+Monitoraggio delle evoluzioni normative ai fini dell'allineamento della pianificazione ICT
+Consuntivazione delle risorse della Direzione Centrale
+Formulazione della proposta complessiva di piano e di programma per le attività svolte a livello territoriale rientranti nell'ambito di competenza della Direzione Centrale</Description>
+</Role>
+<Role>
+<Name>Direttore</Name>
+<NameArea>Direttore dell'agenzia</NameArea>
+<Description>  </Description>
+</Role>
+</Roles>
+<Organigramma>
+<Area>
+<Name>Direttore dell'agenzia</Name>
+<Description>Azienda: Agenzia delle entrate, Codice ATECO: 84.11.10, Sede centrale: Roma, Settore: Amministrazione pubblica e difesa.</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>5</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direttore dell'agenzia</NameArea>
+<Description>Segreteria del Direttore
+Supporto amministrativo per l'esercizio delle funzioni attribuite al Direttore dell'Agenzia
+Supporto al Direttore nei rapporti con il Ministero dell'Economia e delle Finanze e con l'Agenzia delle Entrate–Riscossione per l'esercizio della funzione della riscossione nazionale
+Rapporti con le strutture di vertice
+Presidio dei collegamenti con le amministrazioni e organizzazioni nazionali ed estere per le attività di natura internazionale
+Istruttoria relativa al conferimento delle onorificenze</Description>
+</Role>
+</Couple>
+<Couple>
+<ID>4</ID>
+<Role>
+<Name>Direttore</Name>
+<NameArea>Direttore dell'agenzia</NameArea>
+<Description>  </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Direzione Centrale Affari Legali</Name>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Consuntivazione delle risorse della Direzione Centrale</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>10</ID>
+<Role>
+<Name>Segretaria organi collegiali</Name>
+<NameArea>Direzione Centrale Affari Legali</NameArea>
+<Description>Supporto alle strutture di vertice nell’istruttoria e nell’elaborazione degli atti da sottoporre agli Organi collegiali
+Organizzazione delle sedute degli Organi collegiali e predisposizione dell’ordine del giorno
+Partecipazione alle sedute, redazione dei verbali, stesura delle deliberazioni, comunicazione degli esiti delle riunioni alle strutture competenti e, ove previsto, agli Uffici ministeriali
+Conservazione della documentazione relativa alle sedute
+Assolvimento degli obblighi di pubblicità e trasparenza concernenti gli Organi collegiali, ove non attribuiti ad altre strutture
+Esame degli atti, dei provvedimenti e dei documenti - esclusi quelli di contenuto tecnico-tributario - in firma al Direttore dell’Agenzia, al fine di assicurarne, anche mediante raccordo con altri uffici, la completezza e la coerenza giuridica a fronte dell’istruttoria svolta dalle strutture proponenti</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Audit</Name>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Predisposizione di rapporti al Direttore dell'Agenzia sullo stato di presidio dei rischi aziendali e segnalazione di situazioni di criticità alle strutture centrali
+Consuntivazione delle risorse della Direzione Centrale
+Predisposizione della proposta di budget economico e suo monitoraggio</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>7</ID>
+<Role>
+<Name>Sviluppatore strategie di contrasto</Name>
+<NameArea>Direzione Centrale Audit</NameArea>
+<Description>Monitoraggio delle procedure informatizzate di supporto ai controlli e alle indagini conoscitive condotte dagli uffici della Direzione
+Assistenza all'utilizzo delle procedure informatiche
+Analisi delle procedure operative utilizzate dagli uffici dell'Agenzia e sviluppo di metodologie di controllo, anche mediante la realizzazione di specifiche procedure di office automation, attraverso le quali individuare atti o fatti per i quali emergono anomalie significative da sottoporre a verifica
+Elaborazione di dati e statistiche
+Analisi delle proposte e definizione degli applicativi</Description>
+</Role>
+</Couple>
+<Couple>
+<ID>6</ID>
+<Role>
+<Name>Analista rischi</Name>
+<NameArea>Direzione Centrale Audit</NameArea>
+<Description>Formulazione della proposta complessiva del budget di produzione e del programma delle attività svolte sia a livello territoriale, rientranti nell'ambito di competenza della Direzione Centrale, che della stessa Direzione Centrale
+Definizione di metodologie e procedure operative volte ad assicurare l'efficacia del sistema di controllo di regolarità amministrativa e contabile da parte delle strutture dell'Agenzia
+Individuazione, anche sotto il profilo ICT, dei possibili rischi di disfunzioni o irregolarità nei processi dell'Agenzia.</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Coordinamento Normativo</Name>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Consuntivazione delle risorse della Direzione Centrale</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Divisione Contribuenti</Name>
+<Description>Dalla Divisione Contribuenti dipende il Centro Operativo di Pescara; il coordinamento delle attività dell'area Controlli e accertamenti centralizzati è affidato al Direttore Centrale Persone fisiche, lavoratori autonomi ed enti non commerciali; il coordinamento delle attività dell'area Gestione e controlli dei contribuenti non residenti è affidato al capo settore Internazionale.
+
+Dalla Divisione Contribuenti dipendono la Direzione Centrale Persone Fisiche, Lavoratori Autonomi ed Enti Non Commerciali, la Direzione Centrale Piccole e Medie Imprese e la Direzione Centrale Grandi Contribuenti.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Direzione Centrale Persone Fisiche, Lavoratori Autonomi ed Enti Non Commerciali</Name>
+<Description>Al Direttore Centrale è affidato il coordinamento con il Comando generale della Guardia di Finanza relativamente alle attività di controllo di competenza.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Piccole e Medie Imprese</Name>
+<Description>Al Direttore Centrale è affidato il coordinamento con il Comando generale della Guardia di Finanza relativamente alle attività di controllo di competenza.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Grandi Contribuenti e Internazionale</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Divisione Servizi</Name>
+<Description>Dalla Divisione Servizi dipendono la Direzione Centrale Servizi Fiscali, la Direzione Centrale Servizi Catastali, Cartografici e di Pubblicità Immobiliare e la Direzione Centrale Servizi Estimativi e Osservatorio Mercato Immobiliare.</Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Direzione Centrale Servizi Fiscali</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Servizi Istituzionali e di Riscossione</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Servizi Catastali, Cartografici e di Pubblicità Immobiliare</Name>
+<Description>Il Direttore Centrale svolge la funzione di Organo cartografico dello Stato ai sensi della legge 2 febbraio 1960, n. 98, e di Organismo tecnico ai sensi dell'art. 67 del decreto legislativo 31 marzo 1998, n. 112.</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>3</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Servizi Catastali, Cartografici e di Pubblicità Immobiliare</NameArea>
+<Description>  </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Osservatorio Mercato Immobiliare e Servizi Estimativi</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Divisione Risorse</Name>
+<Description>Segreteria del Capo Divisione
+Supporto tecnico-amministrativo per l’esercizio delle funzioni attribuite al Capo Divisione e per l’adozione degli atti di sua competenza
+Consuntivazione delle risorse della Divisione
+Indirizzo, coordinamento e supporto dell’attività delle Direzioni centrali dipendenti
+Coordinamento e monitoraggio delle attività di valutazione delle proposte normative sottoposte alla Divisione e trasmissione dei relativi elementi alla Direzione Centrale Coordinamento normativo
+Predisposizione degli elementi di risposta ai documenti di sindacato ispettivo e trasmissione degli stessi alla Direzione Centrale Coordinamento normativo</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>1</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Divisione Risorse</NameArea>
+<Description>Segreteria del Capo Divisione
+Supporto tecnico-amministrativo per l’esercizio delle funzioni attribuite al Capo Divisione e per l’adozione degli atti di sua competenza
+Consuntivazione delle risorse della Divisione
+Indirizzo, coordinamento e supporto dell’attività delle Direzioni centrali dipendenti
+Coordinamento e monitoraggio delle attività di valutazione delle proposte normative sottoposte alla Divisione e trasmissione dei relativi elementi alla Direzione Centrale Coordinamento normativo
+Predisposizione degli elementi di risposta ai documenti di sindacato ispettivo e trasmissione degli stessi alla Direzione Centrale Coordinamento normativo</Description>
+</Role>
+</Couple>
+<Couple>
+<ID>0</ID>
+<Role>
+<Name>Capo Divisione</Name>
+<NameArea>Divisione Risorse</NameArea>
+<Description>  </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+<Area>
+<Name>Direzione Centrale Tecnologie e Innovazione</Name>
+<Description>La Direzione Centrale costituisce l'ufficio dirigenziale generale incaricato di dare attuazione alle linee strategiche definite dal Governo per la riorganizzazione e la digitalizzazione dell'Agenzia; a tal fine svolge i compiti di cui all'articolo 17 del Codice dell'amministrazione digitale.</Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>2</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Tecnologie e Innovazione</NameArea>
+<Description>Segreteria del Direttore Centrale
+Supporto tecnico-amministrativo per l'esercizio delle funzioni attribuite al Direttore Centrale e per l'adozione degli atti di sua competenza
+Supporto specialistico al Direttore Centrale per l'attuazione dei compiti di cui all'articolo 17 del Codice dell'amministrazione digitale
+Monitoraggio delle evoluzioni normative ai fini dell'allineamento della pianificazione ICT
+Consuntivazione delle risorse della Direzione Centrale
+Formulazione della proposta complessiva di piano e di programma per le attività svolte a livello territoriale rientranti nell'ambito di competenza della Direzione Centrale</Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Risorse umane</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>9</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Risorse umane</NameArea>
+<Description>  </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Logistica e Approvvigionamenti</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+<Couple>
+<ID>8</ID>
+<Role>
+<Name>Responsabile</Name>
+<NameArea>Direzione Centrale Logistica e Approvvigionamenti</NameArea>
+<Description>  </Description>
+</Role>
+</Couple>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzione Centrale Amministrazione e Pianificazione</Name>
+<Description> </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzioni regionali e Direzioni provinciali di Trento e Bolzano</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+<Area>
+<Name>Direzioni Provinciali e uffici Provinciali territorio</Name>
+<Description>  </Description>
+<State>false</State>
+<Couples>
+</Couples>
+<ListAreas>
+</ListAreas>
+</Area>
+</ListAreas>
+</Area>
+</Organigramma>
+</Azienda>

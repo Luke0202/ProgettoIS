@@ -305,7 +305,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica consistenza dati
             if (nameCreateArea.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Nome inserito non valido. Digita correttamente i dati!");
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
                 return;
             }
 
@@ -357,7 +357,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica consistenza dati
             if (nameCreateArea.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Nome inserito non valido. Digita correttamente i dati!");
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
                 return;
             }
 
@@ -462,6 +462,12 @@ public class Mediator implements MediatorIF{
             int j = dadComboModArea.getSelectedIndex();
             String area = dadComboModArea.getItemAt(j);
 
+            //Verifica compilazione nome area
+            if (name.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
+                return;
+            }
+
             //Caso nessuna modifica: nuova area identica alla precedente
             if (name.equals(oldArea.getName()) && descr.equals(oldArea.getDescription())){
 
@@ -531,6 +537,12 @@ public class Mediator implements MediatorIF{
             int j = dadComboModArea.getSelectedIndex();
             String area = dadComboModArea.getItemAt(j);
 
+            //Verifica compilazione nome area
+            if (name.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
+                return;
+            }
+
             //Caso nuova area identica alla precedente
             if (name.equals(oldArea.getName()) && descr.equals(oldArea.getDescription())){
 
@@ -565,7 +577,6 @@ public class Mediator implements MediatorIF{
                     }
                 }
             }
-
 
             //Richiedi conferma
             int i = JOptionPane.showConfirmDialog(frame, "Una volta validata l'area non sarà più possibile modificarla.\n" +
@@ -605,7 +616,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica validità ruolo
             if (nameCreateRole.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Ruolo inserito non valido. Digita correttamente i dati!");
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
                 return;
             }
 
@@ -701,9 +712,15 @@ public class Mediator implements MediatorIF{
             //Richiesta salvataggio del ruolo
 
             String name = nameModRole.getText().trim();
-            String area = oldRole.getArea();//Nome area uguale al precedente, in quanto l'area non è modificabile
+            String area = oldRole.getArea();//Nome area uguale alla precedente, in quanto non modificabile
             String descr = descrModRole.getText().trim();
             if (descr.isEmpty()) descr = " ";
+
+            //Verifica compilazione nome ruolo
+            if (name.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo obbligatorio non compilato. Digita correttamente i dati!");
+                return;
+            }
 
             //Caso nessuna modifica: ruolo uguale al precedente
             if (name.equals(oldRole.getName()) && descr.equals(oldRole.getDescription())){
@@ -749,7 +766,7 @@ public class Mediator implements MediatorIF{
 
             //Verifica validità dipendente
             if (name.isEmpty() || surname.isEmpty() || email.isEmpty()){
-                JOptionPane.showMessageDialog(frame, "È presente almeno un campo vuoto. Digita correttamente i dati !");
+                JOptionPane.showMessageDialog(frame, "È presente almeno un campo non compilato. Digita correttamente i dati!");
                 return;
             }
 

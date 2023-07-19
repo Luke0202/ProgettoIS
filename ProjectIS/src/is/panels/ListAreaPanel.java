@@ -7,8 +7,6 @@ import is.azienda.Azienda;
 import is.azienda.Organigramma;
 import is.item.ImageZoom;
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -31,15 +29,20 @@ public class ListAreaPanel extends JPanel {
         Color gray = new Color(230,230,230);
         Color blue = new Color(3, 2, 179);
         Color blue2 = new Color(0,51,200);
+
         //Panel options
         setLayout(null);
         setBounds(0,0,1000,1000); //Confini JPanel
+
         //Header
         JPanel headPanel = new JPanel(null);
         headPanel.setBackground(Color.white); //Definizione sfondo
         headPanel.setBounds(0,0,1000,60); //Confini headPanel
+
         //Label of headPanel
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
+        Font f2 = new Font("TimesNewRoman",Font.ITALIC,15);
+
         JLabel head = new JLabel("Elenco aree organizzative");
         head.setFont(f);
         head.setForeground(Color.black);
@@ -93,24 +96,31 @@ public class ListAreaPanel extends JPanel {
         searchLab.setForeground(blue);
         searchLab.setBounds(20,290,200,30);
 
+        JLabel nameLab = new JLabel("Area: ");
+        nameLab.setFont(f2);
+        nameLab.setBounds(20,330,50,30);
+
         JTextField nameField = new JTextField(20); //Campo in cui bisogna inserire l'area che si vuole cercare
         nameField.setText("Digita nome area");
-        nameField.setBounds(20,330,280,30);
+        nameField.setBounds(75,330,280,30);
 
         //Button
         JButton search = new JButton("Cerca");  //Button per la ricerca di una determinata area
         search.setForeground(Color.white);
         search.setBackground(blue2);
-        search.setBounds(340,330,140,30);
+        search.setBounds(380,330,140,30);
+
         //Logo applicazione
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);
+
         //Adding
         headPanel.add(head);
         fieldPanel.add(lab); fieldPanel.add(scrollPane);
-        fieldPanel.add(searchLab); fieldPanel.add(nameField); fieldPanel.add(search);
+        fieldPanel.add(searchLab); fieldPanel.add(search);
+        fieldPanel.add(nameLab); fieldPanel.add(nameField);
         add(headPanel); add(fieldPanel);
         //Mediator
         mediator.setNameListArea(nameField);

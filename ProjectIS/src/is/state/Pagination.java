@@ -18,8 +18,8 @@ import java.io.*;
  * Rappresenta il frame nel quale vengono aggiunti i pannelli
  * che il dipendente chiede di visionare. Ogni pannello viene
  * rappresentato da uno stato che può variare a seconda
- * di come l'utente ineragisce con il sistema.
- * La classe presenta la variabile di istanza currentState che
+ * di come l'utente interagisce con il sistema.
+ * La classe presenta la variabile d'istanza currentState che
  * memorizza lo stato corrente.
  * @author lucab
  */
@@ -34,9 +34,11 @@ public class Pagination extends JFrame implements PaginationIF {
      * @author lucab
      */
     private interface StateIF {
-        default void entryAction(Mediator mediator, Pagination f,Object obj) {}
-        default void exitAction(Pagination f) {}
-        default void goAhead(Pagination f, State state, Object obj){f.transition(state,obj);}
+        default void entryAction(Mediator mediator, Pagination frame,Object obj) {}
+        default void exitAction(Pagination frame) {}
+        default void goAhead(Pagination frame, State state, Object obj){
+            frame.transition(state,obj);
+        }
     }//StateIF
 
     /**
@@ -47,26 +49,26 @@ public class Pagination extends JFrame implements PaginationIF {
     private enum State implements StateIF {
         //Pannello di accesso
         ACCESS_PAGE{
-            private AccessPanel a;
+            private JPanel a;
             @Override
-            public void entryAction(Mediator mediator, Pagination f,Object obj) {
-                a = new AccessPanel(mediator); f.add(a);
+            public void entryAction(Mediator mediator, Pagination frame,Object obj) {
+                a = new AccessPanel(mediator); frame.add(a);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f) {
-                f.remove(a);
+            public void exitAction(Pagination frame) {
+                frame.remove(a);
             }
         },
         //Pannello per il log in
         LOG_IN_PAGE{
-            private LogPanel l;
+            private JPanel l;
             @Override
-            public void entryAction(Mediator mediator, Pagination f,Object obj) {
+            public void entryAction(Mediator mediator, Pagination frame,Object obj) {
                 //Getting data
                 File file = new File(path);
                 //Costruzione azienda a partire dal file data.txt
@@ -75,67 +77,67 @@ public class Pagination extends JFrame implements PaginationIF {
                 //Setting azienda per permettere al mediator di conoscere le credenziali di accesso al sistema
                 mediator.setAzienda(azienda);
                 //Panel
-                l = new LogPanel(mediator); f.add(l);
+                l = new LogPanel(mediator); frame.add(l);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f) {
-                f.remove(l);
+            public void exitAction(Pagination frame) {
+                frame.remove(l);
             }
         },
         //Pannello per la creazione di una nuova azienda
         CREATE_AZIENDA_PAGE{
-            private CreateAziendaPanel c;
+            private JPanel c;
             @Override
-            public void entryAction(Mediator mediator, Pagination f,Object obj) {
-                c = new CreateAziendaPanel(mediator); f.add(c);
+            public void entryAction(Mediator mediator, Pagination frame,Object obj) {
+                c = new CreateAziendaPanel(mediator); frame.add(c);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f) {
-                f.remove(c);
+            public void exitAction(Pagination frame) {
+                frame.remove(c);
             }
         },
         //Homepage dell'applicazione
         HOME_PAGE{
-            private HomePanel h;
+            private JPanel h;
             @Override
-            public void entryAction(Mediator mediator, Pagination f,Object obj) {
-                h = new HomePanel(mediator); f.add(h);
-                addingMenu(mediator,f);
+            public void entryAction(Mediator mediator, Pagination frame,Object obj) {
+                h = new HomePanel(mediator); frame.add(h);
+                addingMenu(mediator,frame);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f) {
-                f.remove(h);
+            public void exitAction(Pagination frame) {
+                frame.remove(h);
             }
 
             /**
              * Tale metodo ha la funzione di aggiungere al frame la barra del menu,
              * consentendo una migliore interazione con l'utente.
              * @param mediator Mediator in modo da settare i JMenuItem e gli ascoltatori
-             * @param f frame al quale va aggiunta la barra del menu.
+             * @param frame frame al quale va aggiunta la barra del menu.
              */
-            private void addingMenu(Mediator mediator, Pagination f){
+            private void addingMenu(Mediator mediator, Pagination frame){
                 //JMenubar
                 JMenuBar menubar = new JMenuBar();
                 //JMenu
                 JMenu area = new JMenu("Area");
                 JMenu role = new JMenu("Ruolo");
                 JMenu association = new JMenu("Dipendente");
-                JMenu az = new JMenu("Azienda");
+                JMenu azienda = new JMenu("Azienda");
                 //JMenuItem
                 JMenuItem createA = new JMenuItem("Inserisci nuova area");
                 JMenuItem listA = new JMenuItem("Elenco aree");
@@ -148,12 +150,12 @@ public class Pagination extends JFrame implements PaginationIF {
 
                 JMenuItem detA = new JMenuItem("Dettagli azienda");
                 //Adding
-                menubar.add(area); menubar.add(role); menubar.add(association); menubar.add(az);
+                menubar.add(area); menubar.add(role); menubar.add(association); menubar.add(azienda);
                 area.add(createA); area.add(listA);
                 role.add(createR); role.add(listR);
                 association.add(createE); association.add(listE);
-                az.add(detA);
-                f.setJMenuBar(menubar);
+                azienda.add(detA);
+                frame.setJMenuBar(menubar);
 
                 //Mediator
                 mediator.setItem(createA,listA,createR,listR,createE,listE,detA);
@@ -169,206 +171,206 @@ public class Pagination extends JFrame implements PaginationIF {
         },
         //Pannello contenente i dettagli aziendali
         DETT_AZIENDA_PAGE{
-            private AziendaPanel a;
+            private JPanel a;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                a = new AziendaPanel(mediator); f.add(a);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                a = new AziendaPanel(mediator); frame.add(a);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(a);
+            public void exitAction(Pagination frame){
+                frame.remove(a);
             }
         },
         //Pannello per la creazione di un'area
         CREATE_AREA_PAGE{
-            private CreateAreaPanel c;
+            private JPanel c;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                c = new CreateAreaPanel(mediator); f.add(c);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                c = new CreateAreaPanel(mediator); frame.add(c);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(c);
+            public void exitAction(Pagination frame){
+                frame.remove(c);
             }
         },
         //Pannello per visionare le aree dell'azienda
         LIST_AREA_PAGE{
-            private ListAreaPanel l;
+            private JPanel l;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                l = new ListAreaPanel(mediator); f.add(l);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                l = new ListAreaPanel(mediator); frame.add(l);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(l);
+            public void exitAction(Pagination frame){
+                frame.remove(l);
             }
         },
         //Pannello per l'assunzione di un dipendente
         CREATE_EMPLOYEE_PAGE{
-            private CreateEmployeePanel c;
+            private JPanel c;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                c = new CreateEmployeePanel(mediator); f.add(c);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                c = new CreateEmployeePanel(mediator); frame.add(c);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(c);
+            public void exitAction(Pagination frame){
+                frame.remove(c);
             }
         },
         //Pannello per visionare i dipendenti dell'azienda
         LIST_EMPLOYEE_PAGE{
-            private ListEmployeePanel l;
+            private JPanel l;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                l = new ListEmployeePanel(mediator); f.add(l);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                l = new ListEmployeePanel(mediator); frame.add(l);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(l);
+            public void exitAction(Pagination frame){
+                frame.remove(l);
             }
         },
         //Pannello per la creazione di un ruolo
         CREATE_ROLE_PAGE{
-            private CreateRolePanel c;
+            private JPanel c;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                c = new CreateRolePanel(mediator); f.add(c);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                c = new CreateRolePanel(mediator); frame.add(c);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(c);
+            public void exitAction(Pagination frame){
+                frame.remove(c);
             }
         },
         //Pannello per visionare i ruoli definiti in azienda
         LIST_ROLE_PAGE{
-            private ListRolePanel l;
+            private JPanel l;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                l = new ListRolePanel(mediator); f.add(l);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                l = new ListRolePanel(mediator); frame.add(l);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(l);
+            public void exitAction(Pagination frame){
+                frame.remove(l);
             }
         },
         //Pannello per la gestione di una singola area
         AREA_PAGE{
-            private AreaPanel a;
+            private JPanel a;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                a = new AreaPanel((Organigramma) obj,mediator); f.add(a);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                a = new AreaPanel((Organigramma) obj,mediator); frame.add(a);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(a);
+            public void exitAction(Pagination frame){
+                frame.remove(a);
             }
         },
         //Pannello per la modifica di un'area
         EDIT_AREA_PAGE{
-            private ModAreaPanel m;
+            private JPanel m;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                m = new ModAreaPanel((Organigramma) obj,mediator); f.add(m);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                m = new ModAreaPanel((Organigramma) obj,mediator); frame.add(m);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(m);
+            public void exitAction(Pagination frame){
+                frame.remove(m);
             }
         },
         //Pannello per la gestione di un singolo ruolo
         ROLE_PAGE{
-            private RolePanel r;
+            private JPanel r;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                r = new RolePanel((Role) obj,mediator); f.add(r);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                r = new RolePanel((Role) obj,mediator); frame.add(r);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(r);
+            public void exitAction(Pagination frame){
+                frame.remove(r);
             }
         },
         //Pannello per la modifica di un ruolo
         EDIT_ROLE_PAGE{
-            private ModRolePanel m;
+            private JPanel m;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                m = new ModRolePanel((Role)obj,mediator); f.add(m);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                m = new ModRolePanel((Role)obj,mediator); frame.add(m);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(m);
+            public void exitAction(Pagination frame){
+                frame.remove(m);
             }
         },
         //Pannello per la gestione di un singolo dipendente
         EMPLOYEE_PAGE{
-            private EmployeePanel e;
+            private JPanel e;
             @Override
-            public void entryAction(Mediator mediator,Pagination f,Object obj){
-                e = new EmployeePanel((Employee) obj,mediator); f.add(e);
+            public void entryAction(Mediator mediator,Pagination frame,Object obj){
+                e = new EmployeePanel((Employee) obj,mediator); frame.add(e);
                 //Frame settings
-                f.setLocation(350,150);
-                f.setSize(1000,650);
-                f.setResizable(false);
-                f.setVisible(true);
+                frame.setLocation(350,150);
+                frame.setSize(1000,650);
+                frame.setResizable(false);
+                frame.setVisible(true);
             }
             @Override
-            public void exitAction(Pagination f){
-                f.remove(e);
+            public void exitAction(Pagination frame){
+                frame.remove(e);
             }
         }
     }//State
@@ -393,12 +395,11 @@ public class Pagination extends JFrame implements PaginationIF {
     //Percorso file
     private final static String path = "data.txt";
 
+    private final Mediator mediator;
+
     //Stato corrente
     private State currentState;
-
-    private Mediator mediator;
-
-
+    
     public Pagination(){
         //Definizione mediator
         mediator = new Mediator();

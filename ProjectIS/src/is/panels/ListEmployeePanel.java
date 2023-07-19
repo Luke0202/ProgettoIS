@@ -27,15 +27,19 @@ public class ListEmployeePanel extends JPanel {
         Color blue = new Color(3, 2, 179);
         Color blue2 = new Color(0,51,200);
         Color gray = new Color(230,230,230);
+
         //Panel options
         setLayout(null);
         setBounds(0,0,1000,1000); //Confini JPanel
+
         //Header
         JPanel headPanel = new JPanel(null);
         headPanel.setBackground(Color.white); //Definizione sfondo
         headPanel.setBounds(0,0,1000,60); //Confini headPanel
+
         //Label of headPanel
         Font f = new Font("TimesNewRoman",Font.BOLD,23);
+        Font f2 = new Font("TimesNewRoman",Font.ITALIC,15);
         JLabel head = new JLabel("Elenco dipendenti");
         head.setFont(f);
         head.setForeground(Color.black);
@@ -80,30 +84,38 @@ public class ListEmployeePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(15,50,955,200);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Consente lo scorrimento verticale
+
         //Search employee
         JLabel searchLab = new JLabel("Cerca dipendente: ");
         searchLab.setFont(f);
         searchLab.setForeground(blue);
         searchLab.setBounds(20,290,280,30);
 
+        JLabel idLab = new JLabel("ID dipendente: ");
+        idLab.setFont(f2);
+        idLab.setBounds(20,330,110,30);
+
         JTextField idField = new JTextField(20); //Campo in cui bisogna inserire l'id del dipendente che si vuole cercare
         idField.setText("Digita ID dipendente");
-        idField.setBounds(20,330,280,30);
+        idField.setBounds(135,330,280,30);
 
         //Button
         JButton search = new JButton("Cerca");  //Button per la ricerca di un dipendente
         search.setForeground(Color.white);
         search.setBackground(blue2);
-        search.setBounds(340,330,140,30);
+        search.setBounds(440,330,140,30);
+
         //Logo applicazione
         ImageZoom icon = new ImageZoom(new ImageIcon(LogPanel.class.getResource("myLogo.png")),0.25);
         ImageIcon image = icon.getImageIcon();
         JLabel lab = new JLabel(image);
         lab.setBounds(730,320,200,200);
+
         //Adding
         headPanel.add(head);
         fieldPanel.add(scrollPane); fieldPanel.add(lab);
-        fieldPanel.add(searchLab); fieldPanel.add(idField); fieldPanel.add(search);
+        fieldPanel.add(searchLab); fieldPanel.add(search);
+        fieldPanel.add(idLab); fieldPanel.add(idField);
         add(fieldPanel); add(headPanel);
         //Mediator
         mediator.setIdListEmployee(idField);

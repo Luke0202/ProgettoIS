@@ -18,9 +18,8 @@ public interface CompositeArea extends Area,Iterable<Area>{
     Area getChild(int i);
     int getNChildren();
     boolean isSubArea(Area area);
-    boolean isChild(Area o);
+    boolean isChild(Area area);
 
     //About iterator
     Iterator<Area> iterator();
-
-}
+}//CompositeArea

@@ -109,7 +109,7 @@ public class AreaPanel extends JPanel {
 
         int i = 0;
         for (Employee e:azienda.getEmployees()){
-            if (org.containsID(e.getID())){
+            if (org.contains(e.getID())){
                 data[i][0] = e.getSurname();
                 data[i][1] = e.getName();
                 data[i][2] = e.getEmail();

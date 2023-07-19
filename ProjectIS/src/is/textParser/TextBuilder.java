@@ -1,5 +1,6 @@
 package is.textParser;
 
+import is.azienda.*;
 import java.io.PrintWriter;
 
 /**
@@ -17,10 +18,17 @@ public class TextBuilder implements TextBuilderIF {
 
     /**
      * Definisce il tag di apertura dell'azienda.
+     * Vengono inoltre scritte sul file le informazioni
+     * generali dell'azienda.
      */
     @Override
-    public void openAzienda() {
+    public void openAzienda(Azienda azienda) {
         pw.println("<Azienda>");
+        pw.println("<Cod>"+azienda.getCod()+"</Cod>");
+        pw.println("<Name>"+azienda.getName()+"</Name>");
+        pw.println("<Headquarter>"+azienda.getHeadquarter()+"</Headquarter>");
+        pw.println("<Type>"+azienda.getType()+"</Type>");
+        pw.println("<Password>"+azienda.getPsw()+"</Password>");
     }
 
     /**
@@ -31,127 +39,6 @@ public class TextBuilder implements TextBuilderIF {
         pw.println("</Azienda>");
         pw.flush();
         pw.close();
-    }
-
-    /**
-     * Definisce i tag di apertura e chiusura del codice ATECO.
-     * @param cod codice ATECO
-     */
-    @Override
-    public void openCod(String cod) {
-        pw.println("<Cod>"+cod+"</Cod>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeCod() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura della sede centrale.
-     * @param h sede centrale dell'azienda
-     */
-    @Override
-    public void openHeadquarter(String h) {
-        pw.println("<Headquarter>"+h+"</Headquarter>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeHeadquarter() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura del settore.
-     * @param type settore aziendale
-     */
-    @Override
-    public void openType(String type) {
-        pw.println("<Type>"+type+"</Type>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeType() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura del nome.
-     * @param name
-     */
-    @Override
-    public void openName(String name) {
-        pw.println("<Name>"+name+"</Name>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeName() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura del cognome.
-     * @param surname cognome dipendente
-     */
-    @Override
-    public void openSurname(String surname) {
-        pw.println("<Surname>"+surname+"</Surname>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeSurname() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura della email.
-     * @param email email dipendente
-     */
-    @Override
-    public void openEmail(String email) {
-        pw.println("<Email>"+email+"</Email>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeEmail() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura della password aziendale.
-     * @param psw password aziendale
-     */
-    @Override
-    public void openPassword(String psw) {
-        pw.println("<Password>"+psw+"</Password>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closePassword() {}
-
-    /**
-     * Definisce il tag di apertura di un dipendente.
-     */
-    @Override
-    public void openEmployee() {
-        pw.println("<Employee>");
-    }
-
-    /**
-     * Definisce il tag di chiusura di un dipendente.
-     */
-    @Override
-    public void closeEmployee() {
-        pw.println("</Employee>");
     }
 
     /**
@@ -171,6 +58,20 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     /**
+     * Permette la scrittura su un file dei
+     * dati di un dipendente.
+     */
+    @Override
+    public void addEmployee(Employee employee) {
+        pw.println("<Employee>");
+        pw.println("<ID>"+employee.getID()+"</ID>");
+        pw.println("<Name>"+employee.getName()+"</Name>");
+        pw.println("<Surname>"+employee.getSurname()+"</Surname>");
+        pw.println("<Email>"+employee.getEmail()+"</Email>");
+        pw.println("</Employee>");
+    }
+
+    /**
      * Definisce il tag di apertura dei ruoli.
      */
     @Override
@@ -187,42 +88,29 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     /**
-     * Definisce il tag di apertura di un ruolo.
+     * Permette la scrittura su un file dei
+     * dati di un ruolo.
      */
     @Override
-    public void openRole() {
+    public void addRole(Role role) {
         pw.println("<Role>");
-    }
-
-    /**
-     * Definisce il tag di chiusura di un ruolo.
-     */
-    @Override
-    public void closeRole() {
+        pw.println("<Name>"+role.getName()+"</Name>");
+        pw.println("<NameArea>"+role.getArea()+"</NameArea>");
+        pw.println("<Description>"+role.getDescription()+"</Description>");
         pw.println("</Role>");
     }
 
     /**
-     * Definisce i tag di apertura e chiusura dello stato di un'area.
-     * @param state stato area
-     */
-    @Override
-    public void openState(boolean state) {
-        pw.println("<State>"+state+"</State>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeState() {}
-
-    /**
      * Definisce il tag di apertura di un'area.
+     * Vengono inoltre scritte sul file le informazioni
+     * generali di un'area organizzativa.
      */
     @Override
-    public void openArea() {
+    public void openArea(Organigramma organigramma) {
         pw.println("<Area>");
+        pw.println("<Name>"+organigramma.getName()+"</Name>");
+        pw.println("<Description>"+organigramma.getDescription()+"</Description>");
+        pw.println("<State>"+organigramma.getStateArea()+"</State>");
     }
 
     /**
@@ -253,9 +141,7 @@ public class TextBuilder implements TextBuilderIF {
      * Definisce il tag di apertura dell'organigramma.
      */
     @Override
-    public void openOrganigramma() {
-        pw.println("<Organigramma>");
-    }
+    public void openOrganigramma() { pw.println("<Organigramma>");}
 
     /**
      * Definisce il tag di chiusura dell'organigramma.
@@ -269,9 +155,7 @@ public class TextBuilder implements TextBuilderIF {
      * Definisce il tag di apertura delle coppie Ruolo-IdDipendente.
      */
     @Override
-    public void openCouples() {
-        pw.println("<Couples>");
-    }
+    public void openCouples() {pw.println("<Couples>");}
 
     /**
      * Definisce il tag di chiusura delle coppie Ruolo-IdDipendente.
@@ -282,11 +166,13 @@ public class TextBuilder implements TextBuilderIF {
     }
 
     /**
-     * Definisce il tag di apertura della coppia Ruolo-IdDipendente.
+     * Vengono scritti sul file il tag di apertura della coppia
+     * Ruolo-IdDipendente e l'id del dipendente.
      */
     @Override
-    public void openCouple() {
+    public void openCouple(Couple couple) {
         pw.println("<Couple>");
+        pw.println("<ID>"+couple.getID()+"</ID>");
     }
 
     /**
@@ -297,48 +183,4 @@ public class TextBuilder implements TextBuilderIF {
         pw.println("</Couple>");
     }
 
-    /**
-     * Definisce i tag di apertura e chiusura di un ID.
-     * @param id
-     */
-    @Override
-    public void openID(int id) {
-        pw.println("<ID>"+id+"</ID>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeID() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura del nome di un'area.
-     * @param nome
-     */
-    @Override
-    public void openNameArea(String nome) {
-        pw.println("<NameArea>"+nome+"</NameArea>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeNameArea() {}
-
-    /**
-     * Definisce i tag di apertura e chiusura di una descrizione.
-     * @param content descrizione
-     */
-    @Override
-    public void openDescription(String content) {
-        pw.println("<Description>"+content+"</Description>");
-    }
-
-    /**
-     * @deprecated
-     */
-    @Override
-    public void closeDescription() {}
 }//TextBuilder

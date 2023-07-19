@@ -24,21 +24,17 @@ public class DirectorVisitor implements AreaVisitor{
      */
     @Override
     public void visit(Organigramma organigramma){
-        builder.openArea();
-        builder.openName(organigramma.getName()); builder.closeName(); //Nome area
-        builder.openDescription(organigramma.getDescription()); builder.closeDescription(); //Descrizione area
-        builder.openState(organigramma.getStateArea()); builder.closeState(); //Stato area
+
+        builder.openArea(organigramma);
+
         //Couples Id employee-role
         builder.openCouples();
         for(Couple c:organigramma.getCouples()){
-            builder.openCouple();
-            builder.openID(c.getID()); builder.closeID(); //Id dipendente
-            Role r = c.getRole();
-            builder.openRole();
-            builder.openName(r.getName()); builder.closeName(); //Nome ruolo
-            builder.openNameArea(r.getArea()); builder.closeNameArea(); //Area di competenza del ruolo
-            builder.openDescription(r.getDescription()); builder.closeDescription(); //Descrizione del ruolo
-            builder.closeRole();
+            builder.openCouple(c);
+
+            //Aggiunta ruolo
+            builder.addRole(c.getRole());
+
             builder.closeCouple();
         }
         builder.closeCouples();
@@ -49,6 +45,7 @@ public class DirectorVisitor implements AreaVisitor{
             organigramma.getChild(i).accept(this);
         }
         builder.closeListAreas();
+
         builder.closeArea();
     }
 }//DirectorVisitor

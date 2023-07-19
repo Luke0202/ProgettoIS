@@ -4,7 +4,7 @@ import is.state.Pagination;
 import is.state.PaginationIF;
 
 /**
- * Tale classe ha la funzione di lanciare l'applicazione per la gestione di un'azienda.
+ * Tale classe ha la funzione di lanciare l'applicazione.
  * @author lucab
  */
 public class Application {
