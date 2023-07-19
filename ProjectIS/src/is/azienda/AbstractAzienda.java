@@ -428,7 +428,7 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Restituisce l'area padre di una determinata area.
-     * Se l'area non presenta alcun area padre, allora viene
+     * Se l'area non presenta alcun'area padre, allora viene
      * restituito null.
      * @param o area della quale si vuole conoscere il genitore
      * @return area padre
