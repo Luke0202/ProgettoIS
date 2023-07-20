@@ -779,15 +779,20 @@ public class Mediator implements MediatorIF{
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             //Modifica ruolo
+            String oldName = oldRole.getName();
+
+            //Identificazione Area
             Organigramma org = azienda.getArea(area);
+
             for (Couple c:org.getCouples()){
                 Role role = c.getRole();
-                if (role.getName().equals(oldRole.getName())){
+                //Aggiornamento info ruolo
+                if (role.getName().toLowerCase().equals(oldName.toLowerCase())){
                     role.setName(name);
                     role.setDescription(descr);
-                    break;
                 }
             }
+
             oldRole.setName(name); oldRole.setDescription(descr);
 
             memorizza();

@@ -326,7 +326,15 @@ public class AbstractAzienda implements AziendaIF{
      */
     @Override
     public void removeRole(Role role){
-        if (isRemovable(role)) roles.remove(role);
+        //Verifica condizione sufficiente per la rimozione
+        if (isRemovable(role)) {
+            Iterator<Role> it = roles.iterator();
+            while (it.hasNext()){
+                Role cur = it.next();
+                if(cur.getName().equals(role.getName()) && cur.getArea().equals(role.getArea()))
+                    it.remove();
+            }
+        }
     }
 
     /**
@@ -340,7 +348,7 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Restituisce l'insieme dei nomi delle aree.
-     * @return
+     * @return insieme di stringhe
      */
     @Override
     public HashSet<String> getAreasName() {
