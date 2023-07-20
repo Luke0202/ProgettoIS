@@ -507,6 +507,11 @@ public class Mediator implements MediatorIF{
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
+            //Modifica ruoli
+            for (Role role:azienda.getRoles()){
+                if (role.getArea().equals(oldArea.getName())) role.setArea(name);
+            }
+
             //Modifica area
             oldArea.setName(name); oldArea.setDescription(descr);
 
@@ -591,6 +596,11 @@ public class Mediator implements MediatorIF{
             //Capitalizing first letter
             name = name.substring(0, 1).toUpperCase() + name.substring(1);
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
+            
+            //Modifica ruoli
+            for (Role role:azienda.getRoles()){
+                if (role.getArea().equals(oldArea.getName())) role.setArea(name);
+            }
 
             //Modifica area
             oldArea.setName(name); oldArea.setDescription(descr); oldArea.setStateArea(true);

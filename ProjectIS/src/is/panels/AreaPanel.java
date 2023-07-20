@@ -5,6 +5,7 @@ import is.azienda.*;
 import is.mediator.Mediator;
 import is.item.ImageZoom;
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 /**
@@ -120,6 +121,14 @@ public class AreaPanel extends JPanel {
 
         //Table
         DataTable table = new DataTable(data, columnNames);
+        //Dimension of columns
+        TableColumn column = null;
+        for (int j = 0;j<4;j++){
+            column = table.getColumnModel().getColumn(j);
+            if (j==2) column.setPreferredWidth(270);
+            if (j==3) column.setPreferredWidth(60);
+        }
+
         //ScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Consente lo scorrimento verticale
