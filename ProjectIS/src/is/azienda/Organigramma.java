@@ -75,8 +75,10 @@ public class Organigramma extends AbstractCompositeArea {
 
         //Aggiunta dipendenti
         for(Couple c:couples){
-            //Verifica ruolo
-            if (c.getRole().equals(role)) ret.add(c.getID());
+            //Verifica nome ruolo
+            if (c.getRole().getName().equals(role.getName())){
+                ret.add(c.getID());
+            }
         }
         return ret;
     }
@@ -128,7 +130,8 @@ public class Organigramma extends AbstractCompositeArea {
         while(it.hasNext()){
             Couple cur = it.next();
             //Verifica corrispondenza ruolo-dipendente
-            if (cur.getRole().equals(role) && cur.getID()==id){
+            Role r = cur.getRole();
+            if (r.getName().equals(role.getName()) && cur.getID()==id){
                 it.remove();
                 break;
             }
@@ -151,7 +154,8 @@ public class Organigramma extends AbstractCompositeArea {
         while(it.hasNext()){
             Couple cur = it.next();
             //Verifica corrispondenza ruolo
-            if (cur.getRole().equals(role)) it.remove();
+            Role r = cur.getRole();
+            if (r.getName().equals(role.getName())) it.remove();
         }
     }
 
@@ -237,7 +241,8 @@ public class Organigramma extends AbstractCompositeArea {
     @Override
     public boolean contains(Role role) {
         for(Couple c:couples){
-            if (c.getRole().equals(role)) return true;
+            Role r = c.getRole();
+            if (r.getName().equals(role.getName()) && r.getArea().equals(role.getArea())) return true;
         }
         return false;
     }
@@ -257,7 +262,8 @@ public class Organigramma extends AbstractCompositeArea {
         //Non bisogna aggiungere l'area corrente
         it.next();
         while(it.hasNext()){
-            ret.add(((Organigramma)it.next()).getName());
+            Organigramma o = (Organigramma)it.next();
+            ret.add(o.getName());
         }
         return ret;
     }
@@ -277,7 +283,7 @@ public class Organigramma extends AbstractCompositeArea {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organigramma that = (Organigramma) o;
-        return name == that.name;
+        return name.equals(that.name);
     }
 
     @Override

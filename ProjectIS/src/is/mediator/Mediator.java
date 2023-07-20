@@ -1,12 +1,8 @@
 package is.mediator;
 
+import is.azienda.*;
 import is.state.Pagination;
 import is.state.PaginationIF;
-import is.azienda.Employee;
-import is.azienda.Role;
-import is.azienda.Azienda;
-import is.azienda.Organigramma;
-import is.azienda.Area;
 import is.textParser.TextPlainParser;
 import javax.swing.*;
 import java.io.File;
@@ -512,6 +508,10 @@ public class Mediator implements MediatorIF{
                 if (role.getArea().equals(oldArea.getName())) role.setArea(name);
             }
 
+            for (Couple c:oldArea.getCouples()){
+                c.getRole().setArea(name);
+            }
+
             //Modifica area
             oldArea.setName(name); oldArea.setDescription(descr);
 
@@ -600,6 +600,10 @@ public class Mediator implements MediatorIF{
             //Modifica ruoli
             for (Role role:azienda.getRoles()){
                 if (role.getArea().equals(oldArea.getName())) role.setArea(name);
+            }
+
+            for (Couple c:oldArea.getCouples()){
+                c.getRole().setArea(name);
             }
 
             //Modifica area
@@ -775,6 +779,15 @@ public class Mediator implements MediatorIF{
             descr = descr.substring(0, 1).toUpperCase() + descr.substring(1);
 
             //Modifica ruolo
+            Organigramma org = azienda.getArea(area);
+            for (Couple c:org.getCouples()){
+                Role role = c.getRole();
+                if (role.getName().equals(oldRole.getName())){
+                    role.setName(name);
+                    role.setDescription(descr);
+                    break;
+                }
+            }
             oldRole.setName(name); oldRole.setDescription(descr);
 
             memorizza();

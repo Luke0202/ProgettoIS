@@ -45,7 +45,7 @@ public class Role {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return role.name.equals(this.name) && role.area.equals(this.area);
+        return Objects.equals(name, role.name) && Objects.equals(area, role.area);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class Role {
     public String toString() {
         return "Role{" +
                 "name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", area='" + area + '\'' +
                 '}';
     }

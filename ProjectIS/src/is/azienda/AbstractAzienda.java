@@ -97,9 +97,7 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Permette di assegnare un ruolo a un determinato
-     * dipendente. Il ruolo deve già esistere all'interno
-     * dell'azienda, altrimenti non è possibile assegnare tale
-     * ruolo.
+     * dipendente.
      * Se il dipendente è nuovo, egli verrà aggiunto
      * in azienda.
      * @param role ruolo da assegnare a un dipendente
@@ -107,66 +105,55 @@ public class AbstractAzienda implements AziendaIF{
      */
     @Override
     public void addEmployee(Role role, Employee emp) {
+        //Ricavo l'area a partire dal ruolo
+        Organigramma org = findArea(role);
+        if (org == null) return;
 
-        //Verifica presenza ruolo
-        if (roles.contains(role) && emp.getID()>=0){
+        //Aggiunta dipendente all'area
+        org.addEmployee(role,emp.getID());
 
-            //Ricavo l'area a partire dal ruolo
-            Organigramma org = findArea(role);
-            if (org == null) return;
-
-            //Aggiunta dipendente all'area
-            org.addEmployee(role,emp.getID());
-
-            //Aggiunta dipendente in azienda
-            employees.add(emp);
-        }
+        //Aggiunta dipendente in azienda
+        employees.add(emp);
     }
 
     /**
      * Permette di assegnare un ruolo a un determinato
-     * dipendente. Il ruolo, così come il dipendente, deve
-     * già esistere all'interno dell'azienda, altrimenti
-     * non è possibile assegnare tale ruolo a un dipendente.
+     * dipendente. Il ruolo e il dipendente devono essere presenti
+     * all'interno dell'azienda, altrimenti non è possibile
+     * assegnare tale ruolo a un dipendente.
      * @param role ruolo da assegnare a un dipendente
      * @param id dipendente al quale assegnare un ruolo
      */
     @Override
     public void addRoleToEmployee(Role role, int id) {
-        //Verifica presenza ruolo e validità id
-        if (roles.contains(role) && id >=0){
-            //Verifica presenza dipendente nell'azienda
-            boolean trovato = false;
+        //Verifica presenza dipendente nell'azienda
+        boolean trovato = false;
 
-            for(Employee emp:employees){
-                if (emp.getID()==id){
-                    trovato = true; break;
-                }
+        for(Employee emp:employees){
+            if (emp.getID()==id){
+                trovato = true; break;
             }
-
-            //Dipendente non trovato
-            if (!trovato) return;
-
-            //Ricavo l'area a partire dal ruolo
-            Organigramma org = findArea(role);
-            if (org == null) return;
-
-            //Aggiunta dipendente all'area
-            org.addEmployee(role,id);
         }
+
+        //Dipendente non trovato
+        if (!trovato) return;
+
+        //Ricavo l'area a partire dal ruolo
+        Organigramma org = findArea(role);
+        if (org == null) return;
+
+        //Aggiunta dipendente all'area
+        org.addEmployee(role,id);
     }
 
     /**
-     * Consente di licenziare un dipendente dall'azienda.
+     * Consente di dismettere un dipendente dal sistema.
      * Tale dipendente viene così rimosso da ogni area in cui svolge
      * almeno un ruolo.
      * @param emp dipendente da licenziare
      */
     @Override
     public void removeEmployee(Employee emp) {
-        //Verifica validità id
-        if (emp.getID()<0) return;
-
         //Rimozione del dipendente dall'insieme dei dipendenti dell'azienda
         employees.remove(emp);
 
@@ -186,11 +173,9 @@ public class AbstractAzienda implements AziendaIF{
      */
     @Override
     public void removeEmployee(int id) {
-        //Verifica validità id
-        if (id<0) return;
 
         boolean trovato = false;
-        //Rimozione dall'insieme dei dipendenti dell'azienda
+        //Rimozione del dipendente dall'insieme dei dipendenti dell'azienda
         Iterator<Employee> it = employees.iterator();
         while(it.hasNext()){
             if (it.next().getID()==id){
@@ -212,58 +197,32 @@ public class AbstractAzienda implements AziendaIF{
 
     /**
      * Permette di dissociare un ruolo da un dipendente.
-     * Se tale dipendente, a seguito della rimozione,
-     * non presenta più alcun ruolo, egli risulta licenziato.
      * @param role ruolo da dissociare da un dipendente
      * @param emp dipendente al quale rimuovere il ruolo
      */
     @Override
     public void removeRoleFromEmployee(Role role, Employee emp) {
-        //Verifica presenza ruolo e validità id
-        if (roles.contains(role) && emp.getID()>=0){
+        //Ricavo l'area a partire dal ruolo
+        Organigramma org = findArea(role);
+        if (org == null) return;
 
-            //Ricavo l'area a partire dal ruolo
-            Organigramma org = findArea(role);
-            if (org == null) return;
-
-            //Rimozione coppia ruolo-dipendente dall'area
-            org.removeEmployee(role,emp.getID());
-
-            //Verifica condizione di licenziamento di un dipendente
-            if (getRoles(emp).isEmpty())
-                employees.remove(emp);
-        }
+        //Rimozione coppia ruolo-dipendente dall'area
+        org.removeEmployee(role,emp.getID());
     }
 
     /**
      * Permette di dissociare un ruolo da un dipendente.
-     * Se tale dipendente, a seguito della rimozione,
-     * non presenta più alcun ruolo, egli risulta licenziato.
      * @param role ruolo da levare a un dipendente
      * @param id id dipendente
      */
     @Override
     public void removeRoleFromEmployee(Role role, int id) {
-        //Verifica presenza ruolo e validità id
-        if (roles.contains(role) && id>=0){
+        //Ricavo l'area a partire dal ruolo
+        Organigramma org = findArea(role);
+        if (org == null) return;
 
-            //Ricavo l'area a partire dal ruolo
-            Organigramma org = findArea(role);
-            if (org == null) return;
-
-            //Rimozione coppia ruolo-dipendente dall'area
-            org.removeEmployee(role,id);
-
-            //Verifica condizione di licenziamento di un dipendente
-            Iterator<Employee> it = employees.iterator();
-            while(it.hasNext()){
-                Employee cur = it.next();
-                if (cur.getID()==id && getRoles(cur).isEmpty()){
-                    it.remove();
-                    break;
-                }
-            }
-        }
+        //Rimozione coppia ruolo-dipendente dall'area
+        org.removeEmployee(role,id);
     }
 
     /**
@@ -329,12 +288,12 @@ public class AbstractAzienda implements AziendaIF{
         HashSet<Role> ret = new HashSet<>();
 
         //Per ogni area verifico la presenza del dipendente
-        Iterator<Area> it = organigramma.iterator();
-        while(it.hasNext()){
-            Organigramma org = (Organigramma) it.next();
+        for (Area a:organigramma){
+            Organigramma org = (Organigramma) a;
             //Aggiunta ruoli
             ret.addAll(org.getRoles(emp));
         }
+
         return ret;
     }
 
@@ -390,7 +349,8 @@ public class AbstractAzienda implements AziendaIF{
 
         //Aggiunta nomi aree
         for (Area a:organigramma){
-            ret.add(((Organigramma)a).getName());
+            Organigramma o = (Organigramma)a;
+            ret.add(o.getName());
         }
 
         return ret;
@@ -474,10 +434,6 @@ public class AbstractAzienda implements AziendaIF{
      */
     @Override
     public void removeArea(Organigramma org) {
-        //Verifica condizione sufficiente di rimozione area
-        for (Area a:org){
-            if (a.getNEmployees()>0) return;
-        }
 
         //Rimozione ruoli dalla lista dei ruoli
         Iterator<Role> it = roles.iterator();
