@@ -412,7 +412,7 @@ public class Mediator implements MediatorIF{
             String nameArea = nameListArea.getText().trim();
 
             //Verifica inserimento di una stringa valida
-            if (nameArea.isEmpty() || nameArea.equals("Digita nome area")){
+            if (nameArea.isEmpty()){
                 JOptionPane.showMessageDialog(frame, "Digita il nome dell'area che vuoi cercare.");
                 return;
             }
@@ -667,11 +667,11 @@ public class Mediator implements MediatorIF{
             String area = areaListRole.getText().trim();
 
             //Verifica inserimento di una stringa non valida
-            if (name.isEmpty() || name.equals("Digita nome ruolo")){
+            if (name.isEmpty()){
                 JOptionPane.showMessageDialog(frame, "Digita il ruolo che vuoi cercare.");
                 return;
             }
-            if (area.isEmpty() || area.equals("Digita nome area di riferimento")){
+            if (area.isEmpty()){
                 JOptionPane.showMessageDialog(frame, "Digita l'area di riferimento del ruolo che vuoi cercare.");
                 return;
             }
