@@ -120,6 +120,22 @@ public abstract class AbstractCompositeArea implements CompositeArea {
     }
 
     /**
+     * Verifica se l'area è cancellabile o meno.
+     * Se l'area e tutte le sotto-aree presentano
+     * complessivamente almeno un dipendente, allora
+     * l'area non può essere rimossa.
+     * @return boolean
+     */
+    @Override
+    public boolean isRemovable(){
+        for (Area a:this){
+            //Verifica presenza di dipendenti
+            if (a.getNEmployees()>0) return false;
+        }
+        return true;
+    }
+
+    /**
      * Effettua una visita pre-Order, aggiungendo gli elementi
      * visitati in una lista.
      * @param ls lista in cui salvare le aree

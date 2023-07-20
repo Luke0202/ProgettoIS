@@ -43,6 +43,7 @@ public class AbstractAzienda implements AziendaIF{
         this.organigramma=organigramma;
     }
 
+
     /**
      * Restituisce il numero di dipendenti che
      * lavorano in azienda.
@@ -254,10 +255,12 @@ public class AbstractAzienda implements AziendaIF{
             org.removeEmployee(role,id);
 
             //Verifica condizione di licenziamento di un dipendente
-            for (Employee emp:employees){
-                if (emp.getID()==id){
-                    if (getRoles(emp).isEmpty())
-                        employees.remove(emp);
+            Iterator<Employee> it = employees.iterator();
+            while(it.hasNext()){
+                Employee cur = it.next();
+                if (cur.getID()==id && getRoles(cur).isEmpty()){
+                    it.remove();
+                    break;
                 }
             }
         }
@@ -346,20 +349,25 @@ public class AbstractAzienda implements AziendaIF{
     }
 
     /**
-     * Permette di cancellare un ruolo dalla lista
-     * dei ruoli dell'azienda.
-     * Il ruolo viene rimosso se esso non è stato
+     * Verifica se un ruolo può essere rimosso o meno.
+     * Un ruolo si può rimuovere se non è stato
      * assegnato ad alcun dipendente.
      * @param role ruolo da rimuovere
      */
     @Override
-    public void removeRole(Role role) {
+    public boolean isRemovable(Role role) {
         //Verifica assenza dipendenti con tale ruolo
-        for (Area a:organigramma){
-            if (a.contains(role)) return;
-        }
+        Organigramma org = getArea(role.getArea());
+        return !org.contains(role);
+    }
 
-        roles.remove(role);
+    /**
+     * Permette la rimozione di un ruolo.
+     * @param role ruolo da rimuovere
+     */
+    @Override
+    public void removeRole(Role role){
+        if (isRemovable(role)) roles.remove(role);
     }
 
     /**
@@ -472,8 +480,12 @@ public class AbstractAzienda implements AziendaIF{
         }
 
         //Rimozione ruoli dalla lista dei ruoli
-        for (Role role:roles){
-            if (role.getArea().equals(org.getName())) removeRole(role);
+        Iterator<Role> it = roles.iterator();
+        while(it.hasNext()){
+            Role cur = it.next();
+            if (cur.getArea().equals(org.getName()) && isRemovable(cur)){
+                it.remove();
+            }
         }
 
         //Ricavo area padre per effettuare la rimozione dell'area figlia

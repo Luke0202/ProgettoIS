@@ -19,6 +19,7 @@ public interface CompositeArea extends Area,Iterable<Area>{
     int getNChildren();
     boolean isSubArea(Area area);
     boolean isChild(Area area);
+    boolean isRemovable();
 
     //About iterator
     Iterator<Area> iterator();

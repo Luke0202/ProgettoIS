@@ -749,7 +749,7 @@ public class Mediator implements MediatorIF{
             if (!name.toLowerCase().equals(oldRole.getName().toLowerCase())){
 
                 for (Role role: azienda.getRoles()){
-                    if (role.getName().equals(name) && role.getArea().equals(area)){
+                    if (role.getName().toLowerCase().equals(name.toLowerCase()) && role.getArea().equals(area)){
                         JOptionPane.showMessageDialog(frame, "Impossibile procedere con la modifica: ruolo già esistente.");
                         return;
                     }

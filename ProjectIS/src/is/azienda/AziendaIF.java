@@ -8,7 +8,7 @@ import java.util.HashSet;
  * @author lucab
  */
 public interface AziendaIF {
-    //About Employeers
+    //About Employees
     int getNEmployees();
     HashSet<Employee> getEmployee(Role role);
     HashSet<Integer> getIdEmployees();
@@ -17,6 +17,7 @@ public interface AziendaIF {
     void removeEmployee(int id);
     void removeRoleFromEmployee(Role role, Employee emp);
     void removeRoleFromEmployee(Role role, int id);
+    boolean isRemovable(Role role);
     int giveID();
 
     //About Roles

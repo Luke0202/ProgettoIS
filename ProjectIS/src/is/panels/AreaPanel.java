@@ -78,7 +78,7 @@ public class AreaPanel extends JPanel {
 
         JButton removeButton = new JButton("Elimina area");  //Button per eliminare un'area
         removeButton.setForeground(Color.white);
-        removeButton.setEnabled(!dadField.getText().equals("Nessuna") && isRemovable(org));
+        removeButton.setEnabled(!dadField.getText().equals("Nessuna") && org.isRemovable());
         removeButton.setBackground(blue2);
         removeButton.setBounds(810,70,150,30);
         //DescriptionArea
@@ -167,21 +167,5 @@ public class AreaPanel extends JPanel {
             return "Nessuna";
 
         return azienda.getParent(org).getName();
-    }
-
-    /**
-     * Verifica se un'area è cancellabile o meno.
-     * Se l'area e tutte le sotto-aree presentano
-     * complessivamente almeno un dipendente, allora
-     * l'area non può essere rimossa.
-     * @param org organigramma da rimuovere
-     * @return boolean
-     */
-    private static boolean isRemovable(Organigramma org){
-        for (Area a:org){
-            //Verifica presenza di dipendenti
-            if (a.getNEmployees()>0) return false;
-        }
-        return true;
     }
 }//AreaPanel

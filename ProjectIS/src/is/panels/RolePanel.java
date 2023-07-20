@@ -72,7 +72,9 @@ public class RolePanel extends JPanel {
 
         JButton removeButton = new JButton("Elimina ruolo"); //Button per la cancellazione di un ruolo
         removeButton.setForeground(Color.white);
-        removeButton.setEnabled(isRemovable(role,azienda));
+        //Un ruolo si può rimuovere se non ha alcun dipendente associato
+        //L'area di riferimento del ruolo non deve presentare alcuna associazione ruolo-idDipendente, in cui è presente tale ruolo
+        removeButton.setEnabled(azienda.isRemovable(role));
         removeButton.setBackground(blue2);
         removeButton.setBounds(810,70,150,30);
         //DescriptionRole
@@ -155,19 +157,5 @@ public class RolePanel extends JPanel {
         //Listeners
         modButton.addActionListener(e->mediator.widgetChanged(modButton));
         removeButton.addActionListener(e->mediator.widgetChanged(removeButton));
-    }
-
-    /**
-     * Verifica se un ruolo è cancellabile o meno.
-     * Un ruolo si può rimuovere se non è associato ad alcun dipendente.
-     * @param role Role
-     * @param azienda Azienda
-     * @return
-     */
-    private boolean isRemovable(Role role,Azienda azienda){
-        //Un ruolo si può rimuovere se non ha alcun dipendente associato
-        //L'area di riferimento del ruolo non deve presentare alcuna associazione ruolo-idDipendente, in cui è presente tale ruolo
-        Organigramma org = azienda.getArea(role.getArea());
-        return !org.contains(role);
     }
 }//RolePanel
