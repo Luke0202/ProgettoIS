@@ -435,12 +435,16 @@ public class AbstractAzienda implements AziendaIF{
     @Override
     public void removeArea(Organigramma org) {
 
-        //Rimozione ruoli dalla lista dei ruoli
+        //Rimozione ruoli dal sistema
         Iterator<Role> it = roles.iterator();
         while(it.hasNext()){
             Role cur = it.next();
-            if (cur.getArea().equals(org.getName()) && isRemovable(cur)){
-                it.remove();
+            //Per ogni area / sotto-area vengono rimossi i ruoli
+            for (Area a:org){
+                Organigramma o=(Organigramma) a;
+                if (cur.getArea().equals(o.getName())){
+                    it.remove(); break;
+                }
             }
         }
 
